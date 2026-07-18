@@ -1,11 +1,4 @@
-import os
-
-TESTS_DIR = os.path.join("src", "intelligence", "tests")
-os.makedirs(TESTS_DIR, exist_ok=True)
-
-files_to_write = {
-    # ----------------- TELEMETRYENGINE.TEST.TS -----------------
-    os.path.join(TESTS_DIR, "telemetryEngine.test.ts"): """import { TelemetryIntelligenceEngine } from '../engine/telemetryEngine';
+import { TelemetryIntelligenceEngine } from '../engine/telemetryEngine';
 import { IEngineConfig } from '../config/engineConfig';
 import { IRawTelemetry } from '../types/health';
 
@@ -95,19 +88,4 @@ describe('PR4.1 Telemetry Intelligence Engine - Automated Test Suite', () => {
     outcome = engine.processIncomingTelemetry(edgePacket);
     expect(outcome.gasState).toBe('NORMAL'); // Historical threat dropped cleanly from cache
   });
-});
-"""
-}
-
-def build_tests():
-    print("=== Starting NOEXCUSE HPO V2 PR4.1.5 Test Infrastructure Installation ===")
-    
-    for filepath, content in files_to_write.items():
-        with open(filepath, "w", encoding="utf-8") as file:
-            file.write(content.strip() + "\\n")
-        print(f"[Written File] {filepath}")
-
-    print("=== PR4.1.5 Testing and Validation Suite Setup Complete ===")
-
-if __name__ == "__main__":
-    build_tests()
+});\n

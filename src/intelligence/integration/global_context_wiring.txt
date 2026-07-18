@@ -1,0 +1,51 @@
+================================================================================
+NOEXCUSE HPO V2: PR4.1.4 DOWNSTREAM INTEGRATION BLUEPRINT
+================================================================================
+
+To integrate the Telemetry Intelligence Engine without modifying the frozen 
+telemetryRepository, implement this wiring setup inside your existing GlobalContext 
+or dedicated telemetry Context Provider file.
+
+1. IMPORT THE ENGINE AND CORE TYPES:
+   import { TelemetryIntelligenceEngine } from '../intelligence/engine/telemetryEngine';
+   import { IClassifiedHealthStates, IRawTelemetry } from '../intelligence/types/health';
+
+2. INITIALIZE ENGINE INSTANCE OUTSIDE THE COMPONENT LIFECYCLE (OR VIA USEMEM):
+   const intelligenceEngine = new TelemetryIntelligenceEngine();
+
+3. ADD AN INDEPENDENT HEALTH STATE SEED INTO YOUR GLOBAL STATE INTERFACE:
+   interface IGlobalState {
+     // ... Your existing baseline telemetry entries
+     classifiedHealthStates: IClassifiedHealthStates | null;
+   }
+
+4. INTERCEPT REPOSITORY EVENT EMITS DOWNSTREAM:
+   Inside your primary telemetry subscription hook or initialization block, pass the 
+   incoming raw frame to the engine before setting state:
+
+   // Your existing database streaming callback framework:
+   telemetryRepository.onDataChange((rawFirebaseUpdate) => {
+       // Convert/cast raw update to matching engine type structure
+       const incomingFrame: IRawTelemetry = {
+           timestamp: rawFirebaseUpdate.timestamp || Date.now(),
+           heartRate: Number(rawFirebaseUpdate.HeartRate || 0),
+           spo2: Number(rawFirebaseUpdate.SpO2 || 0),
+           gas: Number(rawFirebaseUpdate.Gas || 0),
+           steps: Number(rawFirebaseUpdate.Steps || 0),
+           alarm: Boolean(rawFirebaseUpdate.Alarm || false),
+           link: Number(rawFirebaseUpdate.Link || 0),
+           lastPacket: Number(rawFirebaseUpdate.LastPacket || 0)
+       };
+
+       // Execute engine calculation pipeline to get fresh, granular classifications
+       const structuralStates = intelligenceEngine.processIncomingTelemetry(incomingFrame);
+
+       // Update your global context application state with both raw and evaluated datasets
+       dispatch({ type: 'SET_RAW_TELEMETRY', payload: incomingFrame });
+       dispatch({ type: 'SET_CLASSIFIED_HEALTH_STATES', payload: structuralStates });
+   });
+
+5. CONSUME DIRECTLY INSIDE DASHBOARD COMPONENT TREES:
+   const { state } = useGlobalContext();
+   const heartCondition = state.classifiedHealthStates?.heartState ?? 'NORMAL';
+================================================================================\n
