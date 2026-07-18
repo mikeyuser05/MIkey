@@ -1,0 +1,2 @@
+export interface MetricSummary { metricType: string; min: number; max: number; average: number; latest: number; trend: string; }
+export interface GeneratedReport { reportId: string; deviceId: 'PR1' | 'PR2'; rangeLabel: string; startTimestamp: number; endTimestamp: number; generatedAt: number; summaries: Record<string, MetricSummary>; }

@@ -1,0 +1,1 @@
+export const useHistoricalData = (d: any, m: any) => ({ historicalData: [], isLoading: false, error: null, loadHistory: async (r: any) => {} });

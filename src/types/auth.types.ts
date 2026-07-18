@@ -1,0 +1,2 @@
+export interface UserProfile { uid: string; displayName: string | null; email: string | null; photoURL: string | null; createdAt: number; assignedDevices: string[]; preferences: { theme: 'dark' | 'light'; notificationsEnabled: boolean; }; }
+export interface AuthState { user: UserProfile | null; isAuthenticated: boolean; isLoading: boolean; error: string | null; }

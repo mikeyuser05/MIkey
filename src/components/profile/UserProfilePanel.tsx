@@ -1,0 +1,2 @@
+import React from 'react';
+export const UserProfilePanel: React.FC = () => <div className='p-4 bg-neutral-900/30 rounded-2xl border border-neutral-800 text-xs font-mono text-neutral-400'>Control Station Active Session Operator [PR3.10 Secure Baseline]</div>;

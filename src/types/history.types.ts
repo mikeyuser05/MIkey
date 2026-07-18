@@ -1,0 +1,2 @@
+export type MetricType = 'heartRate' | 'spo2' | 'temperature' | 'gas' | 'steps' | 'battery';
+export interface HistoricalRecord { id?: string; timestamp: number; metricType: MetricType; value: number; deviceId: 'PR1' | 'PR2'; }

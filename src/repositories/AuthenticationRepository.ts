@@ -1,0 +1,3 @@
+import { UserProfile } from '../types/auth.types';
+export class AuthenticationRepository { static async getCurrentProfile(uid: string): Promise<UserProfile> { return { uid, displayName: 'HPO Operator', email: 'operator@noexcuse.ai', photoURL: null, createdAt: Date.now(), assignedDevices: ['PR1', 'PR2'], preferences: { theme: 'dark', notificationsEnabled: true } }; }
+static async updateAssignedDevices(u: string, d: string[]): Promise<void> {} }

@@ -1,0 +1,1 @@
+export const useRealtimeChartController = (config: any) => ({ chartData: [], currentMetrics: null });

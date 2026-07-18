@@ -1,0 +1,1 @@
+export class ReportEngineService { static generateSummary(deviceId: any, rangeLabel: any, startTime: any, endTime: any, rawRecords: any[]): any { return { reportId: `REP_${Date.now()}`, deviceId, rangeLabel, startTimestamp: startTime, endTimestamp: endTime, generatedAt: Date.now(), summaries: {} }; } }
