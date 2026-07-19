@@ -25,4 +25,4 @@ export const evaluateGasRules = (
   }
 
   return 'NORMAL';
-};\n
+};

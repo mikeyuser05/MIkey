@@ -33,4 +33,4 @@ export const generateHistoricalSummary = (
     activityMetrics,
     trends
   };
-};\n
+};

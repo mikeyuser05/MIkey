@@ -63,4 +63,4 @@ export class TelemetryRepository {
       this.intervalId = null;
     }
   }
-}\n
+}

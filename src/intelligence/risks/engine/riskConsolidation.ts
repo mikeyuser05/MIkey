@@ -55,4 +55,4 @@ export const evaluateCompositeRisks = (
   }
 
   return compositeRisks;
-};\n
+};

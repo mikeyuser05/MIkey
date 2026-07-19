@@ -27,4 +27,4 @@ export interface IHealthRiskEngine {
     trendSummary: { heartRate: { direction: string; deltaValue: number }; spo2: { direction: string; deltaValue: number } }
   ): IIntegratedRiskStatus;
   reset(): void;
-}\n
+}

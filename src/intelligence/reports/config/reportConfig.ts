@@ -11,4 +11,4 @@ export const DEFAULT_REPORT_CONFIG: IReportConfig = {
   },
   criticalGasThreshold: 800,
   criticalSpo2Threshold: 88
-};\n
+};

@@ -21,4 +21,4 @@ export const buildRecommendationOutput = (
     recommendations: finalizedRecs,
     primaryActionCode
   };
-};\n
+};

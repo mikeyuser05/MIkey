@@ -16,4 +16,4 @@ export const DEFAULT_TREND_CONFIG: ITrendConfig = {
     gas: 50.0,
   },
   trendWindowSizeMs: 300000, // 5-minute historical trend window evaluation
-};\n
+};

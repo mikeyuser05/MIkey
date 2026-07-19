@@ -36,4 +36,4 @@ export interface IActivityEngine {
     healthSnapshot: { timestamp: number; heartRate: number; steps: number }[]
   ): IActivityState;
   reset(): void;
-}\n
+}

@@ -20,4 +20,4 @@ export const DEFAULT_RECOMMENDATION_CONFIG: IRecommendationConfig = {
     'ACTION_REQUIRED': 3,
     'EMERGENCY_ACTION': 4
   }
-};\n
+};

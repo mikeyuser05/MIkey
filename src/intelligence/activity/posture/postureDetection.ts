@@ -25,4 +25,4 @@ export const detectPosture = (
   }
 
   return { inferredPosture: 'UNKNOWN' };
-};\n
+};

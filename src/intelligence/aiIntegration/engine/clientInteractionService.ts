@@ -65,4 +65,4 @@ export class ClientInteractionService {
       return false;
     }
   }
-}\n
+}

@@ -43,4 +43,4 @@ export const aggregateHistoricalMetrics = (
     spo2: { min: spo2Min, max: spo2Max, average: Math.round(spo2Sum / count) },
     gas: { min: gasMin, max: gasMax, average: Math.round(gasSum / count) }
   };
-};\n
+};

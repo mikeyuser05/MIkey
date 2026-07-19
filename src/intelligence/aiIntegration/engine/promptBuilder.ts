@@ -69,4 +69,4 @@ ${directives}
 [ANALYSIS OBJECTIVE]
 Synthesize these parameters to deliver actionable optimization adjustments for physical preparation, outlining how the trends correlate to environmental parameters and systemic load, without altering the baseline thresholds.`;
   }
-}\n
+}

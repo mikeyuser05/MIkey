@@ -28,4 +28,4 @@ export const buildRiskOutput = (
     activeRisks,
     isTransientSpike: isAnyRiskTransient
   };
-};\n
+};

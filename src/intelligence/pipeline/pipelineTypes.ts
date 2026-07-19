@@ -64,4 +64,4 @@ export interface IPipelineState {
     pipelineExecutionTimeMs: number;
     lastProcessedTimestamp: number;
   };
-}\n
+}

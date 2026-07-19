@@ -3,7 +3,7 @@ import { evaluateRecommendationRules } from '../engine/recGenerationEngine';
 import { rankRecommendations } from '../engine/rankingEngine';
 import { resolveRecommendationConflicts } from '../engine/conflictResolution';
 import { IRecommendationConfig } from '../config/recommendationConfig';
-
+import { describe, beforeEach, test, expect } from 'vitest';
 describe('PR4.6 Recommendation Engine - Automated Test Suite', () => {
   let engine: RecommendationEngine;
 
@@ -85,4 +85,4 @@ describe('PR4.6 Recommendation Engine - Automated Test Suite', () => {
     expect(out3.recommendations.length).toBe(1);
     expect(out3.primaryActionCode).toBe('REC_TACHY_REST');
   });
-});\n
+});

@@ -20,4 +20,4 @@ export const DEFAULT_ALERT_CONFIG: IAlertConfig = {
     warningToHighMs: 30000,    // Sustained warning transforms to high after 30s
     highToEmergencyMs: 20000,  // Sustained high transforms to emergency after 20s
   }
-};\n
+};

@@ -113,4 +113,4 @@ export const AIIntegratedWorkspaceHub: React.FC<IAIIntegratedWorkspaceHubProps> 
       )}
     </AIWorkspaceLayout>
   );
-};\n
+};

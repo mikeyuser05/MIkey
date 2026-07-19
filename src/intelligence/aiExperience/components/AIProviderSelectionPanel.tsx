@@ -116,4 +116,4 @@ export const AIProviderSelectionPanel: React.FC<IAIProviderSelectionPanelProps> 
       </div>
     </div>
   );
-};\n
+};

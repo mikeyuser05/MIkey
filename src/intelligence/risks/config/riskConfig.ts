@@ -42,4 +42,4 @@ export const DEFAULT_RISK_CONFIG: IRiskConfig = {
     HIGH: 15000,
     CRITICAL: 5000, // Shorter window for critical response validation
   }
-};\n
+};

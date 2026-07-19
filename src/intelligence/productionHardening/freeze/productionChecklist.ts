@@ -45,4 +45,4 @@ export class ProductionReleaseSignOff {
       versionTag: PLATFORM_RELEASE_MANIFEST.version
     };
   }
-}\n
+}

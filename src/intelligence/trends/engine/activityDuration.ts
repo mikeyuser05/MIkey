@@ -45,4 +45,4 @@ export const calculateActivityDurations = (
     activityDurationsMs: durations,
     totalTrackedTimeMs
   };
-};\n
+};

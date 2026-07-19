@@ -13,7 +13,7 @@ export interface IGlobalContextType {
   error: string | null;
 }
 
-const GlobalContext = createContext<IGlobalContextType | undefined>(undefined);
+export const GlobalContext = createContext<IGlobalContextType | undefined>(undefined);
 
 export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [pipelineData, setPipelineData] = useState<IPipelineState | null>(() => {
@@ -49,4 +49,4 @@ export const useGlobalState = (): IGlobalContextType => {
     throw new Error('useGlobalState must be consumed exclusively within a structural GlobalProvider context frame.');
   }
   return context;
-};\n
+};

@@ -1,7 +1,7 @@
 import { TelemetryIntelligenceEngine } from '../engine/telemetryEngine';
 import { IEngineConfig } from '../config/engineConfig';
 import { IRawTelemetry } from '../types/health';
-
+import { describe, beforeEach, test, expect } from 'vitest';
 describe('PR4.1 Telemetry Intelligence Engine - Automated Test Suite', () => {
   let engine: TelemetryIntelligenceEngine;
   
@@ -88,4 +88,4 @@ describe('PR4.1 Telemetry Intelligence Engine - Automated Test Suite', () => {
     outcome = engine.processIncomingTelemetry(edgePacket);
     expect(outcome.gasState).toBe('NORMAL'); // Historical threat dropped cleanly from cache
   });
-});\n
+});

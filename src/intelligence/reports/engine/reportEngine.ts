@@ -53,4 +53,4 @@ export class ReportEngine implements IReportEngine {
 
     throw new Error(`Unsupported periodic report type scope execution context: ${type}`);
   }
-}\n
+}

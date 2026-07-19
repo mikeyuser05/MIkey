@@ -97,4 +97,4 @@ export class AlertDecisionEngine implements IAlertDecisionEngine {
     this.escalationTracker.clear();
     this.ongoingThreats.clear();
   }
-}\n
+}

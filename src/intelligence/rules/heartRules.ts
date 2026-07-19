@@ -29,4 +29,4 @@ export const evaluateHeartRules = (
   }
 
   return 'NORMAL';
-};\n
+};

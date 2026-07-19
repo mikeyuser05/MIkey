@@ -69,4 +69,4 @@ export class EscalationTracker {
   public clear(): void {
     this.escalationMap.clear();
   }
-}\n
+}

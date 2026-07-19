@@ -41,4 +41,4 @@ export const determineAlertPriority = (
   }
 
   return 'NONE';
-};\n
+};

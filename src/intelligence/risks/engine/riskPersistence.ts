@@ -61,4 +61,4 @@ export class RiskPersistenceTracker {
   public clear(): void {
     this.historyMap.clear();
   }
-}\n
+}

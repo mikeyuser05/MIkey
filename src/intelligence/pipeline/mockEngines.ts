@@ -89,4 +89,4 @@ export class AIPromptEngine {
       generatedAt: Date.now()
     };
   }
-}\n
+}

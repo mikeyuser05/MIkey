@@ -53,4 +53,4 @@ export const detectTrends = (
     spo2: calculateTrendVector(o2Values, config.significantDeltas.spo2, config),
     gas: calculateTrendVector(gasValues, config.significantDeltas.gas, config)
   };
-};\n
+};

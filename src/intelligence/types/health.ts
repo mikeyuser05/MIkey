@@ -23,4 +23,4 @@ export interface IClassifiedHealthStates {
   heartState: HeartState;
   spo2State: SpO2State;
   gasState: GasState;
-}\n
+}

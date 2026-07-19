@@ -47,4 +47,4 @@ export const calculateRollingStats = (
     spo2: { min: o2Min, max: o2Max, avg: Number((o2Sum / totalPoints).toFixed(1)) },
     gas: { min: gasMin, max: gasMax, avg: Number((gasSum / totalPoints).toFixed(1)) }
   };
-};\n
+};

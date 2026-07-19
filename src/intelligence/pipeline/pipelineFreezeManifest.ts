@@ -10,4 +10,4 @@ export const IMMUTABLE_INTEGRATION_MANIFEST = {
   operationalVerificationStatus: "VERIFIED",
   buildTargetEpoch: 1784402055000, // Frozen architectural epoch (2026)
   architectureComplianceAuditorSignature: "INTELLIGENCE_SYSTEMS_ARCHITECT_RELEASE_GATE"
-};\n
+};

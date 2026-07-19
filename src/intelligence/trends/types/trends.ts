@@ -39,4 +39,4 @@ export interface ITrendAnalysisEngine {
     activityHistory: { timestamp: number; currentActivity: UserActivity }[]
   ): ITrendAnalysisSummary;
   reset(): void;
-}\n
+}

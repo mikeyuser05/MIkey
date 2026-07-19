@@ -35,4 +35,4 @@ export const DEFAULT_ACTIVITY_CONFIG: IActivityConfig = {
     noMovementHeartRateMax: 65,
     runningHeartRateMin: 100,
   },
-};\n
+};

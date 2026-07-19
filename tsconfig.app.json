@@ -21,8 +21,9 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-
-    "baseUrl": ".",
+    
+    "ignoreDeprecations": "6.0",
+    "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],

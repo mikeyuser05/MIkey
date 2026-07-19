@@ -35,4 +35,4 @@ export const extractMotionFeatures = (
     heartRateValue: latestFrame.heartRate,
     isStepIncrementing
   };
-};\n
+};

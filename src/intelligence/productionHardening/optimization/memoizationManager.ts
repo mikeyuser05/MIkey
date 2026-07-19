@@ -66,4 +66,4 @@ export class ComputationalMemoizer {
     this.cacheHits = 0;
     this.cacheMisses = 0;
   }
-}\n
+}

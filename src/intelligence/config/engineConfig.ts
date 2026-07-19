@@ -55,4 +55,4 @@ export const DEFAULT_ENGINE_CONFIG: IEngineConfig = {
       critical: 800,        // Dangerous density threshold
     },
   },
-};\n
+};

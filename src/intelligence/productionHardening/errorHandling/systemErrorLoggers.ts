@@ -83,4 +83,4 @@ export class ProductionErrorCoordinator {
   public static wipeLogs(): void {
     this.errorHistory = [];
   }
-}\n
+}

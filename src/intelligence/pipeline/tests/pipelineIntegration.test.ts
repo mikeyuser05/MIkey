@@ -2,7 +2,7 @@
  * NOEXCUSE HPO V2: PR4.11.8 End-to-End Analytics Pipeline Integration Test Suite
  * Validates data integrity preservation across sequential engine blocks.
  */
-
+import { describe, beforeEach, afterEach, it, expect } from 'vitest';
 import { PipelineOrchestrator } from '../pipelineOrchestrator';
 import { IRawTelemetryFrame } from '../pipelineTypes';
 
@@ -17,7 +17,7 @@ describe('PR4.11.8 Analytics Pipeline End-to-End Integration Tests', () => {
     orchestrator.tearDownOrchestrator();
   });
 
-  test('Should process normal raw telemetry frame through entire engine chain successfully', (done) => {
+  it('Should process...', () => {
     const normalFrame: IRawTelemetryFrame = {
       deviceId: 'TEST_DEVICE_INTEGRATION',
       timestamp: Date.now(),
@@ -40,13 +40,12 @@ describe('PR4.11.8 Analytics Pipeline End-to-End Integration Tests', () => {
       expect(state.reportMetadata.pipelineExecutionTimeMs).toBeLessThan(50); // High-performance check
       
       unsubscribe();
-      done();
     });
 
     orchestrator.processIncomingFrame(normalFrame);
   });
 
-  test('Should catch malformed payloads and gracefully invoke emergency fallback structures', (done) => {
+  it('Should catch malformed payloads and gracefully invoke emergency fallback structures', () => {
     const brokenFrame = null as unknown as IRawTelemetryFrame;
 
     const unsubscribe = orchestrator.subscribe((state) => {
@@ -58,9 +57,8 @@ describe('PR4.11.8 Analytics Pipeline End-to-End Integration Tests', () => {
       expect(state.aiPrompt.compiledPayload).toBe('FALLBACK MATRIX INJECTED: WAITING FOR RECOVERY');
       
       unsubscribe();
-      done();
     });
 
     orchestrator.processIncomingFrame(brokenFrame);
   });
-});\n
+});

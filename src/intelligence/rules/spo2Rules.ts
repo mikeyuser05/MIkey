@@ -30,4 +30,4 @@ export const evaluateSpO2Rules = (
   }
 
   return 'NORMAL';
-};\n
+};

@@ -49,4 +49,4 @@ export const compileDailyMetrics = (
     dominantActivity,
     totalActiveTimeMs
   };
-};\n
+};

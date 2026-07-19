@@ -34,4 +34,4 @@ export const classifyRawActivity = (
     default:
       return 'UNKNOWN';
   }
-};\n
+};

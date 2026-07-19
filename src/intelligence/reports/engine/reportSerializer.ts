@@ -22,4 +22,4 @@ export const deserializeReport = (serialized: string): IPeriodicReport => {
   }
 
   return parsed as IPeriodicReport;
-};\n
+};

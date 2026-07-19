@@ -40,4 +40,4 @@ export const resolveRecommendationConflicts = (
   }
 
   return resolved;
-};\n
+};

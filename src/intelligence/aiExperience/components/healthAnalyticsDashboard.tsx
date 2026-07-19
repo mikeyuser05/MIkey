@@ -102,4 +102,4 @@ export const HealthAnalyticsDashboard: React.FC = () => {
       </section>
     </div>
   );
-};\n
+};

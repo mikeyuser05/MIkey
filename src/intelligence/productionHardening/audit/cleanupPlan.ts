@@ -37,4 +37,4 @@ export class CleanupPlanManager {
   public getActiveCleanupPlan(): ICleanupTarget[] {
     return [...this.targets];
   }
-}\n
+}

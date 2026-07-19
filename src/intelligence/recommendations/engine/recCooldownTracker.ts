@@ -38,4 +38,4 @@ export class RecCooldownTracker {
   public clear(): void {
     this.lastIssuedMap.clear();
   }
-}\n
+}

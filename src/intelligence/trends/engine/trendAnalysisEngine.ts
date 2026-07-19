@@ -40,4 +40,4 @@ export class TrendAnalysisEngine implements ITrendAnalysisEngine {
   public reset(): void {
     // Structural compatibility interface endpoint for context layer hooks
   }
-}\n
+}

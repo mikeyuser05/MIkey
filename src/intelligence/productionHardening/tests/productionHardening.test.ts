@@ -2,7 +2,7 @@ import { ComputationalMemoizer } from '../optimization/memoizationManager';
 import { SubscriptionTracker } from '../memory/subscriptionTracker';
 import { ProductionErrorCoordinator } from '../errorHandling/systemErrorLoggers';
 import { DataValidationEngine } from '../validation/dataValidationEngine';
-
+import { describe, beforeEach, test, expect } from 'vitest';
 describe('PR4.10.6 Production Hardening & Validation - Integration Test Suite', () => {
   
   beforeEach(() => {
@@ -76,4 +76,4 @@ describe('PR4.10.6 Production Hardening & Validation - Integration Test Suite', 
     expect(insecureEndpoint.isValid).toBe(false);
     expect(insecureEndpoint.errors[0]).toContain('Security Constraint Violation');
   });
-});\n
+});

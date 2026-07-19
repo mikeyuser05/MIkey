@@ -2,7 +2,7 @@ import { PromptBuilder } from '../engine/promptBuilder';
 import { ContextBuilder } from '../engine/contextBuilder';
 import { ProviderRegistry } from '../engine/providerRegistry';
 import { ClientInteractionService, IClipboardNavigator, IWindowLauncher, INotificationChannel } from '../engine/clientInteractionService';
-
+import { describe, beforeEach, test, expect } from 'vitest';
 describe('PR4.8 AI Integration Layer - Automated Verification Suite', () => {
   
   // High-fidelity mocking state payloads representing historical parameters from PR4.4 and PR4.7
@@ -87,4 +87,4 @@ describe('PR4.8 AI Integration Layer - Automated Verification Suite', () => {
     expect(capturedUrl).toBe('https://gemini.google.com');
     expect(capturedNotification).toContain('Prompt copied for Google Gemini');
   });
-});\n
+});

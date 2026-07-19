@@ -71,4 +71,4 @@ export const createAIIntegrationController = (props: IUseAIIntegrationProps) => 
     handleProviderSelection,
     getAvailableProviders: () => providerRegistry.getRegisteredProviders()
   };
-};\n
+};

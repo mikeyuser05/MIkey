@@ -33,4 +33,4 @@ export class ContextBuilder {
       timestamp: executionTimestamp
     };
   }
-}\n
+}

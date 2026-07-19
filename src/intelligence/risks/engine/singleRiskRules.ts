@@ -80,4 +80,4 @@ export const evaluateGasRisk = (
     sourceRules,
     calculatedValue: gas
   };
-};\n
+};

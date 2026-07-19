@@ -67,4 +67,4 @@ export class RecommendationEngine implements IRecommendationEngine {
   public reset(): void {
     this.cooldownTracker.clear();
   }
-}\n
+}

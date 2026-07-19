@@ -16,4 +16,4 @@ export const AI_PROVIDERS: Record<string, IProviderConfig> = {
     name: 'Claude',
     baseUrl: 'https://claude.ai'
   }
-};\n
+};

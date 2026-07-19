@@ -37,4 +37,4 @@ export class ProviderRegistry {
   public getRegisteredProviders(): IProviderConfig[] {
     return Object.values(this.providers);
   }
-}\n
+}

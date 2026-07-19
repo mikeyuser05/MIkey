@@ -142,4 +142,4 @@ export const PromptPreviewPanel: React.FC<IPromptPreviewPanelProps> = ({
       )}
     </div>
   );
-};\n
+};

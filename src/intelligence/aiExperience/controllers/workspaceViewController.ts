@@ -75,4 +75,4 @@ export class WorkspaceViewController implements IAIWorkspaceController {
     this.updateState({ isExporting: false });
     return success;
   }
-}\n
+}

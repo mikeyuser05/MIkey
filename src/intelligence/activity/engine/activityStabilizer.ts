@@ -68,4 +68,4 @@ export class ActivityStabilizer {
     this.pendingStartTime = 0;
     this.stabilizedStartTime = 0;
   }
-}\n
+}

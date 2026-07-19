@@ -70,4 +70,4 @@ export class SubscriptionTracker {
   public getActiveAllocationCount(): number {
     return this.activeSubscriptions.size;
   }
-}\n
+}

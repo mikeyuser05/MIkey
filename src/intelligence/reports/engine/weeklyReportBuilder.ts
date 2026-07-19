@@ -99,4 +99,4 @@ export const buildWeeklyReport = (
     criticalAlertCount: totalAlerts,
     primaryRiskDirectives
   };
-};\n
+};

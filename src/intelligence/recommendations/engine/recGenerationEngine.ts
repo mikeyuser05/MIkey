@@ -86,4 +86,4 @@ export const evaluateRecommendationRules = (
   }
 
   return recommendations;
-};\n
+};

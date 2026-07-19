@@ -28,4 +28,4 @@ export interface IRecommendationEngine {
     currentTimestamp: number
   ): IStructuredRecommendationOutput;
   reset(): void;
-}\n
+}

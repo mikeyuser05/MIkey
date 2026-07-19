@@ -20,4 +20,4 @@ export const rankRecommendations = (
     // Sort in descending order of priority weight
     return weightB - weightA;
   });
-};\n
+};

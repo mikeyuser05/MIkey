@@ -1,7 +1,7 @@
 import { ActivityRecognitionEngine } from '../engine/activityEngine';
 import { IActivityConfig } from '../config/activityConfig';
 import { IRawTelemetry } from '../../types/health';
-
+import { describe, beforeEach, test, expect } from 'vitest';
 describe('PR4.2 Activity Recognition Engine - Automated Test Suite', () => {
   let engine: ActivityRecognitionEngine;
 
@@ -112,4 +112,4 @@ describe('PR4.2 Activity Recognition Engine - Automated Test Suite', () => {
     result = engine.processActivityWindow(window3);
     expect(result.currentActivity).toBe('WALKING');
   });
-});\n
+});

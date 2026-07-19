@@ -4,7 +4,7 @@ import { calculateActivityDurations } from '../engine/activityDuration';
 import { compileDailyMetrics } from '../engine/dailyMetrics';
 import { ITrendConfig } from '../config/trendConfig';
 import { UserActivity } from '../../activity/types/activity';
-
+import { describe, beforeEach, test, expect } from 'vitest';
 describe('PR4.3 Trend Analysis Engine - Automated Test Suite', () => {
   let engine: TrendAnalysisEngine;
 
@@ -101,4 +101,4 @@ describe('PR4.3 Trend Analysis Engine - Automated Test Suite', () => {
     expect(dailySummary.maxHeartRate).toBe(120);
     expect(dailySummary.totalActiveTimeMs).toBe(6000); // WALKING (4000) + RUNNING (2000)
   });
-});\n
+});

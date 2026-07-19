@@ -62,4 +62,4 @@ export const calculateAggregatedHealthScores = (
     environmentalSafetyScore,
     overallHealthScore: Math.max(0, Math.min(100, calculatedOverall))
   };
-};\n
+};

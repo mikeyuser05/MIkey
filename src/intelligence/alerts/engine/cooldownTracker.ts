@@ -39,4 +39,4 @@ export class CooldownTracker {
   public clear(): void {
     this.lastFiredMap.clear();
   }
-}\n
+}

@@ -35,4 +35,4 @@ export const calculateOverallSeverity = (
   }
 
   return highestSeverity;
-};\n
+};

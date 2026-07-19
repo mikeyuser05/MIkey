@@ -28,4 +28,4 @@ export const buildAlertPayload = (
     activitySnapshot: currentActivity,
     escalationCount
   };
-};\n
+};

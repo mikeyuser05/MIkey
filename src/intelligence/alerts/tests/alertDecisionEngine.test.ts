@@ -2,7 +2,7 @@ import { AlertDecisionEngine } from '../engine/alertDecisionEngine';
 import { evaluateAlertRules } from '../engine/alertRuleEngine';
 import { determineAlertPriority } from '../engine/priorityEngine';
 import { IAlertConfig } from '../config/alertConfig';
-
+import { describe, beforeEach, test, expect } from 'vitest';
 describe('PR4.5 Alert Decision Engine - Automated Test Suite', () => {
   let engine: AlertDecisionEngine;
 
@@ -75,4 +75,4 @@ describe('PR4.5 Alert Decision Engine - Automated Test Suite', () => {
     expect(alert3?.priority).toBe('HIGH');
     expect(alert3?.escalationCount).toBe(1);
   });
-});\n
+});

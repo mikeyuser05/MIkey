@@ -4,7 +4,7 @@ import { calculateAggregatedHealthScores } from '../engine/healthScoreAggregator
 import { serializeReport, deserializeReport } from '../engine/reportSerializer';
 import { IReportConfig } from '../config/reportConfig';
 import { IPeriodicReport } from '../types/reports';
-
+import { describe, beforeEach, test, expect } from 'vitest';
 describe('PR4.7 Periodic AI Reports - Automated Test Suite', () => {
   let reportEngine: ReportEngine;
 
@@ -113,4 +113,4 @@ describe('PR4.7 Periodic AI Reports - Automated Test Suite', () => {
     expect(report.healthScores.overallHealthScore).toBe(93); // Blended baseline evaluation results
     expect(report.primaryRiskDirectives).toContain('MAINTAIN_CURRENT_TRAINING_REGIMEN');
   });
-});\n
+});

@@ -3,7 +3,7 @@ import { evaluateHeartRisk, evaluateSpO2Risk, evaluateGasRisk } from '../engine/
 import { calculateOverallSeverity } from '../engine/riskSeverity';
 import { IRiskConfig } from '../config/riskConfig';
 import { ISingleRiskAssessment } from '../types/risks';
-
+import { describe, beforeEach, test, expect } from 'vitest';
 describe('PR4.4 Health Risk Detection Engine - Automated Test Suite', () => {
   let engine: HealthRiskEngine;
 
@@ -85,4 +85,4 @@ describe('PR4.4 Health Risk Detection Engine - Automated Test Suite', () => {
     const evaluation3 = engine.evaluateHealthRisks(telemetry, activity, trends, baseTime + 1500);
     expect(evaluation3.isTransientSpike).toBe(false);
   });
-});\n
+});

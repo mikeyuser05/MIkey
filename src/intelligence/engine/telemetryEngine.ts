@@ -64,4 +64,4 @@ export class TelemetryIntelligenceEngine {
   public clearHistory(): void {
     this.buffer = [];
   }
-}\n
+}

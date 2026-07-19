@@ -18,4 +18,4 @@ export interface IPromptContext {
 
 export interface IPromptBuilder {
   buildPrompt(context: IPromptContext): string;
-}\n
+}

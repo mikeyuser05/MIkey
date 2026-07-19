@@ -78,4 +78,4 @@ export class HealthRiskEngine implements IHealthRiskEngine {
   public reset(): void {
     this.persistenceTracker.clear();
   }
-}\n
+}

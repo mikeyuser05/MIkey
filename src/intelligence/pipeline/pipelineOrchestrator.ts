@@ -171,4 +171,4 @@ export class PipelineOrchestrator {
   public getLastState(): IPipelineState | null {
     return this.lastKnownState;
   }
-}\n
+}

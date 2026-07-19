@@ -54,4 +54,4 @@ export class ActivityRecognitionEngine implements IActivityEngine {
   public reset(): void {
     this.stabilizer.reset();
   }
-}\n
+}

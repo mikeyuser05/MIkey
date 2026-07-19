@@ -171,4 +171,4 @@ export const RecommendationExplainabilityPanel: React.FC<IRecommendationExplaina
       </div>
     </div>
   );
-};\n
+};

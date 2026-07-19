@@ -30,4 +30,4 @@ export interface IAlertDecisionEngine {
     currentTimestamp: number
   ): IAlertPayload | null;
   reset(): void;
-}\n
+}

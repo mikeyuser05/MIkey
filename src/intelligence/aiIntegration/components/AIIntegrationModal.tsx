@@ -164,4 +164,4 @@ export const AIIntegrationModal: React.FC<IAIIntegrationModalProps> = ({
       </div>
     </div>
   );
-};\n
+};

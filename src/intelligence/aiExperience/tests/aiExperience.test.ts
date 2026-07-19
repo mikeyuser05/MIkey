@@ -1,6 +1,6 @@
 import { WorkspaceViewController } from '../controllers/workspaceViewController';
 import { IAIWorkspaceState } from '../types/aiExperience';
-
+import { describe, beforeEach, test, expect } from 'vitest';
 describe('PR4.9 AI Experience Layer - View Controller Automated Tests', () => {
   let controller: WorkspaceViewController;
   let states: IAIWorkspaceState[];
@@ -54,4 +54,4 @@ describe('PR4.9 AI Experience Layer - View Controller Automated Tests', () => {
     const status = await controller.exportPromptAsFile('', 'invalid.txt');
     expect(status).toBe(false);
   });
-});\n
+});

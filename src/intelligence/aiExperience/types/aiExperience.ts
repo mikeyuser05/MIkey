@@ -21,4 +21,4 @@ export interface IAIWorkspaceController {
 
 export interface IFileExporter {
   exportTxt(content: string, filename: string): boolean;
-}\n
+}

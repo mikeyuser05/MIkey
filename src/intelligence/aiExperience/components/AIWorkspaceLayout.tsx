@@ -119,4 +119,4 @@ export const AIWorkspaceLayout: React.FC<IAIWorkspaceLayoutProps> = ({
       </div>
     </div>
   );
-};\n
+};

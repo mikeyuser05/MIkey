@@ -15,4 +15,4 @@ export const classifyHealthStates = (
     spo2State,
     gasState
   };
-};\n
+};

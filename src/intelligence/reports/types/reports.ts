@@ -43,4 +43,4 @@ export interface IReportEngine {
     startTimestamp: number,
     endTimestamp: number
   ): IPeriodicReport;
-}\n
+}
