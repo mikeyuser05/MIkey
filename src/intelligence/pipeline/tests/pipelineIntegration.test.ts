@@ -1,11 +1,4 @@
-import os
-
-TEST_DIR = os.path.join("src", "intelligence", "pipeline", "tests")
-os.makedirs(TEST_DIR, exist_ok=True)
-
-files_to_write = {
-    # ----------------- TESTS/PIPELINEINTEGRATION.TEST.TS -----------------
-    os.path.join(TEST_DIR, "pipelineIntegration.test.ts"): """/**
+/**
  * NOEXCUSE HPO V2: PR4.11.8 End-to-End Analytics Pipeline Integration Test Suite
  * Validates data integrity preservation across sequential engine blocks.
  */
@@ -70,39 +63,4 @@ describe('PR4.11.8 Analytics Pipeline End-to-End Integration Tests', () => {
 
     orchestrator.processIncomingFrame(brokenFrame);
   });
-});
-""",
-
-    # ----------------- PIPELINE/PIPELINEFREEZEMANIFEST.TS -----------------
-    os.path.join(os.path.dirname(TEST_DIR), "pipelineFreezeManifest.ts"): """/**
- * NOEXCUSE HPO V2: PR4.11.8 Pipeline Architecture Verification Manifest
- * Deep structural lock status confirming complete implementation freeze.
- */
-
-export const IMMUTABLE_INTEGRATION_MANIFEST = {
-  phase: "PR4.11",
-  designation: "System Integration & Pipeline Wiring",
-  structuralLockState: true,
-  operationalVerificationStatus: "VERIFIED",
-  buildTargetEpoch: 1784402055000, // Frozen architectural epoch (2026)
-  architectureComplianceAuditorSignature: "INTELLIGENCE_SYSTEMS_ARCHITECT_RELEASE_GATE"
-};
-"""
-}
-
-def build_testing_and_freeze_subphase():
-    print("=== Starting NOEXCUSE HPO V2 PR4.11.8 Verification & Pipeline Lock ===")
-    
-    for filepath, content in files_to_write.items():
-        with open(filepath, "w", encoding="utf-8") as file:
-            file.write(content.strip() + "\\n")
-        print(f"[Written File] {filepath}")
-
-    print("=== PR4.11.8 Integration Test Vectors Verified and Immutable Pipeline Freeze Set ===")
-    print("==========================================================================================")
-    print("   [PLATFORM COMPLETION ALERT] ALL SUBPHASES UNDER INTEGRATION MATRIX PR4.11 ARE FINISHED!  ")
-    print("   THE NOEXCUSE HPO V2 HIGH-PERFORMANCE ANALYTICAL PIPELINE IS SEALED FOR PRODUCTION.    ")
-    print("==========================================================================================")
-
-if __name__ == "__main__":
-    build_testing_and_freeze_subphase()
+});\n
