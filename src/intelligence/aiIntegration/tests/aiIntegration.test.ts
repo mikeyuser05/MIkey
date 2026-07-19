@@ -1,13 +1,4 @@
-import os
-
-BASE_DIR = os.path.join("src", "intelligence", "aiIntegration", "tests")
-
-# Ensure structural testing directory exists
-os.makedirs(BASE_DIR, exist_ok=True)
-
-files_to_write = {
-    # ----------------- AIINTEGRATION.TEST.TS -----------------
-    os.path.join(BASE_DIR, "aiIntegration.test.ts"): """import { PromptBuilder } from '../engine/promptBuilder';
+import { PromptBuilder } from '../engine/promptBuilder';
 import { ContextBuilder } from '../engine/contextBuilder';
 import { ProviderRegistry } from '../engine/providerRegistry';
 import { ClientInteractionService, IClipboardNavigator, IWindowLauncher, INotificationChannel } from '../engine/clientInteractionService';
@@ -96,20 +87,4 @@ describe('PR4.8 AI Integration Layer - Automated Verification Suite', () => {
     expect(capturedUrl).toBe('https://gemini.google.com');
     expect(capturedNotification).toContain('Prompt copied for Google Gemini');
   });
-});
-"""
-}
-
-def build_ai_integration_testing_and_freeze():
-    print("=== Starting NOEXCUSE HPO V2 PR4.8.8 Test Infrastructure & System Freeze ===")
-    
-    for filepath, content in files_to_write.items():
-        with open(filepath, "w", encoding="utf-8") as file:
-            file.write(content.strip() + "\\n")
-        print(f"[Written File] {filepath}")
-
-    print("=== PR4.8.8 Testing Verification Suite Setup Complete ===")
-    print("=== [PHASE COMPLETE] PR4.8 AI Integration Layer is Frozen ===")
-
-if __name__ == "__main__":
-    build_ai_integration_testing_and_freeze()
+});\n
