@@ -1,13 +1,4 @@
-import os
-
-BASE_DIR = os.path.join("src", "intelligence", "risks", "tests")
-
-# Ensure structural testing directory exists
-os.makedirs(BASE_DIR, exist_ok=True)
-
-files_to_write = {
-    # ----------------- HEALTHRISKENGINE.TEST.TS -----------------
-    os.path.join(BASE_DIR, "healthRiskEngine.test.ts"): """import { HealthRiskEngine } from '../engine/healthRiskEngine';
+import { HealthRiskEngine } from '../engine/healthRiskEngine';
 import { evaluateHeartRisk, evaluateSpO2Risk, evaluateGasRisk } from '../engine/singleRiskRules';
 import { calculateOverallSeverity } from '../engine/riskSeverity';
 import { IRiskConfig } from '../config/riskConfig';
@@ -94,20 +85,4 @@ describe('PR4.4 Health Risk Detection Engine - Automated Test Suite', () => {
     const evaluation3 = engine.evaluateHealthRisks(telemetry, activity, trends, baseTime + 1500);
     expect(evaluation3.isTransientSpike).toBe(false);
   });
-});
-"""
-}
-
-def build_risk_tests():
-    print("=== Starting NOEXCUSE HPO V2 PR4.4.8 Test Infrastructure Installation ===")
-    
-    for filepath, content in files_to_write.items():
-        with open(filepath, "w", encoding="utf-8") as file:
-            file.write(content.strip() + "\\n")
-        print(f"[Written File] {filepath}")
-
-    print("=== PR4.4.8 Testing and Validation Suite Setup Complete ===")
-    print("=== [PHASE COMPLETE] PR4.4 Health Risk Detection Engine is Frozen ===")
-
-if __name__ == "__main__":
-    build_risk_tests()
+});\n
