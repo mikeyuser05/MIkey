@@ -1,13 +1,4 @@
-import os
-
-BASE_DIR = os.path.join("src", "intelligence", "alerts", "tests")
-
-# Ensure structural testing directory exists
-os.makedirs(BASE_DIR, exist_ok=True)
-
-files_to_write = {
-    # ----------------- ALERTDECISIONENGINE.TEST.TS -----------------
-    os.path.join(BASE_DIR, "alertDecisionEngine.test.ts"): """import { AlertDecisionEngine } from '../engine/alertDecisionEngine';
+import { AlertDecisionEngine } from '../engine/alertDecisionEngine';
 import { evaluateAlertRules } from '../engine/alertRuleEngine';
 import { determineAlertPriority } from '../engine/priorityEngine';
 import { IAlertConfig } from '../config/alertConfig';
@@ -84,20 +75,4 @@ describe('PR4.5 Alert Decision Engine - Automated Test Suite', () => {
     expect(alert3?.priority).toBe('HIGH');
     expect(alert3?.escalationCount).toBe(1);
   });
-});
-"""
-}
-
-def build_alert_tests():
-    print("=== Starting NOEXCUSE HPO V2 PR4.5.8 Test Infrastructure & Freeze ===")
-    
-    for filepath, content in files_to_write.items():
-        with open(filepath, "w", encoding="utf-8") as file:
-            file.write(content.strip() + "\\n")
-        print(f"[Written File] {filepath}")
-
-    print("=== PR4.5.8 Testing and Validation Suite Setup Complete ===")
-    print("=== [PHASE COMPLETE] PR4.5 Alert Decision Engine is Frozen ===")
-
-if __name__ == "__main__":
-    build_alert_tests()
+});\n
