@@ -1,10 +1,4 @@
-import os
-
-BASE_DIR = os.path.join("src", "intelligence", "aiExperience")
-
-files_to_write = {
-    # ----------------- TESTS/AIEXPERIENCE.TEST.TS -----------------
-    os.path.join(BASE_DIR, "tests", "aiExperience.test.ts"): """import { WorkspaceViewController } from '../controllers/workspaceViewController';
+import { WorkspaceViewController } from '../controllers/workspaceViewController';
 import { IAIWorkspaceState } from '../types/aiExperience';
 
 describe('PR4.9 AI Experience Layer - View Controller Automated Tests', () => {
@@ -60,20 +54,4 @@ describe('PR4.9 AI Experience Layer - View Controller Automated Tests', () => {
     const status = await controller.exportPromptAsFile('', 'invalid.txt');
     expect(status).toBe(false);
   });
-});
-"""
-}
-
-def build_ai_experience_testing_and_freeze():
-    print("=== Starting NOEXCUSE HPO V2 PR4.9.8 Verification Suite & Freeze ===")
-    
-    for filepath, content in files_to_write.items():
-        with open(filepath, "w", encoding="utf-8") as file:
-            file.write(content.strip() + "\\n")
-        print(f"[Written File] {filepath}")
-
-    print("=== PR4.9.8 Automated Tests Implemented Successfully ===")
-    print("=== [PHASE COMPLETE] PR4.9 AI Experience Layer is Frozen ===")
-
-if __name__ == "__main__":
-    build_ai_experience_testing_and_freeze()
+});\n
