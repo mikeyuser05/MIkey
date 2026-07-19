@@ -1,13 +1,4 @@
-import os
-
-BASE_DIR = os.path.join("src", "intelligence", "recommendations", "tests")
-
-# Ensure structural testing directory exists
-os.makedirs(BASE_DIR, exist_ok=True)
-
-files_to_write = {
-    # ----------------- RECOMMENDATIONENGINE.TEST.TS -----------------
-    os.path.join(BASE_DIR, "recommendationEngine.test.ts"): """import { RecommendationEngine } from '../engine/recommendationEngine';
+import { RecommendationEngine } from '../engine/recommendationEngine';
 import { evaluateRecommendationRules } from '../engine/recGenerationEngine';
 import { rankRecommendations } from '../engine/rankingEngine';
 import { resolveRecommendationConflicts } from '../engine/conflictResolution';
@@ -94,20 +85,4 @@ describe('PR4.6 Recommendation Engine - Automated Test Suite', () => {
     expect(out3.recommendations.length).toBe(1);
     expect(out3.primaryActionCode).toBe('REC_TACHY_REST');
   });
-});
-"""
-}
-
-def build_recommendation_tests():
-    print("=== Starting NOEXCUSE HPO V2 PR4.6.8 Test Infrastructure & Freeze ===")
-    
-    for filepath, content in files_to_write.items():
-        with open(filepath, "w", encoding="utf-8") as file:
-            file.write(content.strip() + "\\n")
-        print(f"[Written File] {filepath}")
-
-    print("=== PR4.6.8 Testing and Validation Suite Setup Complete ===")
-    print("=== [PHASE COMPLETE] PR4.6 Recommendation Engine is Frozen ===")
-
-if __name__ == "__main__":
-    build_recommendation_tests()
+});\n
