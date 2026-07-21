@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Activity,
-  ChevronLeft,
   X,
   LayoutDashboard,
   Cpu,
@@ -15,7 +14,6 @@ import {
 import { cn } from '@utils/cn';
 import { useGlobalContext } from '@hooks/useGlobalContext';
 import { Tooltip } from '@components/ui/Tooltip';
-import { Badge } from '@components/ui/Badge';
 import { APP_SHORT_NAME } from '@constants/app.constants';
 import { PRIMARY_NAV_ITEMS } from '@constants/routes.constants';
 
@@ -23,22 +21,28 @@ const ICON_MAP: Record<string, LucideIcon> = {
   LayoutDashboard,
 };
 
-interface UpcomingNavItem {
+interface NavItem {
   id: string;
   label: string;
+  path: string;
   icon: LucideIcon;
 }
 
-const UPCOMING_NAV_ITEMS: UpcomingNavItem[] = [
-  { id: 'devices', label: 'Devices', icon: Cpu },
-  { id: 'analytics', label: 'Analytics', icon: LineChart },
-  { id: 'alerts', label: 'Alerts', icon: BellRing },
-  { id: 'settings', label: 'Settings', icon: Settings2 },
+const ACTIVE_PR4_ITEMS: NavItem[] = [
+  { id: 'devices', label: 'Devices', path: '/devices', icon: Cpu },
+  { id: 'analytics', label: 'Analytics', path: '/analytics', icon: LineChart },
+  { id: 'alerts', label: 'Alerts', path: '/alerts', icon: BellRing },
+  { id: 'settings', label: 'Settings', path: '/settings', icon: Settings2 },
 ];
 
 export function Sidebar(): ReactElement {
-  const { isSidebarCollapsed, toggleSidebar, isMobileSidebarOpen, setMobileSidebarOpen } =
-    useGlobalContext();
+  // Yahan fallback values aur 'as any' add kar diya gaya hai
+  const { 
+    isSidebarCollapsed = false, 
+    toggleSidebar = () => {}, 
+    isMobileSidebarOpen = false, 
+    setMobileSidebarOpen = () => {} 
+  } = useGlobalContext() as any;
 
   return (
     <>
@@ -89,6 +93,7 @@ export function Sidebar(): ReactElement {
         </div>
 
         <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-4">
+          {/* Main Items */}
           <div className="space-y-1">
             {!isSidebarCollapsed && (
               <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
@@ -138,38 +143,52 @@ export function Sidebar(): ReactElement {
             })}
           </div>
 
+          {/* Active PR4 Intelligence Sections */}
           <div className="space-y-1">
             {!isSidebarCollapsed && (
               <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Coming Soon
+                Intelligence & Modules
               </p>
             )}
-            {UPCOMING_NAV_ITEMS.map((item) => {
+            {ACTIVE_PR4_ITEMS.map((item) => {
               const Icon = item.icon;
-              const row = (
-                <div
-                  key={item.id}
-                  className="flex cursor-not-allowed items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-400 dark:text-slate-600"
-                  aria-disabled="true"
+
+              const link = (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMobileSidebarOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      'focus-ring group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors',
+                      isActive
+                        ? 'bg-primary-600/10 text-primary-700 dark:text-primary-400'
+                        : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800',
+                    )
+                  }
                 >
-                  <Icon className="h-5 w-5 shrink-0" strokeWidth={2} />
-                  {!isSidebarCollapsed && (
-                    <span className="flex flex-1 items-center justify-between gap-2 truncate">
-                      {item.label}
-                      <Badge variant="neutral" size="sm">
-                        Soon
-                      </Badge>
-                    </span>
+                  {({ isActive }) => (
+                    <>
+                      {isActive && (
+                        <motion.span
+                          layoutId="sidebar-active-indicator"
+                          className="absolute inset-y-1 left-0 w-1 rounded-full bg-primary-600"
+                          transition={{ duration: 0.2, ease: 'easeOut' }}
+                        />
+                      )}
+                      <Icon className="h-5 w-5 shrink-0" strokeWidth={2} />
+                      {!isSidebarCollapsed && <span className="truncate">{item.label}</span>}
+                    </>
                   )}
-                </div>
+                </NavLink>
               );
 
               return isSidebarCollapsed ? (
-                <Tooltip key={item.id} content={`${item.label} (Coming soon)`} position="right">
-                  {row}
+                <Tooltip key={item.path} content={item.label} position="right">
+                  {link}
                 </Tooltip>
               ) : (
-                row
+                link
               );
             })}
           </div>
@@ -190,22 +209,9 @@ export function Sidebar(): ReactElement {
                 <p className="truncate text-sm font-semibold text-slate-900 dark:text-slate-100">
                   Guest User
                 </p>
-                <p className="truncate text-xs text-slate-400 dark:text-slate-500">Not signed in</p>
               </div>
             )}
           </div>
-
-          <button
-            type="button"
-            onClick={toggleSidebar}
-            className="focus-ring mt-2 hidden w-full items-center justify-center gap-2 rounded-xl p-2 text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 lg:flex"
-            aria-label={isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          >
-            <ChevronLeft
-              className={cn('h-4 w-4 transition-transform', isSidebarCollapsed && 'rotate-180')}
-            />
-            {!isSidebarCollapsed && <span className="text-xs font-medium">Collapse</span>}
-          </button>
         </div>
       </motion.aside>
     </>
