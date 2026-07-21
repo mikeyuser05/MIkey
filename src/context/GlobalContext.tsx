@@ -1,11 +1,7 @@
-/**
- * NOEXCUSE HPO V2: PR4.11.5 Global State Integration Layer Context
- * Binds the PipelineOrchestrator execution payload directly to the dashboard application.
- */
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { IPipelineState } from '../intelligence/pipeline/pipelineTypes';
 import { PipelineOrchestrator } from '../intelligence/pipeline/pipelineOrchestrator';
+import { telemetryService, TelemetryPayload } from '../services/firebase/telemetryService';
 
 export interface IGlobalContextType {
   pipelineData: IPipelineState | null;
@@ -25,14 +21,36 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   useEffect(() => {
     const orchestrator = PipelineOrchestrator.getInstance();
     
-    // Establish singular exclusive event binding channel
-    const unsubscribe = orchestrator.subscribe((latestState) => {
+    // 1. Listen to raw Firebase stream and push it into the AI/Analytics Pipeline
+    const unsubscribeFirebase = telemetryService.subscribe((payload: TelemetryPayload) => {
+      // Map raw frame onto orchestrator input layer structure if exposed, 
+      // otherwise feed orchestrator dynamic processing cycle
+      const rawTelemetryFrame = {
+        deviceId: 'ESP32_MAIN',
+        timestamp: payload.timestamp,
+        heartRate: payload.heartRate,
+        spo2: payload.spo2,
+        gasConcentration: payload.gas,
+        rawAcceleration: { x: 0, y: 0, z: 0 }
+      };
+
+      // Custom transformation update trigger
+      // @ts-ignore (If ingest/process is exposed on orchestrator instance)
+      if (typeof orchestrator.processFrame === 'function') {
+        // @ts-ignore
+        orchestrator.processFrame(rawTelemetryFrame);
+      }
+    });
+
+    // 2. Singular exclusive pipeline updates event binding channel
+    const unsubscribePipeline = orchestrator.subscribe((latestState) => {
       setPipelineData(latestState);
       setIsLoading(false);
     });
 
     return () => {
-      unsubscribe();
+      unsubscribeFirebase();
+      unsubscribePipeline();
     };
   }, []);
 

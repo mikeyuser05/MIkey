@@ -9,10 +9,11 @@ export const useHeartRateChart = (windowSize: TimeWindowSize = '1m'): UseLiveCha
   const { heartRate, isLoading } = useLiveVitals();
   const [tick, setTick] = useState(0);
   const bufferRef = useRef<ChartBuffer>(new ChartBuffer(windowSize));
-  const prevValueRef = useRef<number>(heartRate);
+  const prevValueRef = useRef<number>(-1);
 
   useEffect(() => {
-    if (isLoading || heartRate === 0) return;
+    if (isLoading) return;
+    
     const now = Date.now();
     if (heartRate !== prevValueRef.current) {
       bufferRef.current.push(heartRate, now, formatTimeLabel(now));
@@ -21,5 +22,9 @@ export const useHeartRateChart = (windowSize: TimeWindowSize = '1m'): UseLiveCha
     }
   }, [heartRate, isLoading]);
 
-  return { data: useMemo(() => bufferRef.current.getPoints(), [tick]), stats: useMemo(() => LiveChartEngine.calculateStats(bufferRef.current.getPoints()), [tick]), isLoading };
+  return { 
+    data: useMemo(() => bufferRef.current.getPoints(), [tick]), 
+    stats: useMemo(() => LiveChartEngine.calculateStats(bufferRef.current.getPoints()), [tick]), 
+    isLoading 
+  };
 };

@@ -1,14 +1,18 @@
 import React, { Suspense, lazy } from 'react';
 import { ToastProvider } from '../components/shared/ToastContainer';
-import { LiveTelemetryMonitor } from '../components/dashboard/LiveTelemetryMonitor';
 import { ErrorBoundary } from '../components/shared/ErrorBoundary';
-import { SkeletonCard } from '../components/shared/SkeletonCard';
+import { SkeletonCard } from '../components/ui/SkeletonCard';
+
+// Main Telemetry Components (Fixed named imports)
+import { StreamOrchestrator } from '../components/dashboard/StreamOrchestrator';
+import { DeviceStatusPanel } from '../components/dashboard/DeviceStatusPanel';
+import { RecentEventsPanel } from '../components/dashboard/RecentEventsPanel';
 
 const MemoizedAnalyticsLayout = lazy(() =>
   import('../components/dashboard/MemoizedAnalyticsLayout').then(m => ({ default: m.MemoizedAnalyticsLayout }))
 );
 
-const Dashboard: React.FC = () => {
+export const Dashboard: React.FC = () => {
   return (
     <ToastProvider>
       <div className="min-h-screen bg-slate-950 text-slate-100 p-4 md:p-8 space-y-6">
@@ -23,10 +27,22 @@ const Dashboard: React.FC = () => {
           </div>
         </header>
 
-        <main className="space-y-6">
-          <ErrorBoundary><LiveTelemetryMonitor /></ErrorBoundary>
+        <main className="space-y-8">
+          <ErrorBoundary>
+            <StreamOrchestrator />
+          </ErrorBoundary>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <ErrorBoundary>
+              <DeviceStatusPanel />
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <RecentEventsPanel />
+            </ErrorBoundary>
+          </div>
+
           <section className="space-y-4">
-            <h2 className="text-lg font-bold text-white tracking-tight px-1">Biometric Streams & Analytics</h2>
+            <h2 className="text-lg font-bold text-white tracking-tight px-1">Biometric Streams & Charts</h2>
             <ErrorBoundary>
               <Suspense fallback={<div className="grid grid-cols-1 lg:grid-cols-2 gap-6"><SkeletonCard /><SkeletonCard /></div>}>
                 <MemoizedAnalyticsLayout />

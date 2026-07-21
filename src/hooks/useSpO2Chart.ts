@@ -9,10 +9,11 @@ export const useSpO2Chart = (windowSize: TimeWindowSize = '1m'): UseLiveChartRes
   const { spO2, isLoading } = useLiveVitals();
   const [tick, setTick] = useState(0);
   const bufferRef = useRef<ChartBuffer>(new ChartBuffer(windowSize));
-  const prevValueRef = useRef<number>(spO2);
+  const prevValueRef = useRef<number>(-1);
 
   useEffect(() => {
-    if (isLoading || spO2 === 0) return;
+    if (isLoading) return;
+    
     const now = Date.now();
     if (spO2 !== prevValueRef.current) {
       bufferRef.current.push(spO2, now, formatTimeLabel(now));
@@ -21,5 +22,9 @@ export const useSpO2Chart = (windowSize: TimeWindowSize = '1m'): UseLiveChartRes
     }
   }, [spO2, isLoading]);
 
-  return { data: useMemo(() => bufferRef.current.getPoints(), [tick]), stats: useMemo(() => LiveChartEngine.calculateStats(bufferRef.current.getPoints()), [tick]), isLoading };
+  return { 
+    data: useMemo(() => bufferRef.current.getPoints(), [tick]), 
+    stats: useMemo(() => LiveChartEngine.calculateStats(bufferRef.current.getPoints()), [tick]), 
+    isLoading 
+  };
 };

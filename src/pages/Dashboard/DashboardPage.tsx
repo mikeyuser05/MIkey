@@ -1,112 +1,58 @@
-import type { ReactElement } from 'react';
-import { motion } from 'framer-motion';
-import toast from 'react-hot-toast';
-import { RefreshCw, Download } from 'lucide-react';
-import { PageHeader } from '@components/ui/PageHeader';
-import { Button } from '@components/ui/Button';
-import { Container } from '@components/ui/Container';
-import {
-  DashboardGrid,
-  HeartRateCard,
-  SpO2Card,
-  StepsCard,
-  TemperatureCard,
-  GasCard,
-  BatteryCard,
-  ConnectionCard,
-  AlarmCard,
-  DeviceStatusPanel,
-  RecentEventsPanel,
-  QuickActionsPanel,
-  SystemStatusCard,
-} from '@components/dashboard';
+import React, { Suspense, lazy } from 'react';
+import { ToastProvider } from '../../components/shared/ToastContainer';
+import { ErrorBoundary } from '../../components/shared/ErrorBoundary';
+import { SkeletonCard } from '../../components/ui/SkeletonCard';
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.05 },
-  },
-};
+// Main Telemetry Components (Fixed named imports)
+import { StreamOrchestrator } from '../../components/dashboard/StreamOrchestrator';
+import { DeviceStatusPanel } from '../../components/dashboard/DeviceStatusPanel';
+import { RecentEventsPanel } from '../../components/dashboard/RecentEventsPanel';
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0 },
-};
+const MemoizedAnalyticsLayout = lazy(() =>
+  import('../../components/dashboard/MemoizedAnalyticsLayout').then(m => ({ default: m.MemoizedAnalyticsLayout }))
+);
 
-export function DashboardPage(): ReactElement {
-  const handleRefresh = (): void => {
-    toast.success('Dashboard refreshed (placeholder data)');
-  };
-
-  const handleExport = (): void => {
-    toast('Export is coming in a future PR.', { icon: '🚧' });
-  };
-
+export const DashboardPage: React.FC = () => {
   return (
-    <Container size="xl">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="flex flex-col gap-6"
-      >
-        <motion.div variants={itemVariants}>
-          <PageHeader
-            title="Dashboard"
-            description="Real-time overview of vitals, device health, and system status."
-            actions={
-              <>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  leftIcon={<RefreshCw className="h-4 w-4" />}
-                  onClick={handleRefresh}
-                >
-                  Refresh
-                </Button>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  leftIcon={<Download className="h-4 w-4" />}
-                  onClick={handleExport}
-                >
-                  Export
-                </Button>
-              </>
-            }
-          />
-        </motion.div>
-
-        <motion.div variants={itemVariants}>
-          <DashboardGrid>
-            <HeartRateCard />
-            <SpO2Card />
-            <StepsCard />
-            <TemperatureCard />
-            <GasCard />
-            <BatteryCard />
-            <ConnectionCard />
-            <AlarmCard />
-          </DashboardGrid>
-        </motion.div>
-
-        <motion.div variants={itemVariants} className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <div className="lg:col-span-1">
-            <DeviceStatusPanel />
+    <ToastProvider>
+      <div className="min-h-screen bg-slate-950 text-slate-100 p-4 md:p-8 space-y-6">
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-900 pb-6">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-white">NOEXCUSE HPO V2</h1>
+            <p className="text-sm text-slate-400 mt-1">Wearable Health & Safety Monitoring Telemetry System • Production Engine</p>
           </div>
-          <div className="lg:col-span-1">
-            <RecentEventsPanel />
+          <div className="flex items-center gap-2 bg-slate-900/60 border border-slate-800/80 px-4 py-2 rounded-xl text-xs font-mono text-slate-400">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>PR3.4E OPTIMIZED</span>
           </div>
-          <div className="flex flex-col gap-4 lg:col-span-1">
-            <QuickActionsPanel />
-          </div>
-        </motion.div>
+        </header>
 
-        <motion.div variants={itemVariants}>
-          <SystemStatusCard />
-        </motion.div>
-      </motion.div>
-    </Container>
+        <main className="space-y-8">
+          <ErrorBoundary>
+            <StreamOrchestrator />
+          </ErrorBoundary>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <ErrorBoundary>
+              <DeviceStatusPanel />
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <RecentEventsPanel />
+            </ErrorBoundary>
+          </div>
+
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-white tracking-tight px-1">Biometric Streams & Charts</h2>
+            <ErrorBoundary>
+              <Suspense fallback={<div className="grid grid-cols-1 lg:grid-cols-2 gap-6"><SkeletonCard /><SkeletonCard /></div>}>
+                <MemoizedAnalyticsLayout />
+              </Suspense>
+            </ErrorBoundary>
+          </section>
+        </main>
+      </div>
+    </ToastProvider>
   );
-}
+};
+
+export default DashboardPage;
