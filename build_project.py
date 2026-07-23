@@ -1,108 +1,202 @@
 import os
+from pathlib import Path
 
-TEST_DIR = os.path.join("src", "intelligence", "pipeline", "tests")
-os.makedirs(TEST_DIR, exist_ok=True)
+PHASE_NAME = "PR5.7 — Personal Health Intelligence Pipeline Integration"
 
-files_to_write = {
-    # ----------------- TESTS/PIPELINEINTEGRATION.TEST.TS -----------------
-    os.path.join(TEST_DIR, "pipelineIntegration.test.ts"): """/**
- * NOEXCUSE HPO V2: PR4.11.8 End-to-End Analytics Pipeline Integration Test Suite
- * Validates data integrity preservation across sequential engine blocks.
+FILES = {
+    "src/types/pipeline.ts": '''
+/**
+ * NOEXCUSE HPO V2 - Pipeline Integration Types
+ * Phase PR5.7: Personal Health Intelligence Pipeline
  */
 
-import { PipelineOrchestrator } from '../pipelineOrchestrator';
-import { IRawTelemetryFrame } from '../pipelineTypes';
+import { RawTelemetry } from './sqi';
+import { ValidatedTelemetryPacket } from '../services/sqi/sqiFilter';
+import { PersonalBaselineState } from './baseline';
+import { PersonalNormalRanges } from './normalRange';
+import { ContextualizedRanges } from './contextualBaseline';
+import { PersonalDeviationState } from './deviation';
 
-describe('PR4.11.8 Analytics Pipeline End-to-End Integration Tests', () => {
-  let orchestrator: PipelineOrchestrator;
+export interface HealthIntelligencePipelineOutput {
+  timestamp: number;
+  userId: string;
+  validatedPacket: ValidatedTelemetryPacket;
+  baselineState: PersonalBaselineState;
+  normalRanges: PersonalNormalRanges;
+  contextualRanges: ContextualizedRanges;
+  deviationState: PersonalDeviationState;
+  processingTimeMs: number;
+}
+''',
 
-  beforeEach(() => {
-    orchestrator = PipelineOrchestrator.getInstance();
-  });
+    "src/services/pipeline/healthIntelligencePipeline.ts": '''
+/**
+ * NOEXCUSE HPO V2 - Health Intelligence Pipeline Orchestrator
+ * Integrates PR5.1 through PR5.6 into a high-performance stream processor.
+ */
 
-  afterEach(() => {
-    orchestrator.tearDownOrchestrator();
-  });
+import { RawTelemetry } from '../../types/sqi';
+import { PersonalHealthProfile } from '../../types/profile';
+import { sqiEngine } from '../sqi/sqiEngine';
+import { sqiFilter } from '../sqi/sqiFilter';
+import { baselineEngine } from '../baseline/baselineEngine';
+import { baselineRepository } from '../baseline/baselineRepository';
+import { normalRangeEngine } from '../range/normalRangeEngine';
+import { contextEngine } from '../context/contextEngine';
+import { deviationEngine } from '../deviation/deviationEngine';
+import { HealthIntelligencePipelineOutput } from '../../types/pipeline';
 
-  test('Should process normal raw telemetry frame through entire engine chain successfully', (done) => {
-    const normalFrame: IRawTelemetryFrame = {
-      deviceId: 'TEST_DEVICE_INTEGRATION',
-      timestamp: Date.now(),
-      heartRate: 75,
-      spo2: 98,
-      gasConcentration: 150,
-      rawAcceleration: { x: 0.1, y: 0.2, z: 0.9 }
+export class HealthIntelligencePipeline {
+  /**
+   * Processes a single raw telemetry packet through the entire PR5 architecture.
+   */
+  public processPacket(
+    raw: RawTelemetry,
+    profile: PersonalHealthProfile
+  ): HealthIntelligencePipelineOutput {
+    const startTime = performance.now();
+    const userId = profile.id;
+
+    // 1. SQI Validation
+    const sqiResult = sqiEngine.evaluate(raw);
+    const validatedPacket = sqiFilter.filterPacket(raw, sqiResult);
+
+    // 2. Fetch and Update Statistical Baseline
+    let currentBaseline = baselineRepository.getByUserId(userId);
+    if (validatedPacket.sqi.isUsableForBaselines) {
+      currentBaseline = baselineEngine.updateBaseline(currentBaseline, validatedPacket);
+      baselineRepository.save(currentBaseline);
+    }
+
+    // 3. Compute Personal Normal Ranges (PR5.4)
+    const normalRanges = normalRangeEngine.computeRanges(profile, currentBaseline);
+
+    // 4. Activity & Time-of-Day Context Inference (PR5.6)
+    const motionVal = raw.accelMagnitude ?? 0;
+    const activeContext = contextEngine.inferContext(motionVal, raw.timestamp);
+    const contextualRanges = contextEngine.adjustRangesForContext(
+      normalRanges,
+      activeContext,
+      raw.timestamp
+    );
+
+    // 5. Contextual Normal Range Overrides for Deviation Engine
+    const dynamicRanges: PersonalNormalRanges = {
+      ...normalRanges,
+      heartRateRange: {
+        ...normalRanges.heartRateRange,
+        lowerBound: contextualRanges.adjustedHrMin,
+        upperBound: contextualRanges.adjustedHrMax,
+      },
+      spo2Range: {
+        ...normalRanges.spo2Range,
+        lowerBound: contextualRanges.adjustedSpo2Min,
+        upperBound: contextualRanges.adjustedSpo2Max,
+      },
     };
 
-    const unsubscribe = orchestrator.subscribe((state) => {
-      // Basic telemetry mapping assertions
-      expect(state.healthState.isSafe).toBe(true);
-      expect(state.healthState.heartRateStatus).toBe('NORMAL');
-      expect(state.activityState.currentActivity).toBe('RESTING');
-      expect(state.alertState.isTriggered).toBe(false);
-      
-      // AI prompt aggregation assertions
-      expect(state.aiPrompt.compiledPayload).toContain('ACTIVITY: RESTING');
-      expect(state.aiPrompt.compiledPayload).toContain('PRIMARY ACTION: REC_NOMINAL');
-      expect(state.reportMetadata.pipelineExecutionTimeMs).toBeLessThan(50); // High-performance check
-      
-      unsubscribe();
-      done();
-    });
+    // 6. Evaluate Deviation (PR5.5)
+    const deviationState = deviationEngine.evaluateDeviation(validatedPacket, dynamicRanges);
 
-    orchestrator.processIncomingFrame(normalFrame);
-  });
+    const endTime = performance.now();
 
-  test('Should catch malformed payloads and gracefully invoke emergency fallback structures', (done) => {
-    const brokenFrame = null as unknown as IRawTelemetryFrame;
-
-    const unsubscribe = orchestrator.subscribe((state) => {
-      // Error boundary fallbacks assertions
-      expect(state.healthState.heartRateStatus).toBe('UNKNOWN');
-      expect(state.alertState.isTriggered).toBe(true);
-      expect(state.alertState.message).toContain('Pipeline degradation');
-      expect(state.recommendations.primaryActionCode).toBe('REC_FALLBACK');
-      expect(state.aiPrompt.compiledPayload).toBe('FALLBACK MATRIX INJECTED: WAITING FOR RECOVERY');
-      
-      unsubscribe();
-      done();
-    });
-
-    orchestrator.processIncomingFrame(brokenFrame);
-  });
-});
-""",
-
-    # ----------------- PIPELINE/PIPELINEFREEZEMANIFEST.TS -----------------
-    os.path.join(os.path.dirname(TEST_DIR), "pipelineFreezeManifest.ts"): """/**
- * NOEXCUSE HPO V2: PR4.11.8 Pipeline Architecture Verification Manifest
- * Deep structural lock status confirming complete implementation freeze.
- */
-
-export const IMMUTABLE_INTEGRATION_MANIFEST = {
-  phase: "PR4.11",
-  designation: "System Integration & Pipeline Wiring",
-  structuralLockState: true,
-  operationalVerificationStatus: "VERIFIED",
-  buildTargetEpoch: 1784402055000, // Frozen architectural epoch (2026)
-  architectureComplianceAuditorSignature: "INTELLIGENCE_SYSTEMS_ARCHITECT_RELEASE_GATE"
-};
-"""
+    return {
+      timestamp: raw.timestamp,
+      userId,
+      validatedPacket,
+      baselineState: currentBaseline,
+      normalRanges,
+      contextualRanges,
+      deviationState,
+      processingTimeMs: Number((endTime - startTime).toFixed(2)),
+    };
+  }
 }
 
-def build_testing_and_freeze_subphase():
-    print("=== Starting NOEXCUSE HPO V2 PR4.11.8 Verification & Pipeline Lock ===")
-    
-    for filepath, content in files_to_write.items():
-        with open(filepath, "w", encoding="utf-8") as file:
-            file.write(content.strip() + "\\n")
-        print(f"[Written File] {filepath}")
+export const healthIntelligencePipeline = new HealthIntelligencePipeline();
+''',
 
-    print("=== PR4.11.8 Integration Test Vectors Verified and Immutable Pipeline Freeze Set ===")
-    print("==========================================================================================")
-    print("   [PLATFORM COMPLETION ALERT] ALL SUBPHASES UNDER INTEGRATION MATRIX PR4.11 ARE FINISHED!  ")
-    print("   THE NOEXCUSE HPO V2 HIGH-PERFORMANCE ANALYTICAL PIPELINE IS SEALED FOR PRODUCTION.    ")
-    print("==========================================================================================")
+    "src/tests/healthIntelligencePipeline.test.ts": '''
+/**
+ * NOEXCUSE HPO V2 - Pipeline End-to-End Integration Tests
+ */
+
+import { HealthIntelligencePipeline } from '../services/pipeline/healthIntelligencePipeline';
+import { DEFAULT_HEALTH_PROFILE } from '../services/profile/profileValidator';
+import { RawTelemetry } from '../types/sqi';
+import { baselineRepository } from '../services/baseline/baselineRepository';
+
+describe('HealthIntelligencePipeline Integration', () => {
+  let pipeline: HealthIntelligencePipeline;
+
+  beforeEach(() => {
+    pipeline = new HealthIntelligencePipeline();
+    baselineRepository.reset();
+  });
+
+  it('successfully processes a valid resting telemetry frame', () => {
+    const rawPacket: RawTelemetry = {
+      timestamp: Date.now(),
+      heartRate: 72,
+      spo2: 98,
+      gasLevel: 110,
+      accelMagnitude: 0.05,
+    };
+
+    const output = pipeline.processPacket(rawPacket, DEFAULT_HEALTH_PROFILE);
+
+    expect(output.userId).toBe(DEFAULT_HEALTH_PROFILE.id);
+    expect(output.validatedPacket.sqi.isUsableForBaselines).toBe(true);
+    expect(output.contextualRanges.context).toBe('RESTING');
+    expect(output.deviationState.hasAnyDeviation).toBe(false);
+    expect(output.processingTimeMs).toBeLessThan(50); // High-performance guarantee
+  });
+
+  it('correctly suppresses baseline update on corrupted SQI packet while still calculating deviation', () => {
+    const corruptedPacket: RawTelemetry = {
+      timestamp: Date.now(),
+      heartRate: 240, // Unrealistic spike
+      spo2: 98,
+      gasLevel: 100,
+      accelMagnitude: 0.1,
+    };
+
+    const output = pipeline.processPacket(corruptedPacket, DEFAULT_HEALTH_PROFILE);
+
+    expect(output.validatedPacket.sqi.heartRateQuality.isValid).toBe(false);
+    expect(output.deviationState.heartRateDeviation.currentValue).toBeNull();
+  });
+
+  it('adapts context to ACTIVE and adjusts bounds under heavy movement', () => {
+    const activePacket: RawTelemetry = {
+      timestamp: Date.now(),
+      heartRate: 115,
+      spo2: 97,
+      gasLevel: 100,
+      accelMagnitude: 2.1, // High motion
+    };
+
+    const output = pipeline.processPacket(activePacket, DEFAULT_HEALTH_PROFILE);
+
+    expect(output.contextualRanges.context).toBe('ACTIVE');
+    // 115 bpm should not trigger critical deviation when ACTIVE context expands limits
+    expect(output.deviationState.heartRateDeviation.severity).toBe('NORMAL');
+  });
+});
+'''
+}
+
+def build():
+    print("==================================================")
+    print(f"Executing: {PHASE_NAME}")
+    print("==================================================")
+    for file_path, content in FILES.items():
+        path = Path(file_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(content.strip() + "\n")
+        print(f"Created/Updated: {file_path}")
+    print(f"\n{PHASE_NAME} build completed successfully.\n")
 
 if __name__ == "__main__":
-    build_testing_and_freeze_subphase()
+    build()
