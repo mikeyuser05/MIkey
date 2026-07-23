@@ -1,176 +1,97 @@
 /**
- * NOEXCUSE HPO V2 - SQI Deterministic Engine
- * Evaluates telemetry signals against physical constraints, staleness, and spike rules.
+ * @file sqiEngine.ts
+ * @description Deterministic Signal Quality Index (SQI) validator.
  */
 
-import { SQIBoundaryLimits, SQIFlag, SQIEvaluationResult, MetricQualityResult, SQIQualityGrade } from '../../types/sqi';
+import { TelemetryReadingInput, SQIEvaluationResult, SQIFailureReason } from '../../types/sqi';
 
-export const DEFAULT_SQI_BOUNDS: SQIBoundaryLimits = {
-  hrMin: 30,
-  hrMax: 220,
-  hrMaxDeltaPerSec: 15,
-  spo2Min: 70,
-  spo2Max: 100,
-  spo2MaxDeltaPerSec: 5,
-  gasMin: 0,
-  gasMax: 10000,
-  maxStaleAgeMs: 10000, // 10 seconds
-};
+const MAX_STALE_AGE_MS = 15000;
+const HR_MIN_VALID = 30;
+const HR_MAX_VALID = 240;
+const SPO2_MIN_VALID = 60;
+const SPO2_MAX_VALID = 100;
 
-export interface TelemetryPoint {
-  timestamp: number;
-  heartRate?: number | null;
-  spo2?: number | null;
-  gasLevel?: number | null;
-  stepCount?: number | null;
-}
+const MAX_HR_DELTA_PER_SEC = 20;
+const MAX_SPO2_DROP_PER_SEC = 5;
 
 export class SQIEngine {
-  private bounds: SQIBoundaryLimits;
-
-  constructor(bounds: Partial<SQIBoundaryLimits> = {}) {
-    this.bounds = { ...DEFAULT_SQI_BOUNDS, ...bounds };
-  }
-
-  /**
-   * Evaluates a single telemetry sample against physical bounds and previous reference sample.
-   */
-  public evaluateSample(
-    current: TelemetryPoint,
-    previous?: TelemetryPoint | null,
+  public static evaluate(
+    current: TelemetryReadingInput,
+    previous?: TelemetryReadingInput | null,
     nowMs: number = Date.now()
   ): SQIEvaluationResult {
-    const timeDeltaSec = previous ? Math.max((current.timestamp - previous.timestamp) / 1000, 0.1) : 1;
-    const packetAgeMs = nowMs - current.timestamp;
+    const flags: SQIFailureReason[] = [];
+    let score = 100;
 
-    // Check packet freshness
-    const isStale = packetAgeMs > this.bounds.maxStaleAgeMs;
-
-    // 1. Evaluate Heart Rate
-    const hrQuality = this.evaluateMetric(
-      current.heartRate,
-      previous?.heartRate,
-      this.bounds.hrMin,
-      this.bounds.hrMax,
-      this.bounds.hrMaxDeltaPerSec,
-      timeDeltaSec,
-      isStale
-    );
-
-    // 2. Evaluate SpO2
-    const spo2Quality = this.evaluateMetric(
-      current.spo2,
-      previous?.spo2,
-      this.bounds.spo2Min,
-      this.bounds.spo2Max,
-      this.bounds.spo2MaxDeltaPerSec,
-      timeDeltaSec,
-      isStale
-    );
-
-    // 3. Evaluate Gas
-    const gasQuality = this.evaluateMetric(
-      current.gasLevel,
-      previous?.gasLevel,
-      this.bounds.gasMin,
-      this.bounds.gasMax,
-      1000, // High threshold for gas changes
-      timeDeltaSec,
-      isStale
-    );
-
-    // 4. Motion Quality Placeholder (based on availability)
-    const motionQuality: MetricQualityResult = {
-      value: current.stepCount ?? 0,
-      isValid: true,
-      score: 1.0,
-      flags: ['VALID'],
-    };
-
-    // Overall Score Calculation (Weighted)
-    const overallScore = Number(
-      (hrQuality.score * 0.4 + spo2Quality.score * 0.4 + gasQuality.score * 0.2).toFixed(2)
-    );
-
-    let grade: SQIQualityGrade = 'EXCELLENT';
-    if (overallScore < 0.4) grade = 'INVALID';
-    else if (overallScore < 0.7) grade = 'DEGRADED';
-    else if (overallScore < 0.9) grade = 'ACCEPTABLE';
-
-    const isUsableForBaselines = overallScore >= 0.70 && hrQuality.isValid && spo2Quality.isValid;
-
-    const summaryReason = this.buildSummaryReason(isStale, hrQuality, spo2Quality, gasQuality);
-
-    return {
-      timestamp: current.timestamp,
-      overallScore,
-      grade,
-      isUsableForBaselines,
-      heartRateQuality: hrQuality,
-      spo2Quality: spo2Quality,
-      gasQuality: gasQuality,
-      motionQuality,
-      summaryReason,
-    };
-  }
-
-  private evaluateMetric(
-    val: number | undefined | null,
-    prevVal: number | undefined | null,
-    min: number,
-    max: number,
-    maxDeltaPerSec: number,
-    timeDeltaSec: number,
-    isStale: boolean
-  ): MetricQualityResult {
-    const flags: SQIFlag[] = [];
-
-    if (val === undefined || val === null || isNaN(val)) {
-      return { value: null, isValid: false, score: 0.0, flags: ['MISSING_DATA'] };
+    if (current.heartRate === null || current.heartRate === undefined || current.spO2 === null || current.spO2 === undefined) {
+      flags.push('MISSING_DATA');
+      return {
+        grade: 'INVALID',
+        score: 0,
+        isValidForBaseline: false,
+        flags,
+        evaluatedAtMs: nowMs,
+      };
     }
 
-    if (isStale) {
+    const ageMs = nowMs - current.timestampMs;
+    if (ageMs > MAX_STALE_AGE_MS || current.timestampMs <= 0) {
       flags.push('STALE_DATA');
+      score -= 40;
     }
 
-    // Boundary check
-    if (val < min || val > max) {
-      flags.push('IMPOSSIBLE_VALUE');
-      return { value: val, isValid: false, score: 0.0, flags };
+    if (current.heartRate < HR_MIN_VALID || current.heartRate > HR_MAX_VALID) {
+      flags.push('HR_OUT_OF_PHYSIOLOGICAL_RANGE');
+      score -= 50;
     }
 
-    // Spike / Physiological rate-of-change check
-    if (prevVal !== undefined && prevVal !== null && !isNaN(prevVal)) {
-      const delta = Math.abs(val - prevVal);
-      const rateOfChange = delta / timeDeltaSec;
+    if (current.spO2 < SPO2_MIN_VALID || current.spO2 > SPO2_MAX_VALID) {
+      flags.push('SPO2_OUT_OF_PHYSIOLOGICAL_RANGE');
+      score -= 50;
+    }
 
-      if (rateOfChange > maxDeltaPerSec) {
-        flags.push('PHYSICAL_SPIKE');
-        return { value: val, isValid: false, score: 0.3, flags };
+    if (previous && previous.timestampMs > 0 && previous.heartRate != null && previous.spO2 != null) {
+      const dtSec = Math.max(0.1, (current.timestampMs - previous.timestampMs) / 1000);
+
+      const hrDelta = Math.abs(current.heartRate - previous.heartRate);
+      if (hrDelta / dtSec > MAX_HR_DELTA_PER_SEC) {
+        flags.push('IMPLAUSIBLE_HR_SPIKE');
+        score -= 30;
+      }
+
+      const spO2Drop = previous.spO2 - current.spO2;
+      if (spO2Drop / dtSec > MAX_SPO2_DROP_PER_SEC) {
+        flags.push('IMPLAUSIBLE_SPO2_DROP');
+        score -= 30;
       }
     }
 
-    if (flags.length === 0) {
-      flags.push('VALID');
-      return { value: val, isValid: true, score: 1.0, flags };
+    if (current.accelMagnitude && current.accelMagnitude > 3.5) {
+      flags.push('HIGH_MOTION_ARTIFACT');
+      score -= 20;
     }
 
-    const score = flags.includes('STALE_DATA') ? 0.5 : 0.7;
-    return { value: val, isValid: score >= 0.7, score, flags };
-  }
+    score = Math.max(0, score);
+    let grade: 'EXCELLENT' | 'ACCEPTABLE' | 'DEGRADED' | 'INVALID';
 
-  private buildSummaryReason(
-    isStale: boolean,
-    hr: MetricQualityResult,
-    spo2: MetricQualityResult,
-    gas: MetricQualityResult
-  ): string {
-    if (isStale) return 'Telemetry signal is stale.';
-    if (!hr.isValid) return `Heart rate data invalid (${hr.flags.join(', ')}).`;
-    if (!spo2.isValid) return `SpO2 data invalid (${spo2.flags.join(', ')}).`;
-    if (!gas.isValid) return `Gas sensor data invalid (${gas.flags.join(', ')}).`;
-    return 'Signal quality meets target baseline thresholds.';
+    if (score >= 90) {
+      grade = 'EXCELLENT';
+    } else if (score >= 70) {
+      grade = 'ACCEPTABLE';
+    } else if (score >= 40) {
+      grade = 'DEGRADED';
+    } else {
+      grade = 'INVALID';
+    }
+
+    const isValidForBaseline = (grade === 'EXCELLENT' || grade === 'ACCEPTABLE') && !flags.includes('HR_OUT_OF_PHYSIOLOGICAL_RANGE') && !flags.includes('SPO2_OUT_OF_PHYSIOLOGICAL_RANGE');
+
+    return {
+      grade,
+      score,
+      isValidForBaseline,
+      flags,
+      evaluatedAtMs: nowMs,
+    };
   }
 }
-
-export const defaultSQIEngine = new SQIEngine();

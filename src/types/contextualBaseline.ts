@@ -1,24 +1,29 @@
 /**
- * NOEXCUSE HPO V2 - Contextual Baseline Types
- * Phase PR5.6: Context-Aware Baselines
+ * Build 5.6: Activity and Context-Aware Baseline Engine
+ * Domain Types & Interfaces
  */
 
-import { PersonalBaselineState } from './baseline';
-
-export type ActivityContext = 'RESTING' | 'ACTIVE' | 'SLEEPING';
-
-export interface ContextualMultiplier {
-  hrUpperMultiplier: number;
-  hrLowerMultiplier: number;
-  spo2LowerTolerance: number;
+export enum UserContextState {
+    RESTING = "RESTING",
+    ACTIVE = "ACTIVE",
+    SLEEPING = "SLEEPING",
+    UNKNOWN = "UNKNOWN"
 }
 
-export interface ContextualizedRanges {
-  context: ActivityContext;
-  timestamp: number;
-  adjustedHrMin: number;
-  adjustedHrMax: number;
-  adjustedSpo2Min: number;
-  adjustedSpo2Max: number;
-  adjustedGasMax: number;
+export interface ContextInputData {
+    accelMagnitude: number; // Vector magnitude from accelerometer (m/s^2 or g)
+    hourOfDay: number;      // 0 to 23
+    stepCount: number;      // Recent step count delta
+}
+
+export interface BaselineRange {
+    minBpm: number;
+    maxBpm: number;
+}
+
+export interface ScaledBaseline {
+    state: UserContextState;
+    dynamicMinBpm: number;
+    dynamicMaxBpm: number;
+    scalingFactor: number;
 }

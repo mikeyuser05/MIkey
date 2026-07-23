@@ -1,46 +1,51 @@
-/**
- * NOEXCUSE HPO V2 - Normal Range Engine Unit Tests
- */
+import { NormalRangeEngine } from '../services/baseline/normalRangeEngine';
+import { createDefaultProfile } from '../services/healthProfile/healthProfileDefaults';
+import { EmpiricBaselineResult } from '../types/baselineEngine';
 
-import { NormalRangeEngine } from '../services/range/normalRangeEngine';
-import { DEFAULT_HEALTH_PROFILE } from '../services/profile/profileValidator';
-import { PersonalBaselineState } from '../types/baseline';
+describe('PR5.4 — Individual Normal Range Engine', () => {
+  const profile = createDefaultProfile('test-user'); // age 30, maxHR 187, default RHR 70
 
-describe('NormalRangeEngine', () => {
-  let engine: NormalRangeEngine;
-
-  beforeEach(() => {
-    engine = new NormalRangeEngine();
+  test('calculates default demographic normal ranges when uncalibrated', () => {
+    const ranges = NormalRangeEngine.calculateRanges(profile, null);
+    expect(ranges.isEmpiricallyDerived).toBe(false);
+    expect(ranges.heartRateResting.target).toBe(70);
+    expect(ranges.heartRateResting.lower).toBe(60); // 70 - 10
+    expect(ranges.heartRateResting.upper).toBe(80); // 70 + 10
+    expect(ranges.spO2Resting.lower).toBe(95); // 98 - 3
   });
 
-  const mockBaseline = (samples: number, hrMean: number, hrStd: number): PersonalBaselineState => ({
-    userId: 'user_1',
-    updatedAt: Date.now(),
-    confidence: samples >= 100 ? 'HIGH' : samples >= 30 ? 'MODERATE' : 'LOW',
-    overallConfidenceScore: samples >= 100 ? 0.85 : 0.3,
-    restingHeartRate: { sampleCount: samples, mean: hrMean, stdDev: hrStd, median: hrMean, minObserved: 50, maxObserved: 100, lastUpdated: Date.now() },
-    baselineSpo2: { sampleCount: samples, mean: 98, stdDev: 1, median: 98, minObserved: 95, maxObserved: 100, lastUpdated: Date.now() },
-    baselineGasLevel: { sampleCount: samples, mean: 120, stdDev: 15, median: 120, minObserved: 80, maxObserved: 200, lastUpdated: Date.now() },
-    windowStartTimestamp: Date.now() - 10000,
-    windowEndTimestamp: Date.now(),
+  test('calculates empirical dynamic normal ranges when calibrated', () => {
+    const empirical: EmpiricBaselineResult = {
+      empiricalRHR: 64,
+      empiricalSpO2: 97,
+      hrStdDev: 4.0, // hrMargin = 1.5 * 4 = 6
+      spO2StdDev: 1.0, // spO2Margin = 2
+      sampleCount: 50,
+      confidenceScore: 90,
+      isCalibrated: true,
+      lastUpdatedIso: new Date().toISOString(),
+    };
+
+    const ranges = NormalRangeEngine.calculateRanges(profile, empirical);
+    expect(ranges.isEmpiricallyDerived).toBe(true);
+    expect(ranges.heartRateResting.target).toBe(64);
+    expect(ranges.heartRateResting.lower).toBe(58); // 64 - 6
+    expect(ranges.heartRateResting.upper).toBe(70); // 64 + 6
+    expect(ranges.spO2Resting.lower).toBe(95); // 97 - 2
   });
 
-  it('falls back to stated profile when baseline sample count is low', () => {
-    const baseline = mockBaseline(10, 72, 3);
-    const ranges = engine.computeRanges(DEFAULT_HEALTH_PROFILE, baseline);
+  test('respects custom profile overrides if provided', () => {
+    const customProfile = {
+      ...profile,
+      baselines: {
+        ...profile.baselines,
+        customHRLowerBound: 52,
+        customHRUpperBound: 88,
+      },
+    };
 
-    expect(ranges.heartRateRange.isStatedProfileFallback).toBe(true);
-    expect(ranges.heartRateRange.lowerBound).toBe(DEFAULT_HEALTH_PROFILE.statedBaselines.expectedRestingHrMin);
-    expect(ranges.heartRateRange.upperBound).toBe(DEFAULT_HEALTH_PROFILE.statedBaselines.expectedRestingHrMax);
-  });
-
-  it('computes dynamic bounds using statistical baseline when enough samples exist', () => {
-    const baseline = mockBaseline(150, 68, 4);
-    const ranges = engine.computeRanges(DEFAULT_HEALTH_PROFILE, baseline);
-
-    expect(ranges.heartRateRange.isStatedProfileFallback).toBe(false);
-    expect(ranges.heartRateRange.targetMean).toBe(68);
-    expect(ranges.heartRateRange.lowerBound).toBe(60); // 68 - (4 * 2)
-    expect(ranges.heartRateRange.upperBound).toBe(76); // 68 + (4 * 2)
+    const ranges = NormalRangeEngine.calculateRanges(customProfile, null);
+    expect(ranges.heartRateResting.lower).toBe(52);
+    expect(ranges.heartRateResting.upper).toBe(88);
   });
 });

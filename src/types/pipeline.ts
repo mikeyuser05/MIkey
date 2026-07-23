@@ -1,22 +1,20 @@
 /**
- * NOEXCUSE HPO V2 - Pipeline Integration Types
- * Phase PR5.7: Personal Health Intelligence Pipeline
+ * NOEXCUSE HPO V2 - Pipeline Types
+ * Phase PR6.4: Predictive Health Intelligence Pipeline Integration
  */
 
-import { RawTelemetry } from './sqi';
 import { ValidatedTelemetryPacket } from '../services/sqi/sqiFilter';
-import { PersonalBaselineState } from './baseline';
-import { PersonalNormalRanges } from './normalRange';
-import { ContextualizedRanges } from './contextualBaseline';
 import { PersonalDeviationState } from './deviation';
+import { HealthRiskScoreResult } from './riskScore';
+import { ShortTermTrendResult } from './trend';
+import { EarlyWarningResult } from './predictive';
 
-export interface HealthIntelligencePipelineOutput {
+export interface ComprehensiveHealthPacket {
   timestamp: number;
   userId: string;
-  validatedPacket: ValidatedTelemetryPacket;
-  baselineState: PersonalBaselineState;
-  normalRanges: PersonalNormalRanges;
-  contextualRanges: ContextualizedRanges;
+  sqiPacket: ValidatedTelemetryPacket;
   deviationState: PersonalDeviationState;
-  processingTimeMs: number;
+  riskScore: HealthRiskScoreResult;
+  trendResult: ShortTermTrendResult;
+  earlyWarning: EarlyWarningResult;
 }

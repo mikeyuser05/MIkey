@@ -1,13 +1,4 @@
-import os
-import sys
-
-DIRS = [
-    "src/tests"
-]
-
-FILES = {
-    # PR9 Master Test Suite Orchestrator
-    "src/tests/run_all_pr9_tests.ts": '''/**
+/**
  * PR9: Master Test Runner for Phase 9 (Multi-Turn Conversation & QA Engine)
  * Runs test suites PR9.1 through PR9.8 in sequence.
  */
@@ -24,7 +15,7 @@ import { runPR98Tests } from "./test_pr9_8";
 async function runAllPhase9Tests() {
     console.log("================================================================");
     console.log("🚀 STARTING FULL VERIFICATION SUITE FOR PHASE 9 MODULES");
-    console.log("================================================================\\n");
+    console.log("================================================================\n");
 
     const suiteResults: { suite: string; passed: boolean }[] = [];
 
@@ -60,22 +51,3 @@ async function runAllPhase9Tests() {
 if (require.main === module) {
     runAllPhase9Tests();
 }
-'''
-}
-
-def build():
-    print("🚀 Generating Master Test Suite for Phase 9...\n")
-
-    for directory in DIRS:
-        if not os.path.exists(directory):
-            os.makedirs(directory, exist_ok=True)
-
-    for filepath, content in FILES.items():
-        with open(filepath, "w", encoding="utf-8") as f:
-            f.write(content.strip() + "\n")
-        print(f"📄 Generated file: {filepath}")
-
-    print("\n✅ Build complete! Master test orchestrator generated.")
-
-if __name__ == "__main__":
-    build()

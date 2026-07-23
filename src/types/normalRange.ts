@@ -1,23 +1,18 @@
 /**
- * NOEXCUSE HPO V2 - Individual Normal Range Types
- * Phase PR5.4: Individual Normal Range Engine
+ * @file normalRange.ts
+ * @description Interfaces for calculated personal normal bands and boundary thresholds.
  */
 
-import { BaselineConfidence } from './baseline';
-
-export interface SingleMetricRange {
-  lowerBound: number;
-  upperBound: number;
-  targetMean: number;
-  toleranceMargin: number;
-  isStatedProfileFallback: boolean;
+export interface NumericRange {
+  lower: number;
+  upper: number;
+  target: number;
 }
 
 export interface PersonalNormalRanges {
-  userId: string;
-  calculatedAt: number;
-  confidence: BaselineConfidence;
-  heartRateRange: SingleMetricRange;
-  spo2Range: SingleMetricRange;
-  gasRange: SingleMetricRange;
+  heartRateResting: NumericRange;
+  heartRateActive: NumericRange; // Upper ceiling based on max HR target zones
+  spO2Resting: NumericRange;
+  isEmpiricallyDerived: boolean;
+  derivedAtIso: string;
 }
