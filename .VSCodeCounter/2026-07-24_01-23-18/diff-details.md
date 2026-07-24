@@ -1,0 +1,144 @@
+# Diff Details
+
+Date : 2026-07-24 01:23:18
+
+Directory c:\\Users\\HP\\Downloads\\NO-EXCUSE\\Dashboard\\Current Build
+
+Total : 129 files,  6921 codes, 879 comments, 1416 blanks, all 9216 lines
+
+[Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details
+
+## Files
+| filename | language | code | comment | blank | total |
+| :--- | :--- | ---: | ---: | ---: | ---: |
+| [build\_project.py](/build_project.py) | Python | 345 | 21 | 57 | 423 |
+| [src/context/HealthProfileContext.tsx](/src/context/HealthProfileContext.tsx) | TypeScript JSX | 47 | 4 | 10 | 61 |
+| [src/services/advancedPersonalizationEngine.ts](/src/services/advancedPersonalizationEngine.ts) | TypeScript | 33 | 9 | 6 | 48 |
+| [src/services/aiContractParser.ts](/src/services/aiContractParser.ts) | TypeScript | 64 | 16 | 9 | 89 |
+| [src/services/aiConversationPipeline.ts](/src/services/aiConversationPipeline.ts) | TypeScript | 85 | 12 | 16 | 113 |
+| [src/services/aiGuardrails.ts](/src/services/aiGuardrails.ts) | TypeScript | 84 | 12 | 15 | 111 |
+| [src/services/aiOrchestrator.ts](/src/services/aiOrchestrator.ts) | TypeScript | 61 | 13 | 13 | 87 |
+| [src/services/aiProvider.ts](/src/services/aiProvider.ts) | TypeScript | 86 | 14 | 17 | 117 |
+| [src/services/aiSafety.ts](/src/services/aiSafety.ts) | TypeScript | 34 | 10 | 11 | 55 |
+| [src/services/analyticsPipeline.ts](/src/services/analyticsPipeline.ts) | TypeScript | 67 | 12 | 10 | 89 |
+| [src/services/analyticsStorage.ts](/src/services/analyticsStorage.ts) | TypeScript | 35 | 16 | 9 | 60 |
+| [src/services/anomalyEngine.ts](/src/services/anomalyEngine.ts) | TypeScript | 75 | 11 | 12 | 98 |
+| [src/services/baselineEngine.ts](/src/services/baselineEngine.ts) | TypeScript | 56 | 15 | 14 | 85 |
+| [src/services/baseline/baselineCollector.ts](/src/services/baseline/baselineCollector.ts) | TypeScript | 92 | 4 | 20 | 116 |
+| [src/services/baseline/normalRangeEngine.ts](/src/services/baseline/normalRangeEngine.ts) | TypeScript | 59 | 14 | 13 | 86 |
+| [src/services/chatQAService.ts](/src/services/chatQAService.ts) | TypeScript | 71 | 13 | 13 | 97 |
+| [src/services/conversationHistoryManager.ts](/src/services/conversationHistoryManager.ts) | TypeScript | 26 | 14 | 9 | 49 |
+| [src/services/dailyAggregator.ts](/src/services/dailyAggregator.ts) | TypeScript | 102 | 20 | 23 | 145 |
+| [src/services/dailyRecordManager.ts](/src/services/dailyRecordManager.ts) | TypeScript | 73 | 22 | 15 | 110 |
+| [src/services/escalation/acknowledgmentService.ts](/src/services/escalation/acknowledgmentService.ts) | TypeScript | 42 | 8 | 9 | 59 |
+| [src/services/escalation/connectivityMonitor.ts](/src/services/escalation/connectivityMonitor.ts) | TypeScript | 25 | 4 | 9 | 38 |
+| [src/services/escalation/dispatchEngine.ts](/src/services/escalation/dispatchEngine.ts) | TypeScript | 61 | 11 | 17 | 89 |
+| [src/services/escalation/escalationPipeline.ts](/src/services/escalation/escalationPipeline.ts) | TypeScript | 50 | 16 | 14 | 80 |
+| [src/services/escalation/failSafeRouter.ts](/src/services/escalation/failSafeRouter.ts) | TypeScript | 49 | 9 | 11 | 69 |
+| [src/services/exportEngine.ts](/src/services/exportEngine.ts) | TypeScript | 85 | 10 | 12 | 107 |
+| [src/services/healthContextBuilder.ts](/src/services/healthContextBuilder.ts) | TypeScript | 78 | 16 | 15 | 109 |
+| [src/services/healthHistoryPipeline.ts](/src/services/healthHistoryPipeline.ts) | TypeScript | 98 | 21 | 13 | 132 |
+| [src/services/healthInterpretationService.ts](/src/services/healthInterpretationService.ts) | TypeScript | 59 | 13 | 13 | 85 |
+| [src/services/healthProfile/healthProfileDefaults.ts](/src/services/healthProfile/healthProfileDefaults.ts) | TypeScript | 46 | 4 | 8 | 58 |
+| [src/services/healthProfile/healthProfileManager.ts](/src/services/healthProfile/healthProfileManager.ts) | TypeScript | 81 | 4 | 11 | 96 |
+| [src/services/healthQueryAnalyzer.ts](/src/services/healthQueryAnalyzer.ts) | TypeScript | 64 | 10 | 12 | 86 |
+| [src/services/healthTimeline.ts](/src/services/healthTimeline.ts) | TypeScript | 51 | 17 | 13 | 81 |
+| [src/services/intelligenceOrchestrator.ts](/src/services/intelligenceOrchestrator.ts) | TypeScript | 82 | 16 | 15 | 113 |
+| [src/services/localAIReadinessEngine.ts](/src/services/localAIReadinessEngine.ts) | TypeScript | 37 | 8 | 6 | 51 |
+| [src/services/longTermHealthModel.ts](/src/services/longTermHealthModel.ts) | TypeScript | 73 | 7 | 11 | 91 |
+| [src/services/medicalDisclaimerLayer.ts](/src/services/medicalDisclaimerLayer.ts) | TypeScript | 56 | 11 | 12 | 79 |
+| [src/services/mobileOfflineEngine.ts](/src/services/mobileOfflineEngine.ts) | TypeScript | 38 | 4 | 9 | 51 |
+| [src/services/monthlyRecordManager.ts](/src/services/monthlyRecordManager.ts) | TypeScript | 65 | 16 | 15 | 96 |
+| [src/services/multiDeviceSyncManager.ts](/src/services/multiDeviceSyncManager.ts) | TypeScript | 34 | 8 | 9 | 51 |
+| [src/services/multiPeriodAggregator.ts](/src/services/multiPeriodAggregator.ts) | TypeScript | 106 | 18 | 24 | 148 |
+| [src/services/pipeline/predictivePipeline.ts](/src/services/pipeline/predictivePipeline.ts) | TypeScript | 35 | 13 | 11 | 59 |
+| [src/services/pr5HealthIntelligenceModule.ts](/src/services/pr5HealthIntelligenceModule.ts) | TypeScript | 16 | 10 | 6 | 32 |
+| [src/services/predictive/predictiveEngine.ts](/src/services/predictive/predictiveEngine.ts) | TypeScript | 125 | 11 | 26 | 162 |
+| [src/services/privacyExport.ts](/src/services/privacyExport.ts) | TypeScript | 82 | 13 | 17 | 112 |
+| [src/services/recoveryEvaluator.ts](/src/services/recoveryEvaluator.ts) | TypeScript | 75 | 15 | 13 | 103 |
+| [src/services/reportGenerator.ts](/src/services/reportGenerator.ts) | TypeScript | 71 | 10 | 16 | 97 |
+| [src/services/risk/riskEngine.ts](/src/services/risk/riskEngine.ts) | TypeScript | 79 | 8 | 15 | 102 |
+| [src/services/secureSharingController.ts](/src/services/secureSharingController.ts) | TypeScript | 36 | 4 | 9 | 49 |
+| [src/services/semanticRetriever.ts](/src/services/semanticRetriever.ts) | TypeScript | 30 | 10 | 7 | 47 |
+| [src/services/sqi/sqiEngine.ts](/src/services/sqi/sqiEngine.ts) | TypeScript | -58 | -11 | -10 | -79 |
+| [src/services/structuredContextRetriever.ts](/src/services/structuredContextRetriever.ts) | TypeScript | 35 | 9 | 8 | 52 |
+| [src/services/trendEngine.ts](/src/services/trendEngine.ts) | TypeScript | 103 | 16 | 22 | 141 |
+| [src/services/trend/trendEngine.ts](/src/services/trend/trendEngine.ts) | TypeScript | 98 | 10 | 20 | 128 |
+| [src/services/weeklyRecordManager.ts](/src/services/weeklyRecordManager.ts) | TypeScript | 67 | 18 | 16 | 101 |
+| [src/tests/baselineCollector.test.ts](/src/tests/baselineCollector.test.ts) | TypeScript | 45 | 0 | 9 | 54 |
+| [src/tests/dispatchEngine.test.ts](/src/tests/dispatchEngine.test.ts) | TypeScript | 51 | 3 | 13 | 67 |
+| [src/tests/escalationPipeline.test.ts](/src/tests/escalationPipeline.test.ts) | TypeScript | 46 | 3 | 12 | 61 |
+| [src/tests/failSafeRouter.test.ts](/src/tests/failSafeRouter.test.ts) | TypeScript | 48 | 3 | 13 | 64 |
+| [src/tests/healthProfile.test.ts](/src/tests/healthProfile.test.ts) | TypeScript | 30 | 1 | 6 | 37 |
+| [src/tests/normalRangeEngine.test.ts](/src/tests/normalRangeEngine.test.ts) | TypeScript | 10 | -3 | -2 | 5 |
+| [src/tests/predictiveEngine.test.ts](/src/tests/predictiveEngine.test.ts) | TypeScript | 62 | 3 | 12 | 77 |
+| [src/tests/predictivePipeline.test.ts](/src/tests/predictivePipeline.test.ts) | TypeScript | 53 | 5 | 13 | 71 |
+| [src/tests/riskEngine.test.ts](/src/tests/riskEngine.test.ts) | TypeScript | 73 | 3 | 11 | 87 |
+| [src/tests/run\_all\_pr10\_tests.ts](/src/tests/run_all_pr10_tests.ts) | TypeScript | 103 | 10 | 18 | 131 |
+| [src/tests/run\_all\_pr9\_tests.ts](/src/tests/run_all_pr9_tests.ts) | TypeScript | 41 | 4 | 9 | 54 |
+| [src/tests/sqi.test.ts](/src/tests/sqi.test.ts) | TypeScript | 53 | 0 | 10 | 63 |
+| [src/tests/test\_build\_5\_6.ts](/src/tests/test_build_5_6.ts) | TypeScript | 14 | 5 | 6 | 25 |
+| [src/tests/test\_build\_5\_7.ts](/src/tests/test_build_5_7.ts) | TypeScript | 36 | 5 | 8 | 49 |
+| [src/tests/test\_build\_5\_8\_acceptance.ts](/src/tests/test_build_5_8_acceptance.ts) | TypeScript | 68 | 5 | 11 | 84 |
+| [src/tests/test\_pr6\_1.ts](/src/tests/test_pr6_1.ts) | TypeScript | 62 | 5 | 11 | 78 |
+| [src/tests/test\_pr6\_2.ts](/src/tests/test_pr6_2.ts) | TypeScript | 80 | 9 | 15 | 104 |
+| [src/tests/test\_pr6\_3.ts](/src/tests/test_pr6_3.ts) | TypeScript | 79 | 4 | 16 | 99 |
+| [src/tests/test\_pr6\_4.ts](/src/tests/test_pr6_4.ts) | TypeScript | 64 | 4 | 13 | 81 |
+| [src/tests/test\_pr6\_5.ts](/src/tests/test_pr6_5.ts) | TypeScript | 70 | 6 | 17 | 93 |
+| [src/tests/test\_pr6\_6.ts](/src/tests/test_pr6_6.ts) | TypeScript | 90 | 5 | 18 | 113 |
+| [src/tests/test\_pr6\_7.ts](/src/tests/test_pr6_7.ts) | TypeScript | 74 | 3 | 15 | 92 |
+| [src/tests/test\_pr6\_master.ts](/src/tests/test_pr6_master.ts) | TypeScript | 44 | 4 | 8 | 56 |
+| [src/tests/test\_pr7\_1.ts](/src/tests/test_pr7_1.ts) | TypeScript | 58 | 3 | 9 | 70 |
+| [src/tests/test\_pr7\_2.ts](/src/tests/test_pr7_2.ts) | TypeScript | 66 | 3 | 15 | 84 |
+| [src/tests/test\_pr7\_3.ts](/src/tests/test_pr7_3.ts) | TypeScript | 68 | 4 | 15 | 87 |
+| [src/tests/test\_pr7\_4.ts](/src/tests/test_pr7_4.ts) | TypeScript | 68 | 4 | 15 | 87 |
+| [src/tests/test\_pr7\_5.ts](/src/tests/test_pr7_5.ts) | TypeScript | 77 | 3 | 15 | 95 |
+| [src/tests/test\_pr7\_6.ts](/src/tests/test_pr7_6.ts) | TypeScript | 61 | 5 | 11 | 77 |
+| [src/tests/test\_pr7\_7.ts](/src/tests/test_pr7_7.ts) | TypeScript | 76 | 3 | 17 | 96 |
+| [src/tests/test\_pr7\_master.ts](/src/tests/test_pr7_master.ts) | TypeScript | 44 | 4 | 8 | 56 |
+| [src/tests/test\_pr8\_1.ts](/src/tests/test_pr8_1.ts) | TypeScript | 50 | 3 | 9 | 62 |
+| [src/tests/test\_pr8\_2.ts](/src/tests/test_pr8_2.ts) | TypeScript | 84 | 4 | 12 | 100 |
+| [src/tests/test\_pr8\_3.ts](/src/tests/test_pr8_3.ts) | TypeScript | 66 | 3 | 14 | 83 |
+| [src/tests/test\_pr8\_4.ts](/src/tests/test_pr8_4.ts) | TypeScript | 61 | 3 | 14 | 78 |
+| [src/tests/test\_pr8\_5.ts](/src/tests/test_pr8_5.ts) | TypeScript | 50 | 7 | 15 | 72 |
+| [src/tests/test\_pr8\_6.ts](/src/tests/test_pr8_6.ts) | TypeScript | 67 | 3 | 12 | 82 |
+| [src/tests/test\_pr8\_7.ts](/src/tests/test_pr8_7.ts) | TypeScript | 53 | 3 | 10 | 66 |
+| [src/tests/test\_pr8\_8.ts](/src/tests/test_pr8_8.ts) | TypeScript | 78 | 4 | 12 | 94 |
+| [src/tests/test\_pr9\_1.ts](/src/tests/test_pr9_1.ts) | TypeScript | 46 | 3 | 10 | 59 |
+| [src/tests/test\_pr9\_2.ts](/src/tests/test_pr9_2.ts) | TypeScript | 35 | 3 | 12 | 50 |
+| [src/tests/test\_pr9\_3.ts](/src/tests/test_pr9_3.ts) | TypeScript | 73 | 3 | 12 | 88 |
+| [src/tests/test\_pr9\_4.ts](/src/tests/test_pr9_4.ts) | TypeScript | 55 | 3 | 11 | 69 |
+| [src/tests/test\_pr9\_5.ts](/src/tests/test_pr9_5.ts) | TypeScript | 66 | 3 | 12 | 81 |
+| [src/tests/test\_pr9\_6.ts](/src/tests/test_pr9_6.ts) | TypeScript | 49 | 3 | 12 | 64 |
+| [src/tests/test\_pr9\_7.ts](/src/tests/test_pr9_7.ts) | TypeScript | 41 | 3 | 15 | 59 |
+| [src/tests/test\_pr9\_8.ts](/src/tests/test_pr9_8.ts) | TypeScript | 69 | 3 | 14 | 86 |
+| [src/tests/trendEngine.test.ts](/src/tests/trendEngine.test.ts) | TypeScript | 46 | 5 | 11 | 62 |
+| [src/types/aiContext.ts](/src/types/aiContext.ts) | TypeScript | 27 | 4 | 7 | 38 |
+| [src/types/aiContracts.ts](/src/types/aiContracts.ts) | TypeScript | 24 | 4 | 5 | 33 |
+| [src/types/aiConversation.ts](/src/types/aiConversation.ts) | TypeScript | 33 | 4 | 6 | 43 |
+| [src/types/analytics.ts](/src/types/analytics.ts) | TypeScript | 35 | 4 | 7 | 46 |
+| [src/types/anomaly.ts](/src/types/anomaly.ts) | TypeScript | 21 | 3 | 4 | 28 |
+| [src/types/baselineEngine.ts](/src/types/baselineEngine.ts) | TypeScript | 15 | 4 | 3 | 22 |
+| [src/types/contextualBaseline.ts](/src/types/contextualBaseline.ts) | TypeScript | 5 | 0 | 0 | 5 |
+| [src/types/dispatch.ts](/src/types/dispatch.ts) | TypeScript | 25 | 4 | 6 | 35 |
+| [src/types/escalationPipeline.ts](/src/types/escalationPipeline.ts) | TypeScript | 13 | 4 | 4 | 21 |
+| [src/types/export.ts](/src/types/export.ts) | TypeScript | 16 | 3 | 5 | 24 |
+| [src/types/failsafe.ts](/src/types/failsafe.ts) | TypeScript | 14 | 4 | 4 | 22 |
+| [src/types/healthHistory.ts](/src/types/healthHistory.ts) | TypeScript | 93 | 4 | 12 | 109 |
+| [src/types/healthProfile.ts](/src/types/healthProfile.ts) | TypeScript | 39 | 4 | 8 | 51 |
+| [src/types/intelligencePipeline.ts](/src/types/intelligencePipeline.ts) | TypeScript | 23 | 4 | 5 | 32 |
+| [src/types/longTermHealth.ts](/src/types/longTermHealth.ts) | TypeScript | 22 | 4 | 4 | 30 |
+| [src/types/multiDevice.ts](/src/types/multiDevice.ts) | TypeScript | 16 | 3 | 4 | 23 |
+| [src/types/normalRange.ts](/src/types/normalRange.ts) | TypeScript | -4 | 0 | -1 | -5 |
+| [src/types/personalization.ts](/src/types/personalization.ts) | TypeScript | 13 | 3 | 3 | 19 |
+| [src/types/pipeline.ts](/src/types/pipeline.ts) | TypeScript | -2 | 0 | 0 | -2 |
+| [src/types/predictive.ts](/src/types/predictive.ts) | TypeScript | 19 | 4 | 5 | 28 |
+| [src/types/recovery.ts](/src/types/recovery.ts) | TypeScript | 22 | 3 | 4 | 29 |
+| [src/types/riskScore.ts](/src/types/riskScore.ts) | TypeScript | 22 | 4 | 5 | 31 |
+| [src/types/secureSharing.ts](/src/types/secureSharing.ts) | TypeScript | 14 | 3 | 3 | 20 |
+| [src/types/semanticRetrieval.ts](/src/types/semanticRetrieval.ts) | TypeScript | 22 | 4 | 5 | 31 |
+| [src/types/sqi.ts](/src/types/sqi.ts) | TypeScript | -15 | 0 | -1 | -16 |
+| [src/types/trend.ts](/src/types/trend.ts) | TypeScript | 18 | 4 | 4 | 26 |
+| [src/types/trends.ts](/src/types/trends.ts) | TypeScript | 19 | 3 | 5 | 27 |
+
+[Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details
