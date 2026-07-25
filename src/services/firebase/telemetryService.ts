@@ -48,20 +48,23 @@ class TelemetryService {
       const rawSpO2 = Number(data.SpO2 ?? 0);
       const rawGas = Number(data.Gas ?? 0);
       const rawSteps = Number(data.Steps ?? 0);
+      
+      // Ensure LastPacket never defaults to 0
+      const rawLastPacket = Number(data.LastPacket || data.timestamp || Date.now());
 
       // Check if finger is actually on the sensor
       const hasFinger = rawHR > 0 && rawSpO2 > 0;
 
-      // Construct Multi-Node Telemetry Map for PR1 to PR10
+      // Dynamic Multi-Node Payload Object
       const devicesMap: Record<string, DeviceTelemetry> = {
-        PR1: { deviceId: 'PR1', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: Date.now(), status: 'online', fingerDetected: hasFinger },
-        PR2: { deviceId: 'PR2', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: Date.now(), status: 'online', fingerDetected: hasFinger },
-        PR5: { deviceId: 'PR5', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: Date.now(), status: 'online', fingerDetected: hasFinger },
-        PR6: { deviceId: 'PR6', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: Date.now(), status: 'online', fingerDetected: hasFinger },
-        PR7: { deviceId: 'PR7', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: Date.now(), status: 'online', fingerDetected: hasFinger },
-        PR8: { deviceId: 'PR8', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: Date.now(), status: 'online', fingerDetected: hasFinger },
-        PR9: { deviceId: 'PR9', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: Date.now(), status: 'online', fingerDetected: hasFinger },
-        PR10: { deviceId: 'PR10', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: Date.now(), status: 'online', fingerDetected: hasFinger },
+        PR1: { deviceId: 'PR1', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: rawLastPacket, status: 'online', fingerDetected: hasFinger },
+        PR2: { deviceId: 'PR2', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: rawLastPacket, status: 'online', fingerDetected: hasFinger },
+        PR5: { deviceId: 'PR5', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: rawLastPacket, status: 'online', fingerDetected: hasFinger },
+        PR6: { deviceId: 'PR6', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: rawLastPacket, status: 'online', fingerDetected: hasFinger },
+        PR7: { deviceId: 'PR7', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: rawLastPacket, status: 'online', fingerDetected: hasFinger },
+        PR8: { deviceId: 'PR8', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: rawLastPacket, status: 'online', fingerDetected: hasFinger },
+        PR9: { deviceId: 'PR9', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: rawLastPacket, status: 'online', fingerDetected: hasFinger },
+        PR10: { deviceId: 'PR10', heartRate: rawHR, spo2: rawSpO2, gas: rawGas, steps: rawSteps, lastPacket: rawLastPacket, status: 'online', fingerDetected: hasFinger },
       };
 
       const payload: TelemetryPayload = {
@@ -71,7 +74,7 @@ class TelemetryService {
         steps: rawSteps,
         alarm: Boolean(data.Alarm),
         link: Boolean(data.Link),
-        lastPacket: Number(data.LastPacket ?? Date.now()),
+        lastPacket: rawLastPacket,
         timestamp: Date.now(),
         fingerDetected: hasFinger,
         devices: devicesMap

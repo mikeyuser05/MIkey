@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { BellRing, ShieldAlert, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { CheckCircle2, AlertTriangle } from 'lucide-react';
 import { useGlobalContext } from '@hooks/useGlobalContext';
 
 export function AlertsPage(): ReactElement {
@@ -14,7 +14,7 @@ export function AlertsPage(): ReactElement {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Alert Decision Engine</h1>
-        <p className="text-sm text-slate-500">LGN.7 Safety Evaluation & Real-time Threshold Logs</p>
+        <p className="text-sm text-slate-500">LGN.8 PR10 Safety Evaluation & Real-time Threshold Logs</p>
       </div>
 
       {!hasActiveAlert ? (

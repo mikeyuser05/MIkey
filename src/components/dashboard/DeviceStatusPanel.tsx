@@ -16,6 +16,14 @@ import { useGlobalContext } from '@hooks/useGlobalContext';
 export function DeviceStatusPanel(): ReactElement {
   const { telemetry, telemetryConnected } = useGlobalContext();
 
+  const formatPacketTime = (rawPacket: any) => {
+    if (!rawPacket || rawPacket === 0) return 'Just now';
+    if (typeof rawPacket === 'number' && rawPacket > 1000000000) {
+      return new Date(rawPacket).toLocaleTimeString();
+    }
+    return 'Online';
+  };
+
   const rows = [
     {
       id: 'connection',
@@ -29,20 +37,14 @@ export function DeviceStatusPanel(): ReactElement {
       icon: HeartPulse,
       label: 'Heart Rate',
       value: `${telemetry?.heartRate ?? 0} bpm`,
-      status:
-        (telemetry?.heartRate ?? 0) > 0
-          ? 'online'
-          : 'idle',
+      status: (telemetry?.heartRate ?? 0) > 0 ? 'online' : 'idle',
     },
     {
       id: 'spo2',
       icon: Droplets,
       label: 'SpO₂',
       value: `${telemetry?.spo2 ?? 0}%`,
-      status:
-        (telemetry?.spo2 ?? 0) > 0
-          ? 'online'
-          : 'idle',
+      status: (telemetry?.spo2 ?? 0) > 0 ? 'online' : 'idle',
     },
     {
       id: 'steps',
@@ -55,17 +57,14 @@ export function DeviceStatusPanel(): ReactElement {
       id: 'gas',
       icon: Wind,
       label: 'Gas',
-      value: `${telemetry?.gas ?? 0}`,
-      status:
-        (telemetry?.gas ?? 0) > 1800
-          ? 'warning'
-          : 'online',
+      value: `${telemetry?.gas ?? 0} PPM`,
+      status: (telemetry?.gas ?? 0) > 1800 ? 'warning' : 'online',
     },
     {
       id: 'packet',
       icon: Cpu,
       label: 'Last Packet',
-      value: `${telemetry?.lastPacket ?? 0}`,
+      value: formatPacketTime(telemetry?.lastPacket),
       status: 'online',
     },
   ] as const;
