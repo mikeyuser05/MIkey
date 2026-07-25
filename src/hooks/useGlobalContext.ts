@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { GlobalContext } from '@context/GlobalContext';
+import { GlobalContext } from '../context/GlobalContext';
 
 export function useGlobalContext() {
   const context = useContext(GlobalContext);
 
   if (context === undefined) {
-    throw new Error('useGlobalContext must be used within a structural GlobalProvider context frame.');
+    throw new Error('useGlobalContext must be used within a GlobalProvider.');
   }
 
   return context;

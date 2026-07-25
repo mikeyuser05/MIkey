@@ -5,6 +5,8 @@ import { telemetryService, TelemetryPayload } from '../services/firebase/telemet
 
 export interface IGlobalContextType {
   pipelineData: IPipelineState | null;
+  telemetry: TelemetryPayload | null;
+  telemetryConnected: boolean;
   isLoading: boolean;
   error: string | null;
 }
@@ -15,34 +17,37 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [pipelineData, setPipelineData] = useState<IPipelineState | null>(() => {
     return PipelineOrchestrator.getInstance().getLastState();
   });
+  const [telemetry, setTelemetry] = useState<TelemetryPayload | null>(null);
+  const [telemetryConnected, setTelemetryConnected] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(!pipelineData);
   const [error] = useState<string | null>(null);
 
   useEffect(() => {
     const orchestrator = PipelineOrchestrator.getInstance();
-    
-    // 1. Listen to raw Firebase stream and push it into the AI/Analytics Pipeline
+
+    // Listen to raw Firebase stream
     const unsubscribeFirebase = telemetryService.subscribe((payload: TelemetryPayload) => {
-      // Map raw frame onto orchestrator input layer structure if exposed, 
-      // otherwise feed orchestrator dynamic processing cycle
+      setTelemetry(payload);
+      setTelemetryConnected(true);
+
+      const extendedPayload = payload as any;
+
       const rawTelemetryFrame = {
-        deviceId: 'ESP32_MAIN',
+        deviceId: extendedPayload?.deviceId || 'ESP32_MAIN',
         timestamp: payload.timestamp,
         heartRate: payload.heartRate,
         spo2: payload.spo2,
         gasConcentration: payload.gas,
-        rawAcceleration: { x: 0, y: 0, z: 0 }
+        rawAcceleration: extendedPayload?.rawAcceleration || { x: 0, y: 0, z: 0 }
       };
 
-      // Custom transformation update trigger
-      // @ts-ignore (If ingest/process is exposed on orchestrator instance)
-      if (typeof orchestrator.processFrame === 'function') {
-        // @ts-ignore
-        orchestrator.processFrame(rawTelemetryFrame);
+      const orchestratorInstance = orchestrator as any;
+      if (typeof orchestratorInstance.processFrame === 'function') {
+        orchestratorInstance.processFrame(rawTelemetryFrame);
       }
     });
 
-    // 2. Singular exclusive pipeline updates event binding channel
+    // Singular exclusive pipeline updates event binding channel
     const unsubscribePipeline = orchestrator.subscribe((latestState) => {
       setPipelineData(latestState);
       setIsLoading(false);
@@ -55,7 +60,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ pipelineData, isLoading, error }}>
+    <GlobalContext.Provider value={{ pipelineData, telemetry, telemetryConnected, isLoading, error }}>
       {children}
     </GlobalContext.Provider>
   );
