@@ -47,7 +47,7 @@ const NOTIFICATION_ICON = {
 } as const;
 
 export function Navbar(): ReactElement {
-  const { setMobileSidebarOpen } = useGlobalContext();
+  const { setMobileSidebarOpen = () => {} } = useGlobalContext() as any;
   const { resolvedTheme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ export function Navbar(): ReactElement {
             <Menu className="h-5 w-5" />
           </button>
 
-          <nav aria-label="Breadcrumb" className="hidden min-w-0 items-center gap-1 sm:flex">
+                   <nav aria-label="Breadcrumb" className="hidden min-w-0 items-center gap-1 sm:flex">
             {breadcrumbs.map((crumb, index) => {
               const isLast = index === breadcrumbs.length - 1;
               return (
@@ -86,9 +86,11 @@ export function Navbar(): ReactElement {
                     <ChevronRight className="h-3.5 w-3.5 text-slate-300 dark:text-slate-600" />
                   )}
                   {isLast ? (
-                    <span className="truncate text-sm font-semibold text-slate-900 dark:text-slate-100">
-                      {crumb.label}
-                    </span>
+                    <Link to="/dashboard" className="flex items-center gap-2 focus-ring rounded truncate">
+                      <span className="truncate text-sm font-semibold text-slate-900 dark:text-slate-100 hover:text-slate-700 dark:hover:text-slate-200">
+                        {crumb.label}
+                      </span>
+                    </Link>
                   ) : (
                     <Link
                       to={crumb.path}

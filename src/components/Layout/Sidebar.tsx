@@ -1,6 +1,7 @@
-import type { ReactElement } from 'react';
+import { useState, type ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
 import {
   Activity,
   X,
@@ -12,6 +13,8 @@ import {
   Siren,     // Added for Triage Hub
   Radio,     // Added for Command Center
   WifiOff,   // Added for Offline Sync
+  ChevronLeft,   // <--- ADDED
+  ChevronRight,  // <--- ADDED
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@utils/cn';
@@ -43,12 +46,13 @@ const ACTIVE_PR4_ITEMS: NavItem[] = [
 
 export function Sidebar(): ReactElement {
   // Fallback values and 'as any' cast retained from your original code
-  const { 
-    isSidebarCollapsed = false, 
-    toggleSidebar = () => {}, 
-    isMobileSidebarOpen = false, 
-    setMobileSidebarOpen = () => {} 
-  } = useGlobalContext() as any;
+ const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+const toggleSidebar = () => setIsSidebarCollapsed((prev) => !prev);
+
+const { 
+  isMobileSidebarOpen = false, 
+  setMobileSidebarOpen = () => {} 
+} = useGlobalContext() as any;
 
   return (
     <>
@@ -200,7 +204,26 @@ export function Sidebar(): ReactElement {
           </div>
         </nav>
 
-        <div className="border-t border-border-light p-3 dark:border-border-dark">
+        {/* Bottom Utility Container Area */}
+        <div className="border-t border-border-light p-3 dark:border-border-dark flex flex-col gap-2">
+          {/* Collapse Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            className="focus-ring hidden lg:flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors"
+            aria-label={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {isSidebarCollapsed ? (
+              <ChevronRight className="h-5 w-5 shrink-0" />
+            ) : (
+              <>
+                <ChevronLeft className="h-5 w-5 shrink-0" />
+                <span className="truncate">Collapse Sidebar</span>
+              </>
+            )}
+          </button>
+
+          {/* User Profile Badge */}
           <div
             className={cn(
               'flex items-center gap-3 rounded-xl px-2 py-2',
