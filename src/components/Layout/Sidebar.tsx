@@ -9,6 +9,9 @@ import {
   LineChart,
   BellRing,
   Settings2,
+  Siren,     // Added for Triage Hub
+  Radio,     // Added for Command Center
+  WifiOff,   // Added for Offline Sync
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@utils/cn';
@@ -29,6 +32,9 @@ interface NavItem {
 }
 
 const ACTIVE_PR4_ITEMS: NavItem[] = [
+  { id: 'triage', label: 'Triage Hub', path: '/triage', icon: Siren },
+  { id: 'command-center', label: 'Command Center', path: '/command-center', icon: Radio },
+  { id: 'offline-monitor', label: 'Offline Sync', path: '/offline-monitor', icon: WifiOff },
   { id: 'devices', label: 'Devices', path: '/devices', icon: Cpu },
   { id: 'analytics', label: 'Analytics', path: '/analytics', icon: LineChart },
   { id: 'alerts', label: 'Alerts', path: '/alerts', icon: BellRing },
@@ -36,7 +42,7 @@ const ACTIVE_PR4_ITEMS: NavItem[] = [
 ];
 
 export function Sidebar(): ReactElement {
-  // Yahan fallback values aur 'as any' add kar diya gaya hai
+  // Fallback values and 'as any' cast retained from your original code
   const { 
     isSidebarCollapsed = false, 
     toggleSidebar = () => {}, 

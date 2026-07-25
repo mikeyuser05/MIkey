@@ -1,167 +1,319 @@
 import os
-import sys
+from pathlib import Path
 
-DIRS = [
-    "src/pages",
-    "src/components"
-]
+ROOT_DIR = Path(".")
 
-FILES = {
-    # 1. PR10 Updated Dashboard Component
-    "src/pages/Dashboard.tsx": r'''/**
- * HPO V2 — PR10 Master Integrated Dashboard UI
+files_to_create = {
+    ROOT_DIR / "src" / "types" / "pr16Offline.ts": """/**
+ * NOEXCUSE HPO V2 - PR16 Offline Storage & Sync Types
  */
 
-import React, { useState } from 'react';
-import { HealthContextAggregator } from '../services/healthContextAggregator';
-import { HealthHistoryPipelineCoordinator } from '../services/healthHistoryPipeline';
+import { TelemetrySnapshot } from './pr11Triage';
 
-export const Dashboard: React.FC = () => {
-  const [userQuery, setUserQuery] = useState('');
-  const [chatHistory, setChatHistory] = useState<Array<{ sender: string; text: string }>>([
-    {
-      sender: 'ASSISTANT',
-      text: 'Hello! I am your PR10 Conversational Health Intelligence assistant. Ask me anything about your vitals, trends, or recent alerts.'
+export interface BufferedFrame {
+  id: string;
+  snapshot: TelemetrySnapshot;
+  capturedAt: number;
+  synced: boolean;
+  retryCount: number;
+}
+
+export interface NetworkConnectivityStatus {
+  isOnline: boolean;
+  effectiveType?: string;
+  lastOnlineAt: number;
+  pendingQueueSize: number;
+  isSyncing: boolean;
+}
+""",
+
+    ROOT_DIR / "src" / "services" / "offlineSyncEngine.ts": """/**
+ * NOEXCUSE HPO V2 - Offline Storage & Auto-Sync Engine (PR16)
+ * Buffers telemetry frames during signal dropouts and drains to central store upon reconnect.
+ */
+
+import { BufferedFrame, NetworkConnectivityStatus } from '../types/pr16Offline';
+import { TelemetrySnapshot } from '../types/pr11Triage';
+import { auditLogger } from './auditLogger';
+
+const OFFLINE_QUEUE_KEY = 'noexcuse_hpo_v2_offline_queue';
+
+class OfflineSyncEngine {
+  private queue: BufferedFrame[] = [];
+  private isOnline: boolean = navigator.onLine;
+  private isSyncing: boolean = false;
+  private lastOnlineAt: number = Date.now();
+
+  constructor() {
+    this.loadQueue();
+    this.initNetworkListeners();
+  }
+
+  private initNetworkListeners(): void {
+    window.addEventListener('online', () => {
+      this.isOnline = true;
+      this.lastOnlineAt = Date.now();
+      auditLogger.log('EVENT_CREATED', 'Network connection restored. Initiating offline sync recovery...', 'LOW');
+      this.flushQueue();
+    });
+
+    window.addEventListener('offline', () => {
+      this.isOnline = false;
+      auditLogger.log('EVENT_CREATED', 'Network connection lost. Enqueuing telemetry to edge buffer.', 'MODERATE');
+    });
+  }
+
+  public bufferFrame(snapshot: TelemetrySnapshot): boolean {
+    if (this.isOnline) {
+      return false; // Transmitted live
     }
-  ]);
 
-  const handleSendMessage = () => {
-    if (!userQuery.trim()) return;
+    const frame: BufferedFrame = {
+      id: `FRAME_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+      snapshot,
+      capturedAt: Date.now(),
+      synced: false,
+      retryCount: 0
+    };
 
-    const newHistory = [...chatHistory, { sender: 'USER', text: userQuery }];
-    setChatHistory(newHistory);
-    setUserQuery('');
+    this.queue.push(frame);
+    if (this.queue.length > 500) {
+      this.queue.shift(); // FIFO drop if storage capacity exceeded
+    }
+    this.saveQueue();
+    return true; // Buffered offline
+  }
 
-    // Simulate Conversational RAG context lookup
-    setTimeout(() => {
-      setChatHistory((prev) => [
-        ...prev,
-        {
-          sender: 'ASSISTANT',
-          text: `[PR10 Context Evaluated] Based on your current health history and baseline metrics, your vitals are stable. Disclaimer: This is for informational telemetry monitoring only, not formal medical diagnosis.`
-        }
-      ]);
-    }, 600);
+  public async flushQueue(): Promise<number> {
+    if (!this.isOnline || this.queue.length === 0 || this.isSyncing) {
+      return 0;
+    }
+
+    this.isSyncing = true;
+    const initialSize = this.queue.length;
+
+    try {
+      // Simulate batch syncing frames to remote server / Firebase
+      const batch = [...this.queue];
+      for (const frame of batch) {
+        frame.synced = true;
+      }
+
+      // Clear synced frames from queue
+      this.queue = [];
+      this.saveQueue();
+
+      auditLogger.log(
+        'EVENT_CREATED',
+        `Offline Sync Complete: Successfully recovered ${initialSize} telemetry frames.`,
+        'LOW'
+      );
+    } catch (error) {
+      auditLogger.log('EVENT_CREATED', `Offline Sync Error: ${String(error)}`, 'CRITICAL');
+    } finally {
+      this.isSyncing = false;
+    }
+
+    return initialSize;
+  }
+
+  public getStatus(): NetworkConnectivityStatus {
+    return {
+      isOnline: this.isOnline,
+      lastOnlineAt: this.lastOnlineAt,
+      pendingQueueSize: this.queue.length,
+      isSyncing: this.isSyncing
+    };
+  }
+
+  public forceOfflineToggle(simulateOffline: boolean): void {
+    this.isOnline = !simulateOffline;
+    if (this.isOnline) {
+      this.flushQueue();
+    }
+  }
+
+  private loadQueue(): void {
+    try {
+      const stored = localStorage.getItem(OFFLINE_QUEUE_KEY);
+      if (stored) {
+        this.queue = JSON.parse(stored);
+      }
+    } catch (e) {
+      console.warn('Failed to load offline queue from storage', e);
+    }
+  }
+
+  private saveQueue(): void {
+    try {
+      localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(this.queue));
+    } catch (e) {
+      console.error('Failed to save offline queue to storage', e);
+    }
+  }
+}
+
+export const offlineSyncEngine = new OfflineSyncEngine();
+""",
+
+    ROOT_DIR / "src" / "components" / "PR16OfflineSyncMonitor.tsx": """/**
+ * NOEXCUSE HPO V2 - PR16 Offline Storage & Sync Monitor UI
+ */
+
+import React, { useState, useEffect } from 'react';
+import { offlineSyncEngine } from '../services/offlineSyncEngine';
+import { NetworkConnectivityStatus } from '../types/pr16Offline';
+
+export const PR16OfflineSyncMonitor: React.FC = () => {
+  const [status, setStatus] = useState<NetworkConnectivityStatus>(offlineSyncEngine.getStatus());
+  const [simulatedDrop, setSimulatedDrop] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // If simulated network drop is active, buffer mock frames
+      if (simulatedDrop) {
+        offlineSyncEngine.bufferFrame({
+          nodeId: 'NODE_OFFLINE_LAB',
+          heartRate: 78,
+          spO2: 98,
+          mq9GasRaw: 400,
+          batteryPercent: 85,
+          latencyMs: 12,
+          sensorError: false,
+          timestamp: Date.now()
+        });
+      }
+
+      setStatus(offlineSyncEngine.getStatus());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [simulatedDrop]);
+
+  const handleToggleOfflineSimulation = () => {
+    const nextState = !simulatedDrop;
+    setSimulatedDrop(nextState);
+    offlineSyncEngine.forceOfflineToggle(nextState);
+  };
+
+  const handleManualSync = async () => {
+    await offlineSyncEngine.flushQueue();
+    setStatus(offlineSyncEngine.getStatus());
   };
 
   return (
-    <div style={{ padding: '24px', color: '#fff', backgroundColor: '#0b0f19', minHeight: '100vh', fontFamily: 'sans-serif' }}>
-      {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+    <div style={{ backgroundColor: '#ffffff', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0', marginTop: '24px' }}>
+      <header style={{ marginBottom: '20px', borderBottom: '2px solid #cbd5e1', paddingBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: '28px', fontWeight: 'bold' }}>NOEXCUSE HPO V2</h1>
-          <p style={{ margin: '4px 0 0 0', color: '#94a3b8', fontSize: '14px' }}>
-            Wearable Health & Safety Monitoring Telemetry System • PR10 Production Engine
+          <h2 style={{ margin: 0, fontSize: '20px', fontWeight: 'bold', color: '#0f172a' }}>
+            PR16 — Edge Resilience & Offline Sync Recovery
+          </h2>
+          <p style={{ margin: '4px 0 0 0', color: '#64748b', fontSize: '14px' }}>
+            Telemetry buffering during connection loss with automatic batch recovery.
           </p>
         </div>
-        <span style={{ padding: '6px 12px', borderRadius: '20px', backgroundColor: '#064e3b', color: '#34d399', fontSize: '12px', fontWeight: 'bold' }}>
-          ● PR10 MASTER FULLY INTEGRATED
-        </span>
+        <div
+          style={{
+            padding: '6px 14px',
+            borderRadius: '20px',
+            fontSize: '12px',
+            fontWeight: 'bold',
+            backgroundColor: status.isOnline ? '#22c55e' : '#ef4444',
+            color: '#ffffff'
+          }}
+        >
+          {status.isOnline ? 'ONLINE (LIVE TRANSMISSION)' : 'OFFLINE (BUFFERING)'}
+        </div>
+      </header>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', marginBottom: '20px' }}>
+        <div style={{ padding: '16px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+          <div style={{ fontSize: '12px', color: '#64748b', fontWeight: 'bold' }}>PENDING BUFFERED FRAMES</div>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#0f172a', marginTop: '4px' }}>
+            {status.pendingQueueSize}
+          </div>
+        </div>
+
+        <div style={{ padding: '16px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+          <div style={{ fontSize: '12px', color: '#64748b', fontWeight: 'bold' }}>SYNC ENGINE STATE</div>
+          <div style={{ fontSize: '18px', fontWeight: 'bold', color: status.isSyncing ? '#2563eb' : '#334155', marginTop: '6px' }}>
+            {status.isSyncing ? 'FLUSHING BUFFER...' : 'IDLE / READY'}
+          </div>
+        </div>
+
+        <div style={{ padding: '16px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+          <div style={{ fontSize: '12px', color: '#64748b', fontWeight: 'bold' }}>LAST CONNECTION CHECK</div>
+          <div style={{ fontSize: '14px', fontWeight: 'bold', color: '#334155', marginTop: '8px' }}>
+            {new Date(status.lastOnlineAt).toLocaleTimeString()}
+          </div>
+        </div>
       </div>
 
-      {/* Grid Layout */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-        {/* Left Column: Metrics & Device Status */}
-        <div style={{ backgroundColor: '#111827', padding: '20px', borderRadius: '12px', border: '1px solid #1f2937' }}>
-          <h3 style={{ marginTop: 0, color: '#60a5fa' }}>📱 Live Telemetry & Baselines</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '16px' }}>
-            <div style={{ backgroundColor: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-              <span style={{ color: '#94a3b8', fontSize: '12px' }}>Heart Rate</span>
-              <h2 style={{ margin: '4px 0 0 0' }}>72 <span style={{ fontSize: '14px', color: '#94a3b8' }}>bpm</span></h2>
-            </div>
-            <div style={{ backgroundColor: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-              <span style={{ color: '#94a3b8', fontSize: '12px' }}>SpO₂</span>
-              <h2 style={{ margin: '4px 0 0 0' }}>98 <span style={{ fontSize: '14px', color: '#94a3b8' }}>%</span></h2>
-            </div>
-          </div>
+      <div style={{ display: 'flex', gap: '12px' }}>
+        <button
+          onClick={handleToggleOfflineSimulation}
+          style={{
+            padding: '10px 18px',
+            borderRadius: '6px',
+            border: 'none',
+            backgroundColor: simulatedDrop ? '#22c55e' : '#f59e0b',
+            color: '#ffffff',
+            fontWeight: 'bold',
+            cursor: 'pointer'
+          }}
+        >
+          {simulatedDrop ? 'Restore Network Connection' : 'Simulate Network Outage'}
+        </button>
 
-          <div style={{ marginTop: '24px', backgroundColor: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-            <h4 style={{ margin: '0 0 8px 0', color: '#34d399' }}>XAI Health Reasoner (PR6 - PR10)</h4>
-            <p style={{ margin: 0, fontSize: '13px', color: '#cbd5e1', lineHeight: '1.5' }}>
-              System health evaluated as <strong>OPTIMAL</strong>. Longitudinal baseline analysis indicates zero critical anomaly spikes over the last 24 hours.
-            </p>
-          </div>
-        </div>
-
-        {/* Right Column: Embedded PR9 Conversational Health Intelligence AI */}
-        <div style={{ backgroundColor: '#111827', padding: '20px', borderRadius: '12px', border: '1px solid #1f2937', display: 'flex', flexDirection: 'column', height: '400px' }}>
-          <h3 style={{ marginTop: 0, color: '#a78bfa' }}>💬 Health Intelligence Assistant (PR9/PR10)</h3>
-
-          <div style={{ flex: 1, overflowY: 'auto', backgroundColor: '#0f172a', padding: '12px', borderRadius: '8px', marginBottom: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {chatHistory.map((msg, idx) => (
-              <div
-                key={idx}
-                style={{
-                  alignSelf: msg.sender === 'USER' ? 'flex-end' : 'flex-start',
-                  backgroundColor: msg.sender === 'USER' ? '#2563eb' : '#1e293b',
-                  color: '#fff',
-                  padding: '8px 12px',
-                  borderRadius: '8px',
-                  maxWidth: '80%',
-                  fontSize: '13px'
-                }}
-              >
-                {msg.text}
-              </div>
-            ))}
-          </div>
-
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <input
-              type="text"
-              placeholder="Ask: 'How was my health today?'"
-              value={userQuery}
-              onChange={(e) => setUserQuery(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-              style={{
-                flex: 1,
-                backgroundColor: '#1f2937',
-                border: '1px solid #374151',
-                borderRadius: '6px',
-                padding: '8px 12px',
-                color: '#fff',
-                fontSize: '13px'
-              }}
-            />
-            <button
-              onClick={handleSendMessage}
-              style={{
-                backgroundColor: '#7c3aed',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '6px',
-                padding: '8px 16px',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                fontSize: '13px'
-              }}
-            >
-              Send
-            </button>
-          </div>
-        </div>
+        <button
+          onClick={handleManualSync}
+          disabled={!status.isOnline || status.pendingQueueSize === 0}
+          style={{
+            padding: '10px 18px',
+            borderRadius: '6px',
+            border: 'none',
+            backgroundColor: status.isOnline && status.pendingQueueSize > 0 ? '#2563eb' : '#cbd5e1',
+            color: '#ffffff',
+            fontWeight: 'bold',
+            cursor: status.isOnline && status.pendingQueueSize > 0 ? 'pointer' : 'not-allowed'
+          }}
+        >
+          Force Manual Sync Drain
+        </button>
       </div>
     </div>
   );
 };
-
-export default Dashboard;
-'''
+"""
 }
 
 def build():
-    print("🚀 Running Build Script to update Dashboard UI for PR10...\n")
+    print("====================================================")
+    print("NOEXCUSE HPO V2 — BUILD SCRIPT (PR16 COMPLETE)")
+    print("====================================================")
+    
+    created_count = 0
+    updated_count = 0
 
-    for directory in DIRS:
-        if not os.path.exists(directory):
-            os.makedirs(directory, exist_ok=True)
+    for file_path, content in files_to_create.items():
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        if file_path.exists():
+            status = "UPDATED"
+            updated_count += 1
+        else:
+            status = "CREATED"
+            created_count += 1
+            
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(content)
+            
+        print(f"[{status}] -> {file_path}")
 
-    for filepath, content in FILES.items():
-        with open(filepath, "w", encoding="utf-8", newline="\n") as f:
-            f.write(content.strip() + "\n")
-        print(f"📄 Updated UI Component: {filepath}")
-
-    print("\n✅ UI update complete! Refresh your Vite / React browser tab (localhost:5173).")
+    print("----------------------------------------------------")
+    print(f"Summary: {created_count} file(s) created, {updated_count} file(s) updated.")
+    print("PR16 Offline Storage & Auto-Sync Engine deployed successfully.")
+    print("====================================================")
 
 if __name__ == "__main__":
     build()

@@ -13,6 +13,12 @@ import AnalyticsPage from '@pages/Analytics/AnalyticsPage';
 import AlertsPage from '@pages/Alerts/AlertsPage';
 import SettingsPage from '@pages/Settings/SettingsPage';
 
+// PR11–PR16 Functional Hubs
+import { PR11TriageHub } from '../components/PR11TriageHub';
+import { PR14HardwareLab } from '../components/PR14HardwareLab';
+import { PR15MultiNodeCommandCenter } from '../components/PR15MultiNodeCommandCenter';
+import { PR16OfflineSyncMonitor } from '../components/PR16OfflineSyncMonitor';
+
 export function AppRoutes(): ReactElement {
   return (
     <Routes>
@@ -28,6 +34,12 @@ export function AppRoutes(): ReactElement {
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/alerts" element={<AlertsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+
+          {/* PR11-PR16 Connected Modules */}
+          <Route path="/triage" element={<PR11TriageHub />} />
+          <Route path="/hardware-lab" element={<PR14HardwareLab />} />
+          <Route path="/command-center" element={<PR15MultiNodeCommandCenter />} />
+          <Route path="/offline-monitor" element={<PR16OfflineSyncMonitor />} />
         </Route>
       </Route>
 
