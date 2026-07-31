@@ -1,0 +1,75 @@
+Date : 2026-07-26 01:30:43
+Directory : c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build
+Total : 35 files,  2187 codes, 207 comments, 361 blanks, all 2755 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript     |         22 |      1,363 |        139 |        253 |      1,755 |
+| TypeScript JSX |         12 |        727 |         32 |         89 |        848 |
+| Python         |          1 |         97 |         36 |         19 |        152 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                    | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                       |         35 |      2,187 |        207 |        361 |      2,755 |
+| . (Files)                                                                                               |          1 |         97 |         36 |         19 |        152 |
+| src                                                                                                     |         34 |      2,090 |        171 |        342 |      2,603 |
+| src\components                                                                                          |         10 |        711 |         35 |         84 |        830 |
+| src\components (Files)                                                                                  |          4 |        559 |         30 |         70 |        659 |
+| src\components\Layout                                                                                   |          2 |         25 |          3 |          3 |         31 |
+| src\components\dashboard                                                                                |          4 |        127 |          2 |         11 |        140 |
+| src\config                                                                                              |          1 |         28 |          4 |          3 |         35 |
+| src\context                                                                                             |          1 |          8 |         -5 |          2 |          5 |
+| src\routes                                                                                              |          1 |          8 |          2 |          3 |         13 |
+| src\services                                                                                            |         15 |      1,149 |        111 |        214 |      1,474 |
+| src\services (Files)                                                                                    |         14 |      1,121 |        111 |        212 |      1,444 |
+| src\services\firebase                                                                                   |          1 |         28 |          0 |          2 |         30 |
+| src\types                                                                                               |          5 |        166 |         16 |         27 |        209 |
+| src\utils                                                                                               |          1 |         20 |          8 |          9 |         37 |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                | language       | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py                                | Python         |         97 |         36 |         19 |        152 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Navbar.tsx                | TypeScript JSX |          2 |          0 |          0 |          2 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Sidebar.tsx               | TypeScript JSX |         23 |          3 |          3 |         29 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR11TriageHub.tsx                | TypeScript JSX |        244 |         11 |         27 |        282 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR14HardwareLab.tsx              | TypeScript JSX |         92 |          6 |         14 |        112 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR15MultiNodeCommandCenter.tsx   | TypeScript JSX |        112 |          9 |         15 |        136 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR16OfflineSyncMonitor.tsx       | TypeScript JSX |        111 |          4 |         14 |        129 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\DeviceStatusPanel.tsx  | TypeScript JSX |         -2 |          0 |          1 |         -1 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\GasCard.tsx            | TypeScript JSX |          4 |          0 |          1 |          5 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\StepsCard.tsx          | TypeScript JSX |          4 |          0 |          1 |          5 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\StreamOrchestrator.tsx | TypeScript JSX |        121 |          2 |          8 |        131 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\config\alertThresholds.ts                   | TypeScript     |         28 |          4 |          3 |         35 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\context\GlobalContext.tsx                   | TypeScript JSX |          8 |         -5 |          2 |          5 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\routes\AppRoutes.tsx                        | TypeScript JSX |          8 |          2 |          3 |         13 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\alertEngine.ts                     | TypeScript     |        105 |          9 |         14 |        128 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\alertPersistenceManager.ts         | TypeScript     |         80 |         12 |         19 |        111 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\auditLogger.ts                     | TypeScript     |         56 |          4 |         12 |         72 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyPolicyEngine.ts           | TypeScript     |         66 |         14 |         11 |         91 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyPreferencesStore.ts       | TypeScript     |         63 |          5 |         16 |         84 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyStateMachine.ts           | TypeScript     |        101 |         19 |         25 |        145 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\firebase\telemetryService.ts       | TypeScript     |         28 |          0 |          2 |         30 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\geoService.ts                      | TypeScript     |         45 |          5 |          9 |         59 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\hardwareSimulatorEngine.ts         | TypeScript     |         85 |          7 |         19 |        111 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\multiNodeFleetManager.ts           | TypeScript     |        119 |          7 |         17 |        143 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\offlineSyncEngine.ts               | TypeScript     |        101 |          6 |         21 |        128 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\productionValidation.ts            | TypeScript     |         94 |          8 |         14 |        116 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\simulatedVoiceDispatcher.ts        | TypeScript     |         40 |          7 |          9 |         56 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\simulatedVoiceDispatcherPR12.ts    | TypeScript     |         51 |          4 |          8 |         63 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\simulationEngine.ts                | TypeScript     |        115 |          4 |         18 |        137 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr11Triage.ts                         | TypeScript     |         76 |          4 |         10 |         90 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr12Geo.ts                            | TypeScript     |         25 |          3 |          4 |         32 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr14Simulator.ts                      | TypeScript     |         28 |          3 |          4 |         35 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr15Fleet.ts                          | TypeScript     |         22 |          3 |          5 |         30 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr16Offline.ts                        | TypeScript     |         15 |          3 |          4 |         22 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\utils\dataQualityInspector.ts               | TypeScript     |         20 |          8 |          9 |         37 |
+| Total                                                                                                   |                |      2,187 |        207 |        361 |      2,755 |
++---------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

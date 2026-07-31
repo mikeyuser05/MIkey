@@ -1,66 +1,57 @@
-import { Component, type ErrorInfo, type ReactNode } from 'react';
-import { AlertTriangle, RotateCcw } from 'lucide-react';
-import { logger } from '@utils/logger';
-import { DEFAULT_ERROR_MESSAGE } from '@constants/app.constants';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { AlertTriangle, RefreshCw } from 'lucide-react';
 
-interface ErrorBoundaryProps {
+interface Props {
   children: ReactNode;
-  fallback?: ReactNode;
 }
 
-interface ErrorBoundaryState {
+interface State {
   hasError: boolean;
   error: Error | null;
 }
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
+export class ErrorBoundary extends Component<Props, State> {
+  public state: State = {
+    hasError: false,
+    error: null,
+  };
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+  public static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    logger.error('ErrorBoundary', error.message, { error, errorInfo });
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Uncaught error in component tree:', error, errorInfo);
   }
 
-  private handleReset = (): void => {
-    this.setState({ hasError: false, error: null });
+  private handleReload = () => {
     window.location.reload();
   };
 
-  render(): ReactNode {
-    if (!this.state.hasError) {
-      return this.props.children;
-    }
-
-    if (this.props.fallback) {
-      return this.props.fallback;
-    }
-
-    return (
-      <div className="flex min-h-screen w-full flex-col items-center justify-center gap-4 bg-background-light px-6 text-center dark:bg-background-dark">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-status-danger/10 text-status-danger">
-          <AlertTriangle className="h-7 w-7" strokeWidth={2} />
+  public render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 text-center text-slate-100">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-red-500/10 text-red-500 mb-4 border border-red-500/20">
+            <AlertTriangle className="h-8 w-8" />
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight mb-2">Application Error</h1>
+          <p className="text-slate-400 max-w-md mb-6 text-sm">
+            An unhandled runtime error occurred. The system isolated the fault to preserve telemetry data stability.
+          </p>
+          <div className="bg-slate-900 border border-slate-800 rounded-lg p-3 mb-6 max-w-md w-full text-left font-mono text-xs text-red-400 overflow-x-auto">
+            {this.state.error?.message || 'Unknown Application Fault'}
+          </div>
+          <button
+            onClick={this.handleReload}
+            className="flex items-center gap-2 rounded-xl bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-500 transition-colors shadow-lg shadow-primary-600/20"
+          >
+            <RefreshCw className="h-4 w-4" /> Reload System
+          </button>
         </div>
-        <h1 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-          Something went wrong
-        </h1>
-        <p className="max-w-md text-sm text-slate-500 dark:text-slate-400">
-          {this.state.error?.message || DEFAULT_ERROR_MESSAGE}
-        </p>
-        <button
-          type="button"
-          onClick={this.handleReset}
-          className="focus-ring inline-flex items-center gap-2 rounded-xl bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700"
-        >
-          <RotateCcw className="h-4 w-4" />
-          Reload dashboard
-        </button>
-      </div>
-    );
+      );
+    }
+
+    return this.props.children;
   }
 }

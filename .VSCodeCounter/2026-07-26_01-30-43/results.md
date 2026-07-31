@@ -1,20 +1,20 @@
 # Summary
 
-Date : 2026-07-23 20:12:51
+Date : 2026-07-26 01:30:43
 
 Directory c:\\Users\\HP\\Downloads\\NO-EXCUSE\\Dashboard\\Current Build
 
-Total : 265 files,  18301 codes, 986 comments, 1716 blanks, all 21003 lines
+Total : 412 files,  27108 codes, 2059 comments, 3430 blanks, all 32597 lines
 
 Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
+| TypeScript | 311 | 14,419 | 1,883 | 2,794 | 19,096 |
 | JSON | 5 | 7,027 | 0 | 10 | 7,037 |
-| TypeScript | 169 | 6,527 | 890 | 1,192 | 8,609 |
-| TypeScript JSX | 80 | 4,310 | 96 | 434 | 4,840 |
-| Python | 1 | 171 | 0 | 31 | 202 |
+| TypeScript JSX | 85 | 5,152 | 139 | 539 | 5,830 |
+| Python | 1 | 244 | 37 | 38 | 319 |
 | Markdown | 3 | 155 | 0 | 31 | 186 |
 | PostCSS | 1 | 43 | 0 | 11 | 54 |
 | JavaScript | 2 | 37 | 0 | 3 | 40 |
@@ -25,26 +25,27 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 265 | 18,301 | 986 | 1,716 | 21,003 |
-| . (Files) | 13 | 7,528 | 0 | 75 | 7,603 |
+| . | 412 | 27,108 | 2,059 | 3,430 | 32,597 |
+| . (Files) | 13 | 7,601 | 37 | 82 | 7,720 |
 | public | 1 | 4 | 0 | 1 | 5 |
-| src | 251 | 10,769 | 986 | 1,640 | 13,395 |
+| src | 398 | 19,503 | 2,022 | 3,347 | 24,872 |
 | src (Files) | 4 | 102 | 1 | 21 | 124 |
 | src\\assets | 1 | 5 | 0 | 1 | 6 |
 | src\\assets\\images | 1 | 5 | 0 | 1 | 6 |
 | src\\charts | 7 | 145 | 0 | 10 | 155 |
-| src\\components | 50 | 2,438 | 4 | 248 | 2,690 |
-| src\\components\\Layout | 3 | 471 | 3 | 33 | 507 |
+| src\\components | 54 | 3,149 | 39 | 332 | 3,520 |
+| src\\components (Files) | 4 | 559 | 30 | 70 | 659 |
+| src\\components\\Layout | 3 | 496 | 6 | 36 | 538 |
 | src\\components\\analytics | 4 | 150 | 0 | 12 | 162 |
 | src\\components\\auth | 1 | 2 | 0 | 0 | 2 |
 | src\\components\\common | 3 | 111 | 0 | 21 | 132 |
-| src\\components\\dashboard | 18 | 786 | 1 | 71 | 858 |
+| src\\components\\dashboard | 18 | 913 | 3 | 82 | 998 |
 | src\\components\\profile | 1 | 2 | 0 | 0 | 2 |
 | src\\components\\shared | 2 | 48 | 0 | 4 | 52 |
 | src\\components\\ui | 18 | 868 | 0 | 107 | 975 |
-| src\\config | 1 | 72 | 0 | 3 | 75 |
+| src\\config | 2 | 100 | 4 | 6 | 110 |
 | src\\constants | 2 | 43 | 0 | 10 | 53 |
-| src\\context | 4 | 122 | 7 | 24 | 153 |
+| src\\context | 5 | 177 | 6 | 36 | 219 |
 | src\\data | 1 | 167 | 0 | 12 | 179 |
 | src\\engine | 3 | 59 | 0 | 6 | 65 |
 | src\\hooks | 14 | 286 | 10 | 63 | 359 |
@@ -112,8 +113,8 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 | src\\intelligence\\trends\\tests | 1 | 86 | 1 | 17 | 104 |
 | src\\intelligence\\trends\\types | 1 | 32 | 3 | 7 | 42 |
 | src\\intelligence\\types | 1 | 19 | 4 | 3 | 26 |
-| src\\pages | 8 | 465 | 8 | 51 | 524 |
-| src\\pages (Files) | 1 | 50 | 1 | 7 | 58 |
+| src\\pages | 8 | 533 | 15 | 57 | 605 |
+| src\\pages (Files) | 1 | 118 | 8 | 13 | 139 |
 | src\\pages\\Alerts | 1 | 53 | 0 | 5 | 58 |
 | src\\pages\\Analytics | 1 | 67 | 1 | 9 | 77 |
 | src\\pages\\Auth | 1 | 99 | 0 | 8 | 107 |
@@ -122,17 +123,22 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 | src\\pages\\NotFound | 1 | 58 | 0 | 5 | 63 |
 | src\\pages\\Settings | 1 | 22 | 0 | 2 | 24 |
 | src\\repositories | 3 | 51 | 10 | 10 | 71 |
-| src\\routes | 1 | 30 | 2 | 5 | 37 |
-| src\\services | 15 | 971 | 129 | 203 | 1,303 |
-| src\\services (Files) | 2 | 4 | 0 | 0 | 4 |
-| src\\services\\baseline | 2 | 199 | 23 | 41 | 263 |
+| src\\routes | 1 | 38 | 4 | 8 | 50 |
+| src\\services | 80 | 5,297 | 834 | 1,076 | 7,207 |
+| src\\services (Files) | 54 | 3,518 | 600 | 697 | 4,815 |
+| src\\services\\baseline | 4 | 350 | 41 | 74 | 465 |
 | src\\services\\context | 1 | 43 | 14 | 11 | 68 |
 | src\\services\\deviation | 1 | 116 | 8 | 20 | 144 |
-| src\\services\\firebase | 3 | 111 | 3 | 30 | 144 |
-| src\\services\\pipeline | 1 | 60 | 13 | 12 | 85 |
+| src\\services\\escalation | 5 | 227 | 48 | 60 | 335 |
+| src\\services\\firebase | 3 | 139 | 3 | 32 | 174 |
+| src\\services\\healthProfile | 2 | 127 | 8 | 19 | 154 |
+| src\\services\\pipeline | 2 | 95 | 26 | 23 | 144 |
+| src\\services\\predictive | 1 | 125 | 11 | 26 | 162 |
 | src\\services\\profile | 2 | 174 | 32 | 32 | 238 |
 | src\\services\\range | 1 | 94 | 10 | 18 | 122 |
-| src\\services\\sqi | 2 | 170 | 26 | 39 | 235 |
+| src\\services\\risk | 1 | 79 | 8 | 15 | 102 |
+| src\\services\\sqi | 2 | 112 | 15 | 29 | 156 |
+| src\\services\\trend | 1 | 98 | 10 | 20 | 128 |
 | src\\telemetry | 11 | 484 | 96 | 99 | 679 |
 | src\\telemetry\\__tests__ | 1 | 63 | 1 | 13 | 77 |
 | src\\telemetry\\components | 1 | 50 | 15 | 10 | 75 |
@@ -143,8 +149,8 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 | src\\telemetry\\services | 1 | 50 | 19 | 13 | 82 |
 | src\\telemetry\\types | 1 | 22 | 1 | 5 | 28 |
 | src\\telemetry\\utils | 1 | 23 | 9 | 5 | 37 |
-| src\\tests | 7 | 338 | 23 | 68 | 429 |
-| src\\types | 17 | 313 | 31 | 69 | 413 |
-| src\\utils | 7 | 121 | 5 | 28 | 154 |
+| src\\tests | 54 | 3,141 | 198 | 642 | 3,981 |
+| src\\types | 45 | 1,028 | 132 | 212 | 1,372 |
+| src\\utils | 8 | 141 | 13 | 37 | 191 |
 
 Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
