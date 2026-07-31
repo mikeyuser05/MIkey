@@ -1,85 +1,92 @@
 import os
 
 files = {
-    # 1. Vercel Deployment Configuration
-    "vercel.json": '''{
-  "version": 2,
-  "framework": "vite",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    }
-  ]
-}
-''',
+    "src/App.tsx": '''import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { ErrorBoundary } from './components/Common/ErrorBoundary';
+import { MobileBottomBar } from './components/Mobile/MobileBottomBar';
+import { AppLayout } from './components/Layout/AppLayout';
+import { pwaService } from './services/pwa.service';
+import { notificationService } from './services/notification.service';
 
-    # 2. Firebase Hosting Configuration
-    "firebase.json": '''{
-  "hosting": {
-    "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
+// Context Providers
+import { GlobalProvider } from './context/GlobalContext';
+import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
+
+// Pages & Feature Views
+import DashboardPage from './pages/Dashboard/DashboardPage';
+import AnalyticsPage from './pages/Analytics/AnalyticsPage';
+import AlertsPage from './pages/Alerts/AlertsPage';
+import SettingsPage from './pages/Settings/SettingsPage';
+
+// Feature Components
+import { PR11TriageHub } from './components/PR11TriageHub';
+import { PR14HardwareLab } from './components/PR14HardwareLab';
+import { PR15MultiNodeCommandCenter } from './components/PR15MultiNodeCommandCenter';
+import { PR16OfflineSyncMonitor } from './components/PR16OfflineSyncMonitor';
+import HealthCheck from './pages/HealthCheck';
+import NotFound from './pages/NotFound';
+
+export const App: React.FC = () => {
+  useEffect(() => {
+    pwaService.init();
+    notificationService.requestPermission().then((granted) => {
+      if (granted) {
+        console.log('[App]: Push notifications authorized.');
       }
-    ]
-  }
-}
-''',
+    });
+  }, []);
 
-    # 3. GitHub Actions CI/CD Pipeline Workflow
-    ".github/workflows/ci.yml": '''name: Production CI/CD Pipeline
+  return (
+    <ErrorBoundary>
+      <ThemeProvider>
+        <AuthProvider>
+          <GlobalProvider>
+            <BrowserRouter>
+              <Routes>
+                {/* Wrap all main views inside AppLayout */}
+                <Route element={<AppLayout />}>
+                  {/* Core Dashboard */}
+                  <Route path="/" element={<DashboardPage />} />
+                  <Route path="/dashboard" element={<Navigate to="/" replace />} />
+                  
+                  {/* Dedicated Pages */}
+                  <Route path="/analytics" element={<AnalyticsPage />} />
+                  <Route path="/alerts" element={<AlertsPage />} />
+                  <Route path="/settings" element={<SettingsPage />} />
 
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+                  {/* Modules & Route Aliases */}
+                  <Route path="/triage" element={<PR11TriageHub />} />
+                  <Route path="/triage-hub" element={<PR11TriageHub />} />
 
-jobs:
-  build-and-validate:
-    runs-on: ubuntu-latest
+                  <Route path="/command" element={<PR15MultiNodeCommandCenter />} />
+                  <Route path="/command-center" element={<PR15MultiNodeCommandCenter />} />
 
-    steps:
-      - name: Checkout Codebase
-        uses: actions/checkout@v4
+                  <Route path="/offline" element={<PR16OfflineSyncMonitor />} />
+                  <Route path="/offline-monitor" element={<PR16OfflineSyncMonitor />} />
+                  <Route path="/offline-sync" element={<PR16OfflineSyncMonitor />} />
 
-      - name: Setup Node.js Environment
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'npm'
+                  <Route path="/hardware" element={<PR14HardwareLab />} />
+                  <Route path="/devices" element={<PR14HardwareLab />} />
 
-      - name: Install Dependencies
-        run: npm ci
+                  {/* Health & Fallbacks */}
+                  <Route path="/health" element={<HealthCheck />} />
+                  <Route path="*" element={<NotFound />} />
+                </Route>
+              </Routes>
+              
+              {/* Mobile Navigation */}
+              <MobileBottomBar />
+            </BrowserRouter>
+          </GlobalProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
+  );
+};
 
-      - name: Run TypeScript Type Check
-        run: npx tsc --noEmit
-
-      - name: Execute Production Build
-        run: npm run build
-
-      - name: Verify Dist Output Directory
-        run: test -d dist
+export default App;
 '''
 }
 
@@ -91,6 +98,10 @@ def build():
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(content)
         print(f"Updated/Created: {filepath}")
+    
+    print("\n==============================================")
+    print("--- REAL ANALYTICS, ALERTS, & SETTINGS CONNECTED ---")
+    print("==============================================\n")
 
 if __name__ == "__main__":
     build()
