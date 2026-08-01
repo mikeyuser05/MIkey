@@ -97,9 +97,7 @@ export async function runPR66Tests(): Promise<boolean> {
             throw new Error("Quality weighting failed to suppress low-quality sensor spike.");
         }
 
-        console.log("
-✅ ALL PR6.6 ANOMALY SCORING TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR6.6 TEST FAILED:", error);

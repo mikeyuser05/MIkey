@@ -87,9 +87,7 @@ export async function runPR62Tests(): Promise<boolean> {
         await storage.clearUserAnalytics(testUserId);
         console.log("  ✓ Test data cleared.");
 
-        console.log("
-✅ ALL PR6.2 DAILY AGGREGATION TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR6.2 TEST FAILED:", error);

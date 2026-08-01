@@ -67,9 +67,7 @@ export async function runPR83Tests(): Promise<boolean> {
             throw new Error("Provider routing failed for FAST_REASONING model tier.");
         }
 
-        console.log("
-✅ ALL PR8.3 AI PROVIDER ABSTRACTION TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR8.3 TEST FAILED:", error);

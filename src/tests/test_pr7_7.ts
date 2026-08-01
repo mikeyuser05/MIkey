@@ -80,9 +80,7 @@ export async function runPR77Tests(): Promise<boolean> {
         }
         console.log("  ✓ User data purge successfully verified.");
 
-        console.log("
-✅ ALL PR7.7 PRIVACY EXPORT TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR7.7 TEST FAILED:", error);

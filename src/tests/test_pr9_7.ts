@@ -43,9 +43,7 @@ export async function runPR97Tests(): Promise<boolean> {
             throw new Error("Emergency override handling failed.");
         }
 
-        console.log("
-✅ ALL PR9.7 SAFETY & MEDICAL DISCLAIMER TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR9.7 TEST FAILED:", error);

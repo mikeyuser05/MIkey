@@ -65,9 +65,7 @@ export async function runPR64Tests(): Promise<boolean> {
             throw new Error(`Expected overall trajectory to be DEGRADING, got ${report.overallHealthTrajectory}`);
         }
 
-        console.log("
-✅ ALL PR6.4 TREND DETECTION TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR6.4 TEST FAILED:", error);

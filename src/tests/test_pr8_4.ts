@@ -62,9 +62,7 @@ export async function runPR84Tests(): Promise<boolean> {
             throw new Error("Fallback parser contract compliance failed.");
         }
 
-        console.log("
-✅ ALL PR8.4 REQUEST & RESPONSE CONTRACT TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR8.4 TEST FAILED:", error);

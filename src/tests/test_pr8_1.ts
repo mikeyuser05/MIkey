@@ -46,9 +46,7 @@ export async function runPR81Tests(): Promise<boolean> {
         }
         console.log("  ✓ Anonymized AI Context Window validated.");
 
-        console.log("
-✅ ALL PR8.1 AI CONTEXT ARCHITECTURE TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR8.1 TEST FAILED:", error);

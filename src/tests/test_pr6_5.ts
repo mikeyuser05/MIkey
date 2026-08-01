@@ -77,9 +77,7 @@ export async function runPR65Tests(): Promise<boolean> {
         console.log("  ✓ Profile Generated.");
         console.log(`    - Stress Proxy Index: ${profile.stressProxyIndex}`);
 
-        console.log("
-✅ ALL PR6.5 STABILITY & RECOVERY TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR6.5 TEST FAILED:", error);

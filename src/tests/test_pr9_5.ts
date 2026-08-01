@@ -65,9 +65,7 @@ export async function runPR95Tests(): Promise<boolean> {
             throw new Error("Conversation pipeline turn execution failed.");
         }
 
-        console.log("
-✅ ALL PR9.5 AI CONVERSATION PIPELINE TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR9.5 TEST FAILED:", error);

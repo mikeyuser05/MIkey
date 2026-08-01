@@ -56,9 +56,7 @@ export async function runPR85Tests(): Promise<boolean> {
         const metrics = budgetController.getMetrics();
         console.log(`  ✓ Cost tracking verified: $${metrics.estimatedCostTodayUSD.toFixed(6)} USD.`);
 
-        console.log("
-✅ ALL PR8.5 COST AND RATE GUARDRAILS TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR8.5 TEST FAILED:", error);

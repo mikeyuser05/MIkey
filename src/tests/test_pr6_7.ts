@@ -76,9 +76,7 @@ export async function runPR67Tests(): Promise<boolean> {
         console.log("[TEST 4] Cleaning up test records...");
         await storage.clearUserAnalytics(testUserId);
 
-        console.log("
-✅ ALL PR6.7 EXPORT ENGINE TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR6.7 TEST FAILED:", error);

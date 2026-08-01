@@ -224,7 +224,7 @@ export const PR11TriageHub: React.FC = () => {
 
           <h3 style={{ fontSize: '14px', fontWeight: 'bold', margin: '12px 0 8px 0' }}>Emergency Contacts (No default fallback)</h3>
           {preferences.contacts.length === 0 ? (
-            <p style={{ fontSize: '13px', color: '#94a3b8', italic: 'true' }}>No emergency contacts configured. System will not trigger calls.</p>
+            <p style={{ fontSize: '13px', color: '#94a3b8', fontStyle: 'italic' }}>No emergency contacts configured. System will not trigger calls.</p>
           ) : (
             preferences.contacts.map(c => (
               <div key={c.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px', backgroundColor: '#f8fafc', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' }}>

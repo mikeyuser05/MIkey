@@ -1,92 +1,106 @@
 import os
 
 files = {
-    "src/App.tsx": '''import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ErrorBoundary } from './components/Common/ErrorBoundary';
-import { MobileBottomBar } from './components/Mobile/MobileBottomBar';
-import { AppLayout } from './components/Layout/AppLayout';
-import { pwaService } from './services/pwa.service';
-import { notificationService } from './services/notification.service';
+    "src/services/aiConversationPipeline.ts": '''/**
+ * AI Conversation Pipeline Service
+ * Manages medical Q&A streams, context integration, and safety disclaimers.
+ */
 
-// Context Providers
-import { GlobalProvider } from './context/GlobalContext';
-import { AuthProvider } from './context/AuthContext';
-import { ThemeProvider } from './context/ThemeContext';
+export interface ConversationMessage {
+  id: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp: number;
+}
 
-// Pages & Feature Views
-import DashboardPage from './pages/Dashboard/DashboardPage';
-import AnalyticsPage from './pages/Analytics/AnalyticsPage';
-import AlertsPage from './pages/Alerts/AlertsPage';
-import SettingsPage from './pages/Settings/SettingsPage';
+export class AIConversationPipeline {
+  private history: ConversationMessage[] = [];
 
-// Feature Components
-import { PR11TriageHub } from './components/PR11TriageHub';
-import { PR14HardwareLab } from './components/PR14HardwareLab';
-import { PR15MultiNodeCommandCenter } from './components/PR15MultiNodeCommandCenter';
-import { PR16OfflineSyncMonitor } from './components/PR16OfflineSyncMonitor';
-import HealthCheck from './pages/HealthCheck';
-import NotFound from './pages/NotFound';
+  public async sendMessage(prompt: string): Promise<string> {
+    const userMsg: ConversationMessage = {
+      id: `msg_${Date.now()}`,
+      role: 'user',
+      content: prompt,
+      timestamp: Date.now(),
+    };
+    this.history.push(userMsg);
 
-export const App: React.FC = () => {
-  useEffect(() => {
-    pwaService.init();
-    notificationService.requestPermission().then((granted) => {
-      if (granted) {
-        console.log('[App]: Push notifications authorized.');
-      }
-    });
-  }, []);
+    // Mock processing / pipeline logic
+    let responseText = `Received telemetry context and prompt: "${prompt}". All vitals within nominal bounds.`;
+    responseText += '\\n\\nDISCLAIMER: For informational purposes only. Consult a physician for diagnostic advice.';
 
-  return (
-    <ErrorBoundary>
-      <ThemeProvider>
-        <AuthProvider>
-          <GlobalProvider>
-            <BrowserRouter>
-              <Routes>
-                {/* Wrap all main views inside AppLayout */}
-                <Route element={<AppLayout />}>
-                  {/* Core Dashboard */}
-                  <Route path="/" element={<DashboardPage />} />
-                  <Route path="/dashboard" element={<Navigate to="/" replace />} />
-                  
-                  {/* Dedicated Pages */}
-                  <Route path="/analytics" element={<AnalyticsPage />} />
-                  <Route path="/alerts" element={<AlertsPage />} />
-                  <Route path="/settings" element={<SettingsPage />} />
+    const assistantMsg: ConversationMessage = {
+      id: `msg_${Date.now() + 1}`,
+      role: 'assistant',
+      content: responseText,
+      timestamp: Date.now(),
+    };
+    this.history.push(assistantMsg);
 
-                  {/* Modules & Route Aliases */}
-                  <Route path="/triage" element={<PR11TriageHub />} />
-                  <Route path="/triage-hub" element={<PR11TriageHub />} />
+    return responseText;
+  }
 
-                  <Route path="/command" element={<PR15MultiNodeCommandCenter />} />
-                  <Route path="/command-center" element={<PR15MultiNodeCommandCenter />} />
+  public getHistory(): ConversationMessage[] {
+    return this.history;
+  }
 
-                  <Route path="/offline" element={<PR16OfflineSyncMonitor />} />
-                  <Route path="/offline-monitor" element={<PR16OfflineSyncMonitor />} />
-                  <Route path="/offline-sync" element={<PR16OfflineSyncMonitor />} />
+  public clearHistory(): void {
+    this.history = [];
+  }
+}
 
-                  <Route path="/hardware" element={<PR14HardwareLab />} />
-                  <Route path="/devices" element={<PR14HardwareLab />} />
+export const aiConversationPipeline = new AIConversationPipeline();
+''',
 
-                  {/* Health & Fallbacks */}
-                  <Route path="/health" element={<HealthCheck />} />
-                  <Route path="*" element={<NotFound />} />
-                </Route>
-              </Routes>
-              
-              {/* Mobile Navigation */}
-              <MobileBottomBar />
-            </BrowserRouter>
-          </GlobalProvider>
-        </AuthProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
-  );
-};
+    "src/services/medicalDisclaimerLayer.ts": '''/**
+ * Medical Disclaimer Layer Service
+ * Validates responses for safety disclaimers and emergency notices.
+ */
 
-export default App;
+export interface SafetyEvaluationResult {
+  isSafe: boolean;
+  containsDisclaimer: boolean;
+  isEmergencyTriggered: boolean;
+  formattedText: string;
+}
+
+export class MedicalDisclaimerLayer {
+  private readonly defaultDisclaimer = 
+    "\\n\\n---\\n" +
+    "⚠️ **Medical Disclaimer**: This AI response is for general informational purposes only and does not constitute medical diagnosis or advice.";
+
+  private readonly emergencyNotice = 
+    "🚨 **EMERGENCY WARNING**: High risk detected in biometric stream. Contact emergency services immediately.";
+
+  private readonly restrictedPhrases = [
+    "diagnose",
+    "prescribe",
+    "cure"
+  ];
+
+  public processSafetyRules(responseText: string, isEmergency: boolean): SafetyEvaluationResult {
+    let formattedText = responseText;
+    let containsDisclaimer = responseText.includes("Medical Disclaimer");
+
+    if (!containsDisclaimer) {
+      formattedText += this.defaultDisclaimer;
+      containsDisclaimer = true;
+    }
+
+    if (isEmergency) {
+      formattedText = `${this.emergencyNotice}\\n\\n${formattedText}`;
+    }
+
+    return {
+      isSafe: true,
+      containsDisclaimer,
+      isEmergencyTriggered: isEmergency,
+      formattedText
+    };
+  }
+}
+
+export const medicalDisclaimerLayer = new MedicalDisclaimerLayer();
 '''
 }
 
@@ -98,9 +112,9 @@ def build():
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(content)
         print(f"Updated/Created: {filepath}")
-    
+
     print("\n==============================================")
-    print("--- REAL ANALYTICS, ALERTS, & SETTINGS CONNECTED ---")
+    print("--- AI SERVICES STRING SYNTAX FIXED ---")
     print("==============================================\n")
 
 if __name__ == "__main__":

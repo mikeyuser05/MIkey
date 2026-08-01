@@ -34,9 +34,7 @@ export async function runPR92Tests(): Promise<boolean> {
             throw new Error("Emergency escalation query detection failed.");
         }
 
-        console.log("
-✅ ALL PR9.2 HEALTH QUERY UNDERSTANDING TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR9.2 TEST FAILED:", error);

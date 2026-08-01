@@ -74,8 +74,7 @@ export async function runFullPR8TestSuite(): Promise<boolean> {
         const allPassed = suiteResults.every((res) => res === true);
 
         if (allPassed) {
-            console.log("
-🎉 ALL PR8 SUB-MODULE TESTS AND INTEGRATION RUNS PASSED!");
+            // fixed test output log
             return true;
         } else {
             console.error("

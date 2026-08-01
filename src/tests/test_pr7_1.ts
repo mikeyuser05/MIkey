@@ -54,9 +54,7 @@ export async function runPR71Tests(): Promise<boolean> {
         }
         console.log("  ✓ Timeline Event Model verified.");
 
-        console.log("
-✅ ALL PR7.1 DATA MODEL TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR7.1 TEST FAILED:", error);

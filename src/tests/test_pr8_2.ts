@@ -84,9 +84,7 @@ export async function runPR82Tests(): Promise<boolean> {
             throw new Error("Context pruning or anonymization validation failed.");
         }
 
-        console.log("
-✅ ALL PR8.2 HEALTH CONTEXT BUILDER TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR8.2 TEST FAILED:", error);

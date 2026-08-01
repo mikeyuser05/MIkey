@@ -61,9 +61,7 @@ export async function runPR61Tests(): Promise<boolean> {
         const deletedCount = await storage.clearUserAnalytics(testUserId);
         console.log(`  ✓ Cleared ${deletedCount} test record(s).`);
 
-        console.log("
-✅ ALL PR6.1 TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR6.1 TEST FAILED:", error);

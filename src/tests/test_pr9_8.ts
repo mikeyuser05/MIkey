@@ -70,9 +70,7 @@ export async function runPR98Tests(): Promise<boolean> {
             throw new Error("Turn 2 multi-turn history threading failed.");
         }
 
-        console.log("
-✅ ALL PR9.8 END-TO-END CHAT & QA TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR9.8 TEST FAILED:", error);

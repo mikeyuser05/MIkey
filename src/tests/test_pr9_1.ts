@@ -43,9 +43,7 @@ export async function runPR91Tests(): Promise<boolean> {
             throw new Error("Conversation state setup validation failed.");
         }
 
-        console.log("
-✅ ALL PR9.1 CONVERSATIONAL ARCHITECTURE TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR9.1 TEST FAILED:", error);

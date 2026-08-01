@@ -66,9 +66,7 @@ export async function runPR86Tests(): Promise<boolean> {
             throw new Error("Health interpretation output failed validation checks.");
         }
 
-        console.log("
-✅ ALL PR8.6 AI HEALTH INTERPRETATION TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR8.6 TEST FAILED:", error);

@@ -53,9 +53,7 @@ export async function runPR94Tests(): Promise<boolean> {
             throw new Error("Semantic similarity ranking failed.");
         }
 
-        console.log("
-✅ ALL PR9.4 SEMANTIC RETRIEVAL TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR9.4 TEST FAILED:", error);

@@ -42,7 +42,7 @@ export async function runAllPR6Tests(): Promise<boolean> {
 
     const allPassed = Object.values(results).every((res) => res === true);
     if (allPassed) {
-        console.log("🎉 ALL PR6 SUBMODULE TESTS PASSED SUCCESSFULLY!");
+        // fixed test output log
     } else {
         console.error("❌ ONE OR MORE PR6 SUBMODULE TESTS FAILED.");
     }

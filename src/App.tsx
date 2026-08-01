@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ErrorBoundary } from './components/Common/ErrorBoundary';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { MobileBottomBar } from './components/Mobile/MobileBottomBar';
 import { AppLayout } from './components/Layout/AppLayout';
 import { pwaService } from './services/pwa.service';

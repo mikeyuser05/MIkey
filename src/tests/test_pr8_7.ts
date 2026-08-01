@@ -50,9 +50,7 @@ export async function runPR87Tests(): Promise<boolean> {
             throw new Error("AI Safety Gatekeeper checks failed.");
         }
 
-        console.log("
-✅ ALL PR8.7 AI SAFETY TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR8.7 TEST FAILED:", error);

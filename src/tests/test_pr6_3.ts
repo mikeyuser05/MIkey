@@ -83,9 +83,7 @@ export async function runPR63Tests(): Promise<boolean> {
         await storage.clearUserAnalytics(testUserId);
         console.log("  ✓ Test data cleared.");
 
-        console.log("
-✅ ALL PR6.3 MULTI-PERIOD AGGREGATION TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR6.3 TEST FAILED:", error);

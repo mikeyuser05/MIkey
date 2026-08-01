@@ -71,9 +71,7 @@ export async function runPR74Tests(): Promise<boolean> {
         console.log("[TEST 4] Cleaning up test records...");
         await manager.clearUserRecords(testUserId);
 
-        console.log("
-✅ ALL PR7.4 MONTHLY RECORD MANAGER TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR7.4 TEST FAILED:", error);

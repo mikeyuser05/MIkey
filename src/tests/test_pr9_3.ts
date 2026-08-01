@@ -72,9 +72,7 @@ export async function runPR93Tests(): Promise<boolean> {
             throw new Error("Context retrieval failed to isolate today's record.");
         }
 
-        console.log("
-✅ ALL PR9.3 STRUCTURED CONTEXT RETRIEVAL TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR9.3 TEST FAILED:", error);

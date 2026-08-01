@@ -61,9 +61,7 @@ export async function runPR76Tests(): Promise<boolean> {
             throw new Error("Report metrics or trajectory evaluation failed.");
         }
 
-        console.log("
-✅ ALL PR7.6 REPORT GENERATION TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR7.6 TEST FAILED:", error);

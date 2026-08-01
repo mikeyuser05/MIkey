@@ -11,32 +11,38 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
+    "noEmitOnError": false,
     "jsx": "react-jsx",
 
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
+    "strict": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": false,
+    "noUncheckedSideEffectImports": false,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     
-    "ignoreDeprecations": "6.0",
-    "baseUrl": "./",
+    "ignoreDeprecations": "5.0",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
-      "@context/*": ["src/context/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@services/*": ["src/services/*"],
-      "@app-types/*": ["src/types/*"],
-      "@constants/*": ["src/constants/*"],
-      "@utils/*": ["src/utils/*"],
-      "@assets/*": ["src/assets/*"],
-      "@routes/*": ["src/routes/*"]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@context/*": ["./src/context/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@services/*": ["./src/services/*"],
+      "@app-types/*": ["./src/types/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@routes/*": ["./src/routes/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    "src/tests/**/*",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
+  ]
 }

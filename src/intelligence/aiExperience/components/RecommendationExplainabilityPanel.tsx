@@ -121,10 +121,10 @@ export const RecommendationExplainabilityPanel: React.FC<IRecommendationExplaina
             <div>
               {/* Strategic Risk Framework Directives */}
               <div style={{ marginBottom: '16px' }}>
-                <span style={{ fontSize: '11px', color: '#666', uppercase: true, display: 'block', marginBottom: '6px' }}>
+                <span style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
                   Systemic Constraints & Hazards
                 </span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}> 
                   {explainableData.underlyingDirectives.map((dir, dIdx) => (
                     <div 
                       key={dIdx} 
@@ -145,7 +145,7 @@ export const RecommendationExplainabilityPanel: React.FC<IRecommendationExplaina
 
               {/* Underlying System Rationale Log */}
               <div>
-                <span style={{ fontSize: '11px', color: '#666', uppercase: true, display: 'block', marginBottom: '6px' }}>
+                <span style={{ fontSize: '11px', color: '#666', textTransform: 'uppercase', display: 'block', marginBottom: '6px' }}>
                   Mathematical & Core Inductive Logic
                 </span>
                 <blockquote 

@@ -48,9 +48,7 @@ export async function runPR96Tests(): Promise<boolean> {
             throw new Error("Sliding window history pruning failed.");
         }
 
-        console.log("
-✅ ALL PR9.6 CONVERSATION HISTORY TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR9.6 TEST FAILED:", error);

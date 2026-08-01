@@ -79,9 +79,7 @@ export async function runPR75Tests(): Promise<boolean> {
         console.log("[TEST 4] Cleaning up timeline records...");
         await manager.clearUserEvents(testUserId);
 
-        console.log("
-✅ ALL PR7.5 HEALTH TIMELINE TESTS PASSED SUCCESSFULLY.
-");
+        // fixed test output log
         return true;
     } catch (error) {
         console.error("❌ PR7.5 TEST FAILED:", error);
