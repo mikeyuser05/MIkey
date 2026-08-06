@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { useGlobalState } from '../../../context/GlobalContext';
+import { ReportsPanel } from '../../../components/analytics/ReportsPanel';
 
 export const HealthAnalyticsDashboard: React.FC = () => {
   const { pipelineData, isLoading, error } = useGlobalState();
@@ -55,6 +56,7 @@ export const HealthAnalyticsDashboard: React.FC = () => {
         </div>
       )}
 
+      {/* Streams Grid Container */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
         {/* Bio-Telemetry Status Card */}
         <div style={{ backgroundColor: '#FFF', padding: '20px', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
@@ -89,6 +91,11 @@ export const HealthAnalyticsDashboard: React.FC = () => {
             <strong>XAI Justification:</strong> {explainableData.systemLogicJustification}
           </div>
         </div>
+      </div>
+
+      {/* Reports Panel Placement */}
+      <div style={{ marginTop: '24px' }}>
+        <ReportsPanel />
       </div>
 
       {/* AI Prompt Compilation Segment */}

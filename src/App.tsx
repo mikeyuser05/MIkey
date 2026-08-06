@@ -5,7 +5,7 @@ import { MobileBottomBar } from './components/Mobile/MobileBottomBar';
 import { AppLayout } from './components/Layout/AppLayout';
 import { pwaService } from './services/pwa.service';
 import { notificationService } from './services/notification.service';
-
+import { ReportsPanel } from './components/analytics/ReportsPanel';
 // Context Providers
 import { GlobalProvider } from './context/GlobalContext';
 import { AuthProvider } from './context/AuthContext';

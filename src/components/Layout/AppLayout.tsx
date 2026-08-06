@@ -7,7 +7,8 @@ import { Sidebar } from './Sidebar';
 import { Navbar } from './Navbar';
 
 export function AppLayout(): ReactElement {
-  const { isSidebarCollapsed } = useGlobalContext();
+ const context = useGlobalContext() as any;
+ const isSidebarCollapsed = context?.isSidebarCollapsed ?? false;
   const location = useLocation();
 
   return (

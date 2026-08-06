@@ -1,19 +1,19 @@
 import type { ReactElement } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AppLayout } from '@components/Layout/AppLayout';
-import { ProtectedRoute } from '@components/common/ProtectedRoute';
-import { DashboardPage } from '@pages/Dashboard/DashboardPage';
-import { LoginPage } from '@pages/Auth/LoginPage';
-import { NotFoundPage } from '@pages/NotFound/NotFoundPage';
-import { ROUTES } from '@constants/routes.constants';
+import { AppLayout } from '../components/Layout/AppLayout';
+import { ProtectedRoute } from '../components/auth/ProtectedRoute';
+import DashboardPage from '../pages/Dashboard/DashboardPage';
+import { LoginPage } from '../pages/Auth/LoginPage';
+import { NotFoundPage } from '../pages/NotFound/NotFoundPage';
 
-// PR4 Functional Page Views
-import DevicesPage from '@pages/Devices/DevicesPage';
-import AnalyticsPage from '@pages/Analytics/AnalyticsPage';
-import AlertsPage from '@pages/Alerts/AlertsPage';
-import SettingsPage from '@pages/Settings/SettingsPage';
+// Pages & Feature Views
+import DevicesPage from '../pages/Devices/DevicesPage';
+import AnalyticsPage from '../pages/Analytics/AnalyticsPage';
+import AlertsPage from '../pages/Alerts/AlertsPage';
+import SettingsPage from '../pages/Settings/SettingsPage';
+import { ReportsPanel } from '../components/analytics/ReportsPanel';
 
-// PR11–PR16 Functional Hubs
+// PR Modules
 import { PR11TriageHub } from '../components/PR11TriageHub';
 import { PR14HardwareLab } from '../components/PR14HardwareLab';
 import { PR15MultiNodeCommandCenter } from '../components/PR15MultiNodeCommandCenter';
@@ -22,20 +22,19 @@ import { PR16OfflineSyncMonitor } from '../components/PR16OfflineSyncMonitor';
 export function AppRoutes(): ReactElement {
   return (
     <Routes>
-      <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} />
 
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
-          <Route path={ROUTES.ROOT} element={<Navigate to={ROUTES.DASHBOARD} replace />} />
-          <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
-          
-          {/* PR4 Connected Views */}
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/reports" element={<ReportsPanel />} />
           <Route path="/devices" element={<DevicesPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/alerts" element={<AlertsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
 
-          {/* PR11-PR16 Connected Modules */}
+          {/* Intelligence Modules */}
           <Route path="/triage" element={<PR11TriageHub />} />
           <Route path="/hardware-lab" element={<PR14HardwareLab />} />
           <Route path="/command-center" element={<PR15MultiNodeCommandCenter />} />
@@ -43,7 +42,7 @@ export function AppRoutes(): ReactElement {
         </Route>
       </Route>
 
-      <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
