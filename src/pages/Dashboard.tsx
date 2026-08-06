@@ -3,7 +3,7 @@
  */
 
 import React, { useState } from 'react';
-import { HealthContextAggregator } from '../services/healthContextAggregator';
+import { HealthContextBuilder } from '../services/healthContextBuilder'; // ✅ CORRECT FILE NAME
 import { HealthHistoryPipelineCoordinator } from '../services/healthHistoryPipeline';
 
 export const Dashboard: React.FC = () => {

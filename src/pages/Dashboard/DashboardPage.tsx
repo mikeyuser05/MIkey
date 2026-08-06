@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { ToastProvider } from '../../components/shared/ToastContainer';
 import { ErrorBoundary } from '../../components/shared/ErrorBoundary';
 import { SkeletonCard } from '../../components/ui/SkeletonCard';
+import { ReportsPanel } from '../../components/analytics/ReportsPanel';
 
 // UPDATED: Context import kiya telemetry data access karne ke liye
 import { useGlobalContext } from '@hooks/useGlobalContext';
@@ -55,6 +56,11 @@ export const DashboardPage: React.FC = () => {
                 <MemoizedAnalyticsLayout />
               </Suspense>
             </ErrorBoundary>
+          </section>
+
+          {/* REPORTS PANEL ADDED HERE */}
+          <section className="space-y-4">
+            <ReportsPanel />
           </section>
 
           {/* ADDED: LGN.7 Intelligence Panel Bottom par successfully attach ho gaya hai */}

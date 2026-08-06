@@ -6,6 +6,7 @@ import { AppLayout } from './components/Layout/AppLayout';
 import { pwaService } from './services/pwa.service';
 import { notificationService } from './services/notification.service';
 import { ReportsPanel } from './components/analytics/ReportsPanel';
+
 // Context Providers
 import { GlobalProvider } from './context/GlobalContext';
 import { AuthProvider } from './context/AuthContext';
@@ -48,6 +49,9 @@ export const App: React.FC = () => {
                   <Route path="/" element={<DashboardPage />} />
                   <Route path="/dashboard" element={<Navigate to="/" replace />} />
                   
+                  {/* NEW ROUTE ADDED FOR REPORTS */}
+                  <Route path="/reports" element={<ReportsPanel />} />
+
                   {/* Dedicated Pages */}
                   <Route path="/analytics" element={<AnalyticsPage />} />
                   <Route path="/alerts" element={<AlertsPage />} />

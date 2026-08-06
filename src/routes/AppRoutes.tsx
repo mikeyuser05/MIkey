@@ -26,9 +26,12 @@ export function AppRoutes(): ReactElement {
 
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
+          {/* Dashboard and redirect logic cleanup */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          {/* Ensure Dashboard component handles root correctly */}
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/reports" element={<ReportsPanel />} />
+          
           <Route path="/devices" element={<DevicesPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/alerts" element={<AlertsPage />} />
