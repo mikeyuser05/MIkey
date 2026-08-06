@@ -1,23 +1,24 @@
 # Summary
 
-Date : 2026-07-28 13:32:21
+Date : 2026-08-06 23:20:56
 
 Directory c:\\Users\\HP\\Downloads\\NO-EXCUSE\\Dashboard\\Current Build
 
-Total : 412 files,  27108 codes, 2059 comments, 3430 blanks, all 32597 lines
+Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 
 Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| TypeScript | 311 | 14,419 | 1,883 | 2,794 | 19,096 |
-| JSON | 5 | 7,027 | 0 | 10 | 7,037 |
-| TypeScript JSX | 85 | 5,152 | 139 | 539 | 5,830 |
-| Python | 1 | 244 | 37 | 38 | 319 |
-| Markdown | 3 | 155 | 0 | 31 | 186 |
+| TypeScript | 320 | 14,653 | 1,923 | 2,854 | 19,430 |
+| JSON | 8 | 7,323 | 0 | 12 | 7,335 |
+| TypeScript JSX | 88 | 5,359 | 162 | 576 | 6,097 |
+| JavaScript | 5 | 229 | 0 | 10 | 239 |
+| Markdown | 6 | 220 | 0 | 50 | 270 |
+| Python | 3 | 121 | 4 | 30 | 155 |
 | PostCSS | 1 | 43 | 0 | 11 | 54 |
-| JavaScript | 2 | 37 | 0 | 3 | 40 |
+| YAML | 1 | 25 | 0 | 9 | 34 |
 | HTML | 1 | 18 | 0 | 1 | 19 |
 | XML | 2 | 9 | 0 | 2 | 11 |
 | JSON with Comments | 1 | 4 | 0 | 1 | 5 |
@@ -25,31 +26,35 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 412 | 27,108 | 2,059 | 3,430 | 32,597 |
-| . (Files) | 13 | 7,601 | 37 | 82 | 7,720 |
-| public | 1 | 4 | 0 | 1 | 5 |
-| src | 398 | 19,503 | 2,022 | 3,347 | 24,872 |
-| src (Files) | 4 | 102 | 1 | 21 | 124 |
+| . | 436 | 28,004 | 2,089 | 3,556 | 33,649 |
+| . (Files) | 19 | 7,896 | 4 | 77 | 7,977 |
+| .github | 1 | 25 | 0 | 9 | 34 |
+| .github\\workflows | 1 | 25 | 0 | 9 | 34 |
+| docs | 3 | 65 | 0 | 19 | 84 |
+| public | 3 | 74 | 0 | 7 | 81 |
+| src | 410 | 19,944 | 2,085 | 3,444 | 25,473 |
+| src (Files) | 4 | 133 | 11 | 31 | 175 |
 | src\\assets | 1 | 5 | 0 | 1 | 6 |
 | src\\assets\\images | 1 | 5 | 0 | 1 | 6 |
 | src\\charts | 7 | 145 | 0 | 10 | 155 |
-| src\\components | 54 | 3,149 | 39 | 332 | 3,520 |
+| src\\components | 55 | 3,198 | 48 | 343 | 3,589 |
 | src\\components (Files) | 4 | 559 | 30 | 70 | 659 |
-| src\\components\\Layout | 3 | 496 | 6 | 36 | 538 |
-| src\\components\\analytics | 4 | 150 | 0 | 12 | 162 |
+| src\\components\\Layout | 3 | 373 | 3 | 26 | 402 |
+| src\\components\\Mobile | 1 | 43 | 0 | 4 | 47 |
+| src\\components\\analytics | 4 | 270 | 10 | 25 | 305 |
 | src\\components\\auth | 1 | 2 | 0 | 0 | 2 |
-| src\\components\\common | 3 | 111 | 0 | 21 | 132 |
-| src\\components\\dashboard | 18 | 913 | 3 | 82 | 998 |
+| src\\components\\common | 3 | 103 | 0 | 20 | 123 |
+| src\\components\\dashboard | 18 | 930 | 5 | 87 | 1,022 |
 | src\\components\\profile | 1 | 2 | 0 | 0 | 2 |
 | src\\components\\shared | 2 | 48 | 0 | 4 | 52 |
 | src\\components\\ui | 18 | 868 | 0 | 107 | 975 |
-| src\\config | 2 | 100 | 4 | 6 | 110 |
-| src\\constants | 2 | 43 | 0 | 10 | 53 |
+| src\\config | 4 | 170 | 4 | 18 | 192 |
+| src\\constants | 2 | 62 | 2 | 10 | 74 |
 | src\\context | 5 | 177 | 6 | 36 | 219 |
 | src\\data | 1 | 167 | 0 | 12 | 179 |
 | src\\engine | 3 | 59 | 0 | 6 | 65 |
 | src\\hooks | 14 | 286 | 10 | 63 | 359 |
-| src\\intelligence | 95 | 4,557 | 660 | 709 | 5,926 |
+| src\\intelligence | 95 | 4,561 | 662 | 711 | 5,934 |
 | src\\intelligence\\activity | 8 | 307 | 60 | 56 | 423 |
 | src\\intelligence\\activity\\classifiers | 1 | 26 | 7 | 4 | 37 |
 | src\\intelligence\\activity\\config | 1 | 36 | 0 | 2 | 38 |
@@ -58,8 +63,8 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 | src\\intelligence\\activity\\posture | 1 | 17 | 7 | 4 | 28 |
 | src\\intelligence\\activity\\tests | 1 | 90 | 9 | 16 | 115 |
 | src\\intelligence\\activity\\types | 1 | 31 | 3 | 5 | 39 |
-| src\\intelligence\\aiExperience | 10 | 979 | 62 | 86 | 1,127 |
-| src\\intelligence\\aiExperience\\components | 7 | 851 | 52 | 65 | 968 |
+| src\\intelligence\\aiExperience | 10 | 983 | 64 | 88 | 1,135 |
+| src\\intelligence\\aiExperience\\components | 7 | 855 | 54 | 67 | 976 |
 | src\\intelligence\\aiExperience\\controllers | 1 | 63 | 5 | 10 | 78 |
 | src\\intelligence\\aiExperience\\tests | 1 | 48 | 2 | 7 | 57 |
 | src\\intelligence\\aiExperience\\types | 1 | 17 | 3 | 4 | 24 |
@@ -113,19 +118,19 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 | src\\intelligence\\trends\\tests | 1 | 86 | 1 | 17 | 104 |
 | src\\intelligence\\trends\\types | 1 | 32 | 3 | 7 | 42 |
 | src\\intelligence\\types | 1 | 19 | 4 | 3 | 26 |
-| src\\pages | 8 | 533 | 15 | 57 | 605 |
-| src\\pages (Files) | 1 | 118 | 8 | 13 | 139 |
+| src\\pages | 10 | 655 | 16 | 71 | 742 |
+| src\\pages (Files) | 3 | 236 | 8 | 26 | 270 |
 | src\\pages\\Alerts | 1 | 53 | 0 | 5 | 58 |
 | src\\pages\\Analytics | 1 | 67 | 1 | 9 | 77 |
 | src\\pages\\Auth | 1 | 99 | 0 | 8 | 107 |
-| src\\pages\\Dashboard | 1 | 73 | 6 | 12 | 91 |
+| src\\pages\\Dashboard | 1 | 77 | 7 | 13 | 97 |
 | src\\pages\\Devices | 1 | 43 | 0 | 3 | 46 |
 | src\\pages\\NotFound | 1 | 58 | 0 | 5 | 63 |
 | src\\pages\\Settings | 1 | 22 | 0 | 2 | 24 |
 | src\\repositories | 3 | 51 | 10 | 10 | 71 |
-| src\\routes | 1 | 38 | 4 | 8 | 50 |
-| src\\services | 80 | 5,297 | 834 | 1,076 | 7,207 |
-| src\\services (Files) | 54 | 3,518 | 600 | 697 | 4,815 |
+| src\\routes | 1 | 39 | 5 | 8 | 52 |
+| src\\services | 84 | 5,400 | 832 | 1,102 | 7,334 |
+| src\\services (Files) | 58 | 3,621 | 598 | 723 | 4,942 |
 | src\\services\\baseline | 4 | 350 | 41 | 74 | 465 |
 | src\\services\\context | 1 | 43 | 14 | 11 | 68 |
 | src\\services\\deviation | 1 | 116 | 8 | 20 | 144 |
@@ -149,8 +154,8 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 | src\\telemetry\\services | 1 | 50 | 19 | 13 | 82 |
 | src\\telemetry\\types | 1 | 22 | 1 | 5 | 28 |
 | src\\telemetry\\utils | 1 | 23 | 9 | 5 | 37 |
-| src\\tests | 54 | 3,141 | 198 | 642 | 3,981 |
-| src\\types | 45 | 1,028 | 132 | 212 | 1,372 |
+| src\\tests | 55 | 3,122 | 238 | 655 | 4,015 |
+| src\\types | 47 | 1,089 | 132 | 221 | 1,442 |
 | src\\utils | 8 | 141 | 13 | 37 | 191 |
 
 Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-details.md)

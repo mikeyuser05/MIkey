@@ -1,0 +1,10 @@
+"filename", "language", "Python", "TypeScript JSX", "TypeScript", "comment", "blank", "total"
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\get_paths.py", "Python", 14, 0, 0, 4, 6, 24
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\App.tsx", "TypeScript JSX", 0, 2, 0, 1, 1, 4
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\AppLayout.tsx", "TypeScript JSX", 0, 1, 0, 0, 0, 1
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Sidebar.tsx", "TypeScript JSX", 0, -124, 0, -3, -10, -137
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\analytics\ReportsPanel.tsx", "TypeScript JSX", 0, 2, 0, 0, 1, 3
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\constants\routes.constants.ts", "TypeScript", 0, 0, 19, 2, 0, 21
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Dashboard\DashboardPage.tsx", "TypeScript JSX", 0, 4, 0, 1, 1, 6
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\routes\AppRoutes.tsx", "TypeScript JSX", 0, 1, 0, 1, 0, 2
+"Total", "-", 14, -114, 19, 6, -1, -76
