@@ -16,10 +16,13 @@ export type SQIFailureReason =
 
 export interface TelemetryReadingInput {
   timestampMs: number;
+  timestamp?: number; // Alias for legacy modules
   heartRate: number | null | undefined;
   spO2: number | null | undefined;
+  spo2?: number | null | undefined; // Alias for legacy modules
   steps?: number;
   accelMagnitude?: number;
+  gasLevel?: number;
 }
 
 export interface SQIEvaluationResult {

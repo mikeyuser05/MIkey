@@ -13,9 +13,13 @@ export interface LocalFailSafeRouteConfig {
 }
 
 export interface FailSafeDispatchResult {
-  alertId: string;
-  routedLocally: boolean;
-  localPathwaysActivated: string[];
-  bufferedForSync: boolean;
-  timestamp: number;
+  alertId?: string;
+  routedLocally?: boolean;
+  localPathwaysActivated?: string[];
+  bufferedForSync?: boolean;
+  timestamp?: number;
+  success: boolean;
+  dispatchedAt: number;
+  channel: string;
+  error?: string;
 }

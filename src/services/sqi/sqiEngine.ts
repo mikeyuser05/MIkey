@@ -95,3 +95,4 @@ export class SQIEngine {
     };
   }
 }
+export const sqiEngine = new SQIEngine();

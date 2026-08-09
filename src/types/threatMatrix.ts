@@ -1,0 +1,1 @@
+export type DispatchTargetChannel = 'SMS' | 'EMAIL' | 'PUSH' | 'VOICE_CALL' | 'WEBHOOK';

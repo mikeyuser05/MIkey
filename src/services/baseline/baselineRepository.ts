@@ -36,6 +36,17 @@ class BaselineRepository {
     }
   }
 
+  // Pipeline compatibility helpers
+  public getByUserId(userId: string): PersonalBaselineState {
+    return this.getBaseline();
+  }
+
+  public save(state: PersonalBaselineState): void {
+    this.currentState = state;
+    this.saveToStorage();
+    this.notifyListeners();
+  }
+
   public getBaseline(): PersonalBaselineState {
     return { ...this.currentState };
   }

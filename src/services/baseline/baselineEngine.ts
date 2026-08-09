@@ -62,7 +62,7 @@ export class BaselineEngine {
     currentState: PersonalBaselineState,
     packets: ValidatedTelemetryPacket[]
   ): PersonalBaselineState {
-    const validPackets = packets.filter(p => p.sqi.isUsableForBaselines);
+    const validPackets = packets.filter(p => p.sqi.isValidForBaseline);
 
     if (validPackets.length === 0) {
       return currentState;
@@ -73,11 +73,11 @@ export class BaselineEngine {
       .filter((v): v is number => v !== null && v !== undefined);
 
     const spo2Values = validPackets
-      .map(p => p.raw.spo2)
+      .map(p => p.raw.spO2)
       .filter((v): v is number => v !== null && v !== undefined);
 
     const gasValues = validPackets
-      .map(p => p.raw.gasLevel)
+      .map(p => p.raw.gasLevel?? 0)
       .filter((v): v is number => v !== null && v !== undefined);
 
     const now = Date.now();
@@ -88,7 +88,7 @@ export class BaselineEngine {
     const totalValidSamples = updatedHr.sampleCount;
     const { confidence, confidenceScore } = this.calculateConfidence(totalValidSamples);
 
-    const timestamps = validPackets.map(p => p.raw.timestamp);
+    const timestamps = validPackets.map(p => p.raw.timestampMs);
     const minTime = Math.min(...timestamps, currentState.windowStartTimestamp || now);
     const maxTime = Math.max(...timestamps, currentState.windowEndTimestamp || now);
 

@@ -87,3 +87,7 @@ export interface AuditLogEntry {
   nodeId: string;
   simulated: boolean;
 }
+
+// Legacy/Compatibility exports for PR15/PR16 and simulator services
+export type TelemetrySnapshot = RawTelemetrySnapshot;
+export type EmergencyState = AlertState;

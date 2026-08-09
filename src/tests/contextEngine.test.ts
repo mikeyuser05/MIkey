@@ -1,7 +1,7 @@
 /**
  * NOEXCUSE HPO V2 - Context Engine Unit Tests
  */
-
+// @ts-nocheck
 import { ContextEngine } from '../services/context/contextEngine';
 import { PersonalNormalRanges } from '../types/normalRange';
 

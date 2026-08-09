@@ -1,10 +1,19 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { Component, ReactNode, ErrorInfo } from 'react';
 
-interface Props { children: ReactNode; }
-interface State { hasError: boolean; error: Error | null; }
+interface Props {
+  children: ReactNode;
+}
+
+interface State {
+  hasError: boolean;
+  error: Error | null;
+}
 
 export class ProductionErrorBoundary extends Component<Props, State> {
-  public state: State = { hasError: false, error: null };
+  constructor(props: Props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
 
   public static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
@@ -14,7 +23,7 @@ export class ProductionErrorBoundary extends Component<Props, State> {
     console.error("[CRITICAL SYSTEM ERROR] Telemetry Engine Fault:", error, errorInfo);
   }
 
-  public render() {
+  render() {
     if (this.state.hasError) {
       return (
         <div className="flex min-h-screen flex-col items-center justify-center bg-black p-6 text-center font-mono">
@@ -31,6 +40,6 @@ export class ProductionErrorBoundary extends Component<Props, State> {
         </div>
       );
     }
-    return this.children;
+    return this.props.children;
   }
 }

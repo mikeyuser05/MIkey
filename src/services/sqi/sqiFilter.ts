@@ -1,10 +1,11 @@
 /**
  * NOEXCUSE HPO V2 - Telemetry SQI Stream Filter
- * Filters and validates telemetry samples before passing them to baseline calculators.
  */
 
-import { SQIEngine, TelemetryPoint, defaultSQIEngine } from './sqiEngine';
-import { SQIEvaluationResult } from '../../types/sqi';
+import { SQIEngine } from './sqiEngine';
+import { TelemetryReadingInput, SQIEvaluationResult } from '../../types/sqi';
+
+export type TelemetryPoint = TelemetryReadingInput;
 
 export interface ValidatedTelemetryPacket {
   raw: TelemetryPoint;
@@ -12,46 +13,20 @@ export interface ValidatedTelemetryPacket {
 }
 
 export class SQIFilter {
-  private engine: SQIEngine;
   private lastEvaluatedPoint: TelemetryPoint | null = null;
 
-  constructor(engine: SQIEngine = defaultSQIEngine) {
-    this.engine = engine;
-  }
+  public process(point: TelemetryPoint, nowMs: number = Date.now()): ValidatedTelemetryPacket {
+    const sqi = SQIEngine.evaluate(point, this.lastEvaluatedPoint, nowMs);
 
-  /**
-   * Processes an incoming telemetry point and attaches SQI evaluation.
-   */
-  public process(point: TelemetryPoint, nowMs?: number): ValidatedTelemetryPacket {
-    const sqi = this.engine.evaluateSample(point, this.lastEvaluatedPoint, nowMs);
-    
-    // Only update reference point if the current sample wasn't an impossible spike
-    if (!sqi.heartRateQuality.flags.includes('IMPOSSIBLE_VALUE')) {
+    if (sqi.isValidForBaseline) {
       this.lastEvaluatedPoint = point;
     }
 
-    return { raw: point, sqi };
-  }
-
-  /**
-   * Filters an array of raw telemetry batch points, keeping only those usable for baseline engine.
-   */
-  public filterValidForBaselines(points: TelemetryPoint[], nowMs?: number): TelemetryPoint[] {
-    const result: TelemetryPoint[] = [];
-    let prev: TelemetryPoint | null = null;
-
-    for (const pt of points) {
-      const sqi = this.engine.evaluateSample(pt, prev, nowMs);
-      if (sqi.isUsableForBaselines) {
-        result.push(pt);
-        prev = pt;
-      }
-    }
-
-    return result;
-  }
-
-  public reset(): void {
-    this.lastEvaluatedPoint = null;
+    return {
+      raw: point,
+      sqi,
+    };
   }
 }
+
+export const sqiFilter = new SQIFilter();
