@@ -57,7 +57,7 @@ export function Sidebar(): ReactElement {
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 z-40 flex h-screen flex-col border-r border-slate-800 bg-slate-950 transition-all duration-200',
+        'hidden md:flex fixed left-0 top-0 z-40 h-screen flex-col border-r border-slate-800 bg-slate-950 transition-all duration-200',
         isSidebarCollapsed ? 'w-20' : 'w-[280px]'
       )}
     >
