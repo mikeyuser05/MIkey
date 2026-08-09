@@ -49,7 +49,7 @@ export const App: React.FC = () => {
                   <Route path="/" element={<DashboardPage />} />
                   <Route path="/dashboard" element={<Navigate to="/" replace />} />
                   
-                  {/* NEW ROUTE ADDED FOR REPORTS */}
+                  {/* Reports Route */}
                   <Route path="/reports" element={<ReportsPanel />} />
 
                   {/* Dedicated Pages */}
@@ -59,17 +59,17 @@ export const App: React.FC = () => {
 
                   {/* Modules & Route Aliases */}
                   <Route path="/triage" element={<PR11TriageHub />} />
-                  <Route path="/triage-hub" element={<PR11TriageHub />} />
+                  <Route path="/triage-hub" element={<Navigate to="/triage" replace />} />
 
                   <Route path="/command" element={<PR15MultiNodeCommandCenter />} />
-                  <Route path="/command-center" element={<PR15MultiNodeCommandCenter />} />
+                  <Route path="/command-center" element={<Navigate to="/command" replace />} />
 
                   <Route path="/offline" element={<PR16OfflineSyncMonitor />} />
-                  <Route path="/offline-monitor" element={<PR16OfflineSyncMonitor />} />
-                  <Route path="/offline-sync" element={<PR16OfflineSyncMonitor />} />
+                  <Route path="/offline-monitor" element={<Navigate to="/offline" replace />} />
+                  <Route path="/offline-sync" element={<Navigate to="/offline" replace />} />
 
                   <Route path="/hardware" element={<PR14HardwareLab />} />
-                  <Route path="/devices" element={<PR14HardwareLab />} />
+                  <Route path="/devices" element={<Navigate to="/hardware" replace />} />
 
                   {/* Health & Fallbacks */}
                   <Route path="/health" element={<HealthCheck />} />
