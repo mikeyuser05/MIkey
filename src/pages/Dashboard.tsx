@@ -3,8 +3,6 @@
  */
 
 import React, { useState } from 'react';
-import { HealthContextBuilder } from '../services/healthContextBuilder'; // ✅ CORRECT FILE NAME
-import { HealthHistoryPipelineCoordinator } from '../services/healthHistoryPipeline';
 
 export const Dashboard: React.FC = () => {
   const [userQuery, setUserQuery] = useState('');
@@ -37,7 +35,7 @@ export const Dashboard: React.FC = () => {
   return (
     <div style={{ padding: '24px', color: '#fff', backgroundColor: '#0b0f19', minHeight: '100vh', fontFamily: 'sans-serif' }}>
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
         <div>
           <h1 style={{ margin: 0, fontSize: '28px', fontWeight: 'bold' }}>NOEXCUSE HPO V2</h1>
           <p style={{ margin: '4px 0 0 0', color: '#94a3b8', fontSize: '14px' }}>
@@ -49,8 +47,8 @@ export const Dashboard: React.FC = () => {
         </span>
       </div>
 
-      {/* Grid Layout */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+      {/* Grid Layout (Auto-fit for Responsive Mobile View) */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
         {/* Left Column: Metrics & Device Status */}
         <div style={{ backgroundColor: '#111827', padding: '20px', borderRadius: '12px', border: '1px solid #1f2937' }}>
           <h3 style={{ marginTop: 0, color: '#60a5fa' }}>📱 Live Telemetry & Baselines</h3>
