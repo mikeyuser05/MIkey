@@ -1,0 +1,22 @@
+"filename", "language", "TypeScript", "JSON", "TypeScript JSX", "comment", "blank", "total"
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package-lock.json", "JSON", 0, 398, 0, 0, 0, 398
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package.json", "JSON", 0, 2, 0, 0, 0, 2
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\App.tsx", "TypeScript JSX", 0, 0, 0, 0, -1, -1
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\AppLayout.tsx", "TypeScript JSX", 0, 0, 1, 0, -1, 0
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Sidebar.tsx", "TypeScript JSX", 0, 0, -11, 0, 1, -10
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\ui\ProductionErrorBoundary.tsx", "TypeScript JSX", 0, 0, 8, 0, 2, 10
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Dashboard.tsx", "TypeScript JSX", 0, 0, -2, 0, 0, -2
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Dashboard\DashboardPage.tsx", "TypeScript JSX", 0, 0, -16, -7, -6, -29
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\baseline\baselineRepository.ts", "TypeScript", 8, 0, 0, 1, 2, 11
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\chatQAService.ts", "TypeScript", -5, 0, 0, -8, 1, -12
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\pipeline\healthIntelligencePipeline.ts", "TypeScript", 7, 0, 0, -3, 2, 6
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\sqi\sqiEngine.ts", "TypeScript", 1, 0, 0, 0, -1, 0
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\sqi\sqiFilter.ts", "TypeScript", -14, 0, 0, -8, -3, -25
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\contextEngine.test.ts", "TypeScript", 0, 0, 0, 1, -1, 0
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\alertState.ts", "TypeScript", 11, 0, 0, 0, 1, 12
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\failsafe.ts", "TypeScript", 4, 0, 0, 0, -1, 3
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\normalRange.ts", "TypeScript", 12, 0, 0, 0, 0, 12
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr11Triage.ts", "TypeScript", 2, 0, 0, 1, 0, 3
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\sqi.ts", "TypeScript", 3, 0, 0, 0, 0, 3
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\threatMatrix.ts", "TypeScript", 1, 0, 0, 0, 0, 1
+"Total", "-", 30, 400, -20, -23, -5, 382

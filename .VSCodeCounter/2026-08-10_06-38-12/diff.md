@@ -1,0 +1,39 @@
+# Diff Summary
+
+Date : 2026-08-10 06:38:12
+
+Directory c:\\Users\\HP\\Downloads\\NO-EXCUSE\\Dashboard\\Current Build
+
+Total : 20 files,  410 codes, -23 comments, -5 blanks, all 382 lines
+
+[Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
+
+## Languages
+| language | files | code | comment | blank | total |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| JSON | 2 | 400 | 0 | 0 | 400 |
+| TypeScript | 12 | 30 | -16 | 0 | 14 |
+| TypeScript JSX | 6 | -20 | -7 | -5 | -32 |
+
+## Directories
+| path | files | code | comment | blank | total |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| . | 20 | 410 | -23 | -5 | 382 |
+| . (Files) | 2 | 400 | 0 | 0 | 400 |
+| src | 18 | 10 | -23 | -5 | -18 |
+| src (Files) | 1 | 0 | 0 | -1 | -1 |
+| src\\components | 3 | -2 | 0 | 2 | 0 |
+| src\\components\\Layout | 2 | -10 | 0 | 0 | -10 |
+| src\\components\\ui | 1 | 8 | 0 | 2 | 10 |
+| src\\pages | 2 | -18 | -7 | -6 | -31 |
+| src\\pages (Files) | 1 | -2 | 0 | 0 | -2 |
+| src\\pages\\Dashboard | 1 | -16 | -7 | -6 | -29 |
+| src\\services | 5 | -3 | -18 | 1 | -20 |
+| src\\services (Files) | 1 | -5 | -8 | 1 | -12 |
+| src\\services\\baseline | 1 | 8 | 1 | 2 | 11 |
+| src\\services\\pipeline | 1 | 7 | -3 | 2 | 6 |
+| src\\services\\sqi | 2 | -13 | -8 | -4 | -25 |
+| src\\tests | 1 | 0 | 1 | -1 | 0 |
+| src\\types | 6 | 33 | 1 | 0 | 34 |
+
+[Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
