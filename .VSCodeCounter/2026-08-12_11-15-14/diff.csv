@@ -1,0 +1,17 @@
+"filename", "language", "TypeScript", "Python", "TypeScript JSX", "comment", "blank", "total"
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py", "Python", 0, 173, 0, 38, 12, 223
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\index.ts", "TypeScript", 28, 0, 0, 0, 5, 33
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\providers\voiceProvider.ts", "TypeScript", 95, 0, 0, 0, 14, 109
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\callStatusNormalizer.ts", "TypeScript", 18, 0, 0, 0, 3, 21
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\emergencyCallService.ts", "TypeScript", 63, 0, 0, 8, 10, 81
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\twimlGenerator.ts", "TypeScript", 32, 0, 0, 0, 4, 36
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\types\voice.ts", "TypeScript", 43, 0, 0, 0, 6, 49
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\webhooks\twilioWebhook.ts", "TypeScript", 21, 0, 0, 1, 5, 27
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Triage\PR24SafetyGatePanel.tsx", "TypeScript JSX", 0, 0, 240, 6, 17, 263
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyCallSafetyGateService.ts", "TypeScript", 227, 0, 0, 11, 23, 261
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyVoiceBackendClient.ts", "TypeScript", 57, 0, 0, 2, 9, 68
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\emergencyCallSafetyGateService.test.ts", "TypeScript", 119, 0, 0, 0, 15, 134
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\emergencyVoiceBackend.test.ts", "TypeScript", 65, 0, 0, 0, 12, 77
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\pr26VoiceCall.test.ts", "TypeScript", 31, 0, 0, 0, 4, 35
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\triage.ts", "TypeScript", 48, 0, 0, 0, 7, 55
+"Total", "-", 847, 173, 240, 66, 146, 1472

@@ -1,17 +1,17 @@
-Date : 2026-07-31 23:40:30
+Date : 2026-08-12 11:15:14
 Directory : c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build
-Total : 430 files,  27662 codes, 2051 comments, 3519 blanks, all 33232 lines
+Total : 452 files,  29674 codes, 2132 comments, 3697 blanks, all 35503 lines
 
 Languages
 +--------------------+------------+------------+------------+------------+------------+
 | language           | files      | code       | comment    | blank      | total      |
 +--------------------+------------+------------+------------+------------+------------+
-| TypeScript         |        320 |     14,795 |      1,903 |      2,862 |     19,560 |
-| JSON               |          8 |      7,083 |          0 |         13 |      7,096 |
-| TypeScript JSX     |         88 |      5,334 |        148 |        564 |      6,046 |
-| Markdown           |          3 |        155 |          0 |         31 |        186 |
-| Python             |          2 |        106 |          0 |         17 |        123 |
-| JavaScript         |          3 |         90 |          0 |          8 |         98 |
+| TypeScript         |        335 |     15,530 |      1,929 |      2,971 |     20,430 |
+| JSON               |          8 |      7,723 |          0 |         12 |      7,735 |
+| TypeScript JSX     |         89 |      5,579 |        161 |        588 |      6,328 |
+| Python             |          3 |        294 |         42 |         42 |        378 |
+| JavaScript         |          5 |        229 |          0 |         10 |        239 |
+| Markdown           |          6 |        220 |          0 |         50 |        270 |
 | PostCSS            |          1 |         43 |          0 |         11 |         54 |
 | YAML               |          1 |         25 |          0 |          9 |         34 |
 | HTML               |          1 |         18 |          0 |          1 |         19 |
@@ -23,34 +23,43 @@ Directories
 +----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 | path                                                                                                                                   | files      | code       | comment    | blank      | total      |
 +----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
-| .                                                                                                                                      |        430 |     27,662 |      2,051 |      3,519 |     33,232 |
-| . (Files)                                                                                                                              |         16 |      7,502 |          0 |         63 |      7,565 |
+| .                                                                                                                                      |        452 |     29,674 |      2,132 |      3,697 |     35,503 |
+| . (Files)                                                                                                                              |         19 |      8,469 |         42 |         89 |      8,600 |
 | .github                                                                                                                                |          1 |         25 |          0 |          9 |         34 |
 | .github\workflows                                                                                                                      |          1 |         25 |          0 |          9 |         34 |
+| docs                                                                                                                                   |          3 |         65 |          0 |         19 |         84 |
+| functions                                                                                                                              |          7 |        300 |          9 |         47 |        356 |
+| functions\src                                                                                                                          |          7 |        300 |          9 |         47 |        356 |
+| functions\src (Files)                                                                                                                  |          1 |         28 |          0 |          5 |         33 |
+| functions\src\providers                                                                                                                |          1 |         95 |          0 |         14 |        109 |
+| functions\src\services                                                                                                                 |          3 |        113 |          8 |         17 |        138 |
+| functions\src\types                                                                                                                    |          1 |         43 |          0 |          6 |         49 |
+| functions\src\webhooks                                                                                                                 |          1 |         21 |          1 |          5 |         27 |
 | public                                                                                                                                 |          3 |         74 |          0 |          7 |         81 |
-| src                                                                                                                                    |        410 |     20,061 |      2,051 |      3,440 |     25,552 |
-| src (Files)                                                                                                                            |          4 |        131 |         10 |         30 |        171 |
+| src                                                                                                                                    |        419 |     20,741 |      2,081 |      3,526 |     26,348 |
+| src (Files)                                                                                                                            |          4 |        133 |         11 |         30 |        174 |
 | src\assets                                                                                                                             |          1 |          5 |          0 |          1 |          6 |
 | src\assets\images                                                                                                                      |          1 |          5 |          0 |          1 |          6 |
 | src\charts                                                                                                                             |          7 |        145 |          0 |         10 |        155 |
-| src\components                                                                                                                         |         55 |      3,184 |         39 |        335 |      3,558 |
+| src\components                                                                                                                         |         56 |      3,436 |         54 |        362 |      3,852 |
 | src\components (Files)                                                                                                                 |          4 |        559 |         30 |         70 |        659 |
-| src\components\Layout                                                                                                                  |          3 |        496 |          6 |         36 |        538 |
+| src\components\Layout                                                                                                                  |          3 |        363 |          3 |         26 |        392 |
 | src\components\Mobile                                                                                                                  |          1 |         43 |          0 |          4 |         47 |
-| src\components\analytics                                                                                                               |          4 |        150 |          0 |         12 |        162 |
+| src\components\Triage                                                                                                                  |          1 |        240 |          6 |         17 |        263 |
+| src\components\analytics                                                                                                               |          4 |        270 |         10 |         25 |        305 |
 | src\components\auth                                                                                                                    |          1 |          2 |          0 |          0 |          2 |
 | src\components\common                                                                                                                  |          3 |        103 |          0 |         20 |        123 |
-| src\components\dashboard                                                                                                               |         18 |        913 |          3 |         82 |        998 |
+| src\components\dashboard                                                                                                               |         18 |        930 |          5 |         87 |      1,022 |
 | src\components\profile                                                                                                                 |          1 |          2 |          0 |          0 |          2 |
 | src\components\shared                                                                                                                  |          2 |         48 |          0 |          4 |         52 |
-| src\components\ui                                                                                                                      |         18 |        868 |          0 |        107 |        975 |
+| src\components\ui                                                                                                                      |         18 |        876 |          0 |        109 |        985 |
 | src\config                                                                                                                             |          4 |        170 |          4 |         18 |        192 |
-| src\constants                                                                                                                          |          2 |         43 |          0 |         10 |         53 |
+| src\constants                                                                                                                          |          2 |         62 |          2 |         10 |         74 |
 | src\context                                                                                                                            |          5 |        177 |          6 |         36 |        219 |
 | src\data                                                                                                                               |          1 |        167 |          0 |         12 |        179 |
 | src\engine                                                                                                                             |          3 |         59 |          0 |          6 |         65 |
 | src\hooks                                                                                                                              |         14 |        286 |         10 |         63 |        359 |
-| src\intelligence                                                                                                                       |         95 |      4,557 |        660 |        709 |      5,926 |
+| src\intelligence                                                                                                                       |         95 |      4,561 |        662 |        711 |      5,934 |
 | src\intelligence\activity                                                                                                              |          8 |        307 |         60 |         56 |        423 |
 | src\intelligence\activity\classifiers                                                                                                  |          1 |         26 |          7 |          4 |         37 |
 | src\intelligence\activity\config                                                                                                       |          1 |         36 |          0 |          2 |         38 |
@@ -59,8 +68,8 @@ Directories
 | src\intelligence\activity\posture                                                                                                      |          1 |         17 |          7 |          4 |         28 |
 | src\intelligence\activity\tests                                                                                                        |          1 |         90 |          9 |         16 |        115 |
 | src\intelligence\activity\types                                                                                                        |          1 |         31 |          3 |          5 |         39 |
-| src\intelligence\aiExperience                                                                                                          |         10 |        979 |         62 |         86 |      1,127 |
-| src\intelligence\aiExperience\components                                                                                               |          7 |        851 |         52 |         65 |        968 |
+| src\intelligence\aiExperience                                                                                                          |         10 |        983 |         64 |         88 |      1,135 |
+| src\intelligence\aiExperience\components                                                                                               |          7 |        855 |         54 |         67 |        976 |
 | src\intelligence\aiExperience\controllers                                                                                              |          1 |         63 |          5 |         10 |         78 |
 | src\intelligence\aiExperience\tests                                                                                                    |          1 |         48 |          2 |          7 |         57 |
 | src\intelligence\aiExperience\types                                                                                                    |          1 |         17 |          3 |          4 |         24 |
@@ -114,31 +123,31 @@ Directories
 | src\intelligence\trends\tests                                                                                                          |          1 |         86 |          1 |         17 |        104 |
 | src\intelligence\trends\types                                                                                                          |          1 |         32 |          3 |          7 |         42 |
 | src\intelligence\types                                                                                                                 |          1 |         19 |          4 |          3 |         26 |
-| src\pages                                                                                                                              |         10 |        651 |         15 |         70 |        736 |
-| src\pages (Files)                                                                                                                      |          3 |        236 |          8 |         26 |        270 |
+| src\pages                                                                                                                              |         10 |        637 |          9 |         65 |        711 |
+| src\pages (Files)                                                                                                                      |          3 |        234 |          8 |         26 |        268 |
 | src\pages\Alerts                                                                                                                       |          1 |         53 |          0 |          5 |         58 |
 | src\pages\Analytics                                                                                                                    |          1 |         67 |          1 |          9 |         77 |
 | src\pages\Auth                                                                                                                         |          1 |         99 |          0 |          8 |        107 |
-| src\pages\Dashboard                                                                                                                    |          1 |         73 |          6 |         12 |         91 |
+| src\pages\Dashboard                                                                                                                    |          1 |         61 |          0 |          7 |         68 |
 | src\pages\Devices                                                                                                                      |          1 |         43 |          0 |          3 |         46 |
 | src\pages\NotFound                                                                                                                     |          1 |         58 |          0 |          5 |         63 |
 | src\pages\Settings                                                                                                                     |          1 |         22 |          0 |          2 |         24 |
 | src\repositories                                                                                                                       |          3 |         51 |         10 |         10 |         71 |
-| src\routes                                                                                                                             |          1 |         38 |          4 |          8 |         50 |
-| src\services                                                                                                                           |         84 |      5,470 |        846 |      1,110 |      7,426 |
-| src\services (Files)                                                                                                                   |         58 |      3,691 |        612 |        731 |      5,034 |
-| src\services\baseline                                                                                                                  |          4 |        350 |         41 |         74 |        465 |
+| src\routes                                                                                                                             |          1 |         39 |          5 |          8 |         52 |
+| src\services                                                                                                                           |         86 |      5,681 |        827 |      1,135 |      7,643 |
+| src\services (Files)                                                                                                                   |         60 |      3,900 |        603 |        756 |      5,259 |
+| src\services\baseline                                                                                                                  |          4 |        358 |         42 |         76 |        476 |
 | src\services\context                                                                                                                   |          1 |         43 |         14 |         11 |         68 |
 | src\services\deviation                                                                                                                 |          1 |        116 |          8 |         20 |        144 |
 | src\services\escalation                                                                                                                |          5 |        227 |         48 |         60 |        335 |
 | src\services\firebase                                                                                                                  |          3 |        139 |          3 |         32 |        174 |
 | src\services\healthProfile                                                                                                             |          2 |        127 |          8 |         19 |        154 |
-| src\services\pipeline                                                                                                                  |          2 |         95 |         26 |         23 |        144 |
+| src\services\pipeline                                                                                                                  |          2 |        102 |         23 |         25 |        150 |
 | src\services\predictive                                                                                                                |          1 |        125 |         11 |         26 |        162 |
 | src\services\profile                                                                                                                   |          2 |        174 |         32 |         32 |        238 |
 | src\services\range                                                                                                                     |          1 |         94 |         10 |         18 |        122 |
 | src\services\risk                                                                                                                      |          1 |         79 |          8 |         15 |        102 |
-| src\services\sqi                                                                                                                       |          2 |        112 |         15 |         29 |        156 |
+| src\services\sqi                                                                                                                       |          2 |         99 |          7 |         25 |        131 |
 | src\services\trend                                                                                                                     |          1 |         98 |         10 |         20 |        128 |
 | src\telemetry                                                                                                                          |         11 |        484 |         96 |         99 |        679 |
 | src\telemetry\__tests__                                                                                                                |          1 |         63 |          1 |         13 |         77 |
@@ -150,8 +159,8 @@ Directories
 | src\telemetry\services                                                                                                                 |          1 |         50 |         19 |         13 |         82 |
 | src\telemetry\types                                                                                                                    |          1 |         22 |          1 |          5 |         28 |
 | src\telemetry\utils                                                                                                                    |          1 |         23 |          9 |          5 |         37 |
-| src\tests                                                                                                                              |         55 |      3,213 |        206 |        655 |      4,074 |
-| src\types                                                                                                                              |         47 |      1,089 |        132 |        221 |      1,442 |
+| src\tests                                                                                                                              |         58 |      3,337 |        239 |        685 |      4,261 |
+| src\types                                                                                                                              |         50 |      1,170 |        133 |        228 |      1,531 |
 | src\utils                                                                                                                              |          8 |        141 |         13 |         37 |        191 |
 +----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 
@@ -162,18 +171,29 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\.github\workflows\ci.yml                                                       | YAML               |         25 |          0 |          9 |         34 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\.prettierrc.json                                                               | JSON               |         11 |          0 |          1 |         12 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\README.md                                                                      | Markdown           |        133 |          0 |         24 |        157 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py                                                               | Python             |         97 |          0 |         16 |        113 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py                                                               | Python             |        271 |         38 |         35 |        344 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\check_files.py                                                                 | Python             |          9 |          0 |          1 |         10 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\API_REFERENCE.md                                                          | Markdown           |         22 |          0 |          6 |         28 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\ARCHITECTURE.md                                                           | Markdown           |         20 |          0 |          4 |         24 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\DEVELOPMENT_GUIDE.md                                                      | Markdown           |         23 |          0 |          9 |         32 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\eslint.config.js                                                               | JavaScript         |         31 |          0 |          2 |         33 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\firebase.json                                                                  | JSON               |         16 |          0 |          1 |         17 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\index.ts                                                         | TypeScript         |         28 |          0 |          5 |         33 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\providers\voiceProvider.ts                                       | TypeScript         |         95 |          0 |         14 |        109 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\callStatusNormalizer.ts                                 | TypeScript         |         18 |          0 |          3 |         21 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\emergencyCallService.ts                                 | TypeScript         |         63 |          8 |         10 |         81 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\twimlGenerator.ts                                       | TypeScript         |         32 |          0 |          4 |         36 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\types\voice.ts                                                   | TypeScript         |         43 |          0 |          6 |         49 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\webhooks\twilioWebhook.ts                                        | TypeScript         |         21 |          1 |          5 |         27 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\get_paths.py                                                                   | Python             |         14 |          4 |          6 |         24 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\index.html                                                                     | HTML               |         18 |          0 |          1 |         19 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package-lock.json                                                              | JSON               |      6,906 |          0 |          1 |      6,907 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package.json                                                                   | JSON               |         53 |          0 |          1 |         54 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package-lock.json                                                              | JSON               |      7,536 |          0 |          1 |      7,537 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package.json                                                                   | JSON               |         57 |          0 |          1 |         58 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\postcss.config.js                                                              | JavaScript         |          6 |          0 |          1 |          7 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\favicon.svg                                                             | XML                |          4 |          0 |          1 |          5 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\manifest.json                                                           | JSON               |         17 |          0 |          1 |         18 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\sw.js                                                                   | JavaScript         |         53 |          0 |          5 |         58 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\App.tsx                                                                    | TypeScript JSX     |         64 |          9 |         14 |         87 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\App.tsx                                                                    | TypeScript JSX     |         66 |         10 |         14 |         90 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\assets\images\logo.svg                                                     | XML                |          5 |          0 |          1 |          6 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\charts\AreaChart.tsx                                                       | TypeScript JSX     |         32 |          0 |          2 |         34 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\charts\ChartCard.tsx                                                       | TypeScript JSX     |         24 |          0 |          1 |         25 |
@@ -182,18 +202,19 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\charts\ChartLegend.tsx                                                     | TypeScript JSX     |         12 |          0 |          1 |         13 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\charts\GaugeChart.tsx                                                      | TypeScript JSX     |         28 |          0 |          2 |         30 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\charts\LineChart.tsx                                                       | TypeScript JSX     |         32 |          0 |          2 |         34 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\AppLayout.tsx                                            | TypeScript JSX     |         37 |          0 |          5 |         42 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\AppLayout.tsx                                            | TypeScript JSX     |         39 |          0 |          4 |         43 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Navbar.tsx                                               | TypeScript JSX     |        234 |          0 |         13 |        247 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Sidebar.tsx                                              | TypeScript JSX     |        225 |          6 |         18 |        249 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Sidebar.tsx                                              | TypeScript JSX     |         90 |          3 |          9 |        102 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Mobile\MobileBottomBar.tsx                                      | TypeScript JSX     |         43 |          0 |          4 |         47 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR11TriageHub.tsx                                               | TypeScript JSX     |        244 |         11 |         27 |        282 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR14HardwareLab.tsx                                             | TypeScript JSX     |         92 |          6 |         14 |        112 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR15MultiNodeCommandCenter.tsx                                  | TypeScript JSX     |        112 |          9 |         15 |        136 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR16OfflineSyncMonitor.tsx                                      | TypeScript JSX     |        111 |          4 |         14 |        129 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Triage\PR24SafetyGatePanel.tsx                                  | TypeScript JSX     |        240 |          6 |         17 |        263 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\analytics\HistoricalChart.tsx                                   | TypeScript JSX     |          2 |          0 |          0 |          2 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\analytics\OptimizedTelemetryChart.tsx                           | TypeScript JSX     |         83 |          0 |          7 |         90 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\analytics\RealtimeChartWrapper.tsx                              | TypeScript JSX     |         63 |          0 |          5 |         68 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\analytics\ReportsPanel.tsx                                      | TypeScript JSX     |          2 |          0 |          0 |          2 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\analytics\ReportsPanel.tsx                                      | TypeScript JSX     |        122 |         10 |         13 |        145 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\auth\ProtectedRoute.tsx                                         | TypeScript JSX     |          2 |          0 |          0 |          2 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\common\ErrorBoundary.tsx                                        | TypeScript JSX     |         49 |          0 |          9 |         58 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\common\LoadingScreen.tsx                                        | TypeScript JSX     |         35 |          0 |          5 |         40 |
@@ -205,7 +226,7 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\DeviceStatusPanel.tsx                                 | TypeScript JSX     |        108 |          0 |         10 |        118 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\GasCard.tsx                                           | TypeScript JSX     |         28 |          0 |          3 |         31 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\HeartRateCard.tsx                                     | TypeScript JSX     |         25 |          1 |          4 |         30 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\MemoizedAnalyticsLayout.tsx                           | TypeScript JSX     |         34 |          0 |          3 |         37 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\MemoizedAnalyticsLayout.tsx                           | TypeScript JSX     |         40 |          2 |          5 |         47 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\QuickActionsPanel.tsx                                 | TypeScript JSX     |         70 |          0 |          5 |         75 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\RecentEventsPanel.tsx                                 | TypeScript JSX     |        103 |          0 |          7 |        110 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\SpO2Card.tsx                                          | TypeScript JSX     |         24 |          0 |          2 |         26 |
@@ -214,7 +235,7 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\SystemStatusCard.tsx                                  | TypeScript JSX     |        111 |          0 |         10 |        121 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\TelemetryGrid.tsx                                     | TypeScript JSX     |         34 |          0 |          5 |         39 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\TemperatureCard.tsx                                   | TypeScript JSX     |         19 |          0 |          2 |         21 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\VitalCard.tsx                                         | TypeScript JSX     |         95 |          0 |          9 |        104 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\VitalCard.tsx                                         | TypeScript JSX     |        106 |          0 |         12 |        118 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\index.ts                                              | TypeScript         |         14 |          0 |          1 |         15 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\profile\UserProfilePanel.tsx                                    | TypeScript JSX     |          2 |          0 |          0 |          2 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\shared\ErrorBoundary.tsx                                        | TypeScript JSX     |         19 |          0 |          1 |         20 |
@@ -229,7 +250,7 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\ui\IconButton.tsx                                               | TypeScript JSX     |         49 |          0 |          6 |         55 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\ui\Modal.tsx                                                    | TypeScript JSX     |        106 |          0 |         13 |        119 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\ui\PageHeader.tsx                                               | TypeScript JSX     |         33 |          0 |          4 |         37 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\ui\ProductionErrorBoundary.tsx                                  | TypeScript JSX     |         31 |          0 |          5 |         36 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\ui\ProductionErrorBoundary.tsx                                  | TypeScript JSX     |         39 |          0 |          7 |         46 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\ui\SectionHeader.tsx                                            | TypeScript JSX     |         35 |          0 |          4 |         39 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\ui\Skeleton.tsx                                                 | TypeScript JSX     |         42 |          0 |          6 |         48 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\ui\SkeletonCard.tsx                                             | TypeScript JSX     |          2 |          0 |          0 |          2 |
@@ -242,7 +263,7 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\config\env.config.ts                                                       | TypeScript         |         39 |          0 |          6 |         45 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\config\firebase.config.ts                                                  | TypeScript         |         31 |          0 |          6 |         37 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\constants\app.constants.ts                                                 | TypeScript         |         28 |          0 |          6 |         34 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\constants\routes.constants.ts                                              | TypeScript         |         15 |          0 |          4 |         19 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\constants\routes.constants.ts                                              | TypeScript         |         34 |          2 |          4 |         40 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\context\AuthContext.tsx                                                    | TypeScript JSX     |          7 |          0 |          0 |          7 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\context\ChartBufferRegistryContext.tsx                                     | TypeScript JSX     |          4 |          0 |          0 |          4 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\context\GlobalContext.tsx                                                  | TypeScript JSX     |         61 |          2 |         12 |         75 |
@@ -281,7 +302,7 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\intelligence\aiExperience\components\AIWorkspaceLayout.tsx                 | TypeScript JSX     |        110 |          7 |          5 |        122 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\intelligence\aiExperience\components\PromptPreviewPanel.tsx                | TypeScript JSX     |        133 |          6 |          6 |        145 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\intelligence\aiExperience\components\RecommendationExplainabilityPanel.tsx | TypeScript JSX     |        151 |          9 |         14 |        174 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\intelligence\aiExperience\components\healthAnalyticsDashboard.tsx          | TypeScript JSX     |         85 |          9 |         11 |        105 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\intelligence\aiExperience\components\healthAnalyticsDashboard.tsx          | TypeScript JSX     |         89 |         11 |         13 |        113 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\intelligence\aiExperience\controllers\workspaceViewController.ts           | TypeScript         |         63 |          5 |         10 |         78 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\intelligence\aiExperience\tests\aiExperience.test.ts                       | TypeScript         |         48 |          2 |          7 |         57 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\intelligence\aiExperience\types\aiExperience.ts                            | TypeScript         |         17 |          3 |          4 |         24 |
@@ -366,8 +387,8 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Alerts\AlertsPage.tsx                                                | TypeScript JSX     |         53 |          0 |          5 |         58 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Analytics\AnalyticsPage.tsx                                          | TypeScript JSX     |         67 |          1 |          9 |         77 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Auth\LoginPage.tsx                                                   | TypeScript JSX     |         99 |          0 |          8 |        107 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Dashboard.tsx                                                        | TypeScript JSX     |        118 |          8 |         13 |        139 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Dashboard\DashboardPage.tsx                                          | TypeScript JSX     |         73 |          6 |         12 |         91 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Dashboard.tsx                                                        | TypeScript JSX     |        116 |          8 |         13 |        137 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Dashboard\DashboardPage.tsx                                          | TypeScript JSX     |         61 |          0 |          7 |         68 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Devices\DevicesPage.tsx                                              | TypeScript JSX     |         43 |          0 |          3 |         46 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\HealthCheck.tsx                                                      | TypeScript JSX     |         95 |          0 |         11 |        106 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\NotFound.tsx                                                         | TypeScript JSX     |         23 |          0 |          2 |         25 |
@@ -376,12 +397,12 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\repositories\AuthenticationRepository.ts                                   | TypeScript         |          3 |          0 |          0 |          3 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\repositories\HistoricalRepository.ts                                       | TypeScript         |          2 |          0 |          0 |          2 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\repositories\telemetryRepository.ts                                        | TypeScript         |         46 |         10 |         10 |         66 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\routes\AppRoutes.tsx                                                       | TypeScript JSX     |         38 |          4 |          8 |         50 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\routes\AppRoutes.tsx                                                       | TypeScript JSX     |         39 |          5 |          8 |         52 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\ExportService.ts                                                  | TypeScript         |          3 |          0 |          0 |          3 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\ReportEngineService.ts                                            | TypeScript         |          1 |          0 |          0 |          1 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\advancedPersonalizationEngine.ts                                  | TypeScript         |         33 |          9 |          6 |         48 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\aiContractParser.ts                                               | TypeScript         |         64 |         16 |          9 |         89 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\aiConversationPipeline.ts                                         | TypeScript         |         85 |         12 |         16 |        113 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\aiConversationPipeline.ts                                         | TypeScript         |         35 |          5 |         10 |         50 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\aiGuardrails.ts                                                   | TypeScript         |         84 |         12 |         15 |        111 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\aiOrchestrator.ts                                                 | TypeScript         |         61 |         13 |         13 |         87 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\aiProvider.ts                                                     | TypeScript         |         86 |         14 |         17 |        117 |
@@ -396,17 +417,19 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\baselineEngine.ts                                                 | TypeScript         |         56 |         15 |         14 |         85 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\baseline\baselineCollector.ts                                     | TypeScript         |         92 |          4 |         20 |        116 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\baseline\baselineEngine.ts                                        | TypeScript         |        124 |         19 |         27 |        170 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\baseline\baselineRepository.ts                                    | TypeScript         |         75 |          4 |         14 |         93 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\baseline\baselineRepository.ts                                    | TypeScript         |         83 |          5 |         16 |        104 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\baseline\normalRangeEngine.ts                                     | TypeScript         |         59 |         14 |         13 |         86 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\chatQAService.ts                                                  | TypeScript         |         71 |         13 |         13 |         97 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\chatQAService.ts                                                  | TypeScript         |         66 |          5 |         14 |         85 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\context\contextEngine.ts                                          | TypeScript         |         43 |         14 |         11 |         68 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\conversationHistoryManager.ts                                     | TypeScript         |         26 |         14 |          9 |         49 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\dailyAggregator.ts                                                | TypeScript         |        102 |         20 |         23 |        145 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\dailyRecordManager.ts                                             | TypeScript         |         73 |         22 |         15 |        110 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\deviation\deviationEngine.ts                                      | TypeScript         |        116 |          8 |         20 |        144 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyCallSafetyGateService.ts                                 | TypeScript         |        227 |         11 |         23 |        261 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyPolicyEngine.ts                                          | TypeScript         |         66 |         14 |         11 |         91 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyPreferencesStore.ts                                      | TypeScript         |         63 |          5 |         16 |         84 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyStateMachine.ts                                          | TypeScript         |        101 |         19 |         25 |        145 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyVoiceBackendClient.ts                                    | TypeScript         |         57 |          2 |          9 |         68 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\escalation\acknowledgmentService.ts                               | TypeScript         |         42 |          8 |          9 |         59 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\escalation\connectivityMonitor.ts                                 | TypeScript         |         25 |          4 |          9 |         38 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\escalation\dispatchEngine.ts                                      | TypeScript         |         61 |         11 |         17 |         89 |
@@ -428,7 +451,7 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\intelligenceOrchestrator.ts                                       | TypeScript         |         82 |         16 |         15 |        113 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\localAIReadinessEngine.ts                                         | TypeScript         |         37 |          8 |          6 |         51 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\longTermHealthModel.ts                                            | TypeScript         |         73 |          7 |         11 |         91 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\medicalDisclaimerLayer.ts                                         | TypeScript         |         56 |         11 |         12 |         79 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\medicalDisclaimerLayer.ts                                         | TypeScript         |         36 |          4 |         10 |         50 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\mobileOfflineEngine.ts                                            | TypeScript         |         38 |          4 |          9 |         51 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\monthlyRecordManager.ts                                           | TypeScript         |         65 |         16 |         15 |         96 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\multiDeviceSyncManager.ts                                         | TypeScript         |         34 |          8 |          9 |         51 |
@@ -436,7 +459,7 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\multiPeriodAggregator.ts                                          | TypeScript         |        106 |         18 |         24 |        148 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\notification.service.ts                                           | TypeScript         |         32 |          1 |          7 |         40 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\offlineSyncEngine.ts                                              | TypeScript         |        101 |          6 |         21 |        128 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\pipeline\healthIntelligencePipeline.ts                            | TypeScript         |         60 |         13 |         12 |         85 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\pipeline\healthIntelligencePipeline.ts                            | TypeScript         |         67 |         10 |         14 |         91 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\pipeline\predictivePipeline.ts                                    | TypeScript         |         35 |         13 |         11 |         59 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\pr5HealthIntelligenceModule.ts                                    | TypeScript         |         16 |         10 |          6 |         32 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\predictive\predictiveEngine.ts                                    | TypeScript         |        125 |         11 |         26 |        162 |
@@ -454,8 +477,8 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\simulatedVoiceDispatcher.ts                                       | TypeScript         |         40 |          7 |          9 |         56 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\simulatedVoiceDispatcherPR12.ts                                   | TypeScript         |         51 |          4 |          8 |         63 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\simulationEngine.ts                                               | TypeScript         |        115 |          4 |         18 |        137 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\sqi\sqiEngine.ts                                                  | TypeScript         |         77 |          4 |         17 |         98 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\sqi\sqiFilter.ts                                                  | TypeScript         |         35 |         11 |         12 |         58 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\sqi\sqiEngine.ts                                                  | TypeScript         |         78 |          4 |         16 |         98 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\sqi\sqiFilter.ts                                                  | TypeScript         |         21 |          3 |          9 |         33 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\structuredContextRetriever.ts                                     | TypeScript         |         35 |          9 |          8 |         52 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\telephony.service.ts                                              | TypeScript         |         51 |          9 |          7 |         67 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\trendEngine.ts                                                    | TypeScript         |        103 |         16 |         22 |        141 |
@@ -474,14 +497,17 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\telemetry\utils\validation.ts                                              | TypeScript         |         23 |          9 |          5 |         37 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\baselineCollector.test.ts                                            | TypeScript         |         45 |          0 |          9 |         54 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\baselineEngine.test.ts                                               | TypeScript         |         59 |          3 |          9 |         71 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\contextEngine.test.ts                                                | TypeScript         |         35 |          4 |          9 |         48 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\contextEngine.test.ts                                                | TypeScript         |         35 |          5 |          8 |         48 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\deviationEngine.test.ts                                              | TypeScript         |         57 |          3 |          9 |         69 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\dispatchEngine.test.ts                                               | TypeScript         |         51 |          3 |         13 |         67 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\emergencyCallSafetyGateService.test.ts                               | TypeScript         |        119 |          0 |         15 |        134 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\emergencyVoiceBackend.test.ts                                        | TypeScript         |         65 |          0 |         12 |         77 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\escalationPipeline.test.ts                                           | TypeScript         |         46 |          3 |         12 |         61 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\failSafeRouter.test.ts                                               | TypeScript         |         48 |          3 |         13 |         64 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\healthIntelligencePipeline.test.ts                                   | TypeScript         |         50 |          4 |         13 |         67 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\healthProfile.test.ts                                                | TypeScript         |         30 |          1 |          6 |         37 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\normalRangeEngine.test.ts                                            | TypeScript         |         45 |          0 |          7 |         52 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\pr26VoiceCall.test.ts                                                | TypeScript         |         31 |          0 |          4 |         35 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\predictiveEngine.test.ts                                             | TypeScript         |         62 |          3 |         12 |         77 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\predictivePipeline.test.ts                                           | TypeScript         |         53 |          5 |         13 |         71 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\profileValidator.test.ts                                             | TypeScript         |         59 |          3 |          7 |         69 |
@@ -494,42 +520,43 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_build_5_6.ts                                                    | TypeScript         |         14 |          5 |          6 |         25 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_build_5_7.ts                                                    | TypeScript         |         36 |          5 |          8 |         49 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_build_5_8_acceptance.ts                                         | TypeScript         |         68 |          5 |         11 |         84 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_1.ts                                                        | TypeScript         |         62 |          5 |         11 |         78 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_2.ts                                                        | TypeScript         |         80 |          9 |         15 |        104 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_3.ts                                                        | TypeScript         |         79 |          4 |         16 |         99 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_4.ts                                                        | TypeScript         |         64 |          4 |         13 |         81 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_5.ts                                                        | TypeScript         |         70 |          6 |         17 |         93 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_6.ts                                                        | TypeScript         |         90 |          5 |         18 |        113 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_7.ts                                                        | TypeScript         |         74 |          3 |         15 |         92 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_master.ts                                                   | TypeScript         |         44 |          4 |          8 |         56 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_1.ts                                                        | TypeScript         |         58 |          3 |          9 |         70 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_2.ts                                                        | TypeScript         |         66 |          3 |         15 |         84 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_3.ts                                                        | TypeScript         |         68 |          4 |         15 |         87 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_4.ts                                                        | TypeScript         |         68 |          4 |         15 |         87 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_5.ts                                                        | TypeScript         |         77 |          3 |         15 |         95 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_6.ts                                                        | TypeScript         |         61 |          5 |         11 |         77 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_7.ts                                                        | TypeScript         |         76 |          3 |         17 |         96 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_master.ts                                                   | TypeScript         |         44 |          4 |          8 |         56 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_1.ts                                                        | TypeScript         |         50 |          3 |          9 |         62 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_2.ts                                                        | TypeScript         |         84 |          4 |         12 |        100 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_3.ts                                                        | TypeScript         |         66 |          3 |         14 |         83 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_4.ts                                                        | TypeScript         |         61 |          3 |         14 |         78 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_5.ts                                                        | TypeScript         |         50 |          7 |         15 |         72 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_6.ts                                                        | TypeScript         |         67 |          3 |         12 |         82 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_7.ts                                                        | TypeScript         |         53 |          3 |         10 |         66 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_8.ts                                                        | TypeScript         |         78 |          4 |         12 |         94 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_1.ts                                                        | TypeScript         |         46 |          3 |         10 |         59 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_2.ts                                                        | TypeScript         |         35 |          3 |         12 |         50 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_3.ts                                                        | TypeScript         |         73 |          3 |         12 |         88 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_4.ts                                                        | TypeScript         |         55 |          3 |         11 |         69 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_5.ts                                                        | TypeScript         |         66 |          3 |         12 |         81 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_6.ts                                                        | TypeScript         |         49 |          3 |         12 |         64 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_7.ts                                                        | TypeScript         |         41 |          3 |         15 |         59 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_8.ts                                                        | TypeScript         |         69 |          3 |         14 |         86 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_1.ts                                                        | TypeScript         |         59 |          6 |         11 |         76 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_2.ts                                                        | TypeScript         |         77 |         10 |         15 |        102 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_3.ts                                                        | TypeScript         |         76 |          5 |         16 |         97 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_4.ts                                                        | TypeScript         |         61 |          5 |         13 |         79 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_5.ts                                                        | TypeScript         |         67 |          7 |         17 |         91 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_6.ts                                                        | TypeScript         |         87 |          6 |         18 |        111 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_7.ts                                                        | TypeScript         |         71 |          4 |         15 |         90 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr6_master.ts                                                   | TypeScript         |         43 |          5 |          8 |         56 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_1.ts                                                        | TypeScript         |         55 |          4 |          9 |         68 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_2.ts                                                        | TypeScript         |         63 |          4 |         15 |         82 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_3.ts                                                        | TypeScript         |         65 |          5 |         15 |         85 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_4.ts                                                        | TypeScript         |         65 |          5 |         15 |         85 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_5.ts                                                        | TypeScript         |         74 |          4 |         15 |         93 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_6.ts                                                        | TypeScript         |         58 |          6 |         11 |         75 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_7.ts                                                        | TypeScript         |         73 |          4 |         17 |         94 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr7_master.ts                                                   | TypeScript         |         43 |          5 |          8 |         56 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_1.ts                                                        | TypeScript         |         47 |          4 |          9 |         60 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_2.ts                                                        | TypeScript         |         81 |          5 |         12 |         98 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_3.ts                                                        | TypeScript         |         63 |          4 |         14 |         81 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_4.ts                                                        | TypeScript         |         58 |          4 |         14 |         76 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_5.ts                                                        | TypeScript         |         47 |          8 |         15 |         70 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_6.ts                                                        | TypeScript         |         64 |          4 |         12 |         80 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_7.ts                                                        | TypeScript         |         50 |          4 |         10 |         64 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr8_8.ts                                                        | TypeScript         |         76 |          5 |         12 |         93 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_1.ts                                                        | TypeScript         |         43 |          4 |         10 |         57 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_2.ts                                                        | TypeScript         |         32 |          4 |         12 |         48 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_3.ts                                                        | TypeScript         |         70 |          4 |         12 |         86 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_4.ts                                                        | TypeScript         |         52 |          4 |         11 |         67 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_5.ts                                                        | TypeScript         |         63 |          4 |         12 |         79 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_6.ts                                                        | TypeScript         |         46 |          4 |         12 |         62 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_7.ts                                                        | TypeScript         |         38 |          4 |         15 |         57 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\test_pr9_8.ts                                                        | TypeScript         |         66 |          4 |         14 |         84 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\trendEngine.test.ts                                                  | TypeScript         |         46 |          5 |         11 |         62 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\aiContext.ts                                                         | TypeScript         |         27 |          4 |          7 |         38 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\aiContracts.ts                                                       | TypeScript         |         24 |          4 |          5 |         33 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\aiConversation.ts                                                    | TypeScript         |         33 |          4 |          6 |         43 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\alertState.ts                                                        | TypeScript         |         11 |          0 |          1 |         12 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\analytics.ts                                                         | TypeScript         |         35 |          4 |          7 |         46 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\anomaly.ts                                                           | TypeScript         |         21 |          3 |          4 |         28 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\api.types.ts                                                         | TypeScript         |         32 |          0 |          4 |         36 |
@@ -544,7 +571,7 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\dispatch.ts                                                          | TypeScript         |         25 |          4 |          6 |         35 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\escalationPipeline.ts                                                | TypeScript         |         13 |          4 |          4 |         21 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\export.ts                                                            | TypeScript         |         16 |          3 |          5 |         24 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\failsafe.ts                                                          | TypeScript         |         14 |          4 |          4 |         22 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\failsafe.ts                                                          | TypeScript         |         18 |          4 |          3 |         25 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\global.types.ts                                                      | TypeScript         |         32 |          1 |         11 |         44 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\healthHistory.ts                                                     | TypeScript         |         93 |          4 |         12 |        109 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\healthProfile.ts                                                     | TypeScript         |         39 |          4 |          8 |         51 |
@@ -552,11 +579,11 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\intelligencePipeline.ts                                              | TypeScript         |         23 |          4 |          5 |         32 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\longTermHealth.ts                                                    | TypeScript         |         22 |          4 |          4 |         30 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\multiDevice.ts                                                       | TypeScript         |         16 |          3 |          4 |         23 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\normalRange.ts                                                       | TypeScript         |         12 |          4 |          3 |         19 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\normalRange.ts                                                       | TypeScript         |         24 |          4 |          3 |         31 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\notifications.types.ts                                               | TypeScript         |          7 |          0 |          1 |          8 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\personalization.ts                                                   | TypeScript         |         13 |          3 |          3 |         19 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pipeline.ts                                                          | TypeScript         |         14 |          4 |          3 |         21 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr11Triage.ts                                                        | TypeScript         |         76 |          4 |         10 |         90 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr11Triage.ts                                                        | TypeScript         |         78 |          5 |         10 |         93 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr12Geo.ts                                                           | TypeScript         |         25 |          3 |          4 |         32 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr14Simulator.ts                                                     | TypeScript         |         28 |          3 |          4 |         35 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr15Fleet.ts                                                         | TypeScript         |         22 |          3 |          5 |         30 |
@@ -568,11 +595,13 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\riskScore.ts                                                         | TypeScript         |         22 |          4 |          5 |         31 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\secureSharing.ts                                                     | TypeScript         |         14 |          3 |          3 |         20 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\semanticRetrieval.ts                                                 | TypeScript         |         22 |          4 |          5 |         31 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\sqi.ts                                                               | TypeScript         |         23 |          4 |          5 |         32 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\sqi.ts                                                               | TypeScript         |         26 |          4 |          5 |         35 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\telephony.types.ts                                                   | TypeScript         |         29 |          0 |          5 |         34 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\theme.types.ts                                                       | TypeScript         |          7 |          2 |          2 |         11 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\threatMatrix.ts                                                      | TypeScript         |          1 |          0 |          0 |          1 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\trend.ts                                                             | TypeScript         |         18 |          4 |          4 |         26 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\trends.ts                                                            | TypeScript         |         19 |          3 |          5 |         27 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\triage.ts                                                            | TypeScript         |         48 |          0 |          7 |         55 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\user.types.ts                                                        | TypeScript         |         16 |          0 |          3 |         19 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\utils\breadcrumbs.ts                                                       | TypeScript         |         28 |          0 |          7 |         35 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\utils\chartColors.ts                                                       | TypeScript         |         18 |          0 |          3 |         21 |
@@ -583,11 +612,13 @@ Files
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\utils\logger.ts                                                            | TypeScript         |         20 |          1 |          5 |         26 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\utils\storage.ts                                                           | TypeScript         |         26 |          0 |          5 |         31 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\vite-env.d.ts                                                              | TypeScript         |         15 |          1 |          3 |         19 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tailwind.config.js                                                             | JavaScript         |         96 |          0 |          1 |         97 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tailwind.config.ts                                                             | TypeScript         |         95 |          0 |          3 |         98 |
-| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.app.json                                                              | JSON               |         39 |          0 |          4 |         43 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.app.json                                                              | JSON               |         45 |          0 |          3 |         48 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.json                                                                  | JSON with Comments |          4 |          0 |          1 |          5 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.node.json                                                             | JSON               |         18 |          0 |          3 |         21 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vercel.json                                                                    | JSON               |         23 |          0 |          1 |         24 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.js                                                                 | JavaScript         |         43 |          0 |          1 |         44 |
 | c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.ts                                                                 | TypeScript         |         43 |          0 |          2 |         45 |
-| Total                                                                                                                                  |                    |     27,662 |      2,051 |      3,519 |     33,232 |
+| Total                                                                                                                                  |                    |     29,674 |      2,132 |      3,697 |     35,503 |
 +----------------------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

@@ -1,6 +1,7 @@
 import { onRequest } from 'firebase-functions/v2/https';
 import { emergencyCallBackendService } from './services/emergencyCallService';
 import { CallRequestPayload } from './types/voice';
+import { twilioCallWebhook } from './webhooks/twilioWebhook';
 
 export const initiateEmergencyCall = onRequest(
   { cors: true, secrets: ['TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN', 'TWILIO_PHONE_NUMBER'] },
@@ -27,3 +28,5 @@ export const initiateEmergencyCall = onRequest(
     }
   }
 );
+
+export { twilioCallWebhook };

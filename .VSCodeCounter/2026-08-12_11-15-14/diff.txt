@@ -1,0 +1,55 @@
+Date : 2026-08-12 11:15:14
+Directory : c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build
+Total : 15 files,  1260 codes, 66 comments, 146 blanks, all 1472 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript     |         13 |        847 |         22 |        117 |        986 |
+| TypeScript JSX |          1 |        240 |          6 |         17 |        263 |
+| Python         |          1 |        173 |         38 |         12 |        223 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                     | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                        |         15 |      1,260 |         66 |        146 |      1,472 |
+| . (Files)                                                                                                |          1 |        173 |         38 |         12 |        223 |
+| functions                                                                                                |          7 |        300 |          9 |         47 |        356 |
+| functions\src                                                                                            |          7 |        300 |          9 |         47 |        356 |
+| functions\src (Files)                                                                                    |          1 |         28 |          0 |          5 |         33 |
+| functions\src\providers                                                                                  |          1 |         95 |          0 |         14 |        109 |
+| functions\src\services                                                                                   |          3 |        113 |          8 |         17 |        138 |
+| functions\src\types                                                                                      |          1 |         43 |          0 |          6 |         49 |
+| functions\src\webhooks                                                                                   |          1 |         21 |          1 |          5 |         27 |
+| src                                                                                                      |          7 |        787 |         19 |         87 |        893 |
+| src\components                                                                                           |          1 |        240 |          6 |         17 |        263 |
+| src\components\Triage                                                                                    |          1 |        240 |          6 |         17 |        263 |
+| src\services                                                                                             |          2 |        284 |         13 |         32 |        329 |
+| src\tests                                                                                                |          3 |        215 |          0 |         31 |        246 |
+| src\types                                                                                                |          1 |         48 |          0 |          7 |         55 |
++----------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                 | language       | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py                                 | Python         |        173 |         38 |         12 |        223 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\index.ts                           | TypeScript     |         28 |          0 |          5 |         33 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\providers\voiceProvider.ts         | TypeScript     |         95 |          0 |         14 |        109 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\callStatusNormalizer.ts   | TypeScript     |         18 |          0 |          3 |         21 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\emergencyCallService.ts   | TypeScript     |         63 |          8 |         10 |         81 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\twimlGenerator.ts         | TypeScript     |         32 |          0 |          4 |         36 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\types\voice.ts                     | TypeScript     |         43 |          0 |          6 |         49 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\webhooks\twilioWebhook.ts          | TypeScript     |         21 |          1 |          5 |         27 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Triage\PR24SafetyGatePanel.tsx    | TypeScript JSX |        240 |          6 |         17 |        263 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyCallSafetyGateService.ts   | TypeScript     |        227 |         11 |         23 |        261 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyVoiceBackendClient.ts      | TypeScript     |         57 |          2 |          9 |         68 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\emergencyCallSafetyGateService.test.ts | TypeScript     |        119 |          0 |         15 |        134 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\emergencyVoiceBackend.test.ts          | TypeScript     |         65 |          0 |         12 |         77 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\pr26VoiceCall.test.ts                  | TypeScript     |         31 |          0 |          4 |         35 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\triage.ts                              | TypeScript     |         48 |          0 |          7 |         55 |
+| Total                                                                                                    |                |      1,260 |         66 |        146 |      1,472 |
++----------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
