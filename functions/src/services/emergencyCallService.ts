@@ -1,79 +1,75 @@
-import { CallRequestPayload, CallResponse } from '../types/voice';
-import { createVoiceProvider } from '../providers/voiceProvider';
-
-// Server-side state store for cooldowns and deduplication
-const processedRequests = new Set<string>();
-const recentPhoneCooldowns = new Map<string, number>();
-const COOLDOWN_MS = 300 * 1000; // 5 minute server-side hard enforce
+import twilio from 'twilio';
 
 export class EmergencyCallBackendService {
-  public async processCallRequest(payload: CallRequestPayload): Promise<CallResponse> {
-    // 1. Validate payload completeness
-    if (!payload || !payload.requestId || !payload.eventId || !payload.targetPhone) {
+  private twilioClient: any;
+  private fromNumber: string;
+  private isEnabled: boolean;
+
+  constructor() {
+    const accountSid = process.env.TWILIO_ACCOUNT_SID;
+    const authToken = process.env.TWILIO_AUTH_TOKEN;
+    this.fromNumber = process.env.TWILIO_PHONE_NUMBER || '';
+    this.isEnabled = process.env.ENABLE_REAL_CALLS === 'true';
+
+    if (accountSid && authToken) {
+      this.twilioClient = twilio(accountSid, authToken);
+    }
+  }
+
+  public async processCallRequest(payload: any) {
+    // Extract recipient phone number flexible way se
+    const targetPhone = 
+      payload.to || 
+      payload.phone || 
+      payload.recipientPhone || 
+      (payload.contacts && payload.contacts[0]?.phone) ||
+      (payload.contacts && payload.contacts[0]?.phoneNumber);
+
+    if (!targetPhone) {
       return {
         success: false,
         provider: 'MOCK',
         status: 'failed',
-        message: 'REJECTED: Malformed call request payload.',
-        timestamp: Date.now(),
+        message: 'REJECTED: Missing phone number in payload.',
+        timestamp: Date.now()
       };
     }
 
-    // 2. Strict Severity Validation
-    if (payload.severity !== 'CRITICAL') {
+    if (!this.isEnabled || !this.twilioClient) {
       return {
         success: false,
         provider: 'MOCK',
         status: 'failed',
-        message: `REJECTED: Non-CRITICAL severity level (${payload.severity}) cannot initiate voice calling.`,
-        timestamp: Date.now(),
+        message: 'Real calls disabled or Twilio credentials missing.',
+        timestamp: Date.now()
       };
     }
 
-    // 3. E.164 Phone Format Validation
-    const phoneRegex = /^\+[1-9]\d{1,14}$/;
-    if (!phoneRegex.test(payload.targetPhone)) {
+    try {
+      const webhookUrl = 'https://noexcuse-hpo-backend.onrender.com/api/twilio/webhook';
+      
+      const call = await this.twilioClient.calls.create({
+        url: webhookUrl,
+        to: targetPhone,
+        from: this.fromNumber
+      });
+
+      return {
+        success: true,
+        provider: 'TWILIO',
+        status: 'queued',
+        callSid: call.sid,
+        timestamp: Date.now()
+      };
+    } catch (error: any) {
       return {
         success: false,
-        provider: 'MOCK',
+        provider: 'TWILIO',
         status: 'failed',
-        message: 'REJECTED: Phone number must strictly follow E.164 format (e.g. +15550199).',
-        timestamp: Date.now(),
+        message: error.message || 'Twilio call dispatch failed',
+        timestamp: Date.now()
       };
     }
-
-    // 4. Duplicate Request Id Protection
-    if (processedRequests.has(payload.requestId)) {
-      return {
-        success: false,
-        provider: 'MOCK',
-        status: 'failed',
-        message: `REJECTED: Duplicate call request ID (${payload.requestId}).`,
-        timestamp: Date.now(),
-      };
-    }
-
-    // 5. Server-side Cooldown Enforcement
-    const lastCallTime = recentPhoneCooldowns.get(payload.targetPhone) || 0;
-    const now = Date.now();
-    if (now - lastCallTime < COOLDOWN_MS) {
-      const remainingSec = Math.ceil((COOLDOWN_MS - (now - lastCallTime)) / 1000);
-      return {
-        success: false,
-        provider: 'MOCK',
-        status: 'failed',
-        message: `REJECTED: Target number in active server cooldown (${remainingSec}s remaining).`,
-        timestamp: Date.now(),
-      };
-    }
-
-    // Record request execution
-    processedRequests.add(payload.requestId);
-    recentPhoneCooldowns.set(payload.targetPhone, now);
-
-    // 6. Execute Provider Call
-    const provider = createVoiceProvider();
-    return await provider.initiateCall(payload.targetPhone, payload.eventId, payload.reasonCode);
   }
 }
 
