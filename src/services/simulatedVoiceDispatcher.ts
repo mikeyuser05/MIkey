@@ -15,8 +15,12 @@ export interface VoiceCallDispatch {
 }
 
 export class SimulatedVoiceDispatcher {
+  // 🔥 Cooldown state variables added
+  private lastCallTimestamp: number = 0;
+  private readonly CALL_COOLDOWN_MS: number = 30000; // 30 seconds cooldown
+
   /**
-   * Generates a simulated voice call message payload and dispatches a backend call request.
+   * Generates a simulated voice call message payload and dispatches a backend call request if cooldown passed.
    */
   public generateSimulatedCall(
     evaluation: AlertEvaluationResult,
@@ -48,13 +52,24 @@ export class SimulatedVoiceDispatcher {
     console.log(`Voice Payload  : "${dispatch.messageText}"`);
     console.log('----------------------------------------------------');
 
-    // 🔥 Added fetch call to hit your backend API endpoint
+    // 🔥 Check if 30 seconds have passed since the last call
+    const now = Date.now();
+    if (now - this.lastCallTimestamp < this.CALL_COOLDOWN_MS) {
+      const remainingSec = Math.ceil((this.CALL_COOLDOWN_MS - (now - this.lastCallTimestamp)) / 1000);
+      console.log(`⏳ [CALL COOLDOWN ACTIVE] Call skipped. Next call allowed in ${remainingSec}s.`);
+      return dispatch; // Skips fetch and just returns the dispatch payload safely
+    }
+
+    // Cooldown passed, update timestamp for next check
+    this.lastCallTimestamp = now;
+
+    // Direct fetch call to backend API
     fetch('https://noexcuse-hpo-backend.onrender.com/api/emergency-call', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
-        to: contact.phone || '+916350375677', // Dynamically uses the contact's phone number
-        reason: evaluation.reason,
+        to: contact.phone || '+916350375677',
+        reason: evaluation.reason || 'Critical Emergency Alert',
         eventId: dispatch.id
       })
     })
