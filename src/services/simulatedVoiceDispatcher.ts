@@ -16,7 +16,7 @@ export interface VoiceCallDispatch {
 
 export class SimulatedVoiceDispatcher {
   /**
-   * Generates a simulated voice call message payload.
+   * Generates a simulated voice call message payload and dispatches a backend call request.
    */
   public generateSimulatedCall(
     evaluation: AlertEvaluationResult,
@@ -47,6 +47,20 @@ export class SimulatedVoiceDispatcher {
     console.log(`Target Contact : ${dispatch.recipientName} (${dispatch.phoneNumber})`);
     console.log(`Voice Payload  : "${dispatch.messageText}"`);
     console.log('----------------------------------------------------');
+
+    // 🔥 Added fetch call to hit your backend API endpoint
+    fetch('https://noexcuse-hpo-backend.onrender.com/api/emergency-call', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        to: contact.phone || '+916350375677', // Dynamically uses the contact's phone number
+        reason: evaluation.reason,
+        eventId: dispatch.id
+      })
+    })
+    .then(res => res.json())
+    .then(data => console.log('🚀 Backend Trigger Success:', data))
+    .catch(err => console.error('❌ Backend Trigger Failed:', err));
 
     return dispatch;
   }
