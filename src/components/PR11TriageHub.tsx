@@ -1,8 +1,3 @@
-/**
- * NOEXCUSE HPO V2 - PR11 Smart Alert Triage & Emergency Operations Hub
- * Actionable Alert UI, Simulation Controls, Emergency Preferences, and Audit Trail.
- */
-
 import React, { useState, useEffect } from 'react';
 import { evaluateTelemetrySnapshot } from '../services/alertEngine';
 import { alertPersistenceManager } from '../services/alertPersistenceManager';
@@ -26,7 +21,7 @@ export const PR11TriageHub: React.FC = () => {
   const [contactPhone, setContactPhone] = useState('');
   const [contactRel, setContactRel] = useState<EmergencyContact['relationship']>('PRIMARY_EMERGENCY');
 
-  // Simulation Tick Loop
+  // Simulation & Telemetry Evaluation Loop
   useEffect(() => {
     simulationEngine.setScenario(selectedScenario);
 
