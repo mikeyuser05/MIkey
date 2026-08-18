@@ -1,29 +1,29 @@
-import type { ReactElement } from 'react';
+import { useState, type ReactElement } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { cn } from '@utils/cn';
-import { useGlobalContext } from '@hooks/useGlobalContext';
 import { Sidebar } from './Sidebar';
 import { Navbar } from './Navbar';
 
 export function AppLayout(): ReactElement {
-  const context = useGlobalContext() as any;
-  const isSidebarCollapsed = context?.isSidebarCollapsed ?? false;
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-background-light dark:bg-background-dark">
-      <Sidebar />
+    /* h-screen & w-screen locks the viewport cleanly */
+    <div className="flex h-screen w-screen overflow-hidden bg-slate-950 text-slate-100">
+      
+      {/* 1. Sidebar (Desktop par left sticky, Mobile par overlay drawer) */}
+      <Sidebar
+        isOpen={isMobileSidebarOpen}
+        onClose={() => setIsMobileSidebarOpen(false)}
+      />
 
-      <div
-        className={cn(
-          'flex min-h-screen flex-col transition-[margin] duration-300 ease-out',
-          isSidebarCollapsed ? 'ml-0' : 'ml-0 lg:ml-[280px]'
-        )}
-      >
+      {/* 2. Main Content Wrapper (Occupies remaining width automatically without manual margins) */}
+      <div className="flex flex-1 flex-col h-full min-w-0 overflow-hidden">
         <Navbar />
-        <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
-          <AnimatePresence mode="popLayout" initial={false}>
+
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 bg-slate-950">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={location.pathname}
               initial={{ opacity: 0, y: 6 }}
@@ -36,6 +36,7 @@ export function AppLayout(): ReactElement {
           </AnimatePresence>
         </main>
       </div>
+
     </div>
   );
 }

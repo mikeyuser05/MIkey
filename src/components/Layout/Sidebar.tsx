@@ -1,100 +1,100 @@
-import { useState, type ReactElement } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { 
-  LayoutDashboard, Siren, Radio, WifiOff, FileText, Cpu, 
-  TrendingUp, Bell, Sliders, ChevronLeft, ChevronRight 
+import { ReactElement } from 'react';
+import { NavLink } from 'react-router-dom';
+import {
+  LayoutDashboard,
+  Siren,
+  Radio,
+  WifiOff,
+  FileText,
+  Cpu,
+  BarChart3,
+  Bell,
+  Settings,
+  X,
 } from 'lucide-react';
-import { MAIN_NAV_ITEMS, MODULE_NAV_ITEMS, type NavItem } from '@constants/routes.constants';
-import { cn } from '@utils/cn';
 
-const ICON_MAP: Record<string, React.ElementType> = {
-  LayoutDashboard, Siren, Radio, WifiOff, FileText, Cpu, TrendingUp, Bell, Sliders,
-};
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-export function Sidebar(): ReactElement {
-  // Local state to guarantee immediate collapse without context failure
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const location = useLocation();
-
-  const toggleSidebar = () => setIsCollapsed((prev) => !prev);
-
-  const renderNavItem = (item: NavItem) => {
-    const IconComponent = ICON_MAP[item.iconName] || LayoutDashboard;
-    const isActive = location.pathname === item.path;
-
-    return (
-      <NavLink
-        key={item.path}
-        to={item.path}
-        className={cn(
-          'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors',
-          isActive
-            ? 'bg-blue-600/10 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400'
-            : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
-        )}
-      >
-        <IconComponent className="h-5 w-5 shrink-0" />
-        <span>{item.label}</span>
-      </NavLink>
-    );
-  };
+export function Sidebar({ isOpen, onClose }: SidebarProps): ReactElement {
+  const navItems = [
+    { label: 'Dashboard', path: '/', icon: LayoutDashboard },
+    { label: 'Triage Hub', path: '/triage', icon: Siren },
+    { label: 'Command Center', path: '/command', icon: Radio },
+    { label: 'Offline Sync', path: '/offline-monitor', icon: WifiOff },
+    { label: 'Reports', path: '/reports', icon: FileText },
+    { label: 'Devices', path: '/devices', icon: Cpu },
+    { label: 'Analytics', path: '/analytics', icon: BarChart3 },
+    { label: 'Alerts', path: '/alerts', icon: Bell },
+    { label: 'Settings', path: '/settings', icon: Settings },
+  ];
 
   return (
     <>
-      {/* Middle Floating Toggle Arrow */}
-      <button
-        type="button"
-        onClick={toggleSidebar}
-        className={cn(
-          "fixed top-1/2 -translate-y-1/2 z-50 flex h-8 w-8 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-slate-200 shadow-2xl transition-all duration-300 hover:bg-slate-800 hover:text-white cursor-pointer",
-          isCollapsed ? "left-3" : "left-[264px]"
-        )}
-        aria-label="Toggle Navigation Sidebar"
-      >
-        {isCollapsed ? (
-          <ChevronRight className="h-5 w-5 text-blue-400" />
-        ) : (
-          <ChevronLeft className="h-5 w-5 text-slate-400" />
-        )}
-      </button>
+      {/* Mobile Backdrop (Only active on small screens when opened) */}
+      {isOpen && (
+        <div
+          onClick={onClose}
+          className="fixed inset-0 z-40 bg-slate-950/80 backdrop-blur-sm lg:hidden"
+        />
+      )}
 
-      {/* Main Collapsible Sliding Aside Drawer */}
+      {/* Sidebar Navigation */}
       <aside
-        className={cn(
-          'fixed left-0 top-0 z-40 flex h-screen w-[280px] flex-col border-r border-slate-800 bg-slate-950 transition-transform duration-300 ease-in-out',
-          isCollapsed ? '-translate-x-full' : 'translate-x-0'
-        )}
+        className={`fixed lg:static top-0 left-0 z-50 h-screen w-64 bg-slate-950 border-r border-slate-800/80 flex flex-col justify-between shrink-0 transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
       >
-        <div className="flex h-16 items-center justify-between px-4 border-b border-slate-800">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white">H</div>
-            <div>
-              <h1 className="text-sm font-bold text-white leading-tight">HPO V2</h1>
-              <p className="text-[10px] text-slate-400">Health Monitoring</p>
+        <div className="flex flex-col h-full overflow-y-auto">
+          {/* Header */}
+          <div className="flex items-center justify-between p-5 border-b border-slate-800/80 shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">
+                H
+              </div>
+              <div>
+                <h2 className="font-bold text-white text-sm tracking-wide">HPO V2</h2>
+                <p className="text-[10px] text-slate-400 font-medium">Health Monitoring</p>
+              </div>
             </div>
+            <button
+              onClick={onClose}
+              className="lg:hidden p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-900"
+            >
+              <X className="h-5 w-5" />
+            </button>
           </div>
-        </div>
 
-        <div className="flex-1 overflow-y-auto p-3 space-y-6">
-          <div>
-            <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500">Main</p>
-            <nav className="space-y-1">{MAIN_NAV_ITEMS.map(renderNavItem)}</nav>
-          </div>
-          <div>
-            <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500">Intelligence & Modules</p>
-            <nav className="space-y-1">{MODULE_NAV_ITEMS.map(renderNavItem)}</nav>
-          </div>
-        </div>
+          {/* Navigation Items */}
+          <nav className="p-3 space-y-1 flex-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium transition ${
+                      isActive
+                        ? 'bg-blue-600/15 text-blue-400 border border-blue-500/30'
+                        : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'
+                    }`
+                  }
+                >
+                  <Icon className="h-4 w-4" />
+                  <span>{item.label}</span>
+                </NavLink>
+              );
+            })}
+          </nav>
 
-        <div className="p-3 border-t border-slate-800">
-          <button
-            type="button"
-            onClick={toggleSidebar}
-            className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-slate-400 hover:bg-slate-800 hover:text-white transition-colors"
-          >
-            <ChevronLeft className="h-5 w-5" />
-            <span>Hide Sidebar</span>
-          </button>
+          {/* Version Footer */}
+          <div className="p-4 border-t border-slate-800/80 text-[10px] text-slate-500 font-mono text-center shrink-0">
+            LGN.8 PR34 MOBILE READY
+          </div>
         </div>
       </aside>
     </>

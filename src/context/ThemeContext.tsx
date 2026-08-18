@@ -7,7 +7,7 @@ import {
   type ReactElement,
   type ReactNode,
 } from 'react';
-import type { ThemeContextValue, ThemeMode } from '@app-types/theme.types';
+import type { ThemeContextValue, ThemeMode, ThemePalette } from '@app-types/theme.types';
 import { STORAGE_KEYS } from '@constants/app.constants';
 import { getStorageItem, setStorageItem } from '@utils/storage';
 
@@ -30,14 +30,26 @@ export function ThemeProvider({ children }: ThemeProviderProps): ReactElement {
   const [mode, setModeState] = useState<ThemeMode>(() =>
     getStorageItem<ThemeMode>(STORAGE_KEYS.THEME_MODE, 'system'),
   );
+  
+  // Secondary Palette State (Default: Cyber Blue)
+  const [palette, setPaletteState] = useState<ThemePalette>(() =>
+    getStorageItem<ThemePalette>('HPO_THEME_PALETTE', 'cyber'),
+  );
+
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() => resolveTheme(mode));
 
+  // Sync Light/Dark Class & Palette Class on <html> Root
   useEffect(() => {
     const root = window.document.documentElement;
     const next = resolveTheme(mode);
     setResolvedTheme(next);
+    
     root.classList.toggle('dark', next === 'dark');
-  }, [mode]);
+    
+    // Manage Palette Classes without overwriting dark mode
+    root.classList.remove('theme-cyber', 'theme-tactical', 'theme-clinical');
+    root.classList.add(`theme-${palette}`);
+  }, [mode, palette]);
 
   useEffect(() => {
     if (mode !== 'system') return undefined;
@@ -58,13 +70,18 @@ export function ThemeProvider({ children }: ThemeProviderProps): ReactElement {
     setStorageItem(STORAGE_KEYS.THEME_MODE, next);
   }, []);
 
+  const setPalette = useCallback((nextPalette: ThemePalette) => {
+    setPaletteState(nextPalette);
+    setStorageItem('HPO_THEME_PALETTE', nextPalette);
+  }, []);
+
   const toggleTheme = useCallback(() => {
     setMode(resolvedTheme === 'dark' ? 'light' : 'dark');
   }, [resolvedTheme, setMode]);
 
   const value = useMemo<ThemeContextValue>(
-    () => ({ mode, resolvedTheme, setMode, toggleTheme }),
-    [mode, resolvedTheme, setMode, toggleTheme],
+    () => ({ mode, resolvedTheme, palette, setMode, setPalette, toggleTheme }),
+    [mode, resolvedTheme, palette, setMode, setPalette, toggleTheme],
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

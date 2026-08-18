@@ -8,14 +8,25 @@ import { simulationEngine, SimulationScenario } from '../services/simulationEngi
 import { simulatedVoiceDispatcher } from '../services/simulatedVoiceDispatcher';
 import { auditLogger } from '../services/auditLogger';
 import { AlertEvaluationResult, EmergencyContact, AuditLogEntry } from '../types/pr11Triage';
+import { useTheme } from '@hooks/useTheme';
+import { useGlobalContext } from '@hooks/useGlobalContext';
 
 export const PR11TriageHub: React.FC = () => {
+  const { setPalette } = useTheme();
+  const globalContext = useGlobalContext() as any;
+
   const [selectedScenario, setSelectedScenario] = useState<SimulationScenario>('HEALTHY_BASELINE');
   const [activeEvaluations, setActiveEvaluations] = useState<AlertEvaluationResult[]>([]);
   const [currentState, setCurrentState] = useState(emergencyStateMachine.getState());
   const [preferences, setPreferences] = useState(emergencyPreferencesStore.getPreferences());
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(auditLogger.getLogs());
-  
+
+  // Auto-switch palette when Emergency state triggers
+  useEffect(() => {
+    if (currentState && (currentState.toString().toUpperCase().includes('CRITICAL') || currentState.toString().toUpperCase().includes('HAZARD'))) {
+      setPalette('tactical');
+    }
+  }, [currentState, setPalette]);
   // New Contact Form State
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
