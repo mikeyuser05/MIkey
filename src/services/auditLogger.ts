@@ -1,70 +1,49 @@
-/**
- * NOEXCUSE HPO V2 - Centralized Audit Trail Logger (PR11.9)
- * Records immutable history of state machine changes, policies, user actions, and simulated dispatches.
- */
+export interface AuditLogEntry {
+  id: string;
+  timestamp: string;
+  action: string;
+  severity: 'INFO' | 'WARNING' | 'CRITICAL';
+  actor: string;
+  details: string;
+}
 
-import { AuditLogEntry, AlertSeverity } from '../types/pr11Triage';
-
-const AUDIT_STORAGE_KEY = 'noexcuse_hpo_v2_audit_log';
+const AUDIT_STORAGE_KEY = 'HPO_AUDIT_LOGS_PR38';
 
 class AuditLogger {
-  private logEntries: AuditLogEntry[] = [];
+  private logs: AuditLogEntry[] = [];
 
   constructor() {
-    this.loadLogs();
+    const saved = localStorage.getItem(AUDIT_STORAGE_KEY);
+    this.logs = saved ? JSON.parse(saved) : [];
   }
 
-  public log(
-    eventType: AuditLogEntry['eventType'],
-    details: string,
-    severity: AlertSeverity = 'LOW',
-    nodeId: string = 'NODE_001',
-    simulated: boolean = false
-  ): AuditLogEntry {
-    const entry: AuditLogEntry = {
-      id: `AUDIT_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-      timestamp: Date.now(),
-      eventType,
-      details,
+  log(action: string, severity: 'INFO' | 'WARNING' | 'CRITICAL', details: string, actor = 'System Engine') {
+    const newEntry: AuditLogEntry = {
+      id: `AUD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      timestamp: new Date().toISOString(),
+      action,
       severity,
-      nodeId,
-      simulated
+      actor,
+      details,
     };
 
-    this.logEntries.unshift(entry); // Newest first
-    if (this.logEntries.length > 200) {
-      this.logEntries = this.logEntries.slice(0, 200); // Retain latest 200 logs
+    this.logs.unshift(newEntry);
+    
+    // Maintain max 100 entries for memory optimization
+    if (this.logs.length > 100) {
+      this.logs = this.logs.slice(0, 100);
     }
-    this.saveLogs();
-    return entry;
+
+    localStorage.setItem(AUDIT_STORAGE_KEY, JSON.stringify(this.logs));
   }
 
-  public getLogs(): AuditLogEntry[] {
-    return [...this.logEntries];
+  getLogs(): AuditLogEntry[] {
+    return [...this.logs];
   }
 
-  public clearLogs(): void {
-    this.logEntries = [];
-    this.saveLogs();
-  }
-
-  private loadLogs(): void {
-    try {
-      const stored = localStorage.getItem(AUDIT_STORAGE_KEY);
-      if (stored) {
-        this.logEntries = JSON.parse(stored);
-      }
-    } catch (e) {
-      console.warn('Failed to load audit logs', e);
-    }
-  }
-
-  private saveLogs(): void {
-    try {
-      localStorage.setItem(AUDIT_STORAGE_KEY, JSON.stringify(this.logEntries));
-    } catch (e) {
-      console.error('Failed to save audit logs', e);
-    }
+  clearLogs(): void {
+    this.logs = [];
+    localStorage.removeItem(AUDIT_STORAGE_KEY);
   }
 }
 

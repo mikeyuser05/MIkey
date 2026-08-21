@@ -1,349 +1,284 @@
-#!/usr/bin/env python3
 import os
-import sys
 
-# Deterministic File Map for PR30 - PR33 Roadmap Execution
-files = {
-    # --------------------------------------------------------------------------
-    # PR30.0 / PR30.1: Telemetry Data Buffer & Types (Strict Non-Synthetic)
-    # --------------------------------------------------------------------------
-    "src/types/telemetry.ts": '''export interface TelemetryData {
-  timestamp: number;
-  heartRate: number;      // BPM
-  spo2: number;           // %
-  gasPpm: number;         // MQ-9 Gas PPM
-  steps?: number;
-  temperature?: number;   // Ambient / Skin
-  rssi?: number;
-  batteryVoltage?: number;
+# 1. CSS Injection for Palette Styles
+css_override = '''
+/* PR35 Emergency Palette Styles */
+html[data-theme='tactical'] {
+  --color-primary: #ef4444;
+  --bg-surface: #0f172a;
+  filter: hue-rotate(-140deg) saturate(1.2);
 }
 
-export interface TelemetryBufferPoint {
-  timeLabel: string;
-  timestamp: number;
-  heartRate: number;
-  spo2: number;
-  gasPpm: number;
+html[data-theme='emerald'] {
+  --color-primary: #10b981;
+  --bg-surface: #064e3b;
+  filter: hue-rotate(80deg) saturate(1.1);
 }
 
-export interface AnomalyIndicator {
-  id: string;
-  metric: 'heartRate' | 'spo2' | 'gasPpm';
-  severity: 'WARNING' | 'CRITICAL';
-  message: string;
-  durationSeconds: number;
-  timestamp: number;
-}
-''',
-
-    "src/services/telemetryBuffer.ts": '''import { TelemetryData, TelemetryBufferPoint } from '../types/telemetry';
-
-/**
- * 60-Second Rolling Window Telemetry Buffer
- * Manages live samples without memory leaks, synthetic data, or redundant state triggers.
- */
-export class TelemetryBuffer {
-  private buffer: TelemetryBufferPoint[] = [];
-  private readonly maxWindowMs: number;
-
-  constructor(windowSeconds: number = 60) {
-    this.maxWindowMs = windowSeconds * 1000;
-  }
-
-  public push(sample: TelemetryData): TelemetryBufferPoint[] {
-    if (!sample || typeof sample.timestamp !== 'number') {
-      return this.buffer;
-    }
-
-    const now = sample.timestamp;
-    const dateObj = new Date(now);
-    const timeLabel = dateObj.toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
-
-    const point: TelemetryBufferPoint = {
-      timeLabel,
-      timestamp: now,
-      heartRate: Number.isFinite(sample.heartRate) ? sample.heartRate : 0,
-      spo2: Number.isFinite(sample.spo2) ? sample.spo2 : 0,
-      gasPpm: Number.isFinite(sample.gasPpm) ? sample.gasPpm : 0,
-    };
-
-    this.buffer.push(point);
-
-    // Evict items older than rolling window cutoff
-    const cutoff = now - this.maxWindowMs;
-    while (this.buffer.length > 0 && this.buffer[0].timestamp < cutoff) {
-      this.buffer.shift();
-    }
-
-    return [...this.buffer];
-  }
-
-  public getSnapshot(): TelemetryBufferPoint[] {
-    return [...this.buffer];
-  }
-
-  public clear(): void {
-    this.buffer = [];
-  }
-}
-''',
-
-    # --------------------------------------------------------------------------
-    # PR30.2: Analytics Anomaly Engine (Independent from Emergency Gate)
-    # --------------------------------------------------------------------------
-    "src/services/analyticsEngine.ts": '''import { TelemetryBufferPoint, AnomalyIndicator } from '../types/telemetry';
-
-export class AnalyticsEngine {
-  private static HR_HIGH_THRESHOLD = 120; // BPM
-  private static SPO2_LOW_THRESHOLD = 92;  // %
-  private static GAS_HIGH_THRESHOLD = 300; // PPM
-
-  private static hrHighStart: number | null = null;
-  private static spo2LowStart: number | null = null;
-  private static gasHighStart: number | null = null;
-
-  /**
-   * Evaluates persistent anomalies over time.
-   * NOTE: Anomaly indicators are purely informative for visual analytics.
-   * Emergency safety gating is strictly maintained separately by PR26 Emergency Service.
-   */
-  public static evaluateTrends(buffer: TelemetryBufferPoint[]): AnomalyIndicator[] {
-    const anomalies: AnomalyIndicator[] = [];
-    if (buffer.length === 0) return anomalies;
-
-    const latest = buffer[buffer.length - 1];
-
-    // 1. Persistent High Heart Rate Evaluation
-    if (latest.heartRate > this.HR_HIGH_THRESHOLD) {
-      if (!this.hrHighStart) this.hrHighStart = latest.timestamp;
-      const durationSec = Math.floor((latest.timestamp - this.hrHighStart) / 1000);
-      if (durationSec >= 10) {
-        anomalies.push({
-          id: 'hr-high-persistent',
-          metric: 'heartRate',
-          severity: latest.heartRate > 140 ? 'CRITICAL' : 'WARNING',
-          message: `Persistent High HR (${latest.heartRate} BPM)`,
-          durationSeconds: durationSec,
-          timestamp: latest.timestamp,
-        });
-      }
-    } else {
-      this.hrHighStart = null;
-    }
-
-    // 2. Persistent Low SpO2 Evaluation
-    if (latest.spo2 > 0 && latest.spo2 < this.SPO2_LOW_THRESHOLD) {
-      if (!this.spo2LowStart) this.spo2LowStart = latest.timestamp;
-      const durationSec = Math.floor((latest.timestamp - this.spo2LowStart) / 1000);
-      if (durationSec >= 8) {
-        anomalies.push({
-          id: 'spo2-low-persistent',
-          metric: 'spo2',
-          severity: latest.spo2 < 88 ? 'CRITICAL' : 'WARNING',
-          message: `Persistent Low Oxygen Saturation (${latest.spo2}%)`,
-          durationSeconds: durationSec,
-          timestamp: latest.timestamp,
-        });
-      }
-    } else {
-      this.spo2LowStart = null;
-    }
-
-    // 3. Persistent Environmental Gas Elevation
-    if (latest.gasPpm > this.GAS_HIGH_THRESHOLD) {
-      if (!this.gasHighStart) this.gasHighStart = latest.timestamp;
-      const durationSec = Math.floor((latest.timestamp - this.gasHighStart) / 1000);
-      if (durationSec >= 5) {
-        anomalies.push({
-          id: 'gas-high-persistent',
-          metric: 'gasPpm',
-          severity: latest.gasPpm > 600 ? 'CRITICAL' : 'WARNING',
-          message: `Hazardous Gas Level Detected (${latest.gasPpm} PPM)`,
-          durationSeconds: durationSec,
-          timestamp: latest.timestamp,
-        });
-      }
-    } else {
-      this.gasHighStart = null;
-    }
-
-    return anomalies;
-  }
-}
-''',
-
-    # --------------------------------------------------------------------------
-    # PR30.3: Telemetry Data Export Service (CSV / JSON)
-    # --------------------------------------------------------------------------
-    "src/services/telemetryExport.ts": '''import { TelemetryBufferPoint } from '../types/telemetry';
-
-export class TelemetryExporter {
-  public static exportToCSV(data: TelemetryBufferPoint[], filenamePrefix: string = 'hpo_telemetry'): void {
-    if (!data || data.length === 0) {
-      alert('No telemetry data available to export.');
-      return;
-    }
-
-    const headers = ['Timestamp', 'ISO Time', 'Heart Rate (BPM)', 'SpO2 (%)', 'MQ-9 Gas (PPM)'];
-    const rows = data.map(pt => [
-      pt.timestamp,
-      new Date(pt.timestamp).toISOString(),
-      pt.heartRate,
-      pt.spo2,
-      pt.gasPpm
-    ]);
-
-    const csvContent = [
-      headers.join(','),
-      ...rows.map(row => row.join(','))
-    ].join('\n');
-
-    this.downloadFile(csvContent, `${filenamePrefix}_${Date.now()}.csv`, 'text/csv;charset=utf-8;');
-  }
-
-  public static exportToJSON(data: TelemetryBufferPoint[], filenamePrefix: string = 'hpo_telemetry'): void {
-    if (!data || data.length === 0) {
-      alert('No telemetry data available to export.');
-      return;
-    }
-
-    const jsonContent = JSON.stringify(data, null, 2);
-    this.downloadFile(jsonContent, `${filenamePrefix}_${Date.now()}.json`, 'application/json');
-  }
-
-  private static downloadFile(content: string, fileName: string, mimeType: string): void {
-    const blob = new Blob([content], { type: mimeType });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.setAttribute('href', url);
-    link.setAttribute('download', fileName);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  }
-}
-''',
-
-    # --------------------------------------------------------------------------
-    # PR31.0: GPS / Location Types & Helper (Zero Fake Coordinates)
-    # --------------------------------------------------------------------------
-    "src/types/location.ts": '''export interface LocationData {
-  latitude: number;
-  longitude: number;
-  accuracy: number | null; // meters
-  timestamp: number;
-  source: 'gps' | 'network' | 'manual';
-  valid: boolean;
-}
-
-export interface MapLinkOptions {
-  latitude: number;
-  longitude: number;
-}
-
-export class LocationValidator {
-  public static isValidCoordinate(lat: number, lng: number): boolean {
-    if (typeof lat !== 'number' || typeof lng !== 'number') return false;
-    if (Number.isNaN(lat) || Number.isNaN(lng)) return false;
-    // Reject 0,0 default invalid fix
-    if (lat === 0 && lng === 0) return false;
-    return lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
-  }
-
-  public static isStale(timestamp: number, maxAgeMs: number = 120000): boolean {
-    if (!timestamp) return true;
-    return (Date.now() - timestamp) > maxAgeMs;
-  }
-
-  public static generateGoogleMapsUrl(lat: number, lng: number): string | null {
-    if (!this.isValidCoordinate(lat, lng)) return null;
-    return `https://maps.google.com/?q=${lat.toFixed(6)},${lng.toFixed(6)}`;
-  }
-}
-''',
-
-    # --------------------------------------------------------------------------
-    # PR32: System Observability & Health Service
-    # --------------------------------------------------------------------------
-    "src/services/systemHealthService.ts": '''export interface SystemHealthStatus {
-  telemetryStream: 'LIVE' | 'STALE' | 'OFFLINE';
-  firebaseConnection: 'CONNECTED' | 'RECONNECTING' | 'DISCONNECTED';
-  alertEngineStatus: 'ACTIVE' | 'STANDBY';
-  backendApiStatus: 'ONLINE' | 'DEGRADED' | 'OFFLINE';
-  twilioCallingReady: boolean;
-  lastTelemetryTimestamp: number | null;
-}
-
-export class SystemHealthService {
-  public static evaluateHealth(
-    lastTelemetryTs: number | null,
-    isFirebaseConnected: boolean,
-    isBackendAlive: boolean
-  ): SystemHealthStatus {
-    const now = Date.now();
-    let telemetryStreamStatus: 'LIVE' | 'STALE' | 'OFFLINE' = 'OFFLINE';
-
-    if (lastTelemetryTs) {
-      const ageSec = (now - lastTelemetryTs) / 1000;
-      if (ageSec <= 15) telemetryStreamStatus = 'LIVE';
-      else if (ageSec <= 60) telemetryStreamStatus = 'STALE';
-      else telemetryStreamStatus = 'OFFLINE';
-    }
-
-    return {
-      telemetryStream: telemetryStreamStatus,
-      firebaseConnection: isFirebaseConnected ? 'CONNECTED' : 'DISCONNECTED',
-      alertEngineStatus: 'ACTIVE',
-      backendApiStatus: isBackendAlive ? 'ONLINE' : 'OFFLINE',
-      twilioCallingReady: isBackendAlive,
-      lastTelemetryTimestamp: lastTelemetryTs,
-    };
-  }
+html[data-theme='cyber'] {
+  filter: none;
 }
 '''
+
+# 2. Updated Navbar logic with actual DOM Theme Switching
+navbar_code = '''import type { ReactElement } from 'react';
+import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import {
+  Menu,
+  Moon,
+  Sun,
+  Bell,
+  UserCircle,
+  Search,
+  ChevronRight,
+  LogOut,
+  Settings,
+  User,
+  CheckCircle2,
+  AlertTriangle,
+  Info,
+  Palette,
+} from 'lucide-react';
+import { useGlobalContext } from '@hooks/useGlobalContext';
+import { useTheme } from '@hooks/useTheme';
+import { IconButton } from '@components/ui/IconButton';
+import { Dropdown, DropdownItem, DropdownSeparator } from '@components/ui/Dropdown';
+import { Badge } from '@components/ui/Badge';
+import { buildBreadcrumbs } from '@utils/breadcrumbs';
+import { logout } from '@services/firebase/authService';
+import { ROUTES } from '@constants/routes.constants';
+import { cn } from '@utils/cn';
+
+interface NotificationItem {
+  id: string;
+  title: string;
+  time: string;
+  severity: 'info' | 'success' | 'warning';
 }
 
-def main():
-    print("==========================================================")
-    print(" NOEXCUSE HPO V2 — PR30-PR33 Deterministic File Generator ")
-    print("==========================================================")
+const MOCK_NOTIFICATIONS: NotificationItem[] = [
+  { id: 'n1', title: 'Device reconnected to mesh', time: '2m ago', severity: 'success' },
+  { id: 'n2', title: 'Ambient gas reading elevated', time: '18m ago', severity: 'warning' },
+  { id: 'n3', title: 'Firmware check completed', time: '1h ago', severity: 'info' },
+];
 
-    created_count = 0
-    updated_count = 0
-    skipped_count = 0
+const NOTIFICATION_ICON = {
+  info: Info,
+  success: CheckCircle2,
+  warning: AlertTriangle,
+} as const;
 
-    for path, content in files.items():
-        dir_name = os.path.dirname(path)
-        if dir_name and not os.path.exists(dir_name):
-            os.makedirs(dir_name, exist_ok=True)
+export function Navbar(): ReactElement {
+  const { setMobileSidebarOpen = () => {} } = useGlobalContext() as any;
+  const { resolvedTheme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState('');
+  const [activePalette, setActivePalette] = useState('Cyber Dark');
+  const breadcrumbs = buildBreadcrumbs(location.pathname);
 
-        if os.path.exists(path):
-            with open(path, "r", encoding="utf-8") as f:
-                existing_content = f.read()
-            if existing_content == content.strip():
-                print(f"SKIPPED (Unchanged): {path}")
-                skipped_count += 1
-                continue
-            else:
-                with open(path, "w", encoding="utf-8") as f:
-                    f.write(content.strip() + "\n")
-                print(f"UPDATED: {path}")
-                updated_count += 1
-        else:
-            with open(path, "w", encoding="utf-8") as f:
-                f.write(content.strip() + "\n")
-            print(f"CREATED: {path}")
-            created_count += 1
+  const applyPaletteToDOM = (palette: string) => {
+    const root = document.documentElement;
+    if (palette === 'Tactical Red') {
+      root.setAttribute('data-theme', 'tactical');
+    } else if (palette === 'Clinical Emerald') {
+      root.setAttribute('data-theme', 'emerald');
+    } else {
+      root.setAttribute('data-theme', 'cyber');
+    }
+  };
 
-    print("----------------------------------------------------------")
-    print(f"Summary: Created {created_count}, Updated {updated_count}, Skipped {skipped_count}")
-    print("System architecture preserved successfully.")
-    print("==========================================================")
+  const handleSelectPalette = (themeName: string) => {
+    setActivePalette(themeName);
+    applyPaletteToDOM(themeName);
+    toast.success(`Theme Applied: ${themeName}`);
+  };
+
+  const handleLogout = async (): Promise<void> => {
+    try {
+      await logout();
+      toast.success('Signed out successfully');
+      navigate(ROUTES.LOGIN, { replace: true });
+    } catch {
+      toast.error('Unable to sign out. Please try again.');
+    }
+  };
+
+  return (
+    <header className="sticky top-0 z-20 flex h-16 flex-col justify-center gap-1 border-b border-border-light bg-surface-light/80 px-4 backdrop-blur dark:border-border-dark dark:bg-surface-dark/80 sm:px-6">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex min-w-0 flex-1 items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setMobileSidebarOpen(true)}
+            className="focus-ring shrink-0 rounded-lg p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 lg:hidden"
+            aria-label="Open sidebar"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+
+          <nav aria-label="Breadcrumb" className="hidden min-w-0 items-center gap-1 sm:flex">
+            {breadcrumbs.map((crumb, index) => {
+              const isLast = index === breadcrumbs.length - 1;
+              return (
+                <span key={crumb.path} className="flex items-center gap-1">
+                  {index > 0 && (
+                    <ChevronRight className="h-3.5 w-3.5 text-slate-300 dark:text-slate-600" />
+                  )}
+                  {isLast ? (
+                    <Link to="/dashboard" className="flex items-center gap-2 focus-ring rounded truncate">
+                      <span className="truncate text-sm font-semibold text-slate-900 dark:text-slate-100 hover:text-slate-700 dark:hover:text-slate-200">
+                        {crumb.label}
+                      </span>
+                    </Link>
+                  ) : (
+                    <Link
+                      to={crumb.path}
+                      className="focus-ring truncate rounded text-sm font-medium text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                    >
+                      {crumb.label}
+                    </Link>
+                  )}
+                </span>
+              );
+            })}
+          </nav>
+
+          <div className="relative ml-2 hidden max-w-xs flex-1 md:block">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <input
+              type="search"
+              value={searchValue}
+              onChange={(event) => setSearchValue(event.target.value)}
+              placeholder="Search vitals, devices, events…"
+              className="focus-ring w-full rounded-xl border border-border-light bg-slate-50 py-2 pl-9 pr-3 text-sm text-slate-700 placeholder:text-slate-400 dark:border-border-dark dark:bg-slate-900/60 dark:text-slate-200"
+              aria-label="Search dashboard"
+            />
+          </div>
+        </div>
+
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+          {/* PR35 Palette Selector Dropdown */}
+          <Dropdown
+            align="right"
+            trigger={({ toggle, isOpen }) => (
+              <IconButton
+                icon={<Palette className="h-5 w-5 text-sky-400" />}
+                aria-label="Theme Palette Menu"
+                active={isOpen}
+                onClick={toggle}
+              />
+            )}
+          >
+            {({ close }) => (
+              <div className="py-2 w-56 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl">
+                <div className="px-3 py-1 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                  PR35 Theme Switcher
+                </div>
+                <DropdownSeparator />
+                {[
+                  { name: 'Cyber Dark', desc: 'Default Cyan' },
+                  { name: 'Tactical Red', desc: 'Emergency High-Contrast' },
+                  { name: 'Clinical Emerald', desc: 'Medical Monitoring' },
+                ].map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={() => {
+                      handleSelectPalette(item.name);
+                      close();
+                    }}
+                    className={`w-full text-left px-4 py-2 hover:bg-slate-800 transition-colors flex flex-col ${
+                      activePalette === item.name ? 'border-l-2 border-sky-400 bg-slate-850' : ''
+                    }`}
+                  >
+                    <span className="text-sm font-medium text-slate-200">{item.name}</span>
+                    <span className="text-[10px] text-slate-400">{item.desc}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </Dropdown>
+
+          <IconButton
+            icon={
+              resolvedTheme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />
+            }
+            aria-label="Toggle theme"
+            onClick={toggleTheme}
+          />
+
+          {/* User Account Dropdown */}
+          <Dropdown
+            align="right"
+            trigger={({ toggle, isOpen }) => (
+              <button
+                type="button"
+                onClick={toggle}
+                className={cn(
+                  'focus-ring flex items-center gap-2 rounded-lg p-1.5 text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800',
+                  isOpen && 'bg-slate-100 dark:bg-slate-800',
+                )}
+                aria-label="Account menu"
+              >
+                <UserCircle className="h-6 w-6" />
+                <span className="hidden text-sm font-medium sm:block">Guest</span>
+              </button>
+            )}
+          >
+            {({ close }) => (
+              <div className="py-1.5">
+                <DropdownItem
+                  icon={<User className="h-4 w-4" />}
+                  label="Profile"
+                  onClick={() => close()}
+                />
+                <DropdownItem
+                  icon={<Settings className="h-4 w-4" />}
+                  label="Preferences"
+                  onClick={() => {
+                    close();
+                    navigate('/settings');
+                  }}
+                />
+                <DropdownSeparator />
+                <DropdownItem
+                  icon={<LogOut className="h-4 w-4" />}
+                  label="Sign out"
+                  danger
+                  onClick={() => {
+                    close();
+                    void handleLogout();
+                  }}
+                />
+              </div>
+            )}
+          </Dropdown>
+        </div>
+      </div>
+    </header>
+  );
+}
+'''
+
+# Apply files
+def apply():
+    # 1. Update Navbar
+    nav_path = "src/components/Navbar.tsx"
+    if not os.path.exists(nav_path):
+        nav_path = "src/components/layout/Navbar.tsx"
+    
+    with open(nav_path, "w", encoding="utf-8") as f:
+        f.write(navbar_code.strip() + "\n")
+    print(f"✅ Updated Navbar DOM theme logic: {nav_path}")
+
+    # 2. Append CSS variables to index.css
+    css_path = "src/index.css"
+    if os.path.exists(css_path):
+        with open(css_path, "a", encoding="utf-8") as f:
+            f.write(css_override)
+        print(f"✅ Injected Palette Theme Rules: {css_path}")
 
 if __name__ == "__main__":
-    main()
+    apply()

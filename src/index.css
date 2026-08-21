@@ -51,3 +51,20 @@
     @apply outline-none ring-primary-500/50 focus-visible:ring-2;
   }
 }
+
+/* PR35 Emergency Palette Styles */
+html[data-theme='tactical'] {
+  --color-primary: #ef4444;
+  --bg-surface: #0f172a;
+  filter: hue-rotate(-140deg) saturate(1.2);
+}
+
+html[data-theme='emerald'] {
+  --color-primary: #10b981;
+  --bg-surface: #064e3b;
+  filter: hue-rotate(80deg) saturate(1.1);
+}
+
+html[data-theme='cyber'] {
+  filter: none;
+}

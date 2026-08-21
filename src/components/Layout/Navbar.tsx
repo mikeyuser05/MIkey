@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import {
@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   AlertTriangle,
   Info,
+  Palette,
 } from 'lucide-react';
 import { useGlobalContext } from '@hooks/useGlobalContext';
 import { useTheme } from '@hooks/useTheme';
@@ -52,7 +53,25 @@ export function Navbar(): ReactElement {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
+  const [activePalette, setActivePalette] = useState('Cyber Dark');
   const breadcrumbs = buildBreadcrumbs(location.pathname);
+
+  const applyPaletteToDOM = (palette: string) => {
+    const root = document.documentElement;
+    if (palette === 'Tactical Red') {
+      root.setAttribute('data-theme', 'tactical');
+    } else if (palette === 'Clinical Emerald') {
+      root.setAttribute('data-theme', 'emerald');
+    } else {
+      root.setAttribute('data-theme', 'cyber');
+    }
+  };
+
+  const handleSelectPalette = (themeName: string) => {
+    setActivePalette(themeName);
+    applyPaletteToDOM(themeName);
+    toast.success(`Theme Applied: ${themeName}`);
+  };
 
   const handleLogout = async (): Promise<void> => {
     try {
@@ -77,7 +96,7 @@ export function Navbar(): ReactElement {
             <Menu className="h-5 w-5" />
           </button>
 
-                   <nav aria-label="Breadcrumb" className="hidden min-w-0 items-center gap-1 sm:flex">
+          <nav aria-label="Breadcrumb" className="hidden min-w-0 items-center gap-1 sm:flex">
             {breadcrumbs.map((crumb, index) => {
               const isLast = index === breadcrumbs.length - 1;
               return (
@@ -118,11 +137,46 @@ export function Navbar(): ReactElement {
         </div>
 
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-          <IconButton
-            icon={<Search className="h-5 w-5" />}
-            aria-label="Search"
-            className="md:hidden"
-          />
+          {/* PR35 Palette Selector Dropdown */}
+          <Dropdown
+            align="right"
+            trigger={({ toggle, isOpen }) => (
+              <IconButton
+                icon={<Palette className="h-5 w-5 text-sky-400" />}
+                aria-label="Theme Palette Menu"
+                active={isOpen}
+                onClick={toggle}
+              />
+            )}
+          >
+            {({ close }) => (
+              <div className="py-2 w-56 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl">
+                <div className="px-3 py-1 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                  PR35 Theme Switcher
+                </div>
+                <DropdownSeparator />
+                {[
+                  { name: 'Cyber Dark', desc: 'Default Cyan' },
+                  { name: 'Tactical Red', desc: 'Emergency High-Contrast' },
+                  { name: 'Clinical Emerald', desc: 'Medical Monitoring' },
+                ].map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={() => {
+                      handleSelectPalette(item.name);
+                      close();
+                    }}
+                    className={`w-full text-left px-4 py-2 hover:bg-slate-800 transition-colors flex flex-col ${
+                      activePalette === item.name ? 'border-l-2 border-sky-400 bg-slate-850' : ''
+                    }`}
+                  >
+                    <span className="text-sm font-medium text-slate-200">{item.name}</span>
+                    <span className="text-[10px] text-slate-400">{item.desc}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </Dropdown>
 
           <IconButton
             icon={
@@ -132,65 +186,7 @@ export function Navbar(): ReactElement {
             onClick={toggleTheme}
           />
 
-          <Dropdown
-            align="right"
-            trigger={({ toggle, isOpen }) => (
-              <IconButton
-                icon={<Bell className="h-5 w-5" />}
-                aria-label="Notifications"
-                active={isOpen}
-                onClick={toggle}
-                className="relative"
-              />
-            )}
-          >
-            {({ close }) => (
-              <div className="flex flex-col">
-                <div className="flex items-center justify-between border-b border-border-light px-4 py-3 dark:border-border-dark">
-                  <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                    Notifications
-                  </p>
-                  <Badge variant="primary">{MOCK_NOTIFICATIONS.length} new</Badge>
-                </div>
-                <div className="max-h-72 overflow-y-auto">
-                  {MOCK_NOTIFICATIONS.map((notification) => {
-                    const Icon = NOTIFICATION_ICON[notification.severity];
-                    return (
-                      <button
-                        key={notification.id}
-                        type="button"
-                        onClick={close}
-                        className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-slate-100 dark:hover:bg-slate-800"
-                      >
-                        <span
-                          className={cn(
-                            'mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full',
-                            notification.severity === 'success' &&
-                              'bg-status-success/10 text-emerald-600 dark:text-emerald-400',
-                            notification.severity === 'warning' &&
-                              'bg-status-warning/10 text-amber-600 dark:text-amber-400',
-                            notification.severity === 'info' &&
-                              'bg-status-info/10 text-blue-600 dark:text-blue-400',
-                          )}
-                        >
-                          <Icon className="h-3.5 w-3.5" strokeWidth={2.5} />
-                        </span>
-                        <span className="flex-1">
-                          <span className="block text-sm font-medium text-slate-800 dark:text-slate-100">
-                            {notification.title}
-                          </span>
-                          <span className="mt-0.5 block text-xs text-slate-400 dark:text-slate-500">
-                            {notification.time}
-                          </span>
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </Dropdown>
-
+          {/* User Account Dropdown */}
           <Dropdown
             align="right"
             trigger={({ toggle, isOpen }) => (
@@ -213,17 +209,14 @@ export function Navbar(): ReactElement {
                 <DropdownItem
                   icon={<User className="h-4 w-4" />}
                   label="Profile"
-                  onClick={() => {
-                    close();
-                    toast('Profile settings are coming in a future PR.', { icon: '🚧' });
-                  }}
+                  onClick={() => close()}
                 />
                 <DropdownItem
                   icon={<Settings className="h-4 w-4" />}
                   label="Preferences"
                   onClick={() => {
                     close();
-                    toast('Preferences are coming in a future PR.', { icon: '🚧' });
+                    navigate('/settings');
                   }}
                 />
                 <DropdownSeparator />
