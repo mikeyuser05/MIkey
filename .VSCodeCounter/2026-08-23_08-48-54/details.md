@@ -1,35 +1,17 @@
 # Details
 
-Date : 2026-08-06 23:20:56
+Date : 2026-08-23 08:48:54
 
-Directory c:\\Users\\HP\\Downloads\\NO-EXCUSE\\Dashboard\\Current Build
+Directory c:\\Users\\HP\\Downloads\\NO-EXCUSE\\Dashboard\\Current Build\\src
 
-Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
+Total : 437 files,  21693 codes, 2136 comments, 3657 blanks, all 27486 lines
 
 [Summary](results.md) / Details / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
 
 ## Files
 | filename | language | code | comment | blank | total |
 | :--- | :--- | ---: | ---: | ---: | ---: |
-| [.github/workflows/ci.yml](/.github/workflows/ci.yml) | YAML | 25 | 0 | 9 | 34 |
-| [.prettierrc.json](/.prettierrc.json) | JSON | 11 | 0 | 1 | 12 |
-| [README.md](/README.md) | Markdown | 133 | 0 | 24 | 157 |
-| [build\_project.py](/build_project.py) | Python | 98 | 0 | 23 | 121 |
-| [check\_files.py](/check_files.py) | Python | 9 | 0 | 1 | 10 |
-| [docs/API\_REFERENCE.md](/docs/API_REFERENCE.md) | Markdown | 22 | 0 | 6 | 28 |
-| [docs/ARCHITECTURE.md](/docs/ARCHITECTURE.md) | Markdown | 20 | 0 | 4 | 24 |
-| [docs/DEVELOPMENT\_GUIDE.md](/docs/DEVELOPMENT_GUIDE.md) | Markdown | 23 | 0 | 9 | 32 |
-| [eslint.config.js](/eslint.config.js) | JavaScript | 31 | 0 | 2 | 33 |
-| [firebase.json](/firebase.json) | JSON | 16 | 0 | 1 | 17 |
-| [get\_paths.py](/get_paths.py) | Python | 14 | 4 | 6 | 24 |
-| [index.html](/index.html) | HTML | 18 | 0 | 1 | 19 |
-| [package-lock.json](/package-lock.json) | JSON | 7,138 | 0 | 1 | 7,139 |
-| [package.json](/package.json) | JSON | 55 | 0 | 1 | 56 |
-| [postcss.config.js](/postcss.config.js) | JavaScript | 6 | 0 | 1 | 7 |
-| [public/favicon.svg](/public/favicon.svg) | XML | 4 | 0 | 1 | 5 |
-| [public/manifest.json](/public/manifest.json) | JSON | 17 | 0 | 1 | 18 |
-| [public/sw.js](/public/sw.js) | JavaScript | 53 | 0 | 5 | 58 |
-| [src/App.tsx](/src/App.tsx) | TypeScript JSX | 66 | 10 | 15 | 91 |
+| [src/App.tsx](/src/App.tsx) | TypeScript JSX | 66 | 10 | 14 | 90 |
 | [src/assets/images/logo.svg](/src/assets/images/logo.svg) | XML | 5 | 0 | 1 | 6 |
 | [src/charts/AreaChart.tsx](/src/charts/AreaChart.tsx) | TypeScript JSX | 32 | 0 | 2 | 34 |
 | [src/charts/ChartCard.tsx](/src/charts/ChartCard.tsx) | TypeScript JSX | 24 | 0 | 1 | 25 |
@@ -38,14 +20,16 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/charts/ChartLegend.tsx](/src/charts/ChartLegend.tsx) | TypeScript JSX | 12 | 0 | 1 | 13 |
 | [src/charts/GaugeChart.tsx](/src/charts/GaugeChart.tsx) | TypeScript JSX | 28 | 0 | 2 | 30 |
 | [src/charts/LineChart.tsx](/src/charts/LineChart.tsx) | TypeScript JSX | 32 | 0 | 2 | 34 |
-| [src/components/Layout/AppLayout.tsx](/src/components/Layout/AppLayout.tsx) | TypeScript JSX | 38 | 0 | 5 | 43 |
-| [src/components/Layout/Navbar.tsx](/src/components/Layout/Navbar.tsx) | TypeScript JSX | 234 | 0 | 13 | 247 |
-| [src/components/Layout/Sidebar.tsx](/src/components/Layout/Sidebar.tsx) | TypeScript JSX | 101 | 3 | 8 | 112 |
+| [src/components/Layout/AppLayout.tsx](/src/components/Layout/AppLayout.tsx) | TypeScript JSX | 34 | 3 | 7 | 44 |
+| [src/components/Layout/Navbar.tsx](/src/components/Layout/Navbar.tsx) | TypeScript JSX | 224 | 2 | 14 | 240 |
+| [src/components/Layout/Sidebar.tsx](/src/components/Layout/Sidebar.tsx) | TypeScript JSX | 91 | 5 | 6 | 102 |
 | [src/components/Mobile/MobileBottomBar.tsx](/src/components/Mobile/MobileBottomBar.tsx) | TypeScript JSX | 43 | 0 | 4 | 47 |
-| [src/components/PR11TriageHub.tsx](/src/components/PR11TriageHub.tsx) | TypeScript JSX | 244 | 11 | 27 | 282 |
+| [src/components/PR11TriageHub.tsx](/src/components/PR11TriageHub.tsx) | TypeScript JSX | 253 | 8 | 26 | 287 |
 | [src/components/PR14HardwareLab.tsx](/src/components/PR14HardwareLab.tsx) | TypeScript JSX | 92 | 6 | 14 | 112 |
 | [src/components/PR15MultiNodeCommandCenter.tsx](/src/components/PR15MultiNodeCommandCenter.tsx) | TypeScript JSX | 112 | 9 | 15 | 136 |
 | [src/components/PR16OfflineSyncMonitor.tsx](/src/components/PR16OfflineSyncMonitor.tsx) | TypeScript JSX | 111 | 4 | 14 | 129 |
+| [src/components/Settings.tsx](/src/components/Settings.tsx) | TypeScript JSX | 64 | 2 | 7 | 73 |
+| [src/components/Triage/PR24SafetyGatePanel.tsx](/src/components/Triage/PR24SafetyGatePanel.tsx) | TypeScript JSX | 240 | 6 | 17 | 263 |
 | [src/components/analytics/HistoricalChart.tsx](/src/components/analytics/HistoricalChart.tsx) | TypeScript JSX | 2 | 0 | 0 | 2 |
 | [src/components/analytics/OptimizedTelemetryChart.tsx](/src/components/analytics/OptimizedTelemetryChart.tsx) | TypeScript JSX | 83 | 0 | 7 | 90 |
 | [src/components/analytics/RealtimeChartWrapper.tsx](/src/components/analytics/RealtimeChartWrapper.tsx) | TypeScript JSX | 63 | 0 | 5 | 68 |
@@ -54,6 +38,7 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/components/common/ErrorBoundary.tsx](/src/components/common/ErrorBoundary.tsx) | TypeScript JSX | 49 | 0 | 9 | 58 |
 | [src/components/common/LoadingScreen.tsx](/src/components/common/LoadingScreen.tsx) | TypeScript JSX | 35 | 0 | 5 | 40 |
 | [src/components/common/ProtectedRoute.tsx](/src/components/common/ProtectedRoute.tsx) | TypeScript JSX | 19 | 0 | 6 | 25 |
+| [src/components/common/SystemHealthWidget.tsx](/src/components/common/SystemHealthWidget.tsx) | TypeScript JSX | 71 | 7 | 9 | 87 |
 | [src/components/dashboard/AlarmCard.tsx](/src/components/dashboard/AlarmCard.tsx) | TypeScript JSX | 37 | 0 | 3 | 40 |
 | [src/components/dashboard/BatteryCard.tsx](/src/components/dashboard/BatteryCard.tsx) | TypeScript JSX | 19 | 0 | 2 | 21 |
 | [src/components/dashboard/ConnectionCard.tsx](/src/components/dashboard/ConnectionCard.tsx) | TypeScript JSX | 23 | 0 | 2 | 25 |
@@ -72,6 +57,7 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/components/dashboard/TemperatureCard.tsx](/src/components/dashboard/TemperatureCard.tsx) | TypeScript JSX | 19 | 0 | 2 | 21 |
 | [src/components/dashboard/VitalCard.tsx](/src/components/dashboard/VitalCard.tsx) | TypeScript JSX | 106 | 0 | 12 | 118 |
 | [src/components/dashboard/index.ts](/src/components/dashboard/index.ts) | TypeScript | 14 | 0 | 1 | 15 |
+| [src/components/profile/PatientProfileCard.tsx](/src/components/profile/PatientProfileCard.tsx) | TypeScript JSX | 65 | 2 | 4 | 71 |
 | [src/components/profile/UserProfilePanel.tsx](/src/components/profile/UserProfilePanel.tsx) | TypeScript JSX | 2 | 0 | 0 | 2 |
 | [src/components/shared/ErrorBoundary.tsx](/src/components/shared/ErrorBoundary.tsx) | TypeScript JSX | 19 | 0 | 1 | 20 |
 | [src/components/shared/ToastContainer.tsx](/src/components/shared/ToastContainer.tsx) | TypeScript JSX | 29 | 0 | 3 | 32 |
@@ -85,7 +71,7 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/components/ui/IconButton.tsx](/src/components/ui/IconButton.tsx) | TypeScript JSX | 49 | 0 | 6 | 55 |
 | [src/components/ui/Modal.tsx](/src/components/ui/Modal.tsx) | TypeScript JSX | 106 | 0 | 13 | 119 |
 | [src/components/ui/PageHeader.tsx](/src/components/ui/PageHeader.tsx) | TypeScript JSX | 33 | 0 | 4 | 37 |
-| [src/components/ui/ProductionErrorBoundary.tsx](/src/components/ui/ProductionErrorBoundary.tsx) | TypeScript JSX | 31 | 0 | 5 | 36 |
+| [src/components/ui/ProductionErrorBoundary.tsx](/src/components/ui/ProductionErrorBoundary.tsx) | TypeScript JSX | 39 | 0 | 7 | 46 |
 | [src/components/ui/SectionHeader.tsx](/src/components/ui/SectionHeader.tsx) | TypeScript JSX | 35 | 0 | 4 | 39 |
 | [src/components/ui/Skeleton.tsx](/src/components/ui/Skeleton.tsx) | TypeScript JSX | 42 | 0 | 6 | 48 |
 | [src/components/ui/SkeletonCard.tsx](/src/components/ui/SkeletonCard.tsx) | TypeScript JSX | 2 | 0 | 0 | 2 |
@@ -103,7 +89,7 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/context/ChartBufferRegistryContext.tsx](/src/context/ChartBufferRegistryContext.tsx) | TypeScript JSX | 4 | 0 | 0 | 4 |
 | [src/context/GlobalContext.tsx](/src/context/GlobalContext.tsx) | TypeScript JSX | 61 | 2 | 12 | 75 |
 | [src/context/HealthProfileContext.tsx](/src/context/HealthProfileContext.tsx) | TypeScript JSX | 47 | 4 | 10 | 61 |
-| [src/context/ThemeContext.tsx](/src/context/ThemeContext.tsx) | TypeScript JSX | 58 | 0 | 14 | 72 |
+| [src/context/ThemeContext.tsx](/src/context/ThemeContext.tsx) | TypeScript JSX | 67 | 3 | 18 | 88 |
 | [src/data/mockDashboardData.ts](/src/data/mockDashboardData.ts) | TypeScript | 167 | 0 | 12 | 179 |
 | [src/engine/ChartBuffer.ts](/src/engine/ChartBuffer.ts) | TypeScript | 17 | 0 | 2 | 19 |
 | [src/engine/DataWindow.ts](/src/engine/DataWindow.ts) | TypeScript | 12 | 0 | 3 | 15 |
@@ -122,7 +108,8 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/hooks/useSpO2Chart.ts](/src/hooks/useSpO2Chart.ts) | TypeScript | 26 | 0 | 4 | 30 |
 | [src/hooks/useStepsChart.ts](/src/hooks/useStepsChart.ts) | TypeScript | 22 | 0 | 3 | 25 |
 | [src/hooks/useTheme.ts](/src/hooks/useTheme.ts) | TypeScript | 10 | 0 | 4 | 14 |
-| [src/index.css](/src/index.css) | PostCSS | 43 | 0 | 11 | 54 |
+| [src/hooks/useValidatedTelemetry.ts](/src/hooks/useValidatedTelemetry.ts) | TypeScript | 13 | 0 | 4 | 17 |
+| [src/index.css](/src/index.css) | PostCSS | 56 | 1 | 14 | 71 |
 | [src/intelligence/activity/classifiers/activityClassifier.ts](/src/intelligence/activity/classifiers/activityClassifier.ts) | TypeScript | 26 | 7 | 4 | 37 |
 | [src/intelligence/activity/config/activityConfig.ts](/src/intelligence/activity/config/activityConfig.ts) | TypeScript | 36 | 0 | 2 | 38 |
 | [src/intelligence/activity/engine/activityEngine.ts](/src/intelligence/activity/engine/activityEngine.ts) | TypeScript | 33 | 15 | 9 | 57 |
@@ -220,15 +207,18 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/intelligence/types/health.ts](/src/intelligence/types/health.ts) | TypeScript | 19 | 4 | 3 | 26 |
 | [src/main.tsx](/src/main.tsx) | TypeScript JSX | 9 | 0 | 2 | 11 |
 | [src/pages/Alerts/AlertsPage.tsx](/src/pages/Alerts/AlertsPage.tsx) | TypeScript JSX | 53 | 0 | 5 | 58 |
-| [src/pages/Analytics/AnalyticsPage.tsx](/src/pages/Analytics/AnalyticsPage.tsx) | TypeScript JSX | 67 | 1 | 9 | 77 |
+| [src/pages/Analytics/AnalyticsPage.tsx](/src/pages/Analytics/AnalyticsPage.tsx) | TypeScript JSX | 176 | 7 | 13 | 196 |
 | [src/pages/Auth/LoginPage.tsx](/src/pages/Auth/LoginPage.tsx) | TypeScript JSX | 99 | 0 | 8 | 107 |
-| [src/pages/Dashboard.tsx](/src/pages/Dashboard.tsx) | TypeScript JSX | 118 | 8 | 13 | 139 |
-| [src/pages/Dashboard/DashboardPage.tsx](/src/pages/Dashboard/DashboardPage.tsx) | TypeScript JSX | 77 | 7 | 13 | 97 |
+| [src/pages/Dashboard.tsx](/src/pages/Dashboard.tsx) | TypeScript JSX | 116 | 8 | 13 | 137 |
+| [src/pages/Dashboard/DashboardPage.tsx](/src/pages/Dashboard/DashboardPage.tsx) | TypeScript JSX | 61 | 0 | 7 | 68 |
 | [src/pages/Devices/DevicesPage.tsx](/src/pages/Devices/DevicesPage.tsx) | TypeScript JSX | 43 | 0 | 3 | 46 |
 | [src/pages/HealthCheck.tsx](/src/pages/HealthCheck.tsx) | TypeScript JSX | 95 | 0 | 11 | 106 |
 | [src/pages/NotFound.tsx](/src/pages/NotFound.tsx) | TypeScript JSX | 23 | 0 | 2 | 25 |
 | [src/pages/NotFound/NotFoundPage.tsx](/src/pages/NotFound/NotFoundPage.tsx) | TypeScript JSX | 58 | 0 | 5 | 63 |
+| [src/pages/Settings.tsx](/src/pages/Settings.tsx) | TypeScript JSX | 64 | 2 | 7 | 73 |
+| [src/pages/Settings/Settings.tsx](/src/pages/Settings/Settings.tsx) | TypeScript JSX | 64 | 2 | 7 | 73 |
 | [src/pages/Settings/SettingsPage.tsx](/src/pages/Settings/SettingsPage.tsx) | TypeScript JSX | 22 | 0 | 2 | 24 |
+| [src/pages/Settings/index.tsx](/src/pages/Settings/index.tsx) | TypeScript JSX | 64 | 2 | 7 | 73 |
 | [src/repositories/AuthenticationRepository.ts](/src/repositories/AuthenticationRepository.ts) | TypeScript | 3 | 0 | 0 | 3 |
 | [src/repositories/HistoricalRepository.ts](/src/repositories/HistoricalRepository.ts) | TypeScript | 2 | 0 | 0 | 2 |
 | [src/repositories/telemetryRepository.ts](/src/repositories/telemetryRepository.ts) | TypeScript | 46 | 10 | 10 | 66 |
@@ -244,25 +234,28 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/services/aiSafety.ts](/src/services/aiSafety.ts) | TypeScript | 34 | 10 | 11 | 55 |
 | [src/services/alertEngine.ts](/src/services/alertEngine.ts) | TypeScript | 105 | 9 | 14 | 128 |
 | [src/services/alertPersistenceManager.ts](/src/services/alertPersistenceManager.ts) | TypeScript | 80 | 12 | 19 | 111 |
+| [src/services/analyticsEngine.ts](/src/services/analyticsEngine.ts) | TypeScript | 63 | 8 | 9 | 80 |
 | [src/services/analyticsPipeline.ts](/src/services/analyticsPipeline.ts) | TypeScript | 67 | 12 | 10 | 89 |
 | [src/services/analyticsStorage.ts](/src/services/analyticsStorage.ts) | TypeScript | 35 | 16 | 9 | 60 |
 | [src/services/anomalyEngine.ts](/src/services/anomalyEngine.ts) | TypeScript | 75 | 11 | 12 | 98 |
 | [src/services/api.service.ts](/src/services/api.service.ts) | TypeScript | 54 | 2 | 13 | 69 |
-| [src/services/auditLogger.ts](/src/services/auditLogger.ts) | TypeScript | 56 | 4 | 12 | 72 |
+| [src/services/auditLogger.ts](/src/services/auditLogger.ts) | TypeScript | 39 | 1 | 11 | 51 |
 | [src/services/baselineEngine.ts](/src/services/baselineEngine.ts) | TypeScript | 56 | 15 | 14 | 85 |
 | [src/services/baseline/baselineCollector.ts](/src/services/baseline/baselineCollector.ts) | TypeScript | 92 | 4 | 20 | 116 |
 | [src/services/baseline/baselineEngine.ts](/src/services/baseline/baselineEngine.ts) | TypeScript | 124 | 19 | 27 | 170 |
-| [src/services/baseline/baselineRepository.ts](/src/services/baseline/baselineRepository.ts) | TypeScript | 75 | 4 | 14 | 93 |
+| [src/services/baseline/baselineRepository.ts](/src/services/baseline/baselineRepository.ts) | TypeScript | 83 | 5 | 16 | 104 |
 | [src/services/baseline/normalRangeEngine.ts](/src/services/baseline/normalRangeEngine.ts) | TypeScript | 59 | 14 | 13 | 86 |
-| [src/services/chatQAService.ts](/src/services/chatQAService.ts) | TypeScript | 71 | 13 | 13 | 97 |
+| [src/services/chatQAService.ts](/src/services/chatQAService.ts) | TypeScript | 66 | 5 | 14 | 85 |
 | [src/services/context/contextEngine.ts](/src/services/context/contextEngine.ts) | TypeScript | 43 | 14 | 11 | 68 |
 | [src/services/conversationHistoryManager.ts](/src/services/conversationHistoryManager.ts) | TypeScript | 26 | 14 | 9 | 49 |
 | [src/services/dailyAggregator.ts](/src/services/dailyAggregator.ts) | TypeScript | 102 | 20 | 23 | 145 |
 | [src/services/dailyRecordManager.ts](/src/services/dailyRecordManager.ts) | TypeScript | 73 | 22 | 15 | 110 |
 | [src/services/deviation/deviationEngine.ts](/src/services/deviation/deviationEngine.ts) | TypeScript | 116 | 8 | 20 | 144 |
+| [src/services/emergencyCallSafetyGateService.ts](/src/services/emergencyCallSafetyGateService.ts) | TypeScript | 227 | 11 | 23 | 261 |
 | [src/services/emergencyPolicyEngine.ts](/src/services/emergencyPolicyEngine.ts) | TypeScript | 66 | 14 | 11 | 91 |
 | [src/services/emergencyPreferencesStore.ts](/src/services/emergencyPreferencesStore.ts) | TypeScript | 63 | 5 | 16 | 84 |
 | [src/services/emergencyStateMachine.ts](/src/services/emergencyStateMachine.ts) | TypeScript | 101 | 19 | 25 | 145 |
+| [src/services/emergencyVoiceBackendClient.ts](/src/services/emergencyVoiceBackendClient.ts) | TypeScript | 57 | 2 | 9 | 68 |
 | [src/services/escalation/acknowledgmentService.ts](/src/services/escalation/acknowledgmentService.ts) | TypeScript | 42 | 8 | 9 | 59 |
 | [src/services/escalation/connectivityMonitor.ts](/src/services/escalation/connectivityMonitor.ts) | TypeScript | 25 | 4 | 9 | 38 |
 | [src/services/escalation/dispatchEngine.ts](/src/services/escalation/dispatchEngine.ts) | TypeScript | 61 | 11 | 17 | 89 |
@@ -282,6 +275,7 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/services/healthQueryAnalyzer.ts](/src/services/healthQueryAnalyzer.ts) | TypeScript | 64 | 10 | 12 | 86 |
 | [src/services/healthTimeline.ts](/src/services/healthTimeline.ts) | TypeScript | 51 | 17 | 13 | 81 |
 | [src/services/intelligenceOrchestrator.ts](/src/services/intelligenceOrchestrator.ts) | TypeScript | 82 | 16 | 15 | 113 |
+| [src/services/intelligenceReport.ts](/src/services/intelligenceReport.ts) | TypeScript | 55 | 4 | 8 | 67 |
 | [src/services/localAIReadinessEngine.ts](/src/services/localAIReadinessEngine.ts) | TypeScript | 37 | 8 | 6 | 51 |
 | [src/services/longTermHealthModel.ts](/src/services/longTermHealthModel.ts) | TypeScript | 73 | 7 | 11 | 91 |
 | [src/services/medicalDisclaimerLayer.ts](/src/services/medicalDisclaimerLayer.ts) | TypeScript | 36 | 4 | 10 | 50 |
@@ -292,11 +286,13 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/services/multiPeriodAggregator.ts](/src/services/multiPeriodAggregator.ts) | TypeScript | 106 | 18 | 24 | 148 |
 | [src/services/notification.service.ts](/src/services/notification.service.ts) | TypeScript | 32 | 1 | 7 | 40 |
 | [src/services/offlineSyncEngine.ts](/src/services/offlineSyncEngine.ts) | TypeScript | 101 | 6 | 21 | 128 |
-| [src/services/pipeline/healthIntelligencePipeline.ts](/src/services/pipeline/healthIntelligencePipeline.ts) | TypeScript | 60 | 13 | 12 | 85 |
+| [src/services/patientProfileStore.ts](/src/services/patientProfileStore.ts) | TypeScript | 38 | 0 | 7 | 45 |
+| [src/services/pipeline/healthIntelligencePipeline.ts](/src/services/pipeline/healthIntelligencePipeline.ts) | TypeScript | 67 | 10 | 14 | 91 |
 | [src/services/pipeline/predictivePipeline.ts](/src/services/pipeline/predictivePipeline.ts) | TypeScript | 35 | 13 | 11 | 59 |
 | [src/services/pr5HealthIntelligenceModule.ts](/src/services/pr5HealthIntelligenceModule.ts) | TypeScript | 16 | 10 | 6 | 32 |
 | [src/services/predictive/predictiveEngine.ts](/src/services/predictive/predictiveEngine.ts) | TypeScript | 125 | 11 | 26 | 162 |
 | [src/services/privacyExport.ts](/src/services/privacyExport.ts) | TypeScript | 82 | 13 | 17 | 112 |
+| [src/services/productionHardening.ts](/src/services/productionHardening.ts) | TypeScript | 39 | 2 | 8 | 49 |
 | [src/services/productionValidation.ts](/src/services/productionValidation.ts) | TypeScript | 94 | 8 | 14 | 116 |
 | [src/services/profile/profileRepository.ts](/src/services/profile/profileRepository.ts) | TypeScript | 78 | 19 | 16 | 113 |
 | [src/services/profile/profileValidator.ts](/src/services/profile/profileValidator.ts) | TypeScript | 96 | 13 | 16 | 125 |
@@ -307,12 +303,16 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/services/risk/riskEngine.ts](/src/services/risk/riskEngine.ts) | TypeScript | 79 | 8 | 15 | 102 |
 | [src/services/secureSharingController.ts](/src/services/secureSharingController.ts) | TypeScript | 36 | 4 | 9 | 49 |
 | [src/services/semanticRetriever.ts](/src/services/semanticRetriever.ts) | TypeScript | 30 | 10 | 7 | 47 |
-| [src/services/simulatedVoiceDispatcher.ts](/src/services/simulatedVoiceDispatcher.ts) | TypeScript | 40 | 7 | 9 | 56 |
+| [src/services/simulatedVoiceDispatcher.ts](/src/services/simulatedVoiceDispatcher.ts) | TypeScript | 61 | 11 | 13 | 85 |
 | [src/services/simulatedVoiceDispatcherPR12.ts](/src/services/simulatedVoiceDispatcherPR12.ts) | TypeScript | 51 | 4 | 8 | 63 |
 | [src/services/simulationEngine.ts](/src/services/simulationEngine.ts) | TypeScript | 115 | 4 | 18 | 137 |
-| [src/services/sqi/sqiEngine.ts](/src/services/sqi/sqiEngine.ts) | TypeScript | 77 | 4 | 17 | 98 |
-| [src/services/sqi/sqiFilter.ts](/src/services/sqi/sqiFilter.ts) | TypeScript | 35 | 11 | 12 | 58 |
+| [src/services/sqi/sqiEngine.ts](/src/services/sqi/sqiEngine.ts) | TypeScript | 78 | 4 | 16 | 98 |
+| [src/services/sqi/sqiFilter.ts](/src/services/sqi/sqiFilter.ts) | TypeScript | 21 | 3 | 9 | 33 |
 | [src/services/structuredContextRetriever.ts](/src/services/structuredContextRetriever.ts) | TypeScript | 35 | 9 | 8 | 52 |
+| [src/services/systemHealthService.ts](/src/services/systemHealthService.ts) | TypeScript | 32 | 0 | 4 | 36 |
+| [src/services/telemetryBuffer.ts](/src/services/telemetryBuffer.ts) | TypeScript | 39 | 5 | 11 | 55 |
+| [src/services/telemetryExport.ts](/src/services/telemetryExport.ts) | TypeScript | 41 | 0 | 7 | 48 |
+| [src/services/telemetryValidator.ts](/src/services/telemetryValidator.ts) | TypeScript | 37 | 2 | 9 | 48 |
 | [src/services/telephony.service.ts](/src/services/telephony.service.ts) | TypeScript | 51 | 9 | 7 | 67 |
 | [src/services/trendEngine.ts](/src/services/trendEngine.ts) | TypeScript | 103 | 16 | 22 | 141 |
 | [src/services/trend/trendEngine.ts](/src/services/trend/trendEngine.ts) | TypeScript | 98 | 10 | 20 | 128 |
@@ -330,14 +330,17 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/telemetry/utils/validation.ts](/src/telemetry/utils/validation.ts) | TypeScript | 23 | 9 | 5 | 37 |
 | [src/tests/baselineCollector.test.ts](/src/tests/baselineCollector.test.ts) | TypeScript | 45 | 0 | 9 | 54 |
 | [src/tests/baselineEngine.test.ts](/src/tests/baselineEngine.test.ts) | TypeScript | 59 | 3 | 9 | 71 |
-| [src/tests/contextEngine.test.ts](/src/tests/contextEngine.test.ts) | TypeScript | 35 | 4 | 9 | 48 |
+| [src/tests/contextEngine.test.ts](/src/tests/contextEngine.test.ts) | TypeScript | 35 | 5 | 8 | 48 |
 | [src/tests/deviationEngine.test.ts](/src/tests/deviationEngine.test.ts) | TypeScript | 57 | 3 | 9 | 69 |
 | [src/tests/dispatchEngine.test.ts](/src/tests/dispatchEngine.test.ts) | TypeScript | 51 | 3 | 13 | 67 |
+| [src/tests/emergencyCallSafetyGateService.test.ts](/src/tests/emergencyCallSafetyGateService.test.ts) | TypeScript | 119 | 0 | 15 | 134 |
+| [src/tests/emergencyVoiceBackend.test.ts](/src/tests/emergencyVoiceBackend.test.ts) | TypeScript | 65 | 0 | 12 | 77 |
 | [src/tests/escalationPipeline.test.ts](/src/tests/escalationPipeline.test.ts) | TypeScript | 46 | 3 | 12 | 61 |
 | [src/tests/failSafeRouter.test.ts](/src/tests/failSafeRouter.test.ts) | TypeScript | 48 | 3 | 13 | 64 |
 | [src/tests/healthIntelligencePipeline.test.ts](/src/tests/healthIntelligencePipeline.test.ts) | TypeScript | 50 | 4 | 13 | 67 |
 | [src/tests/healthProfile.test.ts](/src/tests/healthProfile.test.ts) | TypeScript | 30 | 1 | 6 | 37 |
 | [src/tests/normalRangeEngine.test.ts](/src/tests/normalRangeEngine.test.ts) | TypeScript | 45 | 0 | 7 | 52 |
+| [src/tests/pr26VoiceCall.test.ts](/src/tests/pr26VoiceCall.test.ts) | TypeScript | 31 | 0 | 4 | 35 |
 | [src/tests/predictiveEngine.test.ts](/src/tests/predictiveEngine.test.ts) | TypeScript | 62 | 3 | 12 | 77 |
 | [src/tests/predictivePipeline.test.ts](/src/tests/predictivePipeline.test.ts) | TypeScript | 53 | 5 | 13 | 71 |
 | [src/tests/profileValidator.test.ts](/src/tests/profileValidator.test.ts) | TypeScript | 59 | 3 | 7 | 69 |
@@ -386,6 +389,7 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/types/aiContext.ts](/src/types/aiContext.ts) | TypeScript | 27 | 4 | 7 | 38 |
 | [src/types/aiContracts.ts](/src/types/aiContracts.ts) | TypeScript | 24 | 4 | 5 | 33 |
 | [src/types/aiConversation.ts](/src/types/aiConversation.ts) | TypeScript | 33 | 4 | 6 | 43 |
+| [src/types/alertState.ts](/src/types/alertState.ts) | TypeScript | 11 | 0 | 1 | 12 |
 | [src/types/analytics.ts](/src/types/analytics.ts) | TypeScript | 35 | 4 | 7 | 46 |
 | [src/types/anomaly.ts](/src/types/anomaly.ts) | TypeScript | 21 | 3 | 4 | 28 |
 | [src/types/api.types.ts](/src/types/api.types.ts) | TypeScript | 32 | 0 | 4 | 36 |
@@ -400,23 +404,25 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/types/dispatch.ts](/src/types/dispatch.ts) | TypeScript | 25 | 4 | 6 | 35 |
 | [src/types/escalationPipeline.ts](/src/types/escalationPipeline.ts) | TypeScript | 13 | 4 | 4 | 21 |
 | [src/types/export.ts](/src/types/export.ts) | TypeScript | 16 | 3 | 5 | 24 |
-| [src/types/failsafe.ts](/src/types/failsafe.ts) | TypeScript | 14 | 4 | 4 | 22 |
+| [src/types/failsafe.ts](/src/types/failsafe.ts) | TypeScript | 18 | 4 | 3 | 25 |
 | [src/types/global.types.ts](/src/types/global.types.ts) | TypeScript | 32 | 1 | 11 | 44 |
 | [src/types/healthHistory.ts](/src/types/healthHistory.ts) | TypeScript | 93 | 4 | 12 | 109 |
 | [src/types/healthProfile.ts](/src/types/healthProfile.ts) | TypeScript | 39 | 4 | 8 | 51 |
 | [src/types/history.types.ts](/src/types/history.types.ts) | TypeScript | 2 | 0 | 0 | 2 |
 | [src/types/intelligencePipeline.ts](/src/types/intelligencePipeline.ts) | TypeScript | 23 | 4 | 5 | 32 |
+| [src/types/location.ts](/src/types/location.ts) | TypeScript | 28 | 1 | 5 | 34 |
 | [src/types/longTermHealth.ts](/src/types/longTermHealth.ts) | TypeScript | 22 | 4 | 4 | 30 |
 | [src/types/multiDevice.ts](/src/types/multiDevice.ts) | TypeScript | 16 | 3 | 4 | 23 |
-| [src/types/normalRange.ts](/src/types/normalRange.ts) | TypeScript | 12 | 4 | 3 | 19 |
+| [src/types/normalRange.ts](/src/types/normalRange.ts) | TypeScript | 24 | 4 | 3 | 31 |
 | [src/types/notifications.types.ts](/src/types/notifications.types.ts) | TypeScript | 7 | 0 | 1 | 8 |
 | [src/types/personalization.ts](/src/types/personalization.ts) | TypeScript | 13 | 3 | 3 | 19 |
 | [src/types/pipeline.ts](/src/types/pipeline.ts) | TypeScript | 14 | 4 | 3 | 21 |
-| [src/types/pr11Triage.ts](/src/types/pr11Triage.ts) | TypeScript | 76 | 4 | 10 | 90 |
+| [src/types/pr11Triage.ts](/src/types/pr11Triage.ts) | TypeScript | 78 | 5 | 10 | 93 |
 | [src/types/pr12Geo.ts](/src/types/pr12Geo.ts) | TypeScript | 25 | 3 | 4 | 32 |
 | [src/types/pr14Simulator.ts](/src/types/pr14Simulator.ts) | TypeScript | 28 | 3 | 4 | 35 |
 | [src/types/pr15Fleet.ts](/src/types/pr15Fleet.ts) | TypeScript | 22 | 3 | 5 | 30 |
 | [src/types/pr16Offline.ts](/src/types/pr16Offline.ts) | TypeScript | 15 | 3 | 4 | 22 |
+| [src/types/pr36Patient.ts](/src/types/pr36Patient.ts) | TypeScript | 17 | 0 | 1 | 18 |
 | [src/types/predictive.ts](/src/types/predictive.ts) | TypeScript | 19 | 4 | 5 | 28 |
 | [src/types/profile.ts](/src/types/profile.ts) | TypeScript | 33 | 4 | 8 | 45 |
 | [src/types/recovery.ts](/src/types/recovery.ts) | TypeScript | 22 | 3 | 4 | 29 |
@@ -424,11 +430,14 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/types/riskScore.ts](/src/types/riskScore.ts) | TypeScript | 22 | 4 | 5 | 31 |
 | [src/types/secureSharing.ts](/src/types/secureSharing.ts) | TypeScript | 14 | 3 | 3 | 20 |
 | [src/types/semanticRetrieval.ts](/src/types/semanticRetrieval.ts) | TypeScript | 22 | 4 | 5 | 31 |
-| [src/types/sqi.ts](/src/types/sqi.ts) | TypeScript | 23 | 4 | 5 | 32 |
+| [src/types/sqi.ts](/src/types/sqi.ts) | TypeScript | 26 | 4 | 5 | 35 |
+| [src/types/telemetry.ts](/src/types/telemetry.ts) | TypeScript | 25 | 0 | 3 | 28 |
 | [src/types/telephony.types.ts](/src/types/telephony.types.ts) | TypeScript | 29 | 0 | 5 | 34 |
-| [src/types/theme.types.ts](/src/types/theme.types.ts) | TypeScript | 7 | 2 | 2 | 11 |
+| [src/types/theme.types.ts](/src/types/theme.types.ts) | TypeScript | 10 | 3 | 2 | 15 |
+| [src/types/threatMatrix.ts](/src/types/threatMatrix.ts) | TypeScript | 1 | 0 | 0 | 1 |
 | [src/types/trend.ts](/src/types/trend.ts) | TypeScript | 18 | 4 | 4 | 26 |
 | [src/types/trends.ts](/src/types/trends.ts) | TypeScript | 19 | 3 | 5 | 27 |
+| [src/types/triage.ts](/src/types/triage.ts) | TypeScript | 48 | 0 | 7 | 55 |
 | [src/types/user.types.ts](/src/types/user.types.ts) | TypeScript | 16 | 0 | 3 | 19 |
 | [src/utils/breadcrumbs.ts](/src/utils/breadcrumbs.ts) | TypeScript | 28 | 0 | 7 | 35 |
 | [src/utils/chartColors.ts](/src/utils/chartColors.ts) | TypeScript | 18 | 0 | 3 | 21 |
@@ -439,13 +448,5 @@ Total : 436 files,  28004 codes, 2089 comments, 3556 blanks, all 33649 lines
 | [src/utils/logger.ts](/src/utils/logger.ts) | TypeScript | 20 | 1 | 5 | 26 |
 | [src/utils/storage.ts](/src/utils/storage.ts) | TypeScript | 26 | 0 | 5 | 31 |
 | [src/vite-env.d.ts](/src/vite-env.d.ts) | TypeScript | 15 | 1 | 3 | 19 |
-| [tailwind.config.js](/tailwind.config.js) | JavaScript | 96 | 0 | 1 | 97 |
-| [tailwind.config.ts](/tailwind.config.ts) | TypeScript | 95 | 0 | 3 | 98 |
-| [tsconfig.app.json](/tsconfig.app.json) | JSON | 45 | 0 | 3 | 48 |
-| [tsconfig.json](/tsconfig.json) | JSON with Comments | 4 | 0 | 1 | 5 |
-| [tsconfig.node.json](/tsconfig.node.json) | JSON | 18 | 0 | 3 | 21 |
-| [vercel.json](/vercel.json) | JSON | 23 | 0 | 1 | 24 |
-| [vite.config.js](/vite.config.js) | JavaScript | 43 | 0 | 1 | 44 |
-| [vite.config.ts](/vite.config.ts) | TypeScript | 43 | 0 | 2 | 45 |
 
 [Summary](results.md) / Details / [Diff Summary](diff.md) / [Diff Details](diff-details.md)

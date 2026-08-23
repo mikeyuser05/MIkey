@@ -1,0 +1,65 @@
+"filename", "language", "TypeScript", "TypeScript JSX", "PostCSS", "JSON", "JavaScript", "JSON with Comments", "YAML", "Markdown", "XML", "Python", "HTML", "comment", "blank", "total"
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\.github\workflows\ci.yml", "YAML", 0, 0, 0, 0, 0, 0, -25, 0, 0, 0, 0, 0, -9, -34
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\.prettierrc.json", "JSON", 0, 0, 0, -11, 0, 0, 0, 0, 0, 0, 0, 0, -1, -12
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\README.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, -133, 0, 0, 0, 0, -24, -157
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -271, 0, -38, -35, -344
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\check_files.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -9, 0, 0, -1, -10
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\API_REFERENCE.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, -22, 0, 0, 0, 0, -6, -28
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\ARCHITECTURE.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, -20, 0, 0, 0, 0, -4, -24
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\DEVELOPMENT_GUIDE.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, -23, 0, 0, 0, 0, -9, -32
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\eslint.config.js", "JavaScript", 0, 0, 0, 0, -31, 0, 0, 0, 0, 0, 0, 0, -2, -33
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\firebase.json", "JSON", 0, 0, 0, -16, 0, 0, 0, 0, 0, 0, 0, 0, -1, -17
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\package-lock.json", "JSON", 0, 0, 0, -2097, 0, 0, 0, 0, 0, 0, 0, 0, -1, -2098
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\package.json", "JSON", 0, 0, 0, -23, 0, 0, 0, 0, 0, 0, 0, 0, 0, -23
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\providers\voiceProvider.ts", "TypeScript", -95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -13, -108
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\server.ts", "TypeScript", -37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -4, -7, -48
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\callStatusNormalizer.ts", "TypeScript", -18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3, -21
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\emergencyCallService.ts", "TypeScript", -83, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -5, -15, -103
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\twimlGenerator.ts", "TypeScript", -24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -5, -29
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\types\voice.ts", "TypeScript", -43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -6, -49
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\webhooks\twilioWebhook.ts", "TypeScript", -4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2, -6
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\tsconfig.json", "JSON with Comments", 0, 0, 0, 0, 0, -14, 0, 0, 0, 0, 0, 0, 0, -14
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\get_paths.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, -14, 0, -4, -6, -24
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\index.html", "HTML", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -18, 0, -1, -19
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package-lock.json", "JSON", 0, 0, 0, -7536, 0, 0, 0, 0, 0, 0, 0, 0, -1, -7537
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package.json", "JSON", 0, 0, 0, -57, 0, 0, 0, 0, 0, 0, 0, 0, -1, -58
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\postcss.config.js", "JavaScript", 0, 0, 0, 0, -6, 0, 0, 0, 0, 0, 0, 0, -1, -7
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\favicon.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 0, -4, 0, 0, 0, -1, -5
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\manifest.json", "JSON", 0, 0, 0, -17, 0, 0, 0, 0, 0, 0, 0, 0, -1, -18
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\sw.js", "JavaScript", 0, 0, 0, 0, -53, 0, 0, 0, 0, 0, 0, 0, -5, -58
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\AppLayout.tsx", "TypeScript JSX", 0, -5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 1
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Navbar.tsx", "TypeScript JSX", 0, -10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, -7
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Sidebar.tsx", "TypeScript JSX", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, -3, 0
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR11TriageHub.tsx", "TypeScript JSX", 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3, -1, 5
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Settings.tsx", "TypeScript JSX", 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 73
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\common\SystemHealthWidget.tsx", "TypeScript JSX", 0, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 9, 87
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\profile\PatientProfileCard.tsx", "TypeScript JSX", 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 71
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\context\ThemeContext.tsx", "TypeScript JSX", 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 16
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\hooks\useValidatedTelemetry.ts", "TypeScript", 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 17
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\index.css", "PostCSS", 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 17
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Analytics\AnalyticsPage.tsx", "TypeScript JSX", 0, 109, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 4, 119
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Settings.tsx", "TypeScript JSX", 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 73
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Settings\Settings.tsx", "TypeScript JSX", 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 73
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Settings\index.tsx", "TypeScript JSX", 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 73
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\analyticsEngine.ts", "TypeScript", 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 9, 80
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\auditLogger.ts", "TypeScript", -17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3, -1, -21
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\intelligenceReport.ts", "TypeScript", 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 8, 67
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\patientProfileStore.ts", "TypeScript", 38, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 45
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\productionHardening.ts", "TypeScript", 39, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 49
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\systemHealthService.ts", "TypeScript", 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 36
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\telemetryBuffer.ts", "TypeScript", 39, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 11, 55
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\telemetryExport.ts", "TypeScript", 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 48
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\telemetryValidator.ts", "TypeScript", 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9, 48
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\location.ts", "TypeScript", 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 34
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\pr36Patient.ts", "TypeScript", 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 18
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\telemetry.ts", "TypeScript", 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 28
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\theme.types.ts", "TypeScript", 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tailwind.config.js", "JavaScript", 0, 0, 0, 0, -96, 0, 0, 0, 0, 0, 0, 0, -1, -97
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tailwind.config.ts", "TypeScript", -95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3, -98
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.app.json", "JSON", 0, 0, 0, -45, 0, 0, 0, 0, 0, 0, 0, 0, -3, -48
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.json", "JSON with Comments", 0, 0, 0, 0, 0, -4, 0, 0, 0, 0, 0, 0, -1, -5
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.node.json", "JSON", 0, 0, 0, -18, 0, 0, 0, 0, 0, 0, 0, 0, -3, -21
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vercel.json", "JSON", 0, 0, 0, -23, 0, 0, 0, 0, 0, 0, 0, 0, -1, -24
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.js", "JavaScript", 0, 0, 0, 0, -43, 0, 0, 0, 0, 0, 0, 0, -1, -44
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.ts", "TypeScript", -43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2, -45
+"Total", "-", -29, 505, 13, -9843, -229, -18, -25, -198, -4, -294, -18, 0, -49, -10189

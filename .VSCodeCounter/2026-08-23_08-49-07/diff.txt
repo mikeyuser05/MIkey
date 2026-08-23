@@ -1,0 +1,81 @@
+Date : 2026-08-23 08:49:07
+Directory : c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build
+Total : 36 files,  11186 codes, 19 comments, 175 blanks, all 11380 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |         10 |      9,843 |          0 |         13 |      9,856 |
+| TypeScript         |          9 |        442 |          9 |         56 |        507 |
+| Python             |          3 |        409 |         10 |         41 |        460 |
+| JavaScript         |          5 |        229 |          0 |         10 |        239 |
+| Markdown           |          4 |        198 |          0 |         43 |        241 |
+| YAML               |          1 |         25 |          0 |          9 |         34 |
+| JSON with Comments |          2 |         18 |          0 |          1 |         19 |
+| HTML               |          1 |         18 |          0 |          1 |         19 |
+| XML                |          1 |          4 |          0 |          1 |          5 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                   | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                      |         36 |     11,186 |         19 |        175 |     11,380 |
+| . (Files)                                                                                              |         19 |      8,584 |         10 |         88 |      8,682 |
+| .github                                                                                                |          1 |         25 |          0 |          9 |         34 |
+| .github\workflows                                                                                      |          1 |         25 |          0 |          9 |         34 |
+| docs                                                                                                   |          3 |         65 |          0 |         19 |         84 |
+| functions                                                                                              |         10 |      2,438 |          9 |         52 |      2,499 |
+| functions (Files)                                                                                      |          3 |      2,134 |          0 |          1 |      2,135 |
+| functions\src                                                                                          |          7 |        304 |          9 |         51 |        364 |
+| functions\src (Files)                                                                                  |          1 |         37 |          4 |          7 |         48 |
+| functions\src\providers                                                                                |          1 |         95 |          0 |         13 |        108 |
+| functions\src\services                                                                                 |          3 |        125 |          5 |         23 |        153 |
+| functions\src\types                                                                                    |          1 |         43 |          0 |          6 |         49 |
+| functions\src\webhooks                                                                                 |          1 |          4 |          0 |          2 |          6 |
+| public                                                                                                 |          3 |         74 |          0 |          7 |         81 |
++--------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                               | language           | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\.github\workflows\ci.yml                       | YAML               |         25 |          0 |          9 |         34 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\.prettierrc.json                               | JSON               |         11 |          0 |          1 |         12 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\README.md                                      | Markdown           |        133 |          0 |         24 |        157 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py                               | Python             |        258 |          5 |         21 |        284 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\API_REFERENCE.md                          | Markdown           |         22 |          0 |          6 |         28 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\ARCHITECTURE.md                           | Markdown           |         20 |          0 |          4 |         24 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\DEVELOPMENT_GUIDE.md                      | Markdown           |         23 |          0 |          9 |         32 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\eslint.config.js                               | JavaScript         |         31 |          0 |          2 |         33 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\firebase.json                                  | JSON               |         16 |          0 |          1 |         17 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\fix_settings.py                                | Python             |        137 |          1 |         14 |        152 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\package-lock.json                    | JSON               |      2,097 |          0 |          1 |      2,098 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\package.json                         | JSON               |         23 |          0 |          0 |         23 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\providers\voiceProvider.ts       | TypeScript         |         95 |          0 |         13 |        108 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\server.ts                        | TypeScript         |         37 |          4 |          7 |         48 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\callStatusNormalizer.ts | TypeScript         |         18 |          0 |          3 |         21 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\emergencyCallService.ts | TypeScript         |         83 |          5 |         15 |        103 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\twimlGenerator.ts       | TypeScript         |         24 |          0 |          5 |         29 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\types\voice.ts                   | TypeScript         |         43 |          0 |          6 |         49 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\webhooks\twilioWebhook.ts        | TypeScript         |          4 |          0 |          2 |          6 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\tsconfig.json                        | JSON with Comments |         14 |          0 |          0 |         14 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\get_paths.py                                   | Python             |         14 |          4 |          6 |         24 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\index.html                                     | HTML               |         18 |          0 |          1 |         19 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package-lock.json                              | JSON               |      7,536 |          0 |          1 |      7,537 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package.json                                   | JSON               |         57 |          0 |          1 |         58 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\postcss.config.js                              | JavaScript         |          6 |          0 |          1 |          7 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\favicon.svg                             | XML                |          4 |          0 |          1 |          5 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\manifest.json                           | JSON               |         17 |          0 |          1 |         18 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\sw.js                                   | JavaScript         |         53 |          0 |          5 |         58 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tailwind.config.js                             | JavaScript         |         96 |          0 |          1 |         97 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tailwind.config.ts                             | TypeScript         |         95 |          0 |          3 |         98 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.app.json                              | JSON               |         45 |          0 |          3 |         48 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.json                                  | JSON with Comments |          4 |          0 |          1 |          5 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.node.json                             | JSON               |         18 |          0 |          3 |         21 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vercel.json                                    | JSON               |         23 |          0 |          1 |         24 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.js                                 | JavaScript         |         43 |          0 |          1 |         44 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.ts                                 | TypeScript         |         43 |          0 |          2 |         45 |
+| Total                                                                                                  |                    |     11,186 |         19 |        175 |     11,380 |
++--------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

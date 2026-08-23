@@ -1,0 +1,38 @@
+"filename", "language", "JSON", "JSON with Comments", "TypeScript", "JavaScript", "Markdown", "Python", "XML", "YAML", "HTML", "comment", "blank", "total"
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\.github\workflows\ci.yml", "YAML", 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 9, 34
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\.prettierrc.json", "JSON", 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 12
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\README.md", "Markdown", 0, 0, 0, 0, 133, 0, 0, 0, 0, 0, 24, 157
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py", "Python", 0, 0, 0, 0, 0, 258, 0, 0, 0, 5, 21, 284
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\API_REFERENCE.md", "Markdown", 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 6, 28
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\ARCHITECTURE.md", "Markdown", 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 4, 24
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\docs\DEVELOPMENT_GUIDE.md", "Markdown", 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 9, 32
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\eslint.config.js", "JavaScript", 0, 0, 0, 31, 0, 0, 0, 0, 0, 0, 2, 33
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\firebase.json", "JSON", 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 17
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\fix_settings.py", "Python", 0, 0, 0, 0, 0, 137, 0, 0, 0, 1, 14, 152
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\package-lock.json", "JSON", 2097, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2098
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\package.json", "JSON", 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\providers\voiceProvider.ts", "TypeScript", 0, 0, 95, 0, 0, 0, 0, 0, 0, 0, 13, 108
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\server.ts", "TypeScript", 0, 0, 37, 0, 0, 0, 0, 0, 0, 4, 7, 48
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\callStatusNormalizer.ts", "TypeScript", 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 3, 21
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\emergencyCallService.ts", "TypeScript", 0, 0, 83, 0, 0, 0, 0, 0, 0, 5, 15, 103
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\twimlGenerator.ts", "TypeScript", 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 5, 29
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\types\voice.ts", "TypeScript", 0, 0, 43, 0, 0, 0, 0, 0, 0, 0, 6, 49
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\webhooks\twilioWebhook.ts", "TypeScript", 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 2, 6
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\tsconfig.json", "JSON with Comments", 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\get_paths.py", "Python", 0, 0, 0, 0, 0, 14, 0, 0, 0, 4, 6, 24
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\index.html", "HTML", 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 1, 19
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package-lock.json", "JSON", 7536, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7537
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package.json", "JSON", 57, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 58
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\postcss.config.js", "JavaScript", 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 1, 7
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\favicon.svg", "XML", 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 5
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\manifest.json", "JSON", 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 18
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\public\sw.js", "JavaScript", 0, 0, 0, 53, 0, 0, 0, 0, 0, 0, 5, 58
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tailwind.config.js", "JavaScript", 0, 0, 0, 96, 0, 0, 0, 0, 0, 0, 1, 97
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tailwind.config.ts", "TypeScript", 0, 0, 95, 0, 0, 0, 0, 0, 0, 0, 3, 98
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.app.json", "JSON", 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 48
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.json", "JSON with Comments", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tsconfig.node.json", "JSON", 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 21
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vercel.json", "JSON", 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 24
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.js", "JavaScript", 0, 0, 0, 43, 0, 0, 0, 0, 0, 0, 1, 44
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.ts", "TypeScript", 0, 0, 43, 0, 0, 0, 0, 0, 0, 0, 2, 45
+"Total", "-", 9843, 18, 442, 229, 198, 409, 4, 25, 18, 19, 175, 11380

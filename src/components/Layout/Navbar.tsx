@@ -65,6 +65,9 @@ export function Navbar(): ReactElement {
     } else {
       root.setAttribute('data-theme', 'cyber');
     }
+    if (palette === 'neon purple') {
+      root.setAttribute('data-theme', 'purple');
+    }
   };
 
   const handleSelectPalette = (themeName: string) => {
@@ -159,6 +162,7 @@ export function Navbar(): ReactElement {
                   { name: 'Cyber Dark', desc: 'Default Cyan' },
                   { name: 'Tactical Red', desc: 'Emergency High-Contrast' },
                   { name: 'Clinical Emerald', desc: 'Medical Monitoring' },
+                  { name: 'neon purple', desc: 'Futuristic Glow', key: 'purple' },
                 ].map((item) => (
                   <button
                     key={item.name}
