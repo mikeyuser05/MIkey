@@ -1,59 +1,68 @@
 # Summary
 
-Date : 2026-08-10 06:38:12
+Date : 2026-08-26 16:26:35
 
 Directory c:\\Users\\HP\\Downloads\\NO-EXCUSE\\Dashboard\\Current Build
 
-Total : 438 files,  28414 codes, 2066 comments, 3551 blanks, all 34031 lines
+Total : 474 files,  32934 codes, 2158 comments, 3834 blanks, all 38926 lines
 
 Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| TypeScript | 322 | 14,683 | 1,907 | 2,854 | 19,444 |
-| JSON | 8 | 7,723 | 0 | 12 | 7,735 |
-| TypeScript JSX | 88 | 5,339 | 155 | 571 | 6,065 |
-| JavaScript | 5 | 229 | 0 | 10 | 239 |
+| TypeScript | 347 | 15,968 | 1,953 | 3,054 | 20,975 |
+| JSON | 10 | 9,843 | 0 | 13 | 9,856 |
+| TypeScript JSX | 95 | 6,088 | 191 | 637 | 6,916 |
+| Python | 3 | 409 | 10 | 41 | 460 |
+| JavaScript | 6 | 276 | 2 | 11 | 289 |
 | Markdown | 6 | 220 | 0 | 50 | 270 |
-| Python | 3 | 121 | 4 | 30 | 155 |
-| PostCSS | 1 | 43 | 0 | 11 | 54 |
+| PostCSS | 1 | 60 | 2 | 15 | 77 |
 | YAML | 1 | 25 | 0 | 9 | 34 |
+| JSON with Comments | 2 | 18 | 0 | 1 | 19 |
 | HTML | 1 | 18 | 0 | 1 | 19 |
 | XML | 2 | 9 | 0 | 2 | 11 |
-| JSON with Comments | 1 | 4 | 0 | 1 | 5 |
 
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 438 | 28,414 | 2,066 | 3,551 | 34,031 |
-| . (Files) | 19 | 8,296 | 4 | 77 | 8,377 |
+| . | 474 | 32,934 | 2,158 | 3,834 | 38,926 |
+| . (Files) | 20 | 8,631 | 12 | 89 | 8,732 |
 | .github | 1 | 25 | 0 | 9 | 34 |
 | .github\\workflows | 1 | 25 | 0 | 9 | 34 |
 | docs | 3 | 65 | 0 | 19 | 84 |
+| functions | 10 | 2,438 | 9 | 52 | 2,499 |
+| functions (Files) | 3 | 2,134 | 0 | 1 | 2,135 |
+| functions\\src | 7 | 304 | 9 | 51 | 364 |
+| functions\\src (Files) | 1 | 37 | 4 | 7 | 48 |
+| functions\\src\\providers | 1 | 95 | 0 | 13 | 108 |
+| functions\\src\\services | 3 | 125 | 5 | 23 | 153 |
+| functions\\src\\types | 1 | 43 | 0 | 6 | 49 |
+| functions\\src\\webhooks | 1 | 4 | 0 | 2 | 6 |
 | public | 3 | 74 | 0 | 7 | 81 |
-| src | 412 | 19,954 | 2,062 | 3,439 | 25,455 |
-| src (Files) | 4 | 133 | 11 | 30 | 174 |
+| src | 437 | 21,701 | 2,137 | 3,658 | 27,496 |
+| src (Files) | 4 | 150 | 13 | 34 | 197 |
 | src\\assets | 1 | 5 | 0 | 1 | 6 |
 | src\\assets\\images | 1 | 5 | 0 | 1 | 6 |
 | src\\charts | 7 | 145 | 0 | 10 | 155 |
-| src\\components | 55 | 3,196 | 48 | 345 | 3,589 |
-| src\\components (Files) | 4 | 559 | 30 | 70 | 659 |
-| src\\components\\Layout | 3 | 363 | 3 | 26 | 392 |
+| src\\components | 59 | 3,635 | 69 | 382 | 4,086 |
+| src\\components (Files) | 5 | 632 | 29 | 76 | 737 |
+| src\\components\\Layout | 3 | 353 | 10 | 27 | 390 |
 | src\\components\\Mobile | 1 | 43 | 0 | 4 | 47 |
+| src\\components\\Triage | 1 | 240 | 6 | 17 | 263 |
 | src\\components\\analytics | 4 | 270 | 10 | 25 | 305 |
 | src\\components\\auth | 1 | 2 | 0 | 0 | 2 |
-| src\\components\\common | 3 | 103 | 0 | 20 | 123 |
+| src\\components\\common | 4 | 174 | 7 | 29 | 210 |
 | src\\components\\dashboard | 18 | 930 | 5 | 87 | 1,022 |
-| src\\components\\profile | 1 | 2 | 0 | 0 | 2 |
+| src\\components\\profile | 2 | 67 | 2 | 4 | 73 |
 | src\\components\\shared | 2 | 48 | 0 | 4 | 52 |
 | src\\components\\ui | 18 | 876 | 0 | 109 | 985 |
 | src\\config | 4 | 170 | 4 | 18 | 192 |
 | src\\constants | 2 | 62 | 2 | 10 | 74 |
-| src\\context | 5 | 177 | 6 | 36 | 219 |
+| src\\context | 5 | 186 | 9 | 40 | 235 |
 | src\\data | 1 | 167 | 0 | 12 | 179 |
 | src\\engine | 3 | 59 | 0 | 6 | 65 |
-| src\\hooks | 14 | 286 | 10 | 63 | 359 |
+| src\\hooks | 15 | 299 | 10 | 67 | 376 |
 | src\\intelligence | 95 | 4,561 | 662 | 711 | 5,934 |
 | src\\intelligence\\activity | 8 | 307 | 60 | 56 | 423 |
 | src\\intelligence\\activity\\classifiers | 1 | 26 | 7 | 4 | 37 |
@@ -118,19 +127,19 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 | src\\intelligence\\trends\\tests | 1 | 86 | 1 | 17 | 104 |
 | src\\intelligence\\trends\\types | 1 | 32 | 3 | 7 | 42 |
 | src\\intelligence\\types | 1 | 19 | 4 | 3 | 26 |
-| src\\pages | 10 | 637 | 9 | 65 | 711 |
-| src\\pages (Files) | 3 | 234 | 8 | 26 | 268 |
+| src\\pages | 13 | 938 | 21 | 90 | 1,049 |
+| src\\pages (Files) | 4 | 298 | 10 | 33 | 341 |
 | src\\pages\\Alerts | 1 | 53 | 0 | 5 | 58 |
-| src\\pages\\Analytics | 1 | 67 | 1 | 9 | 77 |
+| src\\pages\\Analytics | 1 | 176 | 7 | 13 | 196 |
 | src\\pages\\Auth | 1 | 99 | 0 | 8 | 107 |
 | src\\pages\\Dashboard | 1 | 61 | 0 | 7 | 68 |
 | src\\pages\\Devices | 1 | 43 | 0 | 3 | 46 |
 | src\\pages\\NotFound | 1 | 58 | 0 | 5 | 63 |
-| src\\pages\\Settings | 1 | 22 | 0 | 2 | 24 |
+| src\\pages\\Settings | 3 | 150 | 4 | 16 | 170 |
 | src\\repositories | 3 | 51 | 10 | 10 | 71 |
 | src\\routes | 1 | 39 | 5 | 8 | 52 |
-| src\\services | 84 | 5,397 | 814 | 1,103 | 7,314 |
-| src\\services (Files) | 58 | 3,616 | 590 | 724 | 4,930 |
+| src\\services | 94 | 6,029 | 849 | 1,201 | 8,079 |
+| src\\services (Files) | 68 | 4,248 | 625 | 822 | 5,695 |
 | src\\services\\baseline | 4 | 358 | 42 | 76 | 476 |
 | src\\services\\context | 1 | 43 | 14 | 11 | 68 |
 | src\\services\\deviation | 1 | 116 | 8 | 20 | 144 |
@@ -154,8 +163,8 @@ Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-
 | src\\telemetry\\services | 1 | 50 | 19 | 13 | 82 |
 | src\\telemetry\\types | 1 | 22 | 1 | 5 | 28 |
 | src\\telemetry\\utils | 1 | 23 | 9 | 5 | 37 |
-| src\\tests | 55 | 3,122 | 239 | 654 | 4,015 |
-| src\\types | 49 | 1,122 | 133 | 221 | 1,476 |
+| src\\tests | 58 | 3,337 | 239 | 685 | 4,261 |
+| src\\types | 53 | 1,243 | 135 | 237 | 1,615 |
 | src\\utils | 8 | 141 | 13 | 37 | 191 |
 
 Summary / [Details](details.md) / [Diff Summary](diff.md) / [Diff Details](diff-details.md)
