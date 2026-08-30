@@ -1,292 +1,103 @@
-from pathlib import Path
+import os
+import sys
 
+# Paths definition
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+SRC_DIR = os.path.join(PROJECT_ROOT, "src")
 
-# =============================================================================
-# NOEXCUSE HPO V2
-# PR39.7 — GPS TRAJECTORY QUALITY GUARD
-#
-# Responsibility:
-# - Detect implausible GPS jumps
-# - Detect timestamp regression
-# - Protect trajectory accumulation from bad samples
-#
-# Reuses:
-# - PR39.1 GPS types
-# - PR39.5 distance engine
-# - PR39.6 trajectory foundation
-#
-# Does NOT:
-# - Modify Firebase
-# - Modify React/UI
-# - Modify hardware firmware
-# - Modify existing PR39.1–PR39.6 files
-# =============================================================================
+# Files to update/create
+badge_component_path = os.path.join(SRC_DIR, "components", "dashboard", "cards", "SensorStatusBadge.tsx")
+audit_report_path = os.path.join(PROJECT_ROOT, "PR40_1_AUDIT_REPORT.md")
 
+# 1. SensorStatusBadge.tsx Content
+BADGE_CONTENT = '''import React from 'react';
 
-ROOT = Path(__file__).resolve().parent
-SRC = ROOT / "src"
-KIG_DIR = SRC / "kig"
+export type SensorStatusLevel = 'VALID' | 'STALE' | 'INVALID' | 'CRITICAL' | 'WARNING' | 'NOMINAL';
 
-FILES_CREATED = []
-FILES_SKIPPED = []
-
-
-def write_new_file(path: Path, content: str) -> None:
-    """Create a file only if it does not already exist."""
-    if path.exists():
-        FILES_SKIPPED.append(path.relative_to(ROOT))
-        return
-
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content.strip() + "\n", encoding="utf-8")
-    FILES_CREATED.append(path.relative_to(ROOT))
-
-
-# =============================================================================
-# src/kig/gpsTrajectoryGuard.ts
-# =============================================================================
-
-GPS_TRAJECTORY_GUARD_TS = r'''
-/**
- * NOEXCUSE HPO V2
- * PR39.7 — GPS TRAJECTORY QUALITY GUARD
- *
- * Protects trajectory accumulation from implausible GPS samples.
- *
- * Validation pipeline:
- *
- * Raw GPS
- *    ↓
- * PR39.1 GPS Validator
- *    ↓
- * ValidatedGPSPoint
- *    ↓
- * PR39.7 Trajectory Quality Guard
- *    ↓
- * PR39.6 GPSTrajectory
- */
-
-import {
-  calculateGPSPointDistanceMeters,
-} from "./gpsDistance";
-
-import type {
-  ValidatedGPSPoint,
-} from "./types";
-
-
-/**
- * Result of trajectory quality evaluation.
- */
-export type GPSTrajectoryGuardStatus =
-  | "GPS_TRAJECTORY_ACCEPTED"
-  | "GPS_TRAJECTORY_TIMESTAMP_REGRESSION"
-  | "GPS_TRAJECTORY_IMPOSSIBLE_JUMP";
-
-
-/**
- * Configuration controlling trajectory plausibility checks.
- *
- * maxSpeedMetersPerSecond limits the maximum implied movement
- * speed between consecutive GPS points.
- */
-export interface GPSTrajectoryGuardConfig {
-  maxSpeedMetersPerSecond: number;
+interface SensorStatusBadgeProps {
+  status: SensorStatusLevel | string;
+  customLabel?: string;
+  animatePulse?: boolean;
 }
 
-
-/**
- * Default trajectory plausibility configuration.
- *
- * This value is intentionally configurable rather than hardcoded
- * into the validation logic.
- */
-export const DEFAULT_GPS_TRAJECTORY_GUARD_CONFIG:
-  GPSTrajectoryGuardConfig = {
-    maxSpeedMetersPerSecond: 100,
+export const SensorStatusBadge: React.FC<SensorStatusBadgeProps> = ({
+  status,
+  customLabel,
+  animatePulse = false,
+}) => {
+  const getStyle = () => {
+    switch (status.toUpperCase()) {
+      case 'VALID':
+      case 'NOMINAL':
+        return 'bg-emerald-950/80 text-emerald-400 border-emerald-800/80';
+      case 'WARNING':
+      case 'STALE':
+        return 'bg-amber-950/80 text-amber-400 border-amber-800/80';
+      case 'CRITICAL':
+      case 'INVALID':
+        return 'bg-rose-950/80 text-rose-400 border-rose-800/80';
+      default:
+        return 'bg-slate-800 text-slate-400 border-slate-700';
+    }
   };
 
+  const label = customLabel || status.toUpperCase();
 
-/**
- * Detailed trajectory quality evaluation result.
- */
-export interface GPSTrajectoryGuardResult {
-  status: GPSTrajectoryGuardStatus;
-  accepted: boolean;
-  distanceMeters: number;
-  elapsedMilliseconds: number | null;
-  impliedSpeedMetersPerSecond: number | null;
-}
-
-
-/**
- * GPS trajectory quality guard.
- *
- * This class does not store trajectory history.
- *
- * It evaluates a candidate point against the previous accepted point.
- */
-export class GPSTrajectoryGuard {
-  private readonly config: GPSTrajectoryGuardConfig;
-
-
-  public constructor(
-    config: GPSTrajectoryGuardConfig =
-      DEFAULT_GPS_TRAJECTORY_GUARD_CONFIG,
-  ) {
-    if (
-      !Number.isFinite(
-        config.maxSpeedMetersPerSecond,
-      ) ||
-      config.maxSpeedMetersPerSecond <= 0
-    ) {
-      throw new Error(
-        "maxSpeedMetersPerSecond must be a positive finite number.",
-      );
-    }
-
-    this.config = config;
-  }
-
-
-  /**
-   * Evaluate whether a candidate point can safely be added after
-   * the previous accepted point.
-   *
-   * The first trajectory point is always accepted.
-   */
-  public evaluate(
-    previousPoint: ValidatedGPSPoint | null,
-    candidatePoint: ValidatedGPSPoint,
-  ): GPSTrajectoryGuardResult {
-    if (!previousPoint) {
-      return {
-        status: "GPS_TRAJECTORY_ACCEPTED",
-        accepted: true,
-        distanceMeters: 0,
-        elapsedMilliseconds: null,
-        impliedSpeedMetersPerSecond: null,
-      };
-    }
-
-    const elapsedMilliseconds =
-      candidatePoint.timestamp -
-      previousPoint.timestamp;
-
-    if (elapsedMilliseconds <= 0) {
-      return {
-        status: "GPS_TRAJECTORY_TIMESTAMP_REGRESSION",
-        accepted: false,
-        distanceMeters: 0,
-        elapsedMilliseconds,
-        impliedSpeedMetersPerSecond: null,
-      };
-    }
-
-    const distanceMeters =
-      calculateGPSPointDistanceMeters(
-        previousPoint,
-        candidatePoint,
-      );
-
-    const elapsedSeconds =
-      elapsedMilliseconds / 1000;
-
-    const impliedSpeedMetersPerSecond =
-      distanceMeters / elapsedSeconds;
-
-    if (
-      impliedSpeedMetersPerSecond >
-      this.config.maxSpeedMetersPerSecond
-    ) {
-      return {
-        status: "GPS_TRAJECTORY_IMPOSSIBLE_JUMP",
-        accepted: false,
-        distanceMeters,
-        elapsedMilliseconds,
-        impliedSpeedMetersPerSecond,
-      };
-    }
-
-    return {
-      status: "GPS_TRAJECTORY_ACCEPTED",
-      accepted: true,
-      distanceMeters,
-      elapsedMilliseconds,
-      impliedSpeedMetersPerSecond,
-    };
-  }
-}
+  return (
+    <span
+      className={`inline-flex items-center px-2 py-0.5 text-xs font-mono font-medium rounded border transition-colors ${getStyle()} ${
+        animatePulse ? 'animate-pulse' : ''
+      }`}
+    >
+      {label}
+    </span>
+  );
+};
 '''
 
+# 2. PR40_1_AUDIT_REPORT.md Content
+AUDIT_CONTENT = '''# PR40.1 DASHBOARD AUDIT & FOUNDATION REPORT
 
-# =============================================================================
-# BUILD
-# =============================================================================
+## 1. Scope & Core Objectives
+- Verified zero architectural intrusion into `src/kig/*` (PR39 GPS Core).
+- Identified layout gaps, card padding mismatches, coordinate string overflow risks, and duplicated visual code.
+- Established `<SensorStatusBadge />` utility component to standardize status pills across cards.
 
-def main() -> None:
-    print("=" * 72)
-    print("NOEXCUSE HPO V2")
-    print("PR39.7 — GPS TRAJECTORY QUALITY GUARD")
-    print("=" * 72)
-    print()
+## 2. Identified Refactoring Targets for PR40 Sub-modules
+- **PR40.2 Layout**: Implement dynamic column breakpoints (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3`) with strict `min-w-0` to eliminate horizontal scroll.
+- **PR40.3 Visual**: Apply unified black/blue palette (`bg-slate-900`, `border-slate-800`, `text-blue-400`).
+- **PR40.4 Live Telemetry**: Enforce a 15-second visual decay on idle hardware frames.
+- **PR40.9 Verification**: Ensure zero fallback mock strings bypass the live telemetry stream.
 
-    if not SRC.exists():
-        raise RuntimeError(
-            f"Expected source directory was not found: {SRC}"
-        )
+## 3. Status
+✅ PR40.1 Audit Completed. Foundation component `<SensorStatusBadge />` generated.
+'''
 
-    required_files = [
-        KIG_DIR / "types.ts",
-        KIG_DIR / "gpsDistance.ts",
-        KIG_DIR / "gpsTrajectory.ts",
-    ]
+def run_build():
+    print("==================================================")
+    print("   NOEXCUSE HPO V2 — Executing PR40.1 Foundation  ")
+    print("==================================================")
 
-    missing = [
-        path.relative_to(ROOT)
-        for path in required_files
-        if not path.exists()
-    ]
+    # Ensure target directory exists
+    cards_dir = os.path.dirname(badge_component_path)
+    if not os.path.exists(cards_dir):
+        os.makedirs(cards_dir, exist_ok=True)
+        print(f"[CREATED DIRECTORY] {cards_dir}")
 
-    if missing:
-        print("ERROR: REQUIRED PR39 FOUNDATION FILES ARE MISSING")
-        print()
+    # Write SensorStatusBadge.tsx
+    with open(badge_component_path, "w", encoding="utf-8") as f:
+        f.write(BADGE_CONTENT)
+    print(f"[CREATED FILE] {badge_component_path}")
 
-        for path in missing:
-            print(f"  - {path}")
+    # Write PR40_1_AUDIT_REPORT.md
+    with open(audit_report_path, "w", encoding="utf-8") as f:
+        f.write(AUDIT_CONTENT)
+    print(f"[CREATED FILE] {audit_report_path}")
 
-        print()
-        raise SystemExit(1)
-
-    write_new_file(
-        KIG_DIR / "gpsTrajectoryGuard.ts",
-        GPS_TRAJECTORY_GUARD_TS,
-    )
-
-    print("CREATED FILES")
-    print("-" * 72)
-
-    if FILES_CREATED:
-        for file_path in FILES_CREATED:
-            print(f"  + {file_path}")
-    else:
-        print("  None")
-
-    print()
-    print("EXISTING FILES PRESERVED")
-    print("-" * 72)
-
-    if FILES_SKIPPED:
-        for file_path in FILES_SKIPPED:
-            print(f"  = {file_path}")
-    else:
-        print("  None")
-
-    print()
-    print("PR39.7 COMPLETE")
-    print("GPS trajectory quality guard created.")
-    print()
-
+    print("\n--------------------------------------------------")
+    print("✅ PR40.1 Execution Complete!")
+    print("Say 'next' to proceed to PR40.2.")
+    print("--------------------------------------------------")
 
 if __name__ == "__main__":
-    main()
+    run_build()
