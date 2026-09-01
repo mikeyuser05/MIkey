@@ -17,6 +17,7 @@ import DashboardPage from './pages/Dashboard/DashboardPage';
 import AnalyticsPage from './pages/Analytics/AnalyticsPage';
 import AlertsPage from './pages/Alerts/AlertsPage';
 import SettingsPage from './pages/Settings/SettingsPage';
+import GPSPage from './pages/GPS/GPSPage';
 
 // Feature Components
 import { PR11TriageHub } from './components/PR11TriageHub';
@@ -56,6 +57,10 @@ export const App: React.FC = () => {
                   <Route path="/analytics" element={<AnalyticsPage />} />
                   <Route path="/alerts" element={<AlertsPage />} />
                   <Route path="/settings" element={<SettingsPage />} />
+
+                  {/* GPS Route (PR41.5) */}
+                  <Route path="/gps" element={<GPSPage />} />
+                  <Route path="/gps-tracking" element={<Navigate to="/gps" replace />} />
 
                   {/* Modules & Route Aliases */}
                   <Route path="/triage" element={<PR11TriageHub />} />

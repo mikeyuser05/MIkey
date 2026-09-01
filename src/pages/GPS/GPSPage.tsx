@@ -1,9 +1,4 @@
-import os
-
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-GPS_PAGE_PATH = os.path.join(PROJECT_ROOT, "src", "pages", "GPS", "GPSPage.tsx")
-
-FIXED_GPS_PAGE_CONTENT = '''import React from 'react';
+import React from 'react';
 import { GPSCard } from '../../components/dashboard/cards/GPSCard';
 
 export const GPSPage: React.FC = () => {
@@ -61,12 +56,3 @@ export const GPSPage: React.FC = () => {
 };
 
 export default GPSPage;
-'''
-
-def run_fix():
-    with open(GPS_PAGE_PATH, "w", encoding="utf-8") as f:
-        f.write(FIXED_GPS_PAGE_CONTENT)
-    print(f"[FIXED] Removed invalid import from {GPS_PAGE_PATH}")
-
-if __name__ == "__main__":
-    run_fix()

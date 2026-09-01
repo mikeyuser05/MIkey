@@ -9,6 +9,7 @@ import {
   Cpu,
   BarChart3,
   Bell,
+  Navigation,
   Settings,
   X,
 } from 'lucide-react';
@@ -28,12 +29,13 @@ export function Sidebar({ isOpen, onClose }: SidebarProps): ReactElement {
     { label: 'Devices', path: '/devices', icon: Cpu },
     { label: 'Analytics', path: '/analytics', icon: BarChart3 },
     { label: 'Alerts', path: '/alerts', icon: Bell },
+    { label: 'GPS Tracking (LGN12)', path: '/gps', icon: Navigation },
     { label: 'Settings', path: '/settings', icon: Settings },
   ];
 
   return (
     <>
-      {/* Mobile Backdrop (Only active on small screens when opened) */}
+      {/* Mobile Backdrop */}
       {isOpen && (
         <div
           onClick={onClose}
