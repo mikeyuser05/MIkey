@@ -1,45 +1,30 @@
-/**
- * PR6.1: Analytics Data Model
- * Core Domain Interfaces & Type Definitions for Long-Term Health Analytics
- */
-
-import { UserContextState } from "./contextualBaseline";
-
-export type TimeBucket = "DAILY" | "WEEKLY" | "MONTHLY";
-
-export interface MetricSummary {
-    min: number;
-    max: number;
-    mean: number;
-    median: number;
-    stdDev: number;
-    sampleCount: number;
+export interface BaselineConfig {
+  heartRateMin?: number;
+  heartRateMax?: number;
+  spo2Min?: number;
+  gasThreshold?: number;
 }
 
-export interface AggregatedTelemetry {
-    heartRate: MetricSummary;
-    spO2: MetricSummary;
-    accelMagnitude: MetricSummary;
-    totalStepCount: number;
-    dataQualityRatio: number; // 0.0 to 1.0 representing ratio of valid samples
+export interface BaselineBounds {
+  heartRateMin: number;
+  heartRateMax: number;
+  spo2Min: number;
+  gasThreshold: number;
 }
 
-export interface StabilityAndRecoveryMetrics {
-    restingHeartRate: number;
-    spO2StabilityScore: number; // 0.0 (unstable) to 1.0 (highly stable)
-    postActivityRecoveryRateBpmPerMin: number;
-    stressProxyIndex: number;
-}
+export class ContextualBaselineEngine {
+  private config: BaselineBounds;
 
-export interface AnalyticsRecord {
-    id: string; // e.g. "USER01_DAILY_2026-07-23"
-    userId: string;
-    bucketType: TimeBucket;
-    windowStartIso: string;
-    windowEndIso: string;
-    telemetry: AggregatedTelemetry;
-    stability: StabilityAndRecoveryMetrics;
-    primaryContext: UserContextState;
-    anomalyCount: number;
-    updatedAt: number;
+  constructor(config?: BaselineConfig) {
+    this.config = {
+      heartRateMin: config?.heartRateMin ?? 60,
+      heartRateMax: config?.heartRateMax ?? 100,
+      spo2Min: config?.spo2Min ?? 95,
+      gasThreshold: config?.gasThreshold ?? 400,
+    };
+  }
+
+  public calculateBaseline(_timestamp: number): BaselineBounds {
+    return { ...this.config };
+  }
 }
