@@ -1,33 +1,32 @@
-export interface LocationData {
+export type LocationSource = 'gps' | 'ysh' | 'none';
+export type RuntimeMode = 'live' | 'test';
+
+export interface YSHConfig {
+  enabled: boolean;
   latitude: number;
   longitude: number;
-  accuracy: number | null; // meters
-  timestamp: number;
-  source: 'gps' | 'network' | 'manual';
-  valid: boolean;
+  altitude: number;
+  satellites?: number;
+  label: string;
+  updatedAt: number;
+  source: 'ysh';
 }
 
-export interface MapLinkOptions {
-  latitude: number;
-  longitude: number;
+export interface RawGPSTelemetry {
+  latitude: number | null;
+  longitude: number | null;
+  altitude: number | null;
+  satellites: number;
+  isFixValid: boolean;
+  timestamp?: number;
 }
 
-export class LocationValidator {
-  public static isValidCoordinate(lat: number, lng: number): boolean {
-    if (typeof lat !== 'number' || typeof lng !== 'number') return false;
-    if (Number.isNaN(lat) || Number.isNaN(lng)) return false;
-    // Reject 0,0 default invalid fix
-    if (lat === 0 && lng === 0) return false;
-    return lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
-  }
-
-  public static isStale(timestamp: number, maxAgeMs: number = 120000): boolean {
-    if (!timestamp) return true;
-    return (Date.now() - timestamp) > maxAgeMs;
-  }
-
-  public static generateGoogleMapsUrl(lat: number, lng: number): string | null {
-    if (!this.isValidCoordinate(lat, lng)) return null;
-    return `https://maps.google.com/?q=${lat.toFixed(6)},${lng.toFixed(6)}`;
-  }
+export interface ResolvedLocation {
+  latitude: number | null;
+  longitude: number | null;
+  altitude: number | null;
+  satellites: number;
+  source: LocationSource;
+  label?: string;
+  isFixValid: boolean;
 }

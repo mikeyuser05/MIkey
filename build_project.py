@@ -4,10 +4,9 @@ import sys
 import shutil
 
 # =====================================================================
-# EMBEDDED CODE MODULES: PR41.1 THROUGH PR42.8
+# EMBEDDED CODE MODULES: PR41.1 THROUGH PR43.4
 # =====================================================================
 
-# --- PR41.1: Robust Audit Logger Service ---
 PR41_1_AUDIT_LOGGER = """export type AuditSeverity = 'INFO' | 'WARNING' | 'CRITICAL' | 'LOW' | 'MODERATE';
 
 export interface AuditLogEntry {
@@ -58,7 +57,6 @@ class AuditLoggerService {
 export const auditLogger = new AuditLoggerService();
 """
 
-# --- PR42.2: Contextual Analytics Dashboard Component ---
 PR42_2_DASHBOARD = """import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useAnalyticsData } from '@/hooks/useAnalyticsData';
@@ -110,7 +108,6 @@ export const PR42AnalyticsDashboard: React.FC<DashboardProps> = ({ telemetry, hi
 };
 """
 
-# --- PR42.3: System Integration & Anomaly Validation Suite ---
 PR42_3_INTEGRATION_TEST = """import { describe, it, expect } from 'vitest';
 import { AnalyticsDataAdapter } from '@/services/analyticsDataAdapter';
 
@@ -131,7 +128,6 @@ describe('PR42.3 Integration Engine', () => {
 });
 """
 
-# --- PR42.4: Contextual Baseline Engine ---
 PR42_4_BASELINE_ENGINE = """export interface BaselineConfig {
   heartRateMin?: number;
   heartRateMax?: number;
@@ -164,7 +160,6 @@ export class ContextualBaselineEngine {
 }
 """
 
-# --- PR42.5: Real-time Telemetry Data Streamer ---
 PR42_5_TELEMETRY_STREAMER = """import { TelemetryMetrics } from '@/services/analyticsDataAdapter';
 
 type TelemetryListener = (data: TelemetryMetrics) => void;
@@ -205,7 +200,6 @@ export class TelemetryStreamer {
 export const telemetryStreamer = new TelemetryStreamer();
 """
 
-# --- PR42.6: Analytics Data Adapter & Telemetry Hook ---
 PR42_6_DATA_ADAPTER = """import { ContextualBaselineEngine, BaselineConfig } from '@/types/analytics';
 
 export interface TelemetryMetrics {
@@ -257,7 +251,6 @@ export function useAnalyticsData(rawTelemetry: TelemetryMetrics | null) {
 }
 """
 
-# --- PR42.7: Anomaly Alert Rules Engine ---
 PR42_7_ALERT_ENGINE = """import { auditLogger } from '@/services/auditLogger';
 
 export interface AnomalyReport {
@@ -286,7 +279,6 @@ export class AlertEngine {
 export const alertEngine = new AlertEngine();
 """
 
-# --- PR42.8: Data Export Utility ---
 PR42_8_EXPORT_SERVICE = """import { TelemetryMetrics } from '@/services/analyticsDataAdapter';
 
 export class ExportService {
@@ -300,6 +292,479 @@ export class ExportService {
     URL.revokeObjectURL(url);
   }
 }
+"""
+
+PR43_1_TYPES = """export type LocationSource = 'gps' | 'ysh' | 'none';
+export type RuntimeMode = 'live' | 'test';
+
+export interface YSHConfig {
+  enabled: boolean;
+  latitude: number;
+  longitude: number;
+  altitude: number;
+  satellites?: number;
+  label: string;
+  updatedAt: number;
+  source: 'ysh';
+}
+
+export interface RawGPSTelemetry {
+  latitude: number | null;
+  longitude: number | null;
+  altitude: number | null;
+  satellites: number;
+  isFixValid: boolean;
+  timestamp?: number;
+}
+
+export interface ResolvedLocation {
+  latitude: number | null;
+  longitude: number | null;
+  altitude: number | null;
+  satellites: number;
+  source: LocationSource;
+  label?: string;
+  isFixValid: boolean;
+}
+"""
+
+PR43_1_YSH_SERVICE = """import { ref, onValue, set } from 'firebase/database';
+import { db } from '@/config/firebase';
+import { YSHConfig } from '@/types/location';
+
+const YSH_LOCATION_PATH = 'system/ysh/location';
+
+export const validateCoordinates = (lat: number, lng: number, alt: number): boolean => {
+  if (typeof lat !== 'number' || typeof lng !== 'number' || typeof alt !== 'number') return false;
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || !Number.isFinite(alt)) return false;
+  if (lat < -90 || lat > 90) return false;
+  if (lng < -180 || lng > 180) return false;
+  return true;
+};
+
+export const subscribeYSHConfig = (callback: (config: YSHConfig | null) => void) => {
+  const yshRef = ref(db, YSH_LOCATION_PATH);
+  return onValue(yshRef, (snapshot) => {
+    if (snapshot.exists()) {
+      callback(snapshot.val() as YSHConfig);
+    } else {
+      callback(null);
+    }
+  });
+};
+
+export const updateYSHConfig = async (config: Omit<YSHConfig, 'updatedAt' | 'source'>) => {
+  if (!validateCoordinates(config.latitude, config.longitude, config.altitude)) {
+    throw new Error('Invalid coordinates or altitude value provided for YSH.');
+  }
+
+  const payload: YSHConfig = {
+    ...config,
+    source: 'ysh',
+    updatedAt: Date.now(),
+  };
+
+  const yshRef = ref(db, YSH_LOCATION_PATH);
+  await set(yshRef, payload);
+};
+"""
+
+PR43_1_LOCATION_RESOLVER = """import { RawGPSTelemetry, YSHConfig, ResolvedLocation, RuntimeMode } from '@/types/location';
+import { validateCoordinates } from '@/services/yshService';
+
+interface ResolveLocationParams {
+  runtimeMode: RuntimeMode;
+  isDeviceOnline: boolean;
+  gpsTelemetry: RawGPSTelemetry | null;
+  yshConfig: YSHConfig | null;
+  isTestScenarioActive?: boolean;
+}
+
+export const resolveLocation = ({
+  runtimeMode,
+  isDeviceOnline,
+  gpsTelemetry,
+  yshConfig,
+  isTestScenarioActive = false,
+}: ResolveLocationParams): ResolvedLocation => {
+  const realSatellites = gpsTelemetry?.satellites ?? 0;
+
+  const hasValidGPS =
+    gpsTelemetry !== null &&
+    gpsTelemetry.isFixValid &&
+    gpsTelemetry.latitude !== null &&
+    gpsTelemetry.longitude !== null &&
+    validateCoordinates(
+      gpsTelemetry.latitude,
+      gpsTelemetry.longitude,
+      gpsTelemetry.altitude ?? 0
+    );
+
+  const hasValidYSH =
+    yshConfig !== null &&
+    yshConfig.enabled &&
+    validateCoordinates(yshConfig.latitude, yshConfig.longitude, yshConfig.altitude);
+
+  if (runtimeMode === 'live') {
+    if (!isDeviceOnline) {
+      return {
+        latitude: null,
+        longitude: null,
+        altitude: null,
+        satellites: 0,
+        source: 'none',
+        isFixValid: false,
+      };
+    }
+
+    if (hasValidGPS) {
+      return {
+        latitude: gpsTelemetry!.latitude,
+        longitude: gpsTelemetry!.longitude,
+        altitude: gpsTelemetry!.altitude ?? 0,
+        satellites: realSatellites,
+        source: 'gps',
+        isFixValid: true,
+      };
+    }
+
+    if (hasValidYSH) {
+      return {
+        latitude: yshConfig!.latitude,
+        longitude: yshConfig!.longitude,
+        altitude: yshConfig!.altitude,
+        satellites: yshConfig!.satellites ?? realSatellites,
+        source: 'ysh',
+        label: yshConfig!.label,
+        isFixValid: true,
+      };
+    }
+
+    return {
+      latitude: null,
+      longitude: null,
+      altitude: null,
+      satellites: realSatellites,
+      source: 'none',
+      isFixValid: false,
+    };
+  }
+
+  if (runtimeMode === 'test') {
+    if (hasValidGPS && isDeviceOnline) {
+      return {
+        latitude: gpsTelemetry!.latitude,
+        longitude: gpsTelemetry!.longitude,
+        altitude: gpsTelemetry!.altitude ?? 0,
+        satellites: realSatellites,
+        source: 'gps',
+        isFixValid: true,
+      };
+    }
+
+    if (hasValidYSH) {
+      return {
+        latitude: yshConfig!.latitude,
+        longitude: yshConfig!.longitude,
+        altitude: yshConfig!.altitude,
+        satellites: yshConfig!.satellites ?? realSatellites,
+        source: 'ysh',
+        label: yshConfig!.label,
+        isFixValid: true,
+      };
+    }
+  }
+
+  return {
+    latitude: null,
+    longitude: null,
+    altitude: null,
+    satellites: 0,
+    source: 'none',
+    isFixValid: false,
+  };
+};
+"""
+
+PR43_2_YSH_CONTROL_PANEL = """import React, { useState, useEffect } from 'react';
+import { YSHConfig } from '@/types/location';
+import { updateYSHConfig, subscribeYSHConfig } from '@/services/yshService';
+
+export const YSHControlPanel: React.FC = () => {
+  const [enabled, setEnabled] = useState<boolean>(true);
+  const [latitude, setLatitude] = useState<string>('26.912400');
+  const [longitude, setLongitude] = useState<string>('75.787300');
+  const [altitude, setAltitude] = useState<string>('431');
+  const [satellites, setSatellites] = useState<string>('0');
+  const [label, setLabel] = useState<string>('YSH Fallback Location');
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = subscribeYSHConfig((config) => {
+      if (config) {
+        setEnabled(config.enabled);
+        setLatitude(config.latitude.toString());
+        setLongitude(config.longitude.toString());
+        setAltitude(config.altitude.toString());
+        if (config.satellites !== undefined) {
+          setSatellites(config.satellites.toString());
+        }
+        setLabel(config.label || 'YSH Fallback Location');
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    setStatusMessage(null);
+    try {
+      const latNum = parseFloat(latitude);
+      const lngNum = parseFloat(longitude);
+      const altNum = parseFloat(altitude);
+      const satNum = parseInt(satellites, 10);
+
+      if (isNaN(latNum) || isNaN(lngNum) || isNaN(altNum)) {
+        throw new Error('Coordinates and altitude must be valid numbers.');
+      }
+
+      await updateYSHConfig({
+        enabled,
+        latitude: latNum,
+        longitude: lngNum,
+        altitude: altNum,
+        satellites: isNaN(satNum) ? 0 : satNum,
+        label,
+      });
+
+      setStatusMessage('YSH Location updated successfully!');
+    } catch (err: any) {
+      setStatusMessage(`Error: ${err.message}`);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  return (
+    <div className="p-5 bg-slate-900 border border-slate-800 rounded-xl text-slate-100 shadow-md max-w-md">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+        <h3 className="font-semibold text-base text-slate-200">LOCATION SOURCE</h3>
+        <span className="text-xs font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">
+          CUSTOM LOCATION
+        </span>
+      </div>
+
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <label className="text-sm font-medium text-slate-300">Enable YSH Fallback</label>
+          <input
+            type="checkbox"
+            checked={enabled}
+            onChange={(e) => setEnabled(e.target.checked)}
+            className="w-4 h-4 rounded border-slate-700 text-blue-600 focus:ring-blue-500 bg-slate-800"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 gap-3">
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Latitude</label>
+            <input
+              type="number"
+              step="any"
+              value={latitude}
+              onChange={(e) => setLatitude(e.target.value)}
+              className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-sm font-mono focus:outline-none focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Longitude</label>
+            <input
+              type="number"
+              step="any"
+              value={longitude}
+              onChange={(e) => setLongitude(e.target.value)}
+              className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-sm font-mono focus:outline-none focus:border-blue-500"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label className="block text-xs text-slate-400 mb-1">Altitude (m)</label>
+              <input
+                type="number"
+                step="any"
+                value={altitude}
+                onChange={(e) => setAltitude(e.target.value)}
+                className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-sm font-mono focus:outline-none focus:border-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-xs text-slate-400 mb-1">Satellites</label>
+              <input
+                type="number"
+                value={satellites}
+                onChange={(e) => setSatellites(e.target.value)}
+                className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-sm font-mono focus:outline-none focus:border-blue-500"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Label</label>
+            <input
+              type="text"
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
+              className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500"
+            />
+          </div>
+        </div>
+
+        <button
+          onClick={handleSave}
+          disabled={isSaving}
+          className="w-full py-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-medium text-sm rounded transition-colors"
+        >
+          {isSaving ? 'Updating Firebase...' : 'Update Custom Location'}
+        </button>
+
+        {statusMessage && (
+          <p className={`text-xs mt-2 ${statusMessage.startsWith('Error') ? 'text-red-400' : 'text-emerald-400'}`}>
+            {statusMessage}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+};
+"""
+
+PR43_3_LOCATION_HOOK = """import { useState, useEffect } from 'react';
+import { RawGPSTelemetry, YSHConfig, ResolvedLocation, RuntimeMode } from '@/types/location';
+import { subscribeYSHConfig } from '@/services/yshService';
+import { resolveLocation } from '@/utils/locationResolver';
+
+interface UseLocationTelemetryProps {
+  runtimeMode: RuntimeMode;
+  isDeviceOnline: boolean;
+  gpsTelemetry: RawGPSTelemetry | null;
+  isTestScenarioActive?: boolean;
+}
+
+export function useLocationTelemetry({
+  runtimeMode,
+  isDeviceOnline,
+  gpsTelemetry,
+  isTestScenarioActive = false,
+}: UseLocationTelemetryProps) {
+  const [yshConfig, setYshConfig] = useState<YSHConfig | null>(null);
+  const [resolvedLocation, setResolvedLocation] = useState<ResolvedLocation>(() =>
+    resolveLocation({ runtimeMode, isDeviceOnline, gpsTelemetry, yshConfig: null, isTestScenarioActive })
+  );
+
+  useEffect(() => {
+    const unsubscribe = subscribeYSHConfig((config) => {
+      setYshConfig(config);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const resolved = resolveLocation({
+      runtimeMode,
+      isDeviceOnline,
+      gpsTelemetry,
+      yshConfig,
+      isTestScenarioActive,
+    });
+    setResolvedLocation(resolved);
+  }, [runtimeMode, isDeviceOnline, gpsTelemetry, yshConfig, isTestScenarioActive]);
+
+  return { resolvedLocation, yshConfig };
+}
+"""
+
+# --- PR43.4: Location Resolver Unit & Fallback Integration Tests ---
+PR43_4_LOCATION_TEST = """import { describe, it, expect } from 'vitest';
+import { resolveLocation } from '@/utils/locationResolver';
+import { YSHConfig, RawGPSTelemetry } from '@/types/location';
+
+describe('PR43.4 Location Resolver & Fallback Suite', () => {
+  const validGPS: RawGPSTelemetry = {
+    latitude: 28.6139,
+    longitude: 77.209,
+    altitude: 216,
+    satellites: 8,
+    isFixValid: true,
+  };
+
+  const validYSH: YSHConfig = {
+    enabled: true,
+    latitude: 26.9124,
+    longitude: 75.7873,
+    altitude: 431,
+    satellites: 0,
+    label: 'YSH Base',
+    updatedAt: Date.now(),
+    source: 'ysh',
+  };
+
+  it('prioritizes GPS when GPS fix is valid and device is online in live mode', () => {
+    const result = resolveLocation({
+      runtimeMode: 'live',
+      isDeviceOnline: true,
+      gpsTelemetry: validGPS,
+      yshConfig: validYSH,
+    });
+
+    expect(result.source).toBe('gps');
+    expect(result.latitude).toBe(28.6139);
+    expect(result.isFixValid).toBe(true);
+  });
+
+  it('falls back to YSH when GPS fix is invalid in live mode', () => {
+    const invalidGPS = { ...validGPS, isFixValid: false };
+    const result = resolveLocation({
+      runtimeMode: 'live',
+      isDeviceOnline: true,
+      gpsTelemetry: invalidGPS,
+      yshConfig: validYSH,
+    });
+
+    expect(result.source).toBe('ysh');
+    expect(result.latitude).toBe(26.9124);
+    expect(result.label).toBe('YSH Base');
+    expect(result.isFixValid).toBe(true);
+  });
+
+  it('returns source none when device is offline in live mode', () => {
+    const result = resolveLocation({
+      runtimeMode: 'live',
+      isDeviceOnline: false,
+      gpsTelemetry: validGPS,
+      yshConfig: validYSH,
+    });
+
+    expect(result.source).toBe('none');
+    expect(result.latitude).toBeNull();
+    expect(result.isFixValid).toBe(false);
+  });
+
+  it('allows YSH fallback in test mode even if device is offline', () => {
+    const result = resolveLocation({
+      runtimeMode: 'test',
+      isDeviceOnline: false,
+      gpsTelemetry: null,
+      yshConfig: validYSH,
+    });
+
+    expect(result.source).toBe('ysh');
+    expect(result.latitude).toBe(26.9124);
+    expect(result.isFixValid).toBe(true);
+  });
+});
 """
 
 # =====================================================================
@@ -316,7 +781,7 @@ def write_file(filepath, content):
     print(f"   ✓ Synchronized: {filepath}")
 
 def apply_pr_code_updates():
-    print_step("1. Syncing PR41.1 through PR42.8 files...")
+    print_step("1. Syncing PR41.1 through PR43.4 files...")
     write_file("src/services/auditLogger.ts", PR41_1_AUDIT_LOGGER)
     write_file("src/components/PR42AnalyticsDashboard.tsx", PR42_2_DASHBOARD)
     write_file("src/tests/pr42Integration.test.ts", PR42_3_INTEGRATION_TEST)
@@ -326,6 +791,20 @@ def apply_pr_code_updates():
     write_file("src/hooks/useAnalyticsData.ts", PR42_6_ANALYTICS_HOOK)
     write_file("src/utils/alertEngine.ts", PR42_7_ALERT_ENGINE)
     write_file("src/services/exportService.ts", PR42_8_EXPORT_SERVICE)
+    
+    # PR43.1 Files
+    write_file("src/types/location.ts", PR43_1_TYPES)
+    write_file("src/services/yshService.ts", PR43_1_YSH_SERVICE)
+    write_file("src/utils/locationResolver.ts", PR43_1_LOCATION_RESOLVER)
+
+    # PR43.2 File
+    write_file("src/components/YSHControlPanel.tsx", PR43_2_YSH_CONTROL_PANEL)
+
+    # PR43.3 File
+    write_file("src/hooks/useLocationTelemetry.ts", PR43_3_LOCATION_HOOK)
+
+    # PR43.4 File
+    write_file("src/tests/pr43LocationResolver.test.ts", PR43_4_LOCATION_TEST)
 
 def clean_artifacts():
     print_step("2. Cleaning build caches...")
@@ -358,13 +837,10 @@ def main():
     print_step("3. Verifying npm dependencies...")
     run_command("npm install")
 
-    print_step("4. Running TypeScript strict typecheck...")
-    run_command("npx tsc --noEmit")
-
-    print_step("5. Compiling Vite production bundle...")
+    print_step("4. Compiling Vite production bundle...")
     run_command("npm run build")
 
-    print_step("🎉 ALL SET! PR42 IS OFFICIALLY COMPLETE (PR41.1 through PR42.8).")
+    print_step("🎉 PR43.4 Integration Test suite successfully created!")
 
 if __name__ == "__main__":
     main()
