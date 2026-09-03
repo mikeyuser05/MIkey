@@ -3,19 +3,37 @@ import os
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 GPS_PAGE_PATH = os.path.join(PROJECT_ROOT, "src", "pages", "GPS", "GPSPage.tsx")
 
-FIXED_GPS_PAGE_CONTENT = '''import React from 'react';
+DYNAMIC_GPS_PAGE_CONTENT = '''import React, { useEffect, useState } from 'react';
 import { GPSCard } from '../../components/dashboard/cards/GPSCard';
+import { mapFirebaseToHealthContext, StructuredHealthContext } from '../../services/aiService';
 
 export const GPSPage: React.FC = () => {
-  // Safe default telemetry fallback matching LGN12 schema
-  const gpsStatus = {
-    fix: true,
-    valid: true,
-    latitude: 26.4499,
-    longitude: 74.6399,
-    altitude: 450.2,
-    satellites: 8,
-  };
+  // Live telemetry state
+  const [telemetry, setTelemetry] = useState<StructuredHealthContext['gpsStatus']>({
+    fix: false,
+    valid: false,
+    latitude: 0,
+    longitude: 0,
+    altitude: 0,
+    satellites: 0,
+  });
+
+  useEffect(() => {
+    // PR41.2 Integration: Map dynamic Firebase updates into local GPS status state
+    // Replace this listener/event trigger with your existing Firebase RTDB `onValue` subscription node
+    const handleFirebaseUpdate = (rawPayload: any) => {
+      const normalized = mapFirebaseToHealthContext(rawPayload);
+      setTelemetry(normalized.gpsStatus);
+    };
+
+    // Placeholder: Connect to window event / global Firebase stream if present
+    const listener = (e: CustomEvent) => handleFirebaseUpdate(e.detail);
+    window.addEventListener('firebase-telemetry-update' as any, listener);
+
+    return () => {
+      window.removeEventListener('firebase-telemetry-update' as any, listener);
+    };
+  }, []);
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
@@ -27,7 +45,7 @@ export const GPSPage: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <GPSCard gpsStatus={gpsStatus} />
+        <GPSCard gpsStatus={telemetry} />
         
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between">
           <div>
@@ -63,10 +81,10 @@ export const GPSPage: React.FC = () => {
 export default GPSPage;
 '''
 
-def run_fix():
+def run_update():
     with open(GPS_PAGE_PATH, "w", encoding="utf-8") as f:
-        f.write(FIXED_GPS_PAGE_CONTENT)
-    print(f"[FIXED] Removed invalid import from {GPS_PAGE_PATH}")
+        f.write(DYNAMIC_GPS_PAGE_CONTENT)
+    print(f"[UPDATED] {GPS_PAGE_PATH} with dynamic state handling.")
 
 if __name__ == "__main__":
-    run_fix()
+    run_update()

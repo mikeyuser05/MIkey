@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GPSCard } from '../../components/dashboard/cards/GPSCard';
+import { mapFirebaseToHealthContext, StructuredHealthContext } from '../../services/aiService';
 
 export const GPSPage: React.FC = () => {
-  // Safe default telemetry fallback matching LGN12 schema
-  const gpsStatus = {
-    fix: true,
-    valid: true,
-    latitude: 26.4499,
-    longitude: 74.6399,
-    altitude: 450.2,
-    satellites: 8,
-  };
+  // Live telemetry state
+  const [telemetry, setTelemetry] = useState<StructuredHealthContext['gpsStatus']>({
+    fix: false,
+    valid: false,
+    latitude: 0,
+    longitude: 0,
+    altitude: 0,
+    satellites: 0,
+  });
+
+  useEffect(() => {
+    // PR41.2 Integration: Map dynamic Firebase updates into local GPS status state
+    // Replace this listener/event trigger with your existing Firebase RTDB `onValue` subscription node
+    const handleFirebaseUpdate = (rawPayload: any) => {
+      const normalized = mapFirebaseToHealthContext(rawPayload);
+      setTelemetry(normalized.gpsStatus);
+    };
+
+    // Placeholder: Connect to window event / global Firebase stream if present
+    const listener = (e: CustomEvent) => handleFirebaseUpdate(e.detail);
+    window.addEventListener('firebase-telemetry-update' as any, listener);
+
+    return () => {
+      window.removeEventListener('firebase-telemetry-update' as any, listener);
+    };
+  }, []);
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
@@ -22,7 +40,7 @@ export const GPSPage: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <GPSCard gpsStatus={gpsStatus} />
+        <GPSCard gpsStatus={telemetry} />
         
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between">
           <div>
