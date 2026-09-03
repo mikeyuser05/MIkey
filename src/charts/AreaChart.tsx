@@ -23,7 +23,7 @@ export const AreaChart: React.FC<ChartBaseProps> = ({ data, metricType, title, s
           </defs>
           <CartesianGrid strokeDasharray={GLOBAL_CHART_DEFAULTS.gridConfig.strokeDasharray} vertical={false} stroke={config.gridStroke} />
           <XAxis dataKey="formattedTime" tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} dy={8} />
-          <YAxis domain={config.yAxisDomain} tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} />
+          <YAxis domain={config.yAxisDomain as any} tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} tickLine={false} />
           <Tooltip contentStyle={GLOBAL_CHART_DEFAULTS.tooltipContentStyle} formatter={(value: number) => [`${value}${unit}`, config.name]} />
           <Area type="monotone" dataKey="value" stroke={colors.stroke} strokeWidth={2} fill={`url(#${gradientId})`} dot={false} />
         </RechartsAreaChart>

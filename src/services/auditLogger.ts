@@ -1,50 +1,48 @@
+export type AuditSeverity = 'INFO' | 'WARNING' | 'CRITICAL' | 'LOW' | 'MODERATE';
+
 export interface AuditLogEntry {
   id: string;
-  timestamp: string;
+  timestamp: number;
   action: string;
-  severity: 'INFO' | 'WARNING' | 'CRITICAL';
-  actor: string;
+  severity: AuditSeverity;
   details: string;
+  actor?: string;
+  eventType?: string;
+  nodeId?: string;
+  simulated?: boolean;
 }
 
-const AUDIT_STORAGE_KEY = 'HPO_AUDIT_LOGS_PR38';
-
-class AuditLogger {
+class AuditLoggerService {
   private logs: AuditLogEntry[] = [];
 
-  constructor() {
-    const saved = localStorage.getItem(AUDIT_STORAGE_KEY);
-    this.logs = saved ? JSON.parse(saved) : [];
-  }
-
-  log(action: string, severity: 'INFO' | 'WARNING' | 'CRITICAL', details: string, actor = 'System Engine') {
-    const newEntry: AuditLogEntry = {
-      id: `AUD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-      timestamp: new Date().toISOString(),
+  log(
+    action: string,
+    details: string,
+    severity: AuditSeverity = 'INFO',
+    actorOrNodeId: string = 'System Engine',
+    simulated: boolean = false
+  ): AuditLogEntry {
+    const entry: AuditLogEntry = {
+      id: `audit-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+      timestamp: Date.now(),
       action,
       severity,
-      actor,
       details,
+      actor: actorOrNodeId,
+      nodeId: actorOrNodeId,
+      simulated,
     };
-
-    this.logs.unshift(newEntry);
-    
-    // Maintain max 100 entries for memory optimization
-    if (this.logs.length > 100) {
-      this.logs = this.logs.slice(0, 100);
-    }
-
-    localStorage.setItem(AUDIT_STORAGE_KEY, JSON.stringify(this.logs));
+    this.logs.unshift(entry);
+    return entry;
   }
 
   getLogs(): AuditLogEntry[] {
-    return [...this.logs];
+    return this.logs;
   }
 
   clearLogs(): void {
     this.logs = [];
-    localStorage.removeItem(AUDIT_STORAGE_KEY);
   }
 }
 
-export const auditLogger = new AuditLogger();
+export const auditLogger = new AuditLoggerService();
