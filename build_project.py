@@ -84,7 +84,7 @@ export default GPSPage;
 def run_update():
     with open(GPS_PAGE_PATH, "w", encoding="utf-8") as f:
         f.write(DYNAMIC_GPS_PAGE_CONTENT)
-    print(f"[UPDATED] {GPS_PAGE_PATH} with dynamic state handling.")
+    print(f"[UPDATED] {GPS_PAGE_PATH} with dynamic state handling (ok).")
 
 if __name__ == "__main__":
     run_update()
