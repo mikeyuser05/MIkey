@@ -2,38 +2,40 @@ import { ref, onValue, set } from 'firebase/database';
 import { firebaseDb as db } from '../config/firebase.config';
 import { YSHConfig } from '../types/location';
 
-const YSH_LOCATION_PATH = 'system/ysh/location';
+export const subscribeYSHConfig = (callback: (config: YSHConfig) => void) => {
+  if (!db) return () => {};
 
-export const validateCoordinates = (lat: number, lng: number, alt: number): boolean => {
-  if (typeof lat !== 'number' || typeof lng !== 'number' || typeof alt !== 'number') return false;
-  if (!Number.isFinite(lat) || !Number.isFinite(lng) || !Number.isFinite(alt)) return false;
-  if (lat < -90 || lat > 90) return false;
-  if (lng < -180 || lng > 180) return false;
-  return true;
-};
-
-export const subscribeYSHConfig = (callback: (config: YSHConfig | null) => void) => {
-  const yshRef = ref(db, YSH_LOCATION_PATH);
-  return onValue(yshRef, (snapshot) => {
+  const yshRef = ref(db, 'system/ysh/location');
+  const unsubscribe = onValue(yshRef, (snapshot) => {
     if (snapshot.exists()) {
-      callback(snapshot.val() as YSHConfig);
-    } else {
-      callback(null);
+      callback(snapshot.val());
     }
   });
+
+  return unsubscribe;
 };
 
-export const updateYSHConfig = async (config: Omit<YSHConfig, 'updatedAt' | 'source'>) => {
-  if (!validateCoordinates(config.latitude, config.longitude, config.altitude)) {
-    throw new Error('Invalid coordinates or altitude value provided for YSH.');
-  }
+export const updateYSHConfig = async (config: YSHConfig): Promise<void> => {
+  if (!db) return;
 
-  const payload: YSHConfig = {
+  const timestamp = Date.now();
+
+  // 1. Save state to YSH config path
+  const yshRef = ref(db, 'system/ysh/location');
+  await set(yshRef, {
     ...config,
-    source: 'ysh',
-    updatedAt: Date.now(),
-  };
+    updatedAt: timestamp
+  });
 
-  const yshRef = ref(db, YSH_LOCATION_PATH);
-  await set(yshRef, payload);
+  // 2. Sync values directly into the hardware telemetry node used by the GPS page
+  if (config.enabled) {
+    const hardwareGpsRef = ref(db, 'NOEXCUSE_HPO/GPS');
+    await set(hardwareGpsRef, {
+      Altitude: config.altitude,
+      Latitude: config.latitude,
+      Longitude: config.longitude,
+      Satellites: config.satellites,
+      Valid: true
+    });
+  }
 };

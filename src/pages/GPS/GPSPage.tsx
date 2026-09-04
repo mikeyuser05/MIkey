@@ -1,34 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { GPSCard } from '../../components/dashboard/cards/GPSCard';
-import { mapFirebaseToHealthContext, StructuredHealthContext } from '../../services/aiService';
+import { useGPSTelemetry } from '../../hooks/useGPSTelemetry';
 
 export const GPSPage: React.FC = () => {
-  // Live telemetry state
-  const [telemetry, setTelemetry] = useState<StructuredHealthContext['gpsStatus']>({
-    fix: false,
-    valid: false,
-    latitude: 0,
-    longitude: 0,
-    altitude: 0,
-    satellites: 0,
-  });
-
-  useEffect(() => {
-    // PR41.2 Integration: Map dynamic Firebase updates into local GPS status state
-    // Replace this listener/event trigger with your existing Firebase RTDB `onValue` subscription node
-    const handleFirebaseUpdate = (rawPayload: any) => {
-      const normalized = mapFirebaseToHealthContext(rawPayload);
-      setTelemetry(normalized.gpsStatus);
-    };
-
-    // Placeholder: Connect to window event / global Firebase stream if present
-    const listener = (e: CustomEvent) => handleFirebaseUpdate(e.detail);
-    window.addEventListener('firebase-telemetry-update' as any, listener);
-
-    return () => {
-      window.removeEventListener('firebase-telemetry-update' as any, listener);
-    };
-  }, []);
+  // PR41.2 Integration: Consume real-time telemetry state via hook
+  const telemetry = useGPSTelemetry();
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
@@ -40,12 +16,19 @@ export const GPSPage: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Pass the telemetry object containing fix, valid, latitude, longitude, etc. */}
         <GPSCard gpsStatus={telemetry} />
         
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col justify-between">
           <div>
             <h3 className="font-semibold text-sm text-slate-200 mb-2">Hardware & Signal Specs</h3>
             <ul className="space-y-2 text-xs text-slate-400">
+              <li className="flex justify-between border-b border-slate-800/60 pb-1.5">
+                <span>Signal Fix Status:</span>
+                <span className={`font-mono text-xs font-semibold ${telemetry.valid ? 'text-emerald-400' : 'text-rose-500'}`}>
+                  {telemetry.valid ? 'GPS FIX ACTIVE' : 'NO GPS FIX'}
+                </span>
+              </li>
               <li className="flex justify-between border-b border-slate-800/60 pb-1.5">
                 <span>Receiver Hardware:</span>
                 <span className="font-mono text-slate-200">u-blox Neo-6M</span>

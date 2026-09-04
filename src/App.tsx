@@ -27,6 +27,8 @@ import { PR16OfflineSyncMonitor } from './components/PR16OfflineSyncMonitor';
 import HealthCheck from './pages/HealthCheck';
 import NotFound from './pages/NotFound';
 
+import { YSHControlPanel } from './components/YSHControlPanel';
+
 export const App: React.FC = () => {
   useEffect(() => {
     pwaService.init();
@@ -71,10 +73,20 @@ export const App: React.FC = () => {
 
                   <Route path="/offline" element={<PR16OfflineSyncMonitor />} />
                   <Route path="/offline-monitor" element={<Navigate to="/offline" replace />} />
-                  <Route path="/offline-sync" element={<Navigate to="/offline" replace />} />
+                  <Route path="/offline-sync" element={<Navigate to="/navigate" replace />} />
 
                   <Route path="/hardware" element={<PR14HardwareLab />} />
                   <Route path="/devices" element={<Navigate to="/hardware" replace />} />
+
+                  {/* Unlinked Admin Routes */}
+                  <Route 
+                    path="/ysh-admin" 
+                    element={
+                      <div className="p-8 max-w-xl mx-auto">
+                        <YSHControlPanel />
+                      </div>
+                    } 
+                  />
 
                   {/* Health & Fallbacks */}
                   <Route path="/health" element={<HealthCheck />} />
