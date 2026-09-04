@@ -1,4 +1,4 @@
-import { ContextualBaselineEngine, BaselineConfig } from '@/types/analytics';
+import { ContextualBaselineEngine, BaselineConfig } from '../types/analytics';
 
 export interface TelemetryMetrics {
   heartRate: number;

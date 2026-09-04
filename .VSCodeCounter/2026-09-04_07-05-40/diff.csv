@@ -1,0 +1,41 @@
+"filename", "language", "TypeScript", "TypeScript JSX", "Python", "JSON", "JavaScript", "comment", "blank", "total"
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py", "Python", 0, 0, 556, 0, 0, 3, 8, 567
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package-lock.json", "JSON", 0, 0, 0, 45, 0, 0, 0, 45
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package.json", "JSON", 0, 0, 0, 1, 0, 0, 0, 1
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\App.tsx", "TypeScript JSX", 0, 3, 0, 0, 0, 1, 2, 6
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Sidebar.tsx", "TypeScript JSX", 0, 2, 0, 0, 0, 0, 1, 3
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR42AnalyticsDashboard.tsx", "TypeScript JSX", 0, 45, 0, 0, 0, 0, 5, 50
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\YSHControlPanel.tsx", "TypeScript JSX", 0, 139, 0, 0, 0, 0, 15, 154
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\cards\GPSCard.tsx", "TypeScript JSX", 0, 84, 0, 0, 0, 1, 8, 93
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\hooks\useAnalyticsData.ts", "TypeScript", 12, 0, 0, 0, 0, 0, 4, 16
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\hooks\useLocationTelemetry.ts", "TypeScript", 38, 0, 0, 0, 0, 0, 6, 44
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsDistance.ts", "TypeScript", 50, 0, 0, 0, 0, 27, 14, 91
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsStateManager.ts", "TypeScript", 57, 0, 0, 0, 0, 37, 20, 114
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsTelemetryAdapter.ts", "TypeScript", 28, 0, 0, 0, 0, 35, 7, 70
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsTrajectory.ts", "TypeScript", 79, 0, 0, 0, 0, 71, 32, 182
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsTrajectoryGuard.ts", "TypeScript", 97, 0, 0, 0, 0, 49, 25, 171
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsTransportContract.ts", "TypeScript", 48, 0, 0, 0, 0, 81, 14, 143
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsValidator.test.ts", "TypeScript", 205, 0, 0, 0, 0, 0, 49, 254
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsValidator.ts", "TypeScript", 97, 0, 0, 0, 0, 32, 21, 150
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\guardedGPSTrajectory.ts", "TypeScript", 61, 0, 0, 0, 0, 45, 25, 131
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\index.ts", "TypeScript", 20, 0, 0, 0, 0, 4, 5, 29
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\kigEngine.ts", "TypeScript", 26, 0, 0, 0, 0, 18, 8, 52
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\kigGPSSession.ts", "TypeScript", 96, 0, 0, 0, 0, 44, 31, 171
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\types.ts", "TypeScript", 33, 0, 0, 0, 0, 65, 15, 113
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\GPS\GPSPage.tsx", "TypeScript JSX", 0, 64, 0, 0, 0, 4, 9, 77
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\ExportService.ts", "TypeScript", 9, 0, 0, 0, 0, 0, 2, 11
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\aiService.ts", "TypeScript", 67, 0, 0, 0, 0, 4, 8, 79
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\analyticsDataAdapter.ts", "TypeScript", 26, 0, 0, 0, 0, 0, 7, 33
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\auditLogger.ts", "TypeScript", 3, 0, 0, 0, 0, -1, -4, -2
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\telemetryStreamer.ts", "TypeScript", 31, 0, 0, 0, 0, 0, 8, 39
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\yshService.ts", "TypeScript", 33, 0, 0, 0, 0, 0, 7, 40
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\pr42Integration.test.ts", "TypeScript", 16, 0, 0, 0, 0, 0, 3, 19
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\pr43LocationResolver.test.ts", "TypeScript", 68, 0, 0, 0, 0, 0, 11, 79
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\analytics.ts", "TypeScript", -9, 0, 0, 0, 0, -4, -2, -15
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\location.ts", "TypeScript", 1, 0, 0, 0, 0, -1, -1, -1
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\utils\alertEngine.ts", "TypeScript", 23, 0, 0, 0, 0, 0, 4, 27
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\utils\locationResolver.ts", "TypeScript", 104, 0, 0, 0, 0, 0, 12, 116
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tailwind.config.js", "JavaScript", 0, 0, 0, 0, -96, 0, -1, -97
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.js", "JavaScript", 0, 0, 0, 0, -43, 0, -1, -44
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.ts", "TypeScript", -33, 0, 0, 0, 0, 0, -1, -34
+"Total", "-", 1286, 337, 556, 46, -139, 515, 376, 2977

@@ -1,4 +1,4 @@
-import { TelemetryMetrics } from '@/services/analyticsDataAdapter';
+import { TelemetryMetrics } from '../services/analyticsDataAdapter';
 
 type TelemetryListener = (data: TelemetryMetrics) => void;
 

@@ -1,6 +1,6 @@
 import { ref, onValue, set } from 'firebase/database';
-import { db } from '@/config/firebase';
-import { YSHConfig } from '@/types/location';
+import { firebaseDb as db } from '../config/firebase.config';
+import { YSHConfig } from '../types/location';
 
 const YSH_LOCATION_PATH = 'system/ysh/location';
 

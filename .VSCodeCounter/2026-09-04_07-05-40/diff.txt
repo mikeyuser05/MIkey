@@ -1,0 +1,83 @@
+Date : 2026-09-04 07:05:40
+Directory : c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build
+Total : 39 files,  2086 codes, 515 comments, 376 blanks, all 2977 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| TypeScript     |         28 |      1,286 |        506 |        330 |      2,122 |
+| Python         |          1 |        556 |          3 |          8 |        567 |
+| TypeScript JSX |          6 |        337 |          6 |         40 |        383 |
+| JSON           |          2 |         46 |          0 |          0 |         46 |
+| JavaScript     |          2 |       -139 |          0 |         -2 |       -141 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                               | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                  |         39 |      2,086 |        515 |        376 |      2,977 |
+| . (Files)                                                                                          |          6 |        430 |          3 |          5 |        438 |
+| src                                                                                                |         33 |      1,656 |        512 |        371 |      2,539 |
+| src (Files)                                                                                        |          1 |          3 |          1 |          2 |          6 |
+| src\components                                                                                     |          4 |        270 |          1 |         29 |        300 |
+| src\components (Files)                                                                             |          2 |        184 |          0 |         20 |        204 |
+| src\components\Layout                                                                              |          1 |          2 |          0 |          1 |          3 |
+| src\components\dashboard                                                                           |          1 |         84 |          1 |          8 |         93 |
+| src\components\dashboard\cards                                                                     |          1 |         84 |          1 |          8 |         93 |
+| src\hooks                                                                                          |          2 |         50 |          0 |         10 |         60 |
+| src\kig                                                                                            |         13 |        897 |        508 |        266 |      1,671 |
+| src\pages                                                                                          |          1 |         64 |          4 |          9 |         77 |
+| src\pages\GPS                                                                                      |          1 |         64 |          4 |          9 |         77 |
+| src\services                                                                                       |          6 |        169 |          3 |         28 |        200 |
+| src\tests                                                                                          |          2 |         84 |          0 |         14 |         98 |
+| src\types                                                                                          |          2 |         -8 |         -5 |         -3 |        -16 |
+| src\utils                                                                                          |          2 |        127 |          0 |         16 |        143 |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                           | language       | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py                           | Python         |        556 |          3 |          8 |        567 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package-lock.json                          | JSON           |         45 |          0 |          0 |         45 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package.json                               | JSON           |          1 |          0 |          0 |          1 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\App.tsx                                | TypeScript JSX |          3 |          1 |          2 |          6 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\Layout\Sidebar.tsx          | TypeScript JSX |          2 |          0 |          1 |          3 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR42AnalyticsDashboard.tsx  | TypeScript JSX |         45 |          0 |          5 |         50 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\YSHControlPanel.tsx         | TypeScript JSX |        139 |          0 |         15 |        154 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\cards\GPSCard.tsx | TypeScript JSX |         84 |          1 |          8 |         93 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\hooks\useAnalyticsData.ts              | TypeScript     |         12 |          0 |          4 |         16 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\hooks\useLocationTelemetry.ts          | TypeScript     |         38 |          0 |          6 |         44 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsDistance.ts                     | TypeScript     |         50 |         27 |         14 |         91 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsStateManager.ts                 | TypeScript     |         57 |         37 |         20 |        114 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsTelemetryAdapter.ts             | TypeScript     |         28 |         35 |          7 |         70 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsTrajectory.ts                   | TypeScript     |         79 |         71 |         32 |        182 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsTrajectoryGuard.ts              | TypeScript     |         97 |         49 |         25 |        171 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsTransportContract.ts            | TypeScript     |         48 |         81 |         14 |        143 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsValidator.test.ts               | TypeScript     |        205 |          0 |         49 |        254 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\gpsValidator.ts                    | TypeScript     |         97 |         32 |         21 |        150 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\guardedGPSTrajectory.ts            | TypeScript     |         61 |         45 |         25 |        131 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\index.ts                           | TypeScript     |         20 |          4 |          5 |         29 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\kigEngine.ts                       | TypeScript     |         26 |         18 |          8 |         52 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\kigGPSSession.ts                   | TypeScript     |         96 |         44 |         31 |        171 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\kig\types.ts                           | TypeScript     |         33 |         65 |         15 |        113 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\GPS\GPSPage.tsx                  | TypeScript JSX |         64 |          4 |          9 |         77 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\ExportService.ts              | TypeScript     |          9 |          0 |          2 |         11 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\aiService.ts                  | TypeScript     |         67 |          4 |          8 |         79 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\analyticsDataAdapter.ts       | TypeScript     |         26 |          0 |          7 |         33 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\auditLogger.ts                | TypeScript     |          3 |         -1 |         -4 |         -2 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\telemetryStreamer.ts          | TypeScript     |         31 |          0 |          8 |         39 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\yshService.ts                 | TypeScript     |         33 |          0 |          7 |         40 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\pr42Integration.test.ts          | TypeScript     |         16 |          0 |          3 |         19 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\tests\pr43LocationResolver.test.ts     | TypeScript     |         68 |          0 |         11 |         79 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\analytics.ts                     | TypeScript     |         -9 |         -4 |         -2 |        -15 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\types\location.ts                      | TypeScript     |          1 |         -1 |         -1 |         -1 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\utils\alertEngine.ts                   | TypeScript     |         23 |          0 |          4 |         27 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\utils\locationResolver.ts              | TypeScript     |        104 |          0 |         12 |        116 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\tailwind.config.js                         | JavaScript     |        -96 |          0 |         -1 |        -97 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.js                             | JavaScript     |        -43 |          0 |         -1 |        -44 |
+| c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.ts                             | TypeScript     |        -33 |          0 |         -1 |        -34 |
+| Total                                                                                              |                |      2,086 |        515 |        376 |      2,977 |
++----------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

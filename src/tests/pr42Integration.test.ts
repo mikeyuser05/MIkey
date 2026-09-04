@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { AnalyticsDataAdapter } from '@/services/analyticsDataAdapter';
+import { AnalyticsDataAdapter } from '../services/analyticsDataAdapter';
 
 describe('PR42.3 Integration Engine', () => {
   it('correctly flags anomalous vitals against baseline thresholds', () => {

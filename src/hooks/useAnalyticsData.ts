@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { analyticsAdapter, TelemetryMetrics } from '@/services/analyticsDataAdapter';
+import { analyticsAdapter, TelemetryMetrics } from '../services/analyticsDataAdapter';
 
 export function useAnalyticsData(rawTelemetry: TelemetryMetrics | null) {
   const [processedData, setProcessedData] = useState<ReturnType<typeof analyticsAdapter.processTelemetry> | null>(null);

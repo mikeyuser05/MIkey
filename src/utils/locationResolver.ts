@@ -1,5 +1,5 @@
-import { RawGPSTelemetry, YSHConfig, ResolvedLocation, RuntimeMode } from '@/types/location';
-import { validateCoordinates } from '@/services/yshService';
+import { RawGPSTelemetry, YSHConfig, ResolvedLocation, RuntimeMode } from '../types/location';
+import { validateCoordinates } from '../services/yshService';
 
 interface ResolveLocationParams {
   runtimeMode: RuntimeMode;

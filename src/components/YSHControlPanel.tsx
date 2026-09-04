@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { YSHConfig } from '@/types/location';
-import { updateYSHConfig, subscribeYSHConfig } from '@/services/yshService';
+import { YSHConfig } from '../types/location';
+import { updateYSHConfig, subscribeYSHConfig } from '../services/yshService';
 
 export const YSHControlPanel: React.FC = () => {
   const [enabled, setEnabled] = useState<boolean>(true);
@@ -129,7 +129,7 @@ export const YSHControlPanel: React.FC = () => {
               type="text"
               value={label}
               onChange={(e) => setLabel(e.target.value)}
-              className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500"
+              className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1.5 text-slate-200 focus:outline-none focus:border-blue-500"
             />
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { resolveLocation } from '@/utils/locationResolver';
-import { YSHConfig, RawGPSTelemetry } from '@/types/location';
+import { resolveLocation } from '../utils/locationResolver';
+import { YSHConfig, RawGPSTelemetry } from '../types/location';
 
 describe('PR43.4 Location Resolver & Fallback Suite', () => {
   const validGPS: RawGPSTelemetry = {

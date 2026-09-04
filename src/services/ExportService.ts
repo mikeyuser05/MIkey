@@ -1,4 +1,4 @@
-import { TelemetryMetrics } from '@/services/analyticsDataAdapter';
+import { TelemetryMetrics } from '../services/analyticsDataAdapter';
 
 export class ExportService {
   public static exportToJSON(data: TelemetryMetrics[], filename: string = 'telemetry_export.json'): void {

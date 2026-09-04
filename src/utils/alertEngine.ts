@@ -1,4 +1,4 @@
-import { auditLogger } from '@/services/auditLogger';
+import { auditLogger } from '../services/auditLogger';
 
 export interface AnomalyReport {
   isHeartRateAnomalous: boolean;

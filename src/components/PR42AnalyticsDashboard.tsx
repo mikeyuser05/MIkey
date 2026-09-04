@@ -1,7 +1,7 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { useAnalyticsData } from '@/hooks/useAnalyticsData';
-import { TelemetryMetrics } from '@/services/analyticsDataAdapter';
+import { useAnalyticsData } from '../hooks/useAnalyticsData';
+import { TelemetryMetrics } from '../services/analyticsDataAdapter';
 
 interface DashboardProps {
   telemetry: TelemetryMetrics | null;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { RawGPSTelemetry, YSHConfig, ResolvedLocation, RuntimeMode } from '@/types/location';
-import { subscribeYSHConfig } from '@/services/yshService';
-import { resolveLocation } from '@/utils/locationResolver';
+import { RawGPSTelemetry, YSHConfig, ResolvedLocation, RuntimeMode } from '../types/location';
+import { subscribeYSHConfig } from '../services/yshService';
+import { resolveLocation } from '../utils/locationResolver';
 
 interface UseLocationTelemetryProps {
   runtimeMode: RuntimeMode;
