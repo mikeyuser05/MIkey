@@ -3,6 +3,7 @@
  */
 
 import React, { useState } from 'react';
+import { HeartRateCard } from '../components/dashboard/HeartRateCard'; // Imported alongside your telemetry panels
 
 export const Dashboard: React.FC = () => {
   const [userQuery, setUserQuery] = useState('');
@@ -50,24 +51,34 @@ export const Dashboard: React.FC = () => {
       {/* Grid Layout (Auto-fit for Responsive Mobile View) */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
         {/* Left Column: Metrics & Device Status */}
-        <div style={{ backgroundColor: '#111827', padding: '20px', borderRadius: '12px', border: '1px solid #1f2937' }}>
-          <h3 style={{ marginTop: 0, color: '#60a5fa' }}>📱 Live Telemetry & Baselines</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '16px' }}>
-            <div style={{ backgroundColor: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-              <span style={{ color: '#94a3b8', fontSize: '12px' }}>Heart Rate</span>
-              <h2 style={{ margin: '4px 0 0 0' }}>72 <span style={{ fontSize: '14px', color: '#94a3b8' }}>bpm</span></h2>
-            </div>
-            <div style={{ backgroundColor: '#1f2937', padding: '12px', borderRadius: '8px' }}>
-              <span style={{ color: '#94a3b8', fontSize: '12px' }}>SpO₂</span>
-              <h2 style={{ margin: '4px 0 0 0' }}>98 <span style={{ fontSize: '14px', color: '#94a3b8' }}>%</span></h2>
-            </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          
+          {/* Upper Grid: Vitals & Sensors */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '16px' }}>
+            {/* Heart Rate Card with Filtered/Raw Switch */}
+            <HeartRateCard />
           </div>
 
-          <div style={{ marginTop: '24px', backgroundColor: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-            <h4 style={{ margin: '0 0 8px 0', color: '#34d399' }}>XAI Health Reasoner (PR6 - PR10)</h4>
-            <p style={{ margin: 0, fontSize: '13px', color: '#cbd5e1', lineHeight: '1.5' }}>
-              System health evaluated as <strong>OPTIMAL</strong>. Longitudinal baseline analysis indicates zero critical anomaly spikes over the last 24 hours.
-            </p>
+          {/* Legacy Live Telemetry & Baselines */}
+          <div style={{ backgroundColor: '#111827', padding: '20px', borderRadius: '12px', border: '1px solid #1f2937' }}>
+            <h3 style={{ marginTop: 0, color: '#60a5fa' }}>📱 Live Telemetry & Baselines</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '16px' }}>
+              <div style={{ backgroundColor: '#1f2937', padding: '12px', borderRadius: '8px' }}>
+                <span style={{ color: '#94a3b8', fontSize: '12px' }}>Heart Rate (Fallback)</span>
+                <h2 style={{ margin: '4px 0 0 0' }}>72 <span style={{ fontSize: '14px', color: '#94a3b8' }}>bpm</span></h2>
+              </div>
+              <div style={{ backgroundColor: '#1f2937', padding: '12px', borderRadius: '8px' }}>
+                <span style={{ color: '#94a3b8', fontSize: '12px' }}>SpO₂</span>
+                <h2 style={{ margin: '4px 0 0 0' }}>98 <span style={{ fontSize: '14px', color: '#94a3b8' }}>%</span></h2>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '24px', backgroundColor: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+              <h4 style={{ margin: '0 0 8px 0', color: '#34d399' }}>XAI Health Reasoner (PR6 - PR10)</h4>
+              <p style={{ margin: 0, fontSize: '13px', color: '#cbd5e1', lineHeight: '1.5' }}>
+                System health evaluated as <strong>OPTIMAL</strong>. Longitudinal baseline analysis indicates zero critical anomaly spikes over the last 24 hours.
+              </p>
+            </div>
           </div>
         </div>
 
