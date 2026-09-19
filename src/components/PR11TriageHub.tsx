@@ -8,35 +8,51 @@ import { simulationEngine, SimulationScenario } from '../services/simulationEngi
 import { simulatedVoiceDispatcher } from '../services/simulatedVoiceDispatcher';
 import { auditLogger } from '../services/auditLogger';
 import { AlertEvaluationResult, EmergencyContact, AuditLogEntry } from '../types/pr11Triage';
-import { useTheme } from '@hooks/useTheme';
-import { useGlobalContext } from '@hooks/useGlobalContext';
+import { useTheme } from '../hooks/useTheme';
+import { triggerPR44EmergencyAlert } from '../services/emergencyAlertService';
 
 export const PR11TriageHub: React.FC = () => {
   const { setPalette } = useTheme();
-  const globalContext = useGlobalContext() as any;
 
   const [selectedScenario, setSelectedScenario] = useState<SimulationScenario>('HEALTHY_BASELINE');
   const [activeEvaluations, setActiveEvaluations] = useState<AlertEvaluationResult[]>([]);
   const [currentState, setCurrentState] = useState(emergencyStateMachine.getState());
   const [preferences, setPreferences] = useState(emergencyPreferencesStore.getPreferences());
-  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(auditLogger.getLogs());
+  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(() => auditLogger.getLogs() as AuditLogEntry[]);
 
-  // Auto-switch palette when Emergency state triggers
-  useEffect(() => {
-    if (currentState && (currentState.toString().toUpperCase().includes('CRITICAL') || currentState.toString().toUpperCase().includes('HAZARD'))) {
-      setPalette('tactical');
-    }
-  }, [currentState, setPalette]);
-  // New Contact Form State
+  // Contact Form State
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [contactRel, setContactRel] = useState<EmergencyContact['relationship']>('PRIMARY_EMERGENCY');
 
-  // Simulation & Telemetry Evaluation Loop
+  // Auto-switch palette when Emergency or Warning state triggers
+  useEffect(() => {
+    if (currentState && (currentState.toString().toUpperCase().includes('CRITICAL') || currentState.toString().toUpperCase().includes('HAZARD') || currentState === 'EMERGENCY')) {
+      setPalette('tactical');
+    }
+  }, [currentState, setPalette]);
+
+  // Manual Trigger Handler
+  const handleSimulateEmergency = async () => {
+    const primaryPhone = preferences.contacts.find((c) => c.isPrimary)?.phone;
+    const result = await triggerPR44EmergencyAlert(
+      138,
+      84,
+      'Critical Hypoxia & Tachycardia Detected',
+      primaryPhone
+    );
+    if (result.success) {
+      alert('🚨 Emergency SMS Alert dispatched via Twilio!');
+    } else {
+      alert(`Failed to send SMS: ${result.error}`);
+    }
+  };
+
+  // Telemetry Evaluation and Automated Emergency Dispatch Loop
   useEffect(() => {
     simulationEngine.setScenario(selectedScenario);
 
-    const interval = setInterval(() => {
+    const interval = setInterval(async () => {
       const currentTime = Date.now();
       const snapshot = simulationEngine.generateSnapshot(currentTime);
       const rawEvals = evaluateTelemetrySnapshot(snapshot, currentTime);
@@ -51,6 +67,8 @@ export const PR11TriageHub: React.FC = () => {
         if (ev.state === 'EMERGENCY') {
           const decision = emergencyPolicyEngine.evaluatePolicy(ev, currentTime);
           if (decision.actionEligible && decision.targetContact) {
+            
+            // 1. Voice Call Dispatch (subject to call engine cooldowns)
             const dispatch = simulatedVoiceDispatcher.generateSimulatedCall(
               ev,
               decision.targetContact,
@@ -58,9 +76,19 @@ export const PR11TriageHub: React.FC = () => {
               'Sector 4 Gateway Node',
               currentTime
             );
+
+            // 2. Immediate SMS Dispatch with Vitals & Location (decoupled from call locks)
+            const primaryPhone = decision.targetContact.phone || preferences.contacts.find((c) => c.isPrimary)?.phone;
+            triggerPR44EmergencyAlert(
+              snapshot.heartRate || 140,
+              snapshot.spo2 || 85,
+              ev.reason,
+              primaryPhone
+            );
+
             auditLogger.log(
               'SIMULATED_ACTION_ATTEMPTED',
-              `Dispatched call to ${dispatch.recipientName}: ${dispatch.messageText}`,
+              `Dispatched Voice Call & Location SMS to ${dispatch.recipientName} (${primaryPhone}): ${dispatch.messageText}`,
               ev.severity,
               ev.nodeId,
               true
@@ -69,11 +97,11 @@ export const PR11TriageHub: React.FC = () => {
         }
       }
 
-      setAuditLogs(auditLogger.getLogs());
+      setAuditLogs(auditLogger.getLogs() as AuditLogEntry[]);
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [selectedScenario]);
+  }, [selectedScenario, preferences]);
 
   const handleScenarioChange = (scenario: SimulationScenario) => {
     setSelectedScenario(scenario);
@@ -97,7 +125,7 @@ export const PR11TriageHub: React.FC = () => {
       phone: contactPhone,
       relationship: contactRel,
       isPrimary: preferences.contacts.length === 0,
-      enabled: true
+      enabled: true,
     });
 
     setPreferences(emergencyPreferencesStore.getPreferences());
@@ -138,18 +166,20 @@ export const PR11TriageHub: React.FC = () => {
           PR11 — Smart Alert Triage & Emergency Operations Hub
         </h1>
         <p style={{ margin: '4px 0 0 0', color: '#64748b' }}>
-          Deterministic triage pipeline, anti-flicker validation, emergency preferences & audit logging.
+          Deterministic triage pipeline, anti-flicker validation, emergency preferences & dual-channel voice/SMS dispatch.
         </p>
       </header>
 
       {/* State Machine Status & Action Bar */}
-      <div style={{
-        padding: '20px',
-        borderRadius: '12px',
-        marginBottom: '24px',
-        backgroundColor: currentState === 'EMERGENCY' ? '#fef2f2' : currentState === 'WARNING' ? '#fffbebf' : '#f0fdf4',
-        border: `2px solid ${currentState === 'EMERGENCY' ? '#ef4444' : currentState === 'WARNING' ? '#f59e0b' : '#22c55e'}`
-      }}>
+      <div
+        style={{
+          padding: '20px',
+          borderRadius: '12px',
+          marginBottom: '24px',
+          backgroundColor: currentState === 'EMERGENCY' ? '#fef2f2' : currentState === 'WARNING' ? '#fffbe1' : '#f0fdf4',
+          border: `2px solid ${currentState === 'EMERGENCY' ? '#ef4444' : currentState === 'WARNING' ? '#f59e0b' : '#22c55e'}`,
+        }}
+      >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <span style={{ fontSize: '12px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', color: '#64748b' }}>
@@ -159,7 +189,22 @@ export const PR11TriageHub: React.FC = () => {
               {currentState}
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <button
+              onClick={handleSimulateEmergency}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '6px',
+                border: 'none',
+                backgroundColor: '#dc2626',
+                color: '#ffffff',
+                cursor: 'pointer',
+                fontWeight: '700',
+                boxShadow: '0 2px 4px rgba(220, 38, 38, 0.3)',
+              }}
+            >
+              🚨 Trigger PR44 SMS Alert
+            </button>
             <button onClick={handleAcknowledge} style={{ padding: '8px 16px', borderRadius: '6px', border: '1px solid #cbd5e1', backgroundColor: '#ffffff', cursor: 'pointer', fontWeight: '600' }}>
               Acknowledge
             </button>
@@ -180,8 +225,8 @@ export const PR11TriageHub: React.FC = () => {
           <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', fontSize: '14px' }}>
             Select Test Scenario:
           </label>
-          <select 
-            value={selectedScenario} 
+          <select
+            value={selectedScenario}
             onChange={(e) => handleScenarioChange(e.target.value as SimulationScenario)}
             style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #cbd5e1', marginBottom: '16px' }}
           >
@@ -212,7 +257,7 @@ export const PR11TriageHub: React.FC = () => {
           <h2 style={{ fontSize: '18px', fontWeight: 'bold', marginTop: 0 }}>PR11.4 Emergency Preferences</h2>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', paddingBottom: '12px', borderBottom: '1px solid #f1f5f9' }}>
             <span style={{ fontWeight: '600' }}>Enable Outbound Emergency Calling</span>
-            <button 
+            <button
               onClick={handleToggleCalling}
               style={{
                 padding: '6px 14px',
@@ -221,18 +266,18 @@ export const PR11TriageHub: React.FC = () => {
                 backgroundColor: preferences.emergencyCallingEnabled ? '#22c55e' : '#cbd5e1',
                 color: '#ffffff',
                 fontWeight: 'bold',
-                cursor: 'pointer'
+                cursor: 'pointer',
               }}
             >
               {preferences.emergencyCallingEnabled ? 'ENABLED' : 'DISABLED'}
             </button>
           </div>
 
-          <h3 style={{ fontSize: '14px', fontWeight: 'bold', margin: '12px 0 8px 0' }}>Emergency Contacts (No default fallback)</h3>
+          <h3 style={{ fontSize: '14px', fontWeight: 'bold', margin: '12px 0 8px 0' }}>Emergency Contacts</h3>
           {preferences.contacts.length === 0 ? (
-            <p style={{ fontSize: '13px', color: '#94a3b8', fontStyle: 'italic' }}>No emergency contacts configured. System will not trigger calls.</p>
+            <p style={{ fontSize: '13px', color: '#94a3b8', fontStyle: 'italic' }}>No emergency contacts configured. Add a contact to enable voice & SMS routing.</p>
           ) : (
-            preferences.contacts.map(c => (
+            preferences.contacts.map((c) => (
               <div key={c.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px', backgroundColor: '#f8fafc', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' }}>
                 <div>
                   <strong>{c.name}</strong> ({c.phone}) - {c.relationship} {c.isPrimary && <span style={{ color: '#2563eb' }}>[PRIMARY]</span>}
@@ -245,8 +290,13 @@ export const PR11TriageHub: React.FC = () => {
           )}
 
           <form onSubmit={handleAddContact} style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <input placeholder="Contact Name" value={contactName} onChange={e => setContactName(e.target.value)} style={{ padding: '8px', borderRadius: '4px', border: '1px solid #cbd5e1' }} />
-            <input placeholder="Phone Number" value={contactPhone} onChange={e => setContactPhone(e.target.value)} style={{ padding: '8px', borderRadius: '4px', border: '1px solid #cbd5e1' }} />
+            <input placeholder="Contact Name" value={contactName} onChange={(e) => setContactName(e.target.value)} style={{ padding: '8px', borderRadius: '4px', border: '1px solid #cbd5e1' }} />
+            <input placeholder="Phone Number" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} style={{ padding: '8px', borderRadius: '4px', border: '1px solid #cbd5e1' }} />
+            <select value={contactRel} onChange={(e) => setContactRel(e.target.value as any)} style={{ padding: '8px', borderRadius: '4px', border: '1px solid #cbd5e1' }}>
+              <option value="PRIMARY_EMERGENCY">Primary Emergency</option>
+              <option value="MEDICAL_DISPATCH">Medical Dispatch</option>
+              <option value="GUARDIAN">Guardian</option>
+            </select>
             <button type="submit" style={{ padding: '8px', backgroundColor: '#2563eb', color: '#fff', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}>
               Add Emergency Contact
             </button>
@@ -269,7 +319,7 @@ export const PR11TriageHub: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {auditLogs.map(log => (
+              {auditLogs.map((log) => (
                 <tr key={log.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
                   <td style={{ padding: '8px', color: '#64748b' }}>{new Date(log.timestamp).toLocaleTimeString()}</td>
                   <td style={{ padding: '8px', fontWeight: '600' }}>{log.eventType}</td>

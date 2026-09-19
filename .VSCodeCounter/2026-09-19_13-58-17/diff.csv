@@ -1,0 +1,20 @@
+"filename", "language", "JSON", "TypeScript", "JSON with Comments", "Python", "TypeScript JSX", "comment", "blank", "total"
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\build_project.py", "Python", 0, 0, 0, -760, 0, -8, -19, -787
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\server.ts", "TypeScript", 0, 32, 0, 0, 0, 6, 9, 47
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\src\services\smsService.ts", "TypeScript", 0, 62, 0, 0, 0, 3, 7, 72
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\functions\tsconfig.json", "JSON with Comments", 0, 0, 0, 0, 0, 0, 3, 3
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package-lock.json", "JSON", 540, 0, 0, 0, 0, 0, 0, 540
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\package.json", "JSON", 1, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\App.tsx", "TypeScript JSX", 0, 0, 0, 0, 9, 1, 2, 12
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\PR11TriageHub.tsx", "TypeScript JSX", 0, 0, 0, 0, 42, 3, 5, 50
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\YSHControlPanel.tsx", "TypeScript JSX", 0, 0, 0, 0, 49, 5, 4, 58
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\components\dashboard\HeartRateCard.tsx", "TypeScript JSX", 0, 0, 0, 0, 30, 1, -1, 30
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\hooks\useGPSTelemetry.ts", "TypeScript", 0, 53, 0, 0, 0, 2, 7, 62
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\hooks\useHeartRateTelemetry.ts", "TypeScript", 0, 31, 0, 0, 0, 0, 6, 37
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\Dashboard.tsx", "TypeScript JSX", 0, 0, 0, 0, 6, 3, 2, 11
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\pages\GPS\GPSPage.tsx", "TypeScript JSX", 0, 0, 0, 0, -12, -2, -3, -17
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\emergencyAlertService.ts", "TypeScript", 0, 35, 0, 0, 0, 6, 8, 49
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\services\yshService.ts", "TypeScript", 0, 11, 0, 0, 0, 4, 0, 15
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\src\utils\hrFilter.ts", "TypeScript", 0, 28, 0, 0, 0, 11, 8, 47
+"c:\Users\HP\Downloads\NO-EXCUSE\Dashboard\Current Build\vite.config.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 18
+"Total", "-", 541, 270, 0, -760, 124, 35, 38, 248

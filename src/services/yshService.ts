@@ -39,3 +39,17 @@ export const updateYSHConfig = async (config: YSHConfig): Promise<void> => {
     });
   }
 };
+export const getActiveYSHLocation = async () => {
+  // Fetch current config or return defaults
+  return new Promise<{ latitude: number; longitude: number }>((resolve) => {
+    const unsubscribe = subscribeYSHConfig((config) => {
+      if (config && config.enabled) {
+        resolve({ latitude: config.latitude, longitude: config.longitude });
+      } else {
+        // Fallback default coordinates
+        resolve({ latitude: 26.912400, longitude: 75.787300 });
+      }
+      unsubscribe();
+    });
+  });
+};
