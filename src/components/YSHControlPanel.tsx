@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { HeartPulse, Activity } from 'lucide-react';
+import { HeartPulse } from 'lucide-react';
 import { updateYSHConfig, subscribeYSHConfig } from '../services/yshService';
 import { useHeartRateTelemetry } from '../hooks/useHeartRateTelemetry';
 
 export const YSHControlPanel: React.FC = () => {
   // --- Heart Rate Switch Hook ---
-  const { currentHR, rawHR, isFilteredMode, setIsFilteredMode } = useHeartRateTelemetry();
+  const { currentHR, isFilteredMode, setIsFilteredMode } = useHeartRateTelemetry();
 
   // --- Location Configuration State ---
   const [enabled, setEnabled] = useState<boolean>(true);
@@ -63,6 +63,11 @@ export const YSHControlPanel: React.FC = () => {
     }
   };
 
+  const handleToggleCleanMode = (mode: 'clean' | 'raw') => {
+    setIsFilteredMode(mode === 'clean');
+    localStorage.setItem('ysh_clean_hr_mode', mode === 'clean' ? 'true' : 'false');
+  };
+
   return (
     <div className="space-y-6 max-w-md">
       {/* 1. Heart Rate Signal Processing Control */}
@@ -84,14 +89,17 @@ export const YSHControlPanel: React.FC = () => {
 
           <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/60 border border-slate-700/50">
             <span className="text-xs text-slate-300 font-medium">
-              Active Mode: <span className={isFilteredMode ? 'text-blue-400' : 'text-amber-400'}>{isFilteredMode ? 'Clean Signal' : 'Raw Stream'}</span>
+              Active Mode:{' '}
+              <span className={isFilteredMode ? 'text-blue-400' : 'text-amber-400'}>
+                {isFilteredMode ? 'Clean Signal' : 'Raw Stream'}
+              </span>
             </span>
 
             {/* Clean / Raw Mode Switch Button */}
             <div className="flex items-center space-x-1 bg-slate-900 p-1 rounded-md border border-slate-700">
               <button
                 type="button"
-                onClick={() => setIsFilteredMode(true)}
+                onClick={() => handleToggleCleanMode('clean')}
                 className={`px-2.5 py-1 text-xs font-semibold rounded transition ${
                   isFilteredMode
                     ? 'bg-blue-600 text-white shadow'
@@ -102,7 +110,7 @@ export const YSHControlPanel: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setIsFilteredMode(false)}
+                onClick={() => handleToggleCleanMode('raw')}
                 className={`px-2.5 py-1 text-xs font-semibold rounded transition ${
                   !isFilteredMode
                     ? 'bg-amber-600 text-white shadow'

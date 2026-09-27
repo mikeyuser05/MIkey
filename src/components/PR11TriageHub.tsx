@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { evaluateTelemetrySnapshot } from '../services/alertEngine';
 import { alertPersistenceManager } from '../services/alertPersistenceManager';
 import { emergencyStateMachine } from '../services/emergencyStateMachine';
@@ -20,12 +20,15 @@ export const PR11TriageHub: React.FC = () => {
   const [preferences, setPreferences] = useState(emergencyPreferencesStore.getPreferences());
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(() => auditLogger.getLogs() as AuditLogEntry[]);
 
+  // Prevent repeated spam dispatching during continuous 2s interval loop
+  const hasDispatchedRef = useRef<boolean>(false);
+
   // Contact Form State
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [contactRel, setContactRel] = useState<EmergencyContact['relationship']>('PRIMARY_EMERGENCY');
 
-  // Auto-switch palette when Emergency or Warning state triggers
+  // Auto-switch palette when Emergency state triggers
   useEffect(() => {
     if (currentState && (currentState.toString().toUpperCase().includes('CRITICAL') || currentState.toString().toUpperCase().includes('HAZARD') || currentState === 'EMERGENCY')) {
       setPalette('tactical');
@@ -38,13 +41,13 @@ export const PR11TriageHub: React.FC = () => {
     const result = await triggerPR44EmergencyAlert(
       138,
       84,
-      'Critical Hypoxia & Tachycardia Detected',
+      'Manual Emergency Triggered: Patient in Emergency',
       primaryPhone
     );
     if (result.success) {
-      alert('🚨 Emergency SMS Alert dispatched via Twilio!');
+      alert('🚨 Emergency SMS & Voice Alert dispatched via Twilio!');
     } else {
-      alert(`Failed to send SMS: ${result.error}`);
+      alert(`Failed to send Alert: ${result.error}`);
     }
   };
 
@@ -66,9 +69,11 @@ export const PR11TriageHub: React.FC = () => {
       for (const ev of persistedEvals) {
         if (ev.state === 'EMERGENCY') {
           const decision = emergencyPolicyEngine.evaluatePolicy(ev, currentTime);
-          if (decision.actionEligible && decision.targetContact) {
+          if (decision.actionEligible && decision.targetContact && !hasDispatchedRef.current) {
             
-            // 1. Voice Call Dispatch (subject to call engine cooldowns)
+            hasDispatchedRef.current = true; // Mark as dispatched for this scenario session
+
+            // 1. Voice Call Dispatch Log
             const dispatch = simulatedVoiceDispatcher.generateSimulatedCall(
               ev,
               decision.targetContact,
@@ -77,18 +82,19 @@ export const PR11TriageHub: React.FC = () => {
               currentTime
             );
 
-            // 2. Immediate SMS Dispatch with Vitals & Location (decoupled from call locks)
+            // 2. Real Twilio Call + Fast2SMS Dispatch with GPS Link
             const primaryPhone = decision.targetContact.phone || preferences.contacts.find((c) => c.isPrimary)?.phone;
+            
             triggerPR44EmergencyAlert(
               snapshot.heartRate || 140,
               snapshot.spo2 || 85,
-              ev.reason,
+              ev.reason || 'Patient in Emergency Condition',
               primaryPhone
             );
 
             auditLogger.log(
               'SIMULATED_ACTION_ATTEMPTED',
-              `Dispatched Voice Call & Location SMS to ${dispatch.recipientName} (${primaryPhone}): ${dispatch.messageText}`,
+              `Dispatched Emergency Voice Call & SMS to ${dispatch.recipientName} (${primaryPhone}): ${dispatch.messageText}`,
               ev.severity,
               ev.nodeId,
               true
@@ -105,6 +111,7 @@ export const PR11TriageHub: React.FC = () => {
 
   const handleScenarioChange = (scenario: SimulationScenario) => {
     setSelectedScenario(scenario);
+    hasDispatchedRef.current = false; // Reset lock when scenario changes
     alertPersistenceManager.reset();
     auditLogger.log('CONDITION_STARTED', `Simulation scenario switched to ${scenario}`, 'LOW', 'NODE_SIM_01', true);
   };
@@ -155,6 +162,7 @@ export const PR11TriageHub: React.FC = () => {
   const handleResolve = () => {
     emergencyStateMachine.resolve();
     alertPersistenceManager.reset();
+    hasDispatchedRef.current = false;
     setCurrentState(emergencyStateMachine.getState());
     auditLogger.log('RESOLVED', 'Operator manually resolved emergency state');
   };
