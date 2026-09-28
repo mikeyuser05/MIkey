@@ -1,17 +1,16 @@
 # Diff Details
 
-Date : 2026-08-23 14:17:32
+Date : 2026-09-27 22:45:38
 
 Directory c:\\Users\\HP\\Downloads\\NO-EXCUSE\\Dashboard\\Current Build
 
-Total : 2 files,  8 codes, 1 comments, 1 blanks, all 10 lines
+Total : 1 files,  26 codes, 7 comments, 6 blanks, all 39 lines
 
 [Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details
 
 ## Files
 | filename | language | code | comment | blank | total |
 | :--- | :--- | ---: | ---: | ---: | ---: |
-| [src/components/Layout/Navbar.tsx](/src/components/Layout/Navbar.tsx) | TypeScript JSX | 4 | 0 | 0 | 4 |
-| [src/index.css](/src/index.css) | PostCSS | 4 | 1 | 1 | 6 |
+| [src/hooks/useHeartRateTelemetry.ts](/src/hooks/useHeartRateTelemetry.ts) | TypeScript | 26 | 7 | 6 | 39 |
 
 [Summary](results.md) / [Details](details.md) / [Diff Summary](diff.md) / Diff Details

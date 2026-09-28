@@ -9,7 +9,10 @@ import { simulatedVoiceDispatcher } from '../services/simulatedVoiceDispatcher';
 import { auditLogger } from '../services/auditLogger';
 import { AlertEvaluationResult, EmergencyContact, AuditLogEntry } from '../types/pr11Triage';
 import { useTheme } from '../hooks/useTheme';
-import { triggerPR44EmergencyAlert } from '../services/emergencyAlertService';
+import { 
+  triggerPR44EmergencyAlert, 
+  triggerSinglePR44EmergencyAlert 
+} from '../services/emergencyAlertService';
 
 export const PR11TriageHub: React.FC = () => {
   const { setPalette } = useTheme();
@@ -35,23 +38,34 @@ export const PR11TriageHub: React.FC = () => {
     }
   }, [currentState, setPalette]);
 
-  // Manual Trigger Handler
+  // Manual Trigger Handler (Red Button Click)
+  // Sends 1x SMS + 1 Call instantly (Single Trigger)
   const handleSimulateEmergency = async () => {
     const primaryPhone = preferences.contacts.find((c) => c.isPrimary)?.phone;
-    const result = await triggerPR44EmergencyAlert(
+    
+    const result = await triggerSinglePR44EmergencyAlert(
       138,
       84,
       'Manual Emergency Triggered: Patient in Emergency',
       primaryPhone
     );
+
     if (result.success) {
-      alert('🚨 Emergency SMS & Voice Alert dispatched via Twilio!');
+      alert('🚨 Manual Emergency Alert Triggered!\n• 1x SMS Dispatched\n• 1x Voice Call Initiated');
+      auditLogger.log(
+        'SIMULATED_ACTION_ATTEMPTED',
+        `Manual Button: Dispatched 1x SMS & Single Call to (${primaryPhone || 'Default Target'})`,
+        'CRITICAL',
+        'MANUAL_TRIGGER',
+        true
+      );
     } else {
-      alert(`Failed to send Alert: ${result.error}`);
+      alert(`Failed to send Alert: ${result.error || 'Unknown Error'}`);
     }
   };
 
   // Telemetry Evaluation and Automated Emergency Dispatch Loop
+  // Triggers 1x SMS + Call #1 (0s) & Schedules Call #2 (20s gap)
   useEffect(() => {
     simulationEngine.setScenario(selectedScenario);
 
@@ -82,19 +96,19 @@ export const PR11TriageHub: React.FC = () => {
               currentTime
             );
 
-            // 2. Real Twilio Call + Fast2SMS Dispatch with GPS Link
+            // 2. Real Twilio Call (Call #1 now + Call #2 in 20s gap) + Fast2SMS Dispatch with GPS Link
             const primaryPhone = decision.targetContact.phone || preferences.contacts.find((c) => c.isPrimary)?.phone;
             
             triggerPR44EmergencyAlert(
               snapshot.heartRate || 140,
               snapshot.spo2 || 85,
-              ev.reason || 'Patient in Emergency Condition',
+              ev.reason || 'Simulator: Emergency Condition Detected',
               primaryPhone
             );
 
             auditLogger.log(
               'SIMULATED_ACTION_ATTEMPTED',
-              `Dispatched Emergency Voice Call & SMS to ${dispatch.recipientName} (${primaryPhone}): ${dispatch.messageText}`,
+              `Simulator Trigger: Dispatched 1x SMS & Scheduled Dual Voice Calls to ${dispatch.recipientName} (${primaryPhone})`,
               ev.severity,
               ev.nodeId,
               true
@@ -111,7 +125,7 @@ export const PR11TriageHub: React.FC = () => {
 
   const handleScenarioChange = (scenario: SimulationScenario) => {
     setSelectedScenario(scenario);
-    hasDispatchedRef.current = false; // Reset lock when scenario changes
+    hasDispatchedRef.current = false; // Reset dispatch lock when scenario changes
     alertPersistenceManager.reset();
     auditLogger.log('CONDITION_STARTED', `Simulation scenario switched to ${scenario}`, 'LOW', 'NODE_SIM_01', true);
   };
@@ -343,3 +357,5 @@ export const PR11TriageHub: React.FC = () => {
     </div>
   );
 };
+
+export default PR11TriageHub;
