@@ -26,15 +26,29 @@ export const PR11TriageHub: React.FC = () => {
   // Prevent repeated spam dispatching during continuous 2s interval loop
   const hasDispatchedRef = useRef<boolean>(false);
 
+  // Prevent infinite loop re-renders on palette switch (React Error #185 Fix)
+  const hasSwitchedThemeRef = useRef<boolean>(false);
+
   // Contact Form State
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [contactRel, setContactRel] = useState<EmergencyContact['relationship']>('PRIMARY_EMERGENCY');
 
-  // Auto-switch palette when Emergency state triggers
+  // Auto-switch palette when Emergency state triggers safely without cyclic re-renders
   useEffect(() => {
-    if (currentState && (currentState.toString().toUpperCase().includes('CRITICAL') || currentState.toString().toUpperCase().includes('HAZARD') || currentState === 'EMERGENCY')) {
-      setPalette('tactical');
+    const isEmergency = currentState && (
+      currentState.toString().toUpperCase().includes('CRITICAL') ||
+      currentState.toString().toUpperCase().includes('HAZARD') ||
+      currentState === 'EMERGENCY'
+    );
+
+    if (isEmergency && !hasSwitchedThemeRef.current) {
+      hasSwitchedThemeRef.current = true;
+      setTimeout(() => {
+        setPalette('tactical');
+      }, 0);
+    } else if (!isEmergency) {
+      hasSwitchedThemeRef.current = false;
     }
   }, [currentState, setPalette]);
 
