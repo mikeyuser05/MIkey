@@ -21,7 +21,6 @@ export class EmergencyCallBackendService {
   }
 
   public async processCallRequest(payload: any) {
-    // Extract recipient phone number flexible way se
     const targetPhone = 
       payload.to || 
       payload.phone || 
@@ -39,7 +38,6 @@ export class EmergencyCallBackendService {
       };
     }
 
-    // 🔥 Rate Limit & Cooldown Check
     const now = Date.now();
     if (lastCallMap.has(targetPhone)) {
       const lastTime = lastCallMap.get(targetPhone)!;
@@ -66,10 +64,11 @@ export class EmergencyCallBackendService {
     }
 
     try {
-      // 🔥 Update last call timestamp right before making the real external API call
       lastCallMap.set(targetPhone, now);
 
-      const webhookUrl = 'https://noexcuse-hpo-backend.onrender.com/api/twilio/webhook';
+      // 🔥 Vercel app URL update kiya gaya hai
+      const appBaseUrl = process.env.PUBLIC_APP_URL || 'https://m-ikey.vercel.app';
+      const webhookUrl = 'https://m-ikey.vercel.app/api/twilio/webhook';
       
       const call = await this.twilioClient.calls.create({
         url: webhookUrl,
@@ -85,7 +84,6 @@ export class EmergencyCallBackendService {
         timestamp: Date.now()
       };
     } catch (error: any) {
-      // If the API call fails, remove from lock so user can try again immediately
       lastCallMap.delete(targetPhone);
 
       return {
